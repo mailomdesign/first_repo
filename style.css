@@ -4,8 +4,15 @@ body {
   box-sizing: border-box;
 }
 
+h1 {
+  font-family: 'Pattaya', sans-serif;
+}
+
 body {
-  font-family: 'Segoe UI', sans-serif;
+ body {
+  font-family: 'Inter', sans-serif;
+}
+
   background-color: #f2f2f2;
   color: #333;
   padding: 20px;
@@ -15,7 +22,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0055cc;
+  background-color: #000000;
   color: white;
   padding: 20px;
   border-radius: 10px;
@@ -36,7 +43,7 @@ nav li:hover {
   opacity: 0.7;
 }
 button {
-  background-color: #0055cc;
+  background-color: #000000;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -47,7 +54,7 @@ button {
 }
 
 button:hover {
-  background-color: #003f99;
+  background-color: #474747;
 }
 footer {
   margin-top: 40px;
