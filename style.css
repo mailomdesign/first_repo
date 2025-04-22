@@ -20,6 +20,11 @@ header {
   color: white;
   padding: 20px;
   border-radius: 10px;
+  height: 60px;
+}
+
+nav {
+  margin-left: 30px;
 }
 
 nav ul {
