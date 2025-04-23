@@ -1,0 +1,86 @@
+/* Сброс */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Header — ПОЛНОЭКРАННЫЙ */
+header {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+}
+
+.bottom-left-block {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 10;
+  text-align: left;
+  color: #fff;
+}
+
+.bottom-left-block img {
+  width: 148px;
+  height: 103px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.bottom-left-block p {
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  color: #bbb;
+}
+
+ 
+header img {
+  height: 50px;
+  width: auto;
+}
+
+
+/* Hero блок */
+.hero {
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  max-width: 800px;
+  line-height: 1.2;
+}
+
+/* Стрелка */
+.scroll-hint {
+  margin-top: 40px;
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
