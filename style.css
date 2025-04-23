@@ -90,6 +90,75 @@ header img {
   color: #fff;
 }
 
+.portfolio-block {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  max-width: 1000px;
+  width: 60vw;
+}
+
+.portfolio-nav ul {
+  display: flex;
+  justify-content: flex-start;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.portfolio-nav button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  text-transform: lowercase;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.portfolio-nav button.active {
+  border-bottom: 1px solid #fff;
+}
+
+.carousel-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.3s ease;
+}
+
+.carousel-item {
+  min-width: 200px;
+  height: 300px;
+  background: #bbb;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #111;
+  color: #fff;
+  font-size: 1.5rem;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.carousel-arrow.left {
+  left: 0;
+}
+
+.carousel-arrow.right {
+  right: 0;
+}
+
+
 .intro-block .quote {
   margin-top: 30px;
   font-style: italic;
