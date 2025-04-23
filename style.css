@@ -65,6 +65,39 @@ header img {
   padding: 0 20px;
 }
 
+.intro-block {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 20px 60px;
+  text-align: center;
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.intro-logo {
+  width: 148px;
+  height: 103px;
+  margin: 0 auto 20px;
+  display: block;
+}
+
+.intro-block h2 {
+  font-family: 'Orbitron', sans-serif; /* заменить если есть предпочтение */
+  font-size: 1.4rem;
+  margin-bottom: 40px;
+  letter-spacing: 0.1em;
+  color: #fff;
+}
+
+.intro-block .quote {
+  margin-top: 30px;
+  font-style: italic;
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+
 .hero h1 {
   font-size: 3rem;
   max-width: 800px;
