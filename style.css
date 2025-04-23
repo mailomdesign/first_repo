@@ -27,9 +27,9 @@ header {
 }
 
 .bottom-left-block {
-  position: absolute;
-  bottom: 40px;
-  left: 40px;
+  position: absolute; /* или fixed */
+  left: 3vw;
+  bottom: 8vh;
   z-index: 10;
   text-align: left;
   color: #fff;
@@ -37,10 +37,9 @@ header {
 
 .bottom-left-block img {
   width: 148px;
-  height: 103px;
-  display: block;
-  margin-bottom: 12px;
+  height: 103px;  
 }
+
 
 .bottom-left-block p {
   font-size: 0.875rem;
