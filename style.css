@@ -5,19 +5,64 @@
   box-sizing: border-box;
 }
 
-body
-    background-color: #000;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-  
+body {
+  background-color: #000000;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.tagline {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  max-width: 100%;
+  margin-top: 16px;
+}
+
+.tagline p {
+  margin-bottom: 12px;
+}
+
+.tagline strong {
+  font-weight: 600;
+  display: block;
+}
+
+
+.bottom-left-block {
+  position: absolute;
+  bottom: 10%;
+  left: 200px;
+  width: 40%; /* ограничивает ширину */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+
+.bottom-left-block .logo {
+  width: 100px; /* отрегулируй под макет */
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.bottom-left-block .tagline {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  margin: 0;
+}
+
+    
   .portfolio-block {
     position: absolute;
     top: 40px;
     right: 40px;
     width: 60vw;
+    margin-top: 20vh;
   }
   
   .portfolio-nav ul {
@@ -43,8 +88,10 @@ body
   
   .carousel-wrapper {
     position: relative;
+    height: 400px;
     overflow: hidden;
   }
+  
   
   .carousel-track {
     display: flex;
