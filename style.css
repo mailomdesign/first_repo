@@ -32,29 +32,23 @@ body {
 }
 
 
-.bottom-left-block {
-  position: absolute;
-  bottom: 10%;
-  left: 200px;
-  width: 40%; /* ограничивает ширину */
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-
-.bottom-left-block .logo {
-  width: 100px; /* отрегулируй под макет */
-  height: auto;
-  margin-bottom: 40px;
-}
-
 .bottom-left-block .tagline {
   color: #ffffff;
   font-size: 14px;
   font-weight: 300;
-  margin: 0;
+  line-height: 1.6;
+  margin-top: 16px;
 }
+
+.bottom-left-block .tagline p {
+  margin-bottom: 12px;
+}
+
+.bottom-left-block .tagline strong {
+  font-weight: 600;
+  display: block;
+}
+
 
     
   .portfolio-block {
