@@ -27,25 +27,29 @@ const leftArrow = document.querySelector('.carousel-arrow.left');
 const rightArrow = document.querySelector('.carousel-arrow.right');
 
 let scrollAmount = 0;
-const scrollStep = 320; // ширина + gap
+const scrollStep = 320;
 
 function loadCategory(category) {
   track.innerHTML = '';
   scrollAmount = 0;
   track.style.transform = `translateX(0px)`;
 
-  imageData[category].forEach(img => {
-    const div = document.createElement('div');
-    div.className = 'carousel-item';
-    div.style.backgroundImage = `url(img/${category}/${img})`;
-    track.appendChild(div);
-  });
+  fetch(`gallery.php?category=${category}`)
+    .then(response => response.json())
+    .then(images => {
+      images.forEach(imgPath => {
+        const div = document.createElement('div');
+        div.className = 'carousel-item';
+        div.style.backgroundImage = `url(${imgPath})`;
+        track.appendChild(div);
+      });
+    });
 }
 
-// начальная загрузка
+// Начальная загрузка
 loadCategory('print');
 
-// обработка вкладок
+// Обработка переключения категорий
 buttons.forEach(btn => {
   btn.addEventListener('click', () => {
     buttons.forEach(b => b.classList.remove('active'));
@@ -55,7 +59,7 @@ buttons.forEach(btn => {
   });
 });
 
-// стрелки
+// Стрелки прокрутки
 leftArrow.addEventListener('click', () => {
   scrollAmount -= scrollStep;
   if (scrollAmount < 0) scrollAmount = 0;
@@ -68,6 +72,7 @@ rightArrow.addEventListener('click', () => {
   if (scrollAmount > maxScroll) scrollAmount = maxScroll;
   track.style.transform = `translateX(-${scrollAmount}px)`;
 });
+
 
 
 const buttons = document.querySelectorAll('.portfolio-nav button');

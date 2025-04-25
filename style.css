@@ -95,8 +95,8 @@ body {
   
   .carousel-track {
     display: flex;
-    gap: 20px;
     transition: transform 0.3s ease;
+    gap: 20px;
   }
   
   .carousel-item {
@@ -106,6 +106,7 @@ body {
     background-position: center;
     background-repeat: no-repeat;
   }
+  
   
   .carousel-arrow {
     position: absolute;
