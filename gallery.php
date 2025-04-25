@@ -1,14 +1,11 @@
 <?php
-$category = $_GET['category'] ?? '';
-$folder = __DIR__ . "/img/$category";
-
-$allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+$category = $_GET['category'];
+$dir = __DIR__ . "/img/$category";
 $images = [];
 
-if (is_dir($folder)) {
-    foreach (scandir($folder) as $file) {
-        $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
-        if (in_array($ext, $allowedExtensions)) {
+if (is_dir($dir)) {
+    foreach (scandir($dir) as $file) {
+        if (preg_match('/\.(jpg|jpeg|png|webp)$/i', $file)) {
             $images[] = "img/$category/$file";
         }
     }
