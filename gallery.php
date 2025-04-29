@@ -1,15 +1,17 @@
 <?php
-$category = $_GET['category'];
-$dir = __DIR__ . "/img/$category";
+$category = $_GET['category'] ?? '';
+$dir = "img/$category";
 $images = [];
 
 if (is_dir($dir)) {
-    foreach (scandir($dir) as $file) {
+    $files = scandir($dir);
+    foreach ($files as $file) {
         if (preg_match('/\.(jpg|jpeg|png|webp)$/i', $file)) {
-            $images[] = "img/$category/$file";
+            $images[] = "$dir/$file";
         }
     }
 }
 
 header('Content-Type: application/json');
 echo json_encode($images);
+?>
