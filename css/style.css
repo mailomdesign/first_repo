@@ -1,78 +1,18 @@
-.div-wrapper {
-  background-color: #ffffff;
-  height: 28px;
+body {
+  margin: 0;
+  font-family: 'Russo One', sans-serif;
+  background: #fff;
+}
+
+.wrapper {
+  width: 1920px;
+  margin: 0 auto;
+}
+
+.Frame1 {
+  width: 1720px;
+  margin: 0 auto;
   position: relative;
-  width: 398px;
-}
-
-.div-wrapper .text-wrapper {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: #000000;
-  display: -webkit-box;
-  font-family: "Russo One-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 19px;
-  letter-spacing: 0;
-  line-height: normal;
+  background: white;
   overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-overflow: ellipsis;
-  top: 5px;
-}
-
-.div-wrapper .div {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: #000000;
-  display: -webkit-box;
-  font-family: "Russo One-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 301px;
-  letter-spacing: 0;
-  line-height: normal;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-overflow: ellipsis;
-  top: 5px;
-}
-
-.div-wrapper .text-wrapper-2 {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: #000000;
-  display: -webkit-box;
-  font-family: "Russo One-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-overflow: ellipsis;
-  top: 5px;
-}
-
-.div-wrapper .text-wrapper-3 {
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  color: #000000;
-  display: -webkit-box;
-  font-family: "Russo One-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 219px;
-  letter-spacing: 0;
-  line-height: normal;
-  overflow: hidden;
-  position: absolute;
-  text-align: center;
-  text-overflow: ellipsis;
-  top: 5px;
 }
