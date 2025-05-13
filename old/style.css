@@ -1,0 +1,194 @@
+/* Сброс */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+/* Текстовый блок слева */
+.bottom-left-block {
+  position: absolute;
+  bottom: 10%;
+  left: 200px;
+  max-width: calc(100% - 400px); /* учёт двух краёв */
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bottom-left-block .logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 40px;
+}
+
+.bottom-left-block .tagline {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.tagline p {
+  margin-bottom: 12px;
+}
+
+.tagline strong {
+  font-weight: 600;
+  display: block;
+}
+
+
+/* Блок карусели */
+.portfolio-block {
+  position: absolute;
+  top: 12%;
+  right: 200px;
+  width: calc(60% - 20px); /* под стрелки */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.portfolio-nav ul {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  padding: 0;
+  margin-bottom: 12px;
+}
+
+.portfolio-nav button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+
+.portfolio-nav button.active {
+  border-bottom: 1px solid #fff;
+}
+
+/* Обёртка слайдера */
+.carousel-wrapper {
+  width: 1060px;
+  height: 230px;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 5px;
+  transition: transform 0.3s ease;
+  height: 230px;
+}
+
+.carousel-item {
+  min-width: 230px;
+  height: 230px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  border-radius: 0px;
+}
+
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(180%);
+  background: #111;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.carousel-arrow.left {
+  left: 0;
+}
+
+.carousel-arrow.right {
+  right: 0;
+}
+
+
+/* Центр и низ */
+.hero h1 {
+  font-size: 3rem;
+  max-width: 800px;
+  line-height: 1.2;
+}
+
+.scroll-hint {
+  margin-top: 40px;
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+.contact-block {
+  margin-top: 30px;
+  align-self: flex-end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.contact-title {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.contact-icons img {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.contact-icons img:hover {
+  opacity: 0.7;
+}
+
+
+
+/* Футер с контактами */
+footer {
+  position: absolute;
+  right: 200px;
+  bottom: 60px;
+  display: flex;
+  gap: 20px;
+}
