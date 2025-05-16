@@ -1,18 +1,56 @@
-body {
-  margin: 0;
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 64px;
+  }
+
+  .hero {
+    width: 100%;
+    border: none;
+  }
+
+  .hero-image {
+    width: 200px;
+    height: 200px;
+    bottom: -100px;
+  }
+}
+
+/* Вертикальная черная полоса справа */
+.vertical-bar-right {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 31px;
+  height: 2070px;
+  background: black;
+}
+
+/* Правый декоративный блок */
+.side-block-right {
+  position: absolute;
+  top: 470px; /* подгони под высоту имени */
+  right: 30px;
+  width: 44px;
+  height: 243px;
+  background: black;
+}
+
+/* Вертикальный текст "Идеология" справа */
+.vertical-text-right {
+  position: absolute;
+  top: 550px; /* примерно на уровне bio-name */
+  right: 35px;
+  transform: rotate(-90deg);
+  transform-origin: top right;
+  color: white;
+  font-size: 30px;
   font-family: 'Russo One', sans-serif;
-  background: #fff;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
-.wrapper {
-  width: 1920px;
-  margin: 0 auto;
-}
 
-.Frame1 {
-  width: 1720px;
-  margin: 0 auto;
-  position: relative;
-  background: white;
-  overflow: hidden;
-}
+font-family: 'Russo One', sans-serif;
+font-family: 'Alumni Sans', sans-serif;
+
