@@ -68,7 +68,7 @@
       width: 100%;
       padding: 0 60px;
       box-sizing: border-box;
-      position: relative;
+      position: relative; /* обязательно для абсолютного позиционирования плашки */
     }
 
     .bio-content {
@@ -78,17 +78,22 @@
       flex: 1;
     }
 
+    .bio-label {
+      font-size: 32px;
+      color: #979797;
+      margin: 0 0 20px;
+    }
+
+    /* Якорь для точного позиционирования */
+    .bio-anchor {
+      height: auto;
+    }
+
     .bio-name {
       font-size: 64px;
       color: black;
       text-transform: capitalize;
       margin: 10px 0 0;
-    }
-
-    .bio-label {
-      font-size: 32px;
-      color: #979797;
-      margin: 0 0 20px;
     }
 
     .bio-description {
@@ -101,7 +106,7 @@
     /* ------------------- Плашка "идеология" справа ------------------- */
     .ideology-wrapper {
       position: absolute;
-      top: 260px; /* подогнано под выравнивание с .bio по вертикали */
+      top: 60px; /* теперь плашка на уровне bio-name */
       right: 0;
       width: 44px;
       height: 243px;
@@ -180,10 +185,39 @@
       background: black;
       z-index: 1;
     }
+
+    /* ------------------- Адаптация ------------------- */
+    @media (max-width: 768px) {
+      .hero {
+        width: 100%;
+        border: none;
+      }
+
+      .hero-title {
+        font-size: 64px;
+      }
+
+      .hero-image {
+        width: 200px;
+        height: 200px;
+        bottom: -100px;
+      }
+
+      .bio {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ideology-wrapper {
+        position: static;
+        margin-top: 40px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Hero: Три строки и фото -->
+
+  <!-- Hero-блок -->
   <section class="hero">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
@@ -191,51 +225,83 @@
     <img class="hero-image" src="https://placehold.co/350x350" alt="Портрет Михаила" />
   </section>
 
-  <!-- Левая вертикальная полоса -->
+  <!-- Вертикальная полоса слева -->
   <div class="vertical-bar-left"></div>
 
-  <!-- Bio: Информация о себе -->
+  <!-- Bio: блок с именем и описанием -->
   <section class="bio">
     <div class="bio-content">
       <p class="bio-label">имя</p>
-      <h1 class="bio-name">михаил образцов</h1>
+      <div class="bio-anchor">
+        <h1 class="bio-name">михаил образцов</h1>
+      </div>
       <p class="bio-description">
         Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
         Ставлю перед собой основной задачу в успешной реализации бренда или продукта своего партнера.
       </p>
     </div>
+
+    <!-- Плашка "идеология" справа -->
+    <div class="ideology-wrapper">
+      <div class="side-block-right"></div>
+      <div class="vertical-text-right">идеология</div>
+    </div>
   </section>
 
-  <!-- Плашка "идеология" справа -->
-  <div class="ideology-wrapper">
-    <div class="side-block-right"></div>
-    <div class="vertical-text-right">идеология</div>
-  </div>
-
-  <!-- Stats: Блок с цифрами -->
+  <!-- Цифры -->
   <section class="stats">
     <div class="stat" style="left: 0; top: 0;">
       <div class="stat-title">неприрывный <br> стаж работы</div>
       <div class="stat-value">17</div>
       <div class="stat-sub">лет</div>
     </div>
+
     <div class="divider" style="left: 205px;"></div>
+
     <div class="stat" style="left: 277px; top: 0;">
       <div class="stat-title">разработано и реализовано макетов</div>
       <div class="stat-sub">более</div>
       <div class="stat-value">2000</div>
     </div>
+
     <div class="divider" style="left: 684px;"></div>
+
     <div class="stat" style="left: 756px; top: 0;">
       <div class="stat-title">разработка полной <br> стилистики бренда с</div>
       <div class="stat-value" style="font-size: 160px;">0</div>
       <div class="stat-title" style="font-size: 25px; text-transform: uppercase;">до выхода продукта <br> на рынок</div>
     </div>
+
     <div class="divider" style="left: 1142px;"></div>
+
     <div class="stat" style="left: 1214px; top: 0;">
       <div class="stat-title">дополнительный опыт</div>
       <div class="stat-title" style="font-size: 30px; text-transform: uppercase;">руководства<br>управление<br>обучение</div>
     </div>
   </section>
+
+<!-- Блок: Направление -->
+<section class="direction">
+  <div class="direction-bg"></div>
+
+  <!-- Текстовый блок -->
+  <div class="direction-text">
+    <h2 class="direction-title">направление</h2>
+    <div class="direction-list">
+      веб дизайн<br />
+      полиграфия<br />
+      графический дизайн<br />
+      наружная реклама<br />
+      ретушь
+    </div>
+    <div class="direction-line"></div>
+    <div class="direction-dot"></div>
+  </div>
+
+  <!-- Изображение справа -->
+  <img class="direction-image" src="https://placehold.co/961x950" alt="Превью направления" />
+</section>
+
+
 </body>
 </html>
