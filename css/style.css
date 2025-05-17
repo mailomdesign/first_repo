@@ -61,82 +61,80 @@
   z-index: 2;
 }
 
-/* ------------------- Блок: Направление ------------------- */
+/* ------------------- НАПРАВЛЕНИЕ ------------------- */
 .direction {
-  display: flex;
   width: 100%;
-  max-width: 1920px;
   height: 950px;
-  margin: 0 auto;
+  display: flex;
   background: black;
   position: relative;
   overflow: hidden;
 }
 
-/* Левая часть: текст и графика */
+/* Левая часть — текст */
 .direction-left {
   flex: 1;
-  padding: 100px 50px 0 100px;
+  padding-left: 100px;
+  padding-top: 214px;
   color: #505050;
   font-family: 'Russo One', sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-end;
   position: relative;
 }
 
-/* Заголовок "направление" */
+/* Заголовок */
 .direction-title {
   font-size: 96px;
   text-transform: uppercase;
-  margin: 0;
   text-align: right;
-  width: 100%;
+  margin: 0;
   color: #505050;
+}
+
+/* Линия под заголовком */
+.direction-line {
+  width: 150px;
+  height: 0;
+  border-top: 5px solid white;
+  margin: 24px 0 20px auto;
 }
 
 /* Список направлений */
 .direction-list {
-  margin-top: 40px;
   font-size: 65px;
   color: #8F8F8F;
   text-align: right;
   text-transform: uppercase;
-  line-height: 1.2;
+  margin: 0;
+  line-height: 1.3;
 }
 
-/* Белая линия */
-.direction-line {
-  width: 150px;
-  height: 0;
-  outline: 5px solid white;
-  outline-offset: -2.5px;
-  margin-top: 40px;
-  align-self: flex-end;
-}
-
-/* Белая точка */
-.direction-dot {
+/* Белый квадрат снизу */
+.direction-square {
   width: 15px;
   height: 15px;
   background: white;
-  margin-top: 80px;
-  align-self: flex-end;
+  position: absolute;
+  bottom: 40px;
+  right: 60px;
 }
 
-/* Правая часть: изображение */
+/* Правая часть — изображение */
 .direction-right {
-  width: 961.5px;
-  height: 950px;
-  flex-shrink: 0;
-  overflow: hidden;
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  position: relative;
+  z-index: 1;
 }
 
+/* Изображение */
 .direction-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: 950px;
+  width: auto;
   mix-blend-mode: luminosity;
+  z-index: 2;
 }
+
+
 
