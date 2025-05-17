@@ -63,72 +63,73 @@
 
 /* ------------------- Блок: Направление ------------------- */
 .direction {
-  background: black;
-  padding: 0;
-  margin: 0;
+  display: flex;
   width: 100%;
+  max-width: 1920px;
   height: 950px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin: 0 auto;
+  background: black;
+  position: relative;
+  overflow: hidden;
 }
 
-.direction-content {
-  display: flex;
-  width: 1920px;
-  height: 950px;
-}
-
-.direction-text {
+/* Левая часть: текст и графика */
+.direction-left {
   flex: 1;
-  padding-right: 100px;
+  padding: 100px 50px 0 100px;
+  color: #505050;
+  font-family: 'Russo One', sans-serif;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  color: #505050;
-  text-align: right;
   position: relative;
 }
 
+/* Заголовок "направление" */
 .direction-title {
   font-size: 96px;
-  font-family: 'Russo One', sans-serif;
   text-transform: uppercase;
   margin: 0;
+  text-align: right;
+  width: 100%;
+  color: #505050;
 }
 
+/* Список направлений */
 .direction-list {
-  margin-top: 50px;
+  margin-top: 40px;
   font-size: 65px;
-  font-family: 'Russo One', sans-serif;
-  text-transform: uppercase;
   color: #8F8F8F;
+  text-align: right;
+  text-transform: uppercase;
   line-height: 1.2;
 }
 
+/* Белая линия */
 .direction-line {
-  position: absolute;
-  top: 338px;
-  right: 0;
   width: 150px;
   height: 0;
   outline: 5px solid white;
   outline-offset: -2.5px;
+  margin-top: 40px;
+  align-self: flex-end;
 }
 
+/* Белая точка */
 .direction-dot {
-  position: absolute;
-  top: 759px;
-  right: 39px;
   width: 15px;
   height: 15px;
   background: white;
+  margin-top: 80px;
+  align-self: flex-end;
 }
 
-.direction-image-wrapper {
+/* Правая часть: изображение */
+.direction-right {
   width: 961.5px;
   height: 950px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
@@ -138,3 +139,4 @@
   object-fit: cover;
   mix-blend-mode: luminosity;
 }
+
