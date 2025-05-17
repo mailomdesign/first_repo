@@ -1,13 +1,17 @@
+/* ------------------- АДАПТАЦИЯ: до 768px (мобильные экраны) ------------------- */
 @media (max-width: 768px) {
+  /* Снижение размера заголовка */
   .hero-title {
     font-size: 64px;
   }
 
+  /* Убираем рамку и делаем hero-блок по ширине экрана */
   .hero {
     width: 100%;
     border: none;
   }
 
+  /* Уменьшаем размер аватарки и поднимаем её ближе */
   .hero-image {
     width: 200px;
     height: 200px;
@@ -15,42 +19,42 @@
   }
 }
 
-/* Вертикальная черная полоса справа */
-.vertical-bar-right {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 31px;
-  height: 2070px;
-  background: black;
+
+/* ------------------- Плашка "идеология" справа ------------------- */
+
+/* Обёртка всего блока: плашка + текст */
+.ideology-wrapper {
+  position: absolute;           /* Положение фиксируется относительно ближайшего positioned-родителя */
+  top: 260px;                   /* Подогнано вручную — выравнивание по вертикали с "михаил образцов" */
+  right: 0;                     /* Прижимаем к правому краю экрана */
+  width: 44px;
+  height: 243px;
+  z-index: 10;
 }
 
-/* Правый декоративный блок */
+/* Чёрная вертикальная плашка */
 .side-block-right {
   position: absolute;
-  top: 470px; /* подгони под высоту имени */
-  right: 30px;
+  top: 0;
+  left: 0;
   width: 44px;
   height: 243px;
   background: black;
+  z-index: 1;
 }
 
-/* Вертикальный текст "Идеология" справа */
+/* Вертикальный текст "Идеология" */
 .vertical-text-right {
   position: absolute;
-  top: 550px; /* примерно на уровне bio-name */
-  right: 35px;
-  transform: rotate(-90deg);
-  transform-origin: top right;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);  /* Центрируем и поворачиваем */
+  transform-origin: center;
   color: white;
   font-size: 30px;
   font-family: 'Russo One', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   white-space: nowrap;
+  z-index: 2;
 }
-
-
-font-family: 'Russo One', sans-serif;
-font-family: 'Alumni Sans', sans-serif;
-

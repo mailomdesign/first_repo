@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Михаил Образцов — Портфолио</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -11,10 +12,9 @@
       font-family: 'Russo One', sans-serif;
     }
 
-    
-    /* Hero-блок */
+    /* ------------------- Hero-блок ------------------- */
     .hero {
-      width: 1650px;
+      width: 1700px;
       height: 950px;
       margin: 30px auto;
       border: 1px solid black;
@@ -59,10 +59,23 @@
       transform: translateX(-50%);
     }
 
-    /* Bio-блок */
+    /* ------------------- Bio-блок ------------------- */
     .bio {
       margin-top: 240px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      padding: 0 60px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .bio-content {
+      max-width: 1149px;
+      margin: 0 auto;
       text-align: center;
+      flex: 1;
     }
 
     .bio-name {
@@ -79,17 +92,51 @@
     }
 
     .bio-description {
-      width: 1149px;
-      margin: 0 auto;
       font-size: 32px;
       font-family: 'Alumni Sans', sans-serif;
       color: black;
       line-height: 1.5;
     }
 
-    /* Цифры-блок */
+    /* ------------------- Плашка "идеология" справа ------------------- */
+    .ideology-wrapper {
+      position: absolute;
+      top: 260px; /* подогнано под выравнивание с .bio по вертикали */
+      right: 0;
+      width: 44px;
+      height: 243px;
+      z-index: 10;
+    }
+
+    .side-block-right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 44px;
+      height: 243px;
+      background: black;
+      z-index: 1;
+    }
+
+    .vertical-text-right {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+      transform-origin: center;
+      color: white;
+      font-size: 30px;
+      font-family: 'Russo One', sans-serif;
+      font-weight: 400;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* ------------------- Цифровой блок ------------------- */
     .stats {
-      width: 1550px;
+      width: 100%;
+      max-width: 1550px;
       margin: 100px auto;
       position: relative;
       height: 229px;
@@ -123,7 +170,7 @@
       top: 22px;
     }
 
-    /* Вертикальная черная полоса слева */
+    /* ------------------- Декор слева ------------------- */
     .vertical-bar-left {
       position: absolute;
       left: 0;
@@ -131,37 +178,12 @@
       width: 31px;
       height: 2070px;
       background: black;
-    }
-
-    /* Правый декоративный блок */
-    .side-block {
-      position: absolute;
-      top: 500px;
-      left: 30px;
-      width: 44px;
-      height: 243px;
-      background: black;
-    }
-
-    /* Вертикальный текст "Идеология" */
-    .vertical-text {
-      position: absolute;
-      top: 580px;
-      left: 35px;
-      transform: rotate(-90deg);
-      transform-origin: top left;
-      color: white;
-      font-size: 30px;
-      font-family: 'Russo One', sans-serif;
-      font-weight: 400;
-      text-transform: uppercase;
-      white-space: nowrap;
+      z-index: 1;
     }
   </style>
 </head>
 <body>
-
-  <!-- Hero: Рамка с тремя строками и изображением -->
+  <!-- Hero: Три строки и фото -->
   <section class="hero">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
@@ -169,62 +191,51 @@
     <img class="hero-image" src="https://placehold.co/350x350" alt="Портрет Михаила" />
   </section>
 
-    <!-- Декор: вертикальные элементы -->
-    <div class="vertical-bar-right"></div> <!-- вертикальная полоса справа -->
-    <div class="side-block-right"></div> <!-- вертикальный прямоугольник -->
-    <div class="vertical-text-right">идеология</div> <!-- вертикальный текст -->
+  <!-- Левая вертикальная полоса -->
+  <div class="vertical-bar-left"></div>
 
-  <!-- Bio: Имя и описание -->
+  <!-- Bio: Информация о себе -->
   <section class="bio">
-    <h1 class="bio-name">михаил образцов</h1>
-    <p class="bio-label">имя</p>
-    <p class="bio-description">
-      Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение. <br><br>
-      Ставлю перед собой основной задачу в успешной реализации бренда или продукта своего партнера.
-    </p>
+    <div class="bio-content">
+      <p class="bio-label">имя</p>
+      <h1 class="bio-name">михаил образцов</h1>
+      <p class="bio-description">
+        Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
+        Ставлю перед собой основной задачу в успешной реализации бренда или продукта своего партнера.
+      </p>
+    </div>
   </section>
+
+  <!-- Плашка "идеология" справа -->
+  <div class="ideology-wrapper">
+    <div class="side-block-right"></div>
+    <div class="vertical-text-right">идеология</div>
+  </div>
 
   <!-- Stats: Блок с цифрами -->
   <section class="stats">
-    <!-- Столбец 1 -->
     <div class="stat" style="left: 0; top: 0;">
       <div class="stat-title">неприрывный <br> стаж работы</div>
       <div class="stat-value">17</div>
       <div class="stat-sub">лет</div>
     </div>
-
-    <!-- Разделитель 1 -->
     <div class="divider" style="left: 205px;"></div>
-
-    <!-- Столбец 2 -->
     <div class="stat" style="left: 277px; top: 0;">
       <div class="stat-title">разработано и реализовано макетов</div>
       <div class="stat-sub">более</div>
       <div class="stat-value">2000</div>
     </div>
-
-    <!-- Разделитель 2 -->
     <div class="divider" style="left: 684px;"></div>
-
-    <!-- Столбец 3 -->
     <div class="stat" style="left: 756px; top: 0;">
-      <div class="stat-title">разработка полной стилистики бренда с</div>
+      <div class="stat-title">разработка полной <br> стилистики бренда с</div>
       <div class="stat-value" style="font-size: 160px;">0</div>
-      <div class="stat-title" style="font-size: 30px; text-transform: uppercase;">до выхода продукта <br> на рынок</div>
+      <div class="stat-title" style="font-size: 25px; text-transform: uppercase;">до выхода продукта <br> на рынок</div>
     </div>
-
-    <!-- Разделитель 3 -->
     <div class="divider" style="left: 1142px;"></div>
-
-    <!-- Столбец 4 -->
     <div class="stat" style="left: 1214px; top: 0;">
       <div class="stat-title">дополнительный опыт</div>
       <div class="stat-title" style="font-size: 30px; text-transform: uppercase;">руководства<br>управление<br>обучение</div>
     </div>
   </section>
-
-    <!-- Подключение шрифтов через Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet" />
-
 </body>
 </html>
