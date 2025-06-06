@@ -141,40 +141,56 @@
 
     /* ------------------- Цифровой блок ------------------- */
     .stats {
-      width: 100%;
-      max-width: 1550px;
-      margin: 100px auto;
-      position: relative;
-      height: 229px;
-    }
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 90px; /* расстояние между блоками */
+  max-width: 1550px;
+  margin: 100px auto;
+  position: relative;
+  height: auto;
+  flex-wrap: nowrap;
+}
 
-    .stat {
-      position: absolute;
-      text-align: left;
-      color: black;
-      text-transform: uppercase;
-    }
+.stats {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  gap: 90px;
+  max-width: 1550px;
+  margin: 100px auto;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
 
-    .stat-title {
-      font-size: 20px;
-      text-transform: lowercase;
-    }
+.stat {
+  text-align: left;
+  color: black;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
 
-    .stat-value {
-      font-size: 128px;
-    }
+.stat-title {
+  font-size: 20px;
+  text-transform: lowercase;
+  line-height: 1.4;
+}
 
-    .stat-sub {
-      font-size: 64px;
-    }
+.stat-value {
+  font-size: 128px;
+}
 
-    .divider {
-      position: absolute;
-      width: 1px;
-      height: 180px;
-      background: black;
-      top: 22px;
-    }
+.stat-sub {
+  font-size: 64px;
+}
+
+/* отключаем абсолютные разделители, если они остались */
+.divider {
+  display: none;
+}
+
+
 
     /* ------------------- НАПРАВЛЕНИЕ ------------------- */
 
@@ -377,7 +393,7 @@
   height: 50px; /* фиксируем высоту названия, чтобы точки были на одной линии */
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
 }
 
 
@@ -752,6 +768,27 @@
   color: #AAAAAA; /* регулируй по вкусу */
 }
 
+.scroll-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 25px;         /* как .ideology-wrapper */
+  height: 30px;
+  background: black;
+  color: white;
+  font-size: 16px;
+  font-family: 'Russo One', sans-serif;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.scroll-top:hover {
+  background: #333;
+}
+
+
 
 
 
@@ -809,35 +846,30 @@
 
   <!-- Цифры -->
   <section class="stats">
-    <div class="stat" style="left: 0; top: 0;">
+    <div class="stat">
       <div class="stat-title">неприрывный <br> стаж работы</div>
       <div class="stat-value">17</div>
       <div class="stat-sub">лет</div>
     </div>
-
-    <div class="divider" style="left: 205px;"></div>
-
-    <div class="stat" style="left: 277px; top: 0;">
+  
+    <div class="stat">
       <div class="stat-title">разработано и реализовано макетов</div>
       <div class="stat-sub">более</div>
       <div class="stat-value">2000</div>
     </div>
-
-    <div class="divider" style="left: 684px;"></div>
-
-    <div class="stat" style="left: 756px; top: 0;">
+  
+    <div class="stat">
       <div class="stat-title">разработка полной <br> стилистики бренда с</div>
       <div class="stat-value" style="font-size: 160px;">0</div>
       <div class="stat-title" style="font-size: 25px; text-transform: uppercase;">до выхода продукта <br> на рынок</div>
     </div>
-
-    <div class="divider" style="left: 1142px;"></div>
-
-    <div class="stat" style="left: 1214px; top: 0;">
+  
+    <div class="stat">
       <div class="stat-title">дополнительный опыт</div>
       <div class="stat-title" style="font-size: 30px; text-transform: uppercase;">руководства<br>управление<br>обучение</div>
     </div>
   </section>
+  
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
 <section class="direction-wrapper">
@@ -1042,6 +1074,16 @@
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+</script>
+
+<button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
+  ↑
+</button>
+
+<script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
 
