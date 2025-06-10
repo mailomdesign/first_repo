@@ -1,34 +1,21 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $title = $_POST['title'];
-    $description = $_POST['description'];
-    $tag = $_POST['tag'];
-    $site = $_POST['site'];
+header('Content-Type: application/json');
 
-    // Загрузка изображения
-    $uploadDir = 'uploads/';
-    if (!is_dir($uploadDir)) mkdir($uploadDir);
-    $imageName = basename($_FILES['image']['name']);
-    $imagePath = $uploadDir . time() . "_" . $imageName;
-    move_uploaded_file($_FILES['image']['tmp_name'], $imagePath);
+$data = json_decode(file_get_contents('php://input'), true);
+$file = '../cases.json';
 
-    // Данные кейса
-    $newCase = [
-        'title' => $title,
-        'description' => $description,
-        'tag' => $tag,
-        'site' => $site,
-        'image' => $imagePath
-    ];
-
-    // Загрузка существующего массива
-    $jsonFile = 'cases.json';
-    $cases = file_exists($jsonFile) ? json_decode(file_get_contents($jsonFile), true) : [];
-
-    $cases[] = $newCase;
-    file_put_contents($jsonFile, json_encode($cases, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
-
-    header("Location: admin.html?success=1");
+if (!$data) {
+    echo json_encode(['success' => false, 'error' => 'Пустые данные']);
     exit;
 }
+
+if (!file_exists($file)) {
+    file_put_contents($file, '[]');
+}
+
+$cases = json_decode(file_get_contents($file), true);
+$cases[] = $data;
+
+file_put_contents($file, json_encode($cases, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
+echo json_encode(['success' => true]);
 ?>

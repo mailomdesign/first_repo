@@ -1,0 +1,13 @@
+[
+    {
+      "title": "Компания 1",
+      "label": "разработка",
+      "desc": "дизайн, верстка, сопровождение",
+      "site": "https://example.com",
+      "tag": "#дизайн",
+      "image_bw": "img/cases/case01-color.png",
+      "image_color": "img/cases/case01-color.png"
+    },
+    ...
+  ]
+  

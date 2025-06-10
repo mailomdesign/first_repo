@@ -1,9 +1,73 @@
-<form action="save_case.php" method="POST" enctype="multipart/form-data">
-    <input type="text" name="title" placeholder="Название компании" required><br>
-    <textarea name="description" placeholder="Описание" required></textarea><br>
-    <input type="text" name="tag" placeholder="#тег"><br>
-    <input type="text" name="site" placeholder="Сайт"><br>
-    <input type="file" name="image" accept="image/*" required><br>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Добавить кейс</title>
+  <style>
+    body {
+      font-family: 'Russo One', sans-serif;
+      background: #f8f8f8;
+      padding: 40px;
+    }
+    form {
+      max-width: 600px;
+      background: white;
+      border: 1px solid #ccc;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, button {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 10px;
+      font-family: inherit;
+      font-size: 14px;
+    }
+    button {
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="caseForm">
+    <input type="text" name="title" placeholder="Название компании" required />
+    <input type="text" name="label" placeholder="Метка (разработка)" required />
+    <input type="text" name="desc" placeholder="Описание" required />
+    <input type="url" name="site" placeholder="Сайт (https://...)" required />
+    <input type="text" name="tag" placeholder="Тег (#дизайн)" required />
+    <input type="text" name="image_bw" placeholder="Путь к ЧБ изображению" required />
+    <input type="text" name="image_color" placeholder="Путь к цветному изображению" required />
     <button type="submit">Сохранить кейс</button>
   </form>
-  
+
+  <script>
+    document.getElementById('caseForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const jsonData = {};
+      formData.forEach((value, key) => jsonData[key] = value);
+
+      fetch('php/save_case.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(jsonData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert('Кейс успешно сохранён!');
+          this.reset();
+        } else {
+          alert('Ошибка: ' + data.error);
+        }
+      })
+      .catch(() => alert('Ошибка соединения с сервером'));
+    });
+  </script>
+
+</body>
+</html>
