@@ -1,7 +1,48 @@
 <?php
-$casesData = file_get_contents(__DIR__ . '/cases.json');
-$cases = json_decode($casesData, true);
+$jsonData = file_get_contents('cases.json');
+$cases = json_decode($jsonData, true);
+
+if ($cases && is_array($cases)) {
+    echo '<div class="case-row">';
+    foreach ($cases as $index => $case) {
+        echo '<div class="case-block">';
+        
+        // ЧБ слой
+        echo '<div class="case-layer case-bw">';
+        echo '<div class="logo-bg"></div>';
+        echo '<div class="logo-text">лого<br>215x125</div>';
+        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
+        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
+        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
+        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
+        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
+        echo '</div>';
+
+        // Цветной слой
+        echo '<div class="case-layer case-color">';
+        echo '<img class="case-image" src="' . htmlspecialchars($case["image_color"]) . '" alt="Цветной кейс" />';
+        echo '<div class="logo-bg"></div>';
+        echo '<div class="logo-text">лого<br>215x125</div>';
+        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
+        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
+        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
+        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
+        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
+        echo '</div>';
+
+        echo '</div>';
+
+        // Каждые 3 кейса — новый .case-row
+        if (($index + 1) % 3 == 0 && $index + 1 < count($cases)) {
+            echo '</div><div class="case-row">';
+        }
+    }
+    echo '</div>'; // Закрытие последнего case-row
+} else {
+    echo "<p style='color:red;'>Ошибка: не удалось загрузить данные кейсов.</p>";
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -472,53 +513,56 @@ $cases = json_decode($casesData, true);
 }
 
 .case-row {
-    display: flex;
-    justify-content: center;
-    gap: 90px;
-    margin: 90px 0;
-  }
+  display: flex;
+  justify-content: center;
+  gap: 90px;
+  margin: 90px 0;
+  flex-wrap: wrap;
+}
 
-  .case-block {
-    width: 530px;
-    height: 530px;
-    position: relative;
-    overflow: hidden;
-    border: 1px solid black;
-  }
+.case-block {
+  width: 530px;
+  height: 530px;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid black;
+}
 
-  .case-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.4s ease;
-  }
+.case-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.4s ease;
+}
 
-  .case-bw {
-    z-index: 1;
-  }
+.case-bw {
+  z-index: 1;
+  background: white; /* <== убрать серый фон и blend */
+}
 
-  .case-color {
-    z-index: 2;
-    opacity: 0;
-    background: black;
-  }
+.case-color {
+  z-index: 2;
+  opacity: 0;
+  background: black;
+}
 
-  .case-block:hover .case-color {
-    opacity: 1;
-  }
+.case-block:hover .case-color {
+  opacity: 1;
+}
 
-  .case-block:hover .case-bw {
-    opacity: 0;
-  }
+.case-block:hover .case-bw {
+  opacity: 0;
+}
 
-  .case-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.54;
-  }
+.case-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.54;
+}
+
 
   .logo-bg {
     position: absolute;

@@ -1,11 +1,38 @@
 [
   {
-    "title": "Компания A",
+    "title": "Doroda Group",
     "label": "разработка",
     "desc": "дизайн, верстка, сопровождение",
     "site": "https://example.com",
     "tag": "#бренд",
-    "image_bw": "img/cases/case01-color.png",
+    "image_bw": "img/cases/case01-bw.png",
     "image_color": "img/cases/case01-color.png"
+  },
+  {
+    "title": "Компания 2",
+    "label": "разработка",
+    "desc": "сайт, фирменный стиль, упаковка",
+    "site": "https://company2.com",
+    "tag": "#упаковка",
+    "image_bw": "img/cases/case02-bw.png",
+    "image_color": "img/cases/case02-color.png"
+  },
+  {
+    "title": "Компания 3",
+    "label": "разработка",
+    "desc": "сайт, фирменный стиль, упаковка",
+    "site": "https://company2.com",
+    "tag": "#упаковка",
+    "image_bw": "img/cases/case02-bw.png",
+    "image_color": "img/cases/case02-color.png"
+  },
+  {
+    "title": "Компания 4",
+    "label": "разработка",
+    "desc": "сайт, фирменный стиль, упаковка",
+    "site": "https://company2.com",
+    "tag": "#упаковка",
+    "image_bw": "img/cases/case02-bw.png",
+    "image_color": "img/cases/case02-color.png"
   }
 ]
