@@ -9,6 +9,36 @@ if (!is_array($cases)) {
 }
 ?>
 
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.number-value').forEach(el => {
+          const target = +el.getAttribute('data-target');
+          const duration = 1200;
+          const stepTime = Math.max(10, duration / target);
+          let current = 0;
+
+          const timer = setInterval(() => {
+            current += 1;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            el.textContent = current + (target >= 1000 ? '+' : '');
+          }, stepTime);
+        });
+
+        // Отключаем наблюдение после первого срабатывания
+        observer.disconnect();
+      }
+    });
+  }, { threshold: 0.5 });
+
+  const statsBlock = document.querySelector('.stats-numbers');
+  if (statsBlock) observer.observe(statsBlock);
+</script>
+
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -152,50 +182,45 @@ if (!is_array($cases)) {
     }
 
     /* ------------------- Цифровой блок ------------------- */
-    .stats {
+    .stats-numbers {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 90px; /* расстояние между блоками */
+  gap: 60px;
   max-width: 1550px;
-  margin: 100px auto;
-  position: relative;
-  height: auto;
-  flex-wrap: nowrap;
-}
-
-.stats {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-  gap: 90px;
-  max-width: 1550px;
-  margin: 100px auto;
+  margin: 140px auto 100px;
   padding: 0 60px;
   box-sizing: border-box;
+  flex-wrap: nowrap;
 }
 
-.stat {
-  text-align: left;
+.number-block {
+  text-align: center;
   color: black;
-  text-transform: uppercase;
-  flex-shrink: 0;
+  font-family: 'Russo One', sans-serif;
+  width: 392px;
 }
 
-.stat-title {
-  font-size: 20px;
+.number-value {
+  font-size: 128px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.number-desc {
+  font-size: 14px;
   text-transform: lowercase;
+  margin-top: 20px;
   line-height: 1.4;
 }
 
-.stat-value {
-  font-size: 128px;
+.divider-vertical {
+  width: 1px;
+  height: 200px;
+  background: black;
+  align-self: center;
 }
 
-.stat-sub {
-  font-size: 64px;
-}
 
 /* отключаем абсолютные разделители, если они остались */
 .divider {
@@ -885,30 +910,30 @@ html {
   </section>
 
   <!-- Цифры -->
-  <section class="stats">
-    <div class="stat">
-      <div class="stat-title">неприрывный <br> стаж работы</div>
-      <div class="stat-value">17</div>
-      <div class="stat-sub">лет</div>
-    </div>
-  
-    <div class="stat">
-      <div class="stat-title">разработано и реализовано макетов</div>
-      <div class="stat-sub">более</div>
-      <div class="stat-value">2000</div>
-    </div>
-  
-    <div class="stat">
-      <div class="stat-title">разработка полной <br> стилистики бренда с</div>
-      <div class="stat-value" style="font-size: 160px;">0</div>
-      <div class="stat-title" style="font-size: 25px; text-transform: uppercase;">до выхода продукта <br> на рынок</div>
-    </div>
-  
-    <div class="stat">
-      <div class="stat-title">дополнительный опыт</div>
-      <div class="stat-title" style="font-size: 30px; text-transform: uppercase;">руководства<br>управление<br>обучение</div>
-    </div>
-  </section>
+  <section class="stats-numbers">
+  <div class="number-block">
+  <div class="number-value" data-target="17">0</div>
+  <div class="number-desc">лет непрерывной коммерческой практики в дизайне</div>
+  </div>
+
+  <div class="divider-vertical"></div>  
+  <div class="number-block">
+  <div class="number-value" data-target="30">0</div>
+  <div class="number-desc">проектов реализовано и завершено в партнёрстве с клиентами</div>
+  </div>
+
+  <div class="divider-vertical"></div>
+  <div class="number-block">
+  <div class="number-value" data-target="12">0</div>
+  <div class="number-desc">брендов разработаны с нуля — от концепта до выхода на рынок</div>
+  </div>
+
+  <div class="divider-vertical"></div>
+  <div class="number-block">
+  <div class="number-value" data-target="2500">0</div>
+    <div class="number-desc">выполнено и реализовано <br>рекламных макетов</div>
+  </div>
+</section>
   
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
