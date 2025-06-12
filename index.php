@@ -1,45 +1,11 @@
 <?php
-$jsonData = file_get_contents('cases.json');
-$cases = json_decode($jsonData, true);
+$content = file_get_contents('cases.json'); // путь к файлу может отличаться
+$cases = json_decode($content, true);
 
-if ($cases && is_array($cases)) {
-    echo '<div class="case-row">';
-    foreach ($cases as $index => $case) {
-        echo '<div class="case-block">';
-        
-        // ЧБ слой
-        echo '<div class="case-layer case-bw">';
-        echo '<div class="logo-bg"></div>';
-        echo '<div class="logo-text">лого<br>215x125</div>';
-        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
-        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
-        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
-        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
-        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
-        echo '</div>';
-
-        // Цветной слой
-        echo '<div class="case-layer case-color">';
-        echo '<img class="case-image" src="' . htmlspecialchars($case["image_color"]) . '" alt="Цветной кейс" />';
-        echo '<div class="logo-bg"></div>';
-        echo '<div class="logo-text">лого<br>215x125</div>';
-        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
-        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
-        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
-        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
-        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
-        echo '</div>';
-
-        echo '</div>';
-
-        // Каждые 3 кейса — новый .case-row
-        if (($index + 1) % 3 == 0 && $index + 1 < count($cases)) {
-            echo '</div><div class="case-row">';
-        }
-    }
-    echo '</div>'; // Закрытие последнего case-row
-} else {
-    echo "<p style='color:red;'>Ошибка: не удалось загрузить данные кейсов.</p>";
+if (!is_array($cases)) {
+    echo "<p style='color:red;'>Ошибка: не удалось загрузить cases.json или он содержит неверный JSON.</p>";
+    var_dump($content); // покажет что именно считалось
+    exit; // останавливаем скрипт, чтобы не было дальнейших ошибок
 }
 ?>
 
@@ -515,8 +481,8 @@ if ($cases && is_array($cases)) {
 .case-row {
   display: flex;
   justify-content: center;
-  gap: 90px;
-  margin: 90px 0;
+  gap: 65px;
+  margin: 65px 0;
   flex-wrap: wrap;
 }
 
@@ -563,25 +529,46 @@ if ($cases && is_array($cases)) {
   opacity: 0.54;
 }
 
+.logo-img {
+  position: absolute;
+  top: 27px;
+  right: 33px;
+  width: 215px;
+  height: 125px;
+  object-fit: contain;
+  z-index: 3;
+}
 
-  .logo-bg {
-    position: absolute;
-    left: 266px;
-    top: 27px;
-    width: 215px;
-    height: 125px;
-    background: #D9D9D9;
-  }
 
-  .logo-text {
-    position: absolute;
-    left: 326px;
-    top: 66px;
-    font-size: 20px;
-    font-family: 'Russo One', sans-serif;
-    color: black;
-    text-align: center;
-  }
+.logo-bg {
+  position: absolute;
+  top: 27px;
+  right: 33px; /* заменили left: 266px */
+  width: 215px;
+  height: 125px;
+  background: #D9D9D9;
+}
+
+.logo-img {
+  position: absolute;
+  top: 27px;
+  right: 33px;
+  width: 215px;
+  height: 125px;
+  object-fit: contain;
+}
+
+.logo-text {
+  position: absolute;
+  top: 66px;
+  right: 33px; /* заменили left: 326px */
+  width: 215px;
+  font-size: 20px;
+  font-family: 'Russo One', sans-serif;
+  color: black;
+  text-align: center;
+}
+
 
   .case-title,
   .case-label,
@@ -598,6 +585,7 @@ if ($cases && is_array($cases)) {
   .case-title {
     font-size: 72px;
     left: 50px;
+    right: 33px;
     top: 195px;
     text-align: right;
     text-transform: uppercase;
@@ -757,6 +745,9 @@ if ($cases && is_array($cases)) {
   text-transform: uppercase;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
 .fixed-menu {
   position: fixed;
@@ -789,7 +780,7 @@ if ($cases && is_array($cases)) {
   color: #AAAAAA; /* или любой другой: #505050, #888 — регулируй по вкусу */
 }
 
-.fixed-name {
+.fixed-education {
   position: fixed;
   top: 40px; /* как у .hero */
   left: 51%;
@@ -797,8 +788,8 @@ if ($cases && is_array($cases)) {
   z-index: 1000;
 }
 
-.name-box {
-  width: 155px;
+.education-box {
+  width: 140px;
   height: 28px;
   background: white;
   border: 1px solid white; /* если нужен бордер */
@@ -813,7 +804,7 @@ if ($cases && is_array($cases)) {
   transition: color 0.3s ease;
 }
 
-.name-box:hover {
+.education-box:hover {
   color: #AAAAAA; /* регулируй по вкусу */
 }
 
@@ -855,17 +846,17 @@ if ($cases && is_array($cases)) {
 
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
-    <ul>
-      <li><a href="#bio">Био</a></li>
-      <li><a href="#direction">Направление</a></li>
-      <li><a href="#cases">Кейсы</a></li>
-      <li><a href="#contacts">Контакты</a></li>
-    </ul>
-  </nav>
+  <ul>
+    <li><a href="#bio">Био</a></li>
+    <li><a href="#direction">Направление</a></li>
+    <li><a href="#cases">Кейсы</a></li>
+    <li><a href="#contacts">Контакты</a></li>
+  </ul>
+</nav>
   
-  <div class="fixed-name">
-    <div class="name-box">
-      МИХАИЛ ОБРАЗЦОВ
+  <div class="fixed-education">
+    <div class="education-box">
+      ШКОЛА ДИЗАЙНА
     </div>
   </div>
   
@@ -874,7 +865,7 @@ if ($cases && is_array($cases)) {
   <div class="vertical-bar-left"></div>
 
   <!-- Bio: блок с именем и описанием -->
-  <section class="bio">
+  <section class="bio" id="bio">
     <div class="bio-content">
       <p class="bio-label">имя</p>
       <div class="bio-anchor">
@@ -921,7 +912,7 @@ if ($cases && is_array($cases)) {
   
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
-<section class="direction-wrapper">
+  <section class="direction-wrapper" id="direction">
   <div class="direction-block">
 
     <!-- Фон -->
@@ -1041,35 +1032,64 @@ if ($cases && is_array($cases)) {
 </section>
 
 <!-- 🔻 Заголовок "КЕЙСЫ_" с подчёркиванием по правому краю -->
-<div class="cases-header">
+<div class="cases-header" id="cases">
   <span class="cases-text">КЕЙСЫ</span>
   <span class="cases-line"></span>
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
-<?php foreach ($cases as $case): ?>
-  <div class="case-block">
-    <!-- ЧБ слой -->
-    <div class="case-layer case-bw">
-      <img class="case-image" src="<?= $case['image_bw'] ?>" alt="Превью ЧБ" />
-      <div class="case-title"><?= $case['title'] ?></div>
-      <div class="case-label"><?= $case['label'] ?></div>
-      <div class="case-desc"><?= $case['desc'] ?></div>
-      <div class="case-site"><?= $case['site'] ?></div>
-      <div class="case-tag"><?= $case['tag'] ?></div>
-    </div>
+<?php
+$jsonData = file_get_contents('cases.json');
+$cases = json_decode($jsonData, true);
 
-    <!-- Цветной слой -->
-    <div class="case-layer case-color">
-      <img class="case-image" src="<?= $case['image_color'] ?>" alt="Цветной кейс" />
-      <div class="case-title"><?= $case['title'] ?></div>
-      <div class="case-label"><?= $case['label'] ?></div>
-      <div class="case-desc"><?= $case['desc'] ?></div>
-      <div class="case-site"><?= $case['site'] ?></div>
-      <div class="case-tag"><?= $case['tag'] ?></div>
-    </div>
-  </div>
-<?php endforeach; ?>
+if ($cases && is_array($cases)) {
+    echo '<div class="case-row">';
+    foreach ($cases as $index => $case) {
+        echo '<div class="case-block">';
+        
+        // ЧБ слой
+        echo '<div class="case-layer case-bw">';
+        if (isset($case["logo_bw"])) {
+          echo '<img src="' . htmlspecialchars($case["logo_bw"]) . '" alt="Логотип ЧБ" class="logo-img">';
+      }
+          echo isset($case["logo_img"])
+        ? '<img src="' . htmlspecialchars($case["logo_img"]) . '" alt="Логотип" class="logo-img">'
+        : '';
+        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
+        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
+        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
+        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
+        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
+        echo '</div>';
+
+        // Цветной слой
+        echo '<div class="case-layer case-color">';
+        if (isset($case["logo_color"])) {
+          echo '<img src="' . htmlspecialchars($case["logo_color"]) . '" alt="Логотип цветной" class="logo-img">';
+      }
+        echo '<img class="case-image" src="' . htmlspecialchars($case["image_color"]) . '" alt="Цветной кейс" />';
+        echo '<img src="' . htmlspecialchars($case["logo_img"]) . ' class="logo-img">';
+        echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
+        echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
+        echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
+        echo '<div class="case-site">' . htmlspecialchars($case["site"]) . '</div>';
+        echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
+        echo '</div>';
+
+        echo '</div>';
+
+        // Каждые 3 кейса — новый .case-row
+        if (($index + 1) % 3 == 0 && $index + 1 < count($cases)) {
+            echo '</div><div class="case-row">';
+        }
+    }
+    echo '</div>'; // Закрытие последнего case-row
+} else {
+    echo "<p style='color:red;'>Ошибка: не удалось загрузить данные кейсов.</p>";
+}
+?>
+
+
 
 <!-- ЦИТАТА 2 -->
 <section class="quote-section 2">
@@ -1084,7 +1104,7 @@ if ($cases && is_array($cases)) {
 </section>
 
 <!-- 🔻 КОНТАКТЫ -->
-<section class="contacts-section">
+<section class="contacts-section" id="contacts">
   <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>
