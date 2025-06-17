@@ -9,36 +9,6 @@ if (!is_array($cases)) {
 }
 ?>
 
-<script>
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        document.querySelectorAll('.number-value').forEach(el => {
-          const target = +el.getAttribute('data-target');
-          const duration = 1200;
-          const stepTime = Math.max(10, duration / target);
-          let current = 0;
-
-          const timer = setInterval(() => {
-            current += 1;
-            if (current >= target) {
-              current = target;
-              clearInterval(timer);
-            }
-            el.textContent = current + (target >= 1000 ? '+' : '');
-          }, stepTime);
-        });
-
-        // Отключаем наблюдение после первого срабатывания
-        observer.disconnect();
-      }
-    });
-  }, { threshold: 0.5 });
-
-  const statsBlock = document.querySelector('.stats-numbers');
-  if (statsBlock) observer.observe(statsBlock);
-</script>
-
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -505,11 +475,11 @@ if (!is_array($cases)) {
 
 .case-row {
   display: flex;
-  justify-content: center;
-  gap: 65px;
-  margin: 65px 0;
   flex-wrap: wrap;
+  gap: 90px;
+  justify-content: center;
 }
+
 
 .case-block {
   width: 530px;
@@ -643,6 +613,21 @@ if (!is_array($cases)) {
     text-align: right;
     color: rgb(121, 121, 121);
   }
+
+  .black-slot {
+  width: 603px;
+  height: 1150px;
+  position: relative;
+  border: none;
+}
+
+.black-frame {
+  width: 100%;
+  height: 100%;
+  background: black;
+  border: 1px solid black;
+}
+
 
   /* Цветной текст в hover-версии — белый */
   .case-color .case-title,
@@ -912,25 +897,25 @@ html {
   <!-- Цифры -->
   <section class="stats-numbers">
   <div class="number-block">
-  <div class="number-value" data-target="17">0</div>
+  <div class="number-value">17</div>
   <div class="number-desc">лет непрерывной коммерческой практики в дизайне</div>
   </div>
 
   <div class="divider-vertical"></div>  
   <div class="number-block">
-  <div class="number-value" data-target="30">0</div>
+  <div class="number-value">30+</div>
   <div class="number-desc">проектов реализовано и завершено в партнёрстве с клиентами</div>
   </div>
 
   <div class="divider-vertical"></div>
   <div class="number-block">
-  <div class="number-value" data-target="12">0</div>
+  <div class="number-value">12</div>
   <div class="number-desc">брендов разработаны с нуля — от концепта до выхода на рынок</div>
   </div>
 
   <div class="divider-vertical"></div>
   <div class="number-block">
-  <div class="number-value" data-target="2500">0</div>
+    <div class="number-value">2500+</div>
     <div class="number-desc">выполнено и реализовано <br>рекламных макетов</div>
   </div>
 </section>
@@ -1114,6 +1099,25 @@ if ($cases && is_array($cases)) {
 }
 ?>
 
+<?php
+$index = 0;
+foreach ($cases as $case) {
+    // ВСТАВКА ЧЁРНОГО СЛОТА на позицию 3
+    if ($index === 3) {
+        echo '
+        <div class="case-block black-slot">
+          <div class="black-frame"></div>
+        </div>';
+    }
+
+    // Обычный кейс
+    echo '<div class="case-block">';
+    // ...остальной код отрисовки кейса...
+    echo '</div>';
+
+    $index++;
+}
+?>
 
 
 <!-- ЦИТАТА 2 -->
