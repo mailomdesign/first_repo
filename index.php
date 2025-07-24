@@ -116,6 +116,14 @@ if (!is_array($cases)) {
       line-height: 1.5;
     }
 
+    .bio-underline {
+  width: 60px;
+  height: 6px;
+  background-color: #505050;
+  margin: 40px auto 0; /* сверху 10px, снизу 0 — выравнивание по центру */
+}
+
+
     /* ------------------- Плашка "идеология" справа ------------------- */
     .ideology-wrapper {
       position: absolute;
@@ -447,6 +455,26 @@ if (!is_array($cases)) {
   margin: 0 auto;
 }
 
+.quote-button {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 24px;
+  background: black;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid black;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.quote-button:hover {
+  background: white;
+  color: black;
+}
+
+
 .cases-header {
   width: 100%;
   display: flex;
@@ -475,11 +503,11 @@ if (!is_array($cases)) {
 
 .case-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 90px;
   justify-content: center;
+  gap: 65px;
+  margin: 65px 0;
+  flex-wrap: wrap;
 }
-
 
 .case-block {
   width: 530px;
@@ -613,21 +641,6 @@ if (!is_array($cases)) {
     text-align: right;
     color: rgb(121, 121, 121);
   }
-
-  .black-slot {
-  width: 603px;
-  height: 1150px;
-  position: relative;
-  border: none;
-}
-
-.black-frame {
-  width: 100%;
-  height: 100%;
-  background: black;
-  border: 1px solid black;
-}
-
 
   /* Цветной текст в hover-версии — белый */
   .case-color .case-title,
@@ -799,7 +812,7 @@ html {
 }
 
 .education-box {
-  width: 140px;
+  width: 90px;
   height: 28px;
   background: white;
   border: 1px solid white; /* если нужен бордер */
@@ -847,7 +860,7 @@ html {
 <body>
 
   <!-- Hero-блок -->
-  <section class="hero">
+  <section class="hero" id="hero">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
     <div class="hero-caption">не виртуального дизайнер</div>
@@ -857,18 +870,23 @@ html {
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
   <ul>
+    <li><a href="#hero">Главная</a></li>
     <li><a href="#bio">Био</a></li>
     <li><a href="#direction">Направление</a></li>
+    <li><a href="#education">Обучение</a></li>
     <li><a href="#cases">Кейсы</a></li>
     <li><a href="#contacts">Контакты</a></li>
   </ul>
 </nav>
   
-  <div class="fixed-education">
+<div class="fixed-education">
+  <a href="vacancy.html" style="text-decoration: none; color: inherit;">
     <div class="education-box">
-      ШКОЛА ДИЗАЙНА
+      Вакансия
     </div>
-  </div>
+  </a>
+</div>
+
   
 
   <!-- Вертикальная полоса слева -->
@@ -877,9 +895,9 @@ html {
   <!-- Bio: блок с именем и описанием -->
   <section class="bio" id="bio">
     <div class="bio-content">
-      <p class="bio-label">имя</p>
       <div class="bio-anchor">
         <h1 class="bio-name">михаил образцов</h1>
+        <div class="bio-underline"></div> <!-- ← чёрная полоска -->
       </div>
       <p class="bio-description">
         Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
@@ -1029,16 +1047,16 @@ html {
 </div>
 </section>
 
-<!-- 🔻 ЦИТАТА -->
+<!-- 🔻 Обучение 2-->
 <section class="quote-section">
   <h2 class="quote-title">
-    Дизайн без воплощения — это идея. <br />
-    Я делаю — чтобы работало
+    Наставник, который сопровождает  <br />
   </h2>
   <p class="quote-text">
-    Реализация творческих амбиций — это всегда хорошо, но продукт порой требует практичных решений в рекламе. <br />
-    Вместе с вами я смогу найти путь к успешной презентации.
+    Интересуют базовые навыки или требуется поднять уровень до более уверенного специалиста? <br />
+    С удовольствием пройду с Вами этот путь, убрав все лишнее с упором на практику
   </p>
+  <a href="#request" class="quote-button">Оставить заявку</a>
 </section>
 
 <!-- 🔻 Заголовок "КЕЙСЫ_" с подчёркиванием по правому краю -->
@@ -1099,26 +1117,6 @@ if ($cases && is_array($cases)) {
 }
 ?>
 
-<?php
-$index = 0;
-foreach ($cases as $case) {
-    // ВСТАВКА ЧЁРНОГО СЛОТА на позицию 3
-    if ($index === 3) {
-        echo '
-        <div class="case-block black-slot">
-          <div class="black-frame"></div>
-        </div>';
-    }
-
-    // Обычный кейс
-    echo '<div class="case-block">';
-    // ...остальной код отрисовки кейса...
-    echo '</div>';
-
-    $index++;
-}
-?>
-
 
 <!-- ЦИТАТА 2 -->
 <section class="quote-section 2">
@@ -1131,6 +1129,7 @@ foreach ($cases as $case) {
     Вместе с вами я смогу найти путь к успешной презентации.
   </p>
 </section>
+
 
 <!-- 🔻 КОНТАКТЫ -->
 <section class="contacts-section" id="contacts">
