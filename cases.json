@@ -47,6 +47,7 @@
     "desc": "разработка дизайна одежды, технические макеты, визуализация, разработка логотипов, допечатная подготовка, сопровождение бренда",
     "site": "@freeplaysevendesign",
     "tag": "#fashion",
-    "image_color": "img/cases/case_fp7d.png"
+    "image_color": "img/cases/case_fp7d.png",
+    "page": "case_fp7d.html"
   }
 ]

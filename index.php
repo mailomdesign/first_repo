@@ -651,6 +651,14 @@ if (!is_array($cases)) {
     color: white;
   }
 
+  .case-card {
+  transition: transform 0.2s ease;
+}
+.case-card:hover {
+  transform: translateY(-5px);
+}
+
+
   .contacts-section {
   position: relative; /* чтобы .contacts-header мог позиционироваться внутри */
   display: flex;
@@ -858,6 +866,9 @@ html {
 </style>
 </head>
 <body>
+
+<script src="js/script.js"></script>
+
 
   <!-- Hero-блок -->
   <section class="hero" id="hero">
@@ -1067,6 +1078,8 @@ html {
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
+<div class="cases-container"></div>
+
 <?php
 $jsonData = file_get_contents('cases.json');
 $cases = json_decode($jsonData, true);

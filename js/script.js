@@ -1,0 +1,22 @@
+fetch('cases.json')
+  .then(response => response.json())
+  .then(cases => {
+    const container = document.querySelector('.cases-container');
+
+    cases.forEach(c => {
+      const html = `
+        <a href="${c.page}" class="case-link" style="text-decoration: none; color: inherit;">
+          <div class="case-card" style="margin: 40px 0; border-bottom: 1px solid #ddd; padding: 20px 0;">
+            <img src="${c.logo_bw}" alt="${c.title} logo" style="height: 60px; margin-bottom: 20px;">
+            <h2 style="font-family: 'Russo One'; font-size: 40px; color: #000;">${c.title}</h2>
+            <p style="font-family: 'Alumni Sans'; font-size: 20px; color: #333; max-width: 600px;">${c.desc}</p>
+            <div style="color: #999; margin-top: 10px;">${c.tag}</div>
+          </div>
+        </a>
+      `;
+      container.innerHTML += html;
+    });
+  })
+  .catch(err => {
+    console.error('Ошибка загрузки кейсов:', err);
+  });
