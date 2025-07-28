@@ -12,13 +12,31 @@
       background: white;
     }
 
-    .case-header {
-      text-align: right;
-      font-size: 96px;
-      color: #505050;
-      padding: 60px 120px 0 0;
-      text-transform: uppercase;
-    }
+    .cases-header {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 0px; /* как у .ideology-wrapper */
+  box-sizing: border-box;
+  margin-top: 120px;
+  font-family: 'Russo One', sans-serif;
+}
+
+.cases-text {
+  font-size: 96px;
+  font-weight: 400;
+  color: #505050;
+  text-transform: uppercase;
+  line-height: 0.65;
+}
+
+.cases-line {
+  width: 90px;
+  height: 16px;
+  background-color: #505050;
+  margin-left: 0px; /* расстояние между "КЕЙСЫ" и линией */
+}
 
     .case-title {
       text-align: right;
@@ -63,26 +81,21 @@
     }
 
     .case-logo {
-      width: 215px;
-      height: 125px;
-      background: #D9D9D9;
-      color: black;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 40px;
-      font-size: 20px;
-      text-align: center;
-    }
+  width: 215px;
+  height: 125px;
+  object-fit: contain; /* или cover, если нужно обрезать */
+  margin-bottom: 40px;
+}
+
 
     .case-panel h3 {
-      font-size: 22px;
+      font-size: 26px;
       margin: 20px 0 10px;
     }
 
     .case-panel p {
       font-family: 'Alumni Sans', sans-serif;
-      font-size: 18px;
+      font-size: 22px;
       text-align: right;
       line-height: 1.5;
       margin: 0;
@@ -105,22 +118,153 @@
       margin: 0 auto 120px;
     }
 
+    .footer {
+  width: 100%;
+  max-width: 1920px;
+  height: 40px;
+  background: #212121;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Russo One', sans-serif;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 1920px; /* или 1920px — зависит от центральной сетки */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 60px;
+  box-sizing: border-box;
+  color: white;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.fixed-menu {
+  position: fixed;
+  top: 40px; /* как у .hero */
+  right: 51%;
+  transform: translateX(850px); /* 1700px / 2 - точно к правому краю рамки hero */
+  z-index: 1000;
+}
+
+.fixed-menu ul {
+  display: flex;
+  gap: 20px;
+  background: white;
+  border: 1px solid rgb(255, 255, 255);
+  padding: 5px 10px;
+  margin: 0;
+  list-style: none;
+}
+
+.fixed-menu li a {
+  text-decoration: none;
+  color: black;
+  font-family: 'Russo One', sans-serif;
+  font-size: 14px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.fixed-menu li a:hover {
+  color: #AAAAAA; /* или любой другой: #505050, #888 — регулируй по вкусу */
+}
+
+.fixed-education {
+  position: fixed;
+  top: 40px; /* как у .hero */
+  left: 51%;
+  transform: translateX(-850px); /* 1700px / 2 — левый край рамки */
+  z-index: 1000;
+}
+
+.education-box {
+  width: 90px;
+  height: 28px;
+  background: white;
+  border: 1px solid white; /* если нужен бордер */
+  color: black;
+  font-size: 14px;
+  font-family: 'Russo One', sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  transition: color 0.3s ease;
+}
+
+.education-box:hover {
+  color: #AAAAAA; /* регулируй по вкусу */
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  width: 25px;         /* как .ideology-wrapper */
+  height: 30px;
+  background: black;
+  color: white;
+  font-size: 16px;
+  font-family: 'Russo One', sans-serif;
+  border: none;
+  cursor: pointer;
+  z-index: 1000;
+  transition: background 0.3s ease;
+}
+
+.scroll-top:hover {
+  background: #333;
+}
+
   </style>
 </head>
 <body>
 
-  <div class="case-header">кейсы</div>
-  <div class="case-title">free play<br>seven design</div>
-  <div class="divider"></div>
+  <!-- Плавающее меню -->
+  <nav class="fixed-menu">
+    <ul>
+      <li><a href="#hero">Главная</a></li>
+      <li><a href="#bio">Био</a></li>
+      <li><a href="#direction">Направление</a></li>
+      <li><a href="education.html">Обучение</a></li>
+      <li><a href="#cases">Кейсы</a></li>
+      <li><a href="#contacts">Контакты</a></li>
+    </ul>
+  </nav>
+    
+  <div class="fixed-education">
+    <a href="vacancy.html" style="text-decoration: none; color: inherit;">
+      <div class="education-box">
+        Вакансия
+      </div>
+    </a>
+  </div>
+
+  <div class="cases-header" id="cases">
+    <br><br>
+    <span class="cases-text">КЕЙСЫ</span>
+    <span class="cases-line"></span>
+  </div> <br><br>
+  <div class="case-title">free play<br>seven design</div><br><br>
+
 
   <div class="case-wrapper">
     <div class="case-image"></div>
     <div class="case-panel">
-      <div class="case-logo">ЛОГО<br>215x125</div>
+      <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
+
       <h3>Задачи:</h3>
       <p>
-        Разработка логотипа компании, рекламной и печатной продукции, наружная реклама,<br>
-        допечатная подготовка, web, дизайн сопровождение
+        Разработка логотипа компании, рекламной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение
       </p>
       <h3 style="margin-top: 40px;">Сайт компании</h3>
       <p>#категория</p>
@@ -132,6 +276,33 @@
     Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
     Ставлю перед собой основную задачу в успешной реализации бренда или продукта своего партнера.
   </div>
+
+  <!-- 🔻 ФУТЕР -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
+    <div class="footer-right">2025</div>
+  </div>
+</footer>
+
+<script>
+  function scrollToSection(id) {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+</script>
+
+<button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
+  ↑
+</button>
+
+<script>
+  function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
