@@ -1,3 +1,4 @@
+/*
 fetch('cases.json')
   .then(response => response.json())
   .then(cases => {
@@ -20,3 +21,4 @@ fetch('cases.json')
   .catch(err => {
     console.error('Ошибка загрузки кейсов:', err);
   });
+*/
