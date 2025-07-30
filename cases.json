@@ -7,7 +7,8 @@
     "desc": "разработка дизайна меню, верстка меню, допечатная подготовка, дизайн сопровождение",
     "site": "@borodashvilirest",
     "tag": "#horeca",
-    "image_color": "img/cases/case_bg.png"
+    "image_color": "img/cases/case_bg.png",
+    "page": "case_bg.html"
   },
   {
     "title": "МСК ГРУПП",
@@ -17,7 +18,8 @@
     "desc": "разработка логотипа компании, рекамной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение",
     "site": "msk-development.ru",
     "tag": "#строительство",
-    "image_color": "img/cases/case_msk.png"
+    "image_color": "img/cases/case_msk.png",
+    "page": "case_msk.html"
   },
   {
     "title": "SEP",
@@ -27,7 +29,8 @@
     "desc": "раработка логотипа, верстка рекламных материалов, визуализация дизайна кофеен, элементы оформления дизайна кофеен, дизайн сопровождение",
     "site": "@sepcoffee",
     "tag": "#horeca",
-    "image_color": "img/cases/case_sep.png"
+    "image_color": "img/cases/case_sep.png",
+    "page": "case_sep.html"
   },
   {
     "title": "MUVA",
@@ -37,7 +40,8 @@
     "desc": "разработка фирменного стиля и брендбука компании, pos материалы, допечатная подготовка, альбомы и наружная реклама",
     "site": "muva-development.ru",
     "tag": "#строительство",
-    "image_color": "img/cases/case_muva.png"
+    "image_color": "img/cases/case_muva.png",
+    "page": "case_muva.html"
   },
   {
     "title": "FP7D",

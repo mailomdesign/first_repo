@@ -552,6 +552,13 @@ if (!is_array($cases)) {
   opacity: 0.54;
 }
 
+.case-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+
 .logo-img {
   position: absolute;
   top: 27px;
@@ -1087,16 +1094,17 @@ $cases = json_decode($jsonData, true);
 if ($cases && is_array($cases)) {
     echo '<div class="case-row">';
     foreach ($cases as $index => $case) {
+        echo '<a href="' . htmlspecialchars($case["page"]) . '" class="case-link">';
         echo '<div class="case-block">';
-        
+
         // ЧБ слой
         echo '<div class="case-layer case-bw">';
         if (isset($case["logo_bw"])) {
-          echo '<img src="' . htmlspecialchars($case["logo_bw"]) . '" alt="Логотип ЧБ" class="logo-img">';
-      }
-          echo isset($case["logo_img"])
-        ? '<img src="' . htmlspecialchars($case["logo_img"]) . '" alt="Логотип" class="logo-img">'
-        : '';
+            echo '<img src="' . htmlspecialchars($case["logo_bw"]) . '" alt="Логотип ЧБ" class="logo-img">';
+        }
+        echo isset($case["logo_img"])
+            ? '<img src="' . htmlspecialchars($case["logo_img"]) . '" alt="Логотип" class="logo-img">'
+            : '';
         echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
         echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
         echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
@@ -1107,10 +1115,12 @@ if ($cases && is_array($cases)) {
         // Цветной слой
         echo '<div class="case-layer case-color">';
         if (isset($case["logo_color"])) {
-          echo '<img src="' . htmlspecialchars($case["logo_color"]) . '" alt="Логотип цветной" class="logo-img">';
-      }
+            echo '<img src="' . htmlspecialchars($case["logo_color"]) . '" alt="Логотип цветной" class="logo-img">';
+        }
         echo '<img class="case-image" src="' . htmlspecialchars($case["image_color"]) . '" alt="Цветной кейс" />';
-        echo '<img src="' . htmlspecialchars($case["logo_img"]) . ' class="logo-img">';
+        echo isset($case["logo_img"])
+            ? '<img src="' . htmlspecialchars($case["logo_img"]) . '" alt="Логотип" class="logo-img">'
+            : '';
         echo '<div class="case-title">' . htmlspecialchars($case["title"]) . '</div>';
         echo '<div class="case-label">' . htmlspecialchars($case["label"]) . ':</div>';
         echo '<div class="case-desc">' . htmlspecialchars($case["desc"]) . '</div>';
@@ -1118,18 +1128,20 @@ if ($cases && is_array($cases)) {
         echo '<div class="case-tag">' . htmlspecialchars($case["tag"]) . '</div>';
         echo '</div>';
 
-        echo '</div>';
+        echo '</div>'; // .case-block
+        echo '</a>';   // .case-link
 
-        // Каждые 3 кейса — новый .case-row
+        // Каждые 3 кейса — новая строка
         if (($index + 1) % 3 == 0 && $index + 1 < count($cases)) {
             echo '</div><div class="case-row">';
         }
     }
-    echo '</div>'; // Закрытие последнего case-row
+    echo '</div>'; // Закрытие последнего .case-row
 } else {
     echo "<p style='color:red;'>Ошибка: не удалось загрузить данные кейсов.</p>";
 }
 ?>
+
 
 
 <!-- ЦИТАТА 2 -->

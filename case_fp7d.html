@@ -58,30 +58,39 @@
     }
 
     .case-wrapper {
-      display: flex;
-      width: 100%;
-      height: 1000px;
-    }
+  display: flex;
+  width: 100%;
+  height: 1000px;
+  overflow: hidden;
+  position: relative;
+}
+
 
     .case-image {
       flex: 2;
-      background-image: url("https://placehold.co/1244x1000");
+      background-image: url("img/cases/case_fp7d_im.png");
       background-size: cover;
       background-position: center;
     }
 
     .case-panel {
-      flex: 1;
-      background: black;
-      color: white;
-      position: relative;
-      padding: 60px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: flex-end;
-    }
+  flex: 1;
+  background: black;
+  color: white;
+  position: relative;
+  padding: 60px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%, 0 100%);
+  z-index: 2;
+}
+
+
+
+
 
     .case-logo {
   width: 215px;
@@ -263,7 +272,7 @@ html {
 
 
   <div class="case-wrapper">
-    <div class="case-image"></div>
+    <div class="case-image"> </div>
     <div class="case-panel">
       <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
 
