@@ -1103,13 +1103,13 @@ html {
 </section>
 
 <!-- 🔻 Заголовок "КЕЙСЫ_" с подчёркиванием по правому краю -->
-<div class="cases-header scroll-fade" id="cases">
-  <span class="cases-text scroll-fade">КЕЙСЫ</span>
-  <span class="cases-line scroll-fade"></span>
+<div class="cases-header" id="cases">
+  <span class="cases-text">КЕЙСЫ</span>
+  <span class="cases-line"></span>
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
-<div class="cases-container"></div>
+<div class="cases-container scroll-auto-fade"></div>
 
 <?php
 $jsonData = file_get_contents('cases.json');

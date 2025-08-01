@@ -24,7 +24,9 @@ fetch('cases.json')
 */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const fadeElements = document.querySelectorAll('.scroll-fade');
+  const selector = '.scroll-fade, .scroll-auto-fade';
+  document.querySelectorAll(selector).forEach(el => observer.observe(el));
+  
 
   const onScroll = () => {
     fadeElements.forEach(el => {
