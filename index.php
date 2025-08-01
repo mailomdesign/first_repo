@@ -665,6 +665,18 @@ if (!is_array($cases)) {
   transform: translateY(-5px);
 }
 
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 
   .contacts-section {
   position: relative; /* чтобы .contacts-header мог позиционироваться внутри */
@@ -874,6 +886,23 @@ html {
 </head>
 <body>
 
+<script>
+  const fadeElements = document.querySelectorAll('.scroll-fade');
+
+  const onScroll = () => {
+    fadeElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  document.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+</script>
+
+
 <script src="js/script.js"></script>
 
 
@@ -959,7 +988,7 @@ html {
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
   <section class="direction-wrapper" id="direction">
-  <div class="direction-block">
+  <div class="direction-block scroll-fade">
 
     <!-- Фон -->
     <div class="direction-bg"></div>

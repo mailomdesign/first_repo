@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
@@ -19,7 +19,7 @@
   align-items: flex-end;
   padding-right: 0px; /* как у .ideology-wrapper */
   box-sizing: border-box;
-  margin-top: 120px;
+  margin-top: 100px;
   margin-bottom: 50px;
   font-family: 'Russo One', sans-serif;
 }
@@ -57,10 +57,10 @@
       margin: 40px 120px 60px auto;
     }
 
-    .case-wrapper {
+  .case-wrapper {
   position: relative;
   height: 1000px;
-  overflow: hidden;
+  overflow: hidden
 }
 
 .case-image {
@@ -76,7 +76,6 @@
   mix-blend-mode: normal;
 }
 
-
 .case-panel {
   position: absolute;
   top: 0;
@@ -85,23 +84,71 @@
   height: 100%;
   background: black;
   color: white;
-  clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0 100%);
+  clip-path: polygon(5% 0%, 100% 0, 100% 100%, 0 100%);
   z-index: 2;
   padding: 60px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center; /* логотип по центру */
   text-align: left;
 }
 
-    .case-logo {
-  width: 215px;
-  height: 125px;
-  object-fit: contain; /* или cover, если нужно обрезать */
-  margin-top: 120px;
-  margin-bottom: 40px;
+.logo-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
+
+.case-logo {
+  width: 350px;   /* Было 250px */
+  height: 175px;  /* Было 125px */
+  object-fit: contain;
+  margin-top: 30px;
+}
+
+.text-wrapper {
+  align-self: flex-start; /* текст привязывается к левому краю */
+  padding-left: 50px;     /* 👉 увеличенный отступ слева */
+  padding-right: 20px;    /* (опционально) ограничение справа */
+  max-width: 500px;
+}
+
+.text-wrapper h3 {
+  font-size: 26px;
+  margin: 0 0 10px;
+  text-align: left;
+}
+
+.text-wrapper p {
+  font-family: 'Alumni Sans', sans-serif;
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0;
+  text-align: left;
+}
+
+.icon-row {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  justify-content: center; /* ← Центр по горизонтали внутри text-wrapper */
+}
+
+
+.icon-row a img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  transition: opacity 0.3s ease;
+  filter: brightness(0) invert(1); /* делает иконки белыми, если они чёрные */
+}
+
+.icon-row a:hover img {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+
 
 
     .case-panel h3 {
@@ -113,27 +160,76 @@
     .case-panel p {
       font-family: 'Alumni Sans', sans-serif;
       font-size: 22px;
-      text-align: right;
+      text-align: left;
       line-height: 1.5;
       margin: 0;
       max-width: 537px;
     }
 
-    .case-info {
-      font-size: 37px;
-      color: rgb(0, 0, 0);
-      text-align: left;
-      margin: 80px auto 40px;
-    }
+    .case-bio-section {
+  max-width: 1400px;
+  margin: 120px auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 60px;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
 
-    .case-bio {
-      font-family: 'Alumni Sans', sans-serif;
-      font-size: 32px;
-      color: rgb(0, 0, 0);
-      text-align: left;
-      max-width: 603px;
-      margin: 0 auto 120px;
-    }
+.bio-image-wrapper {
+  flex-shrink: 0;
+}
+
+.bio-image {
+  width: 620px;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.bio-text-block {
+  max-width: 660px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.bio-title {
+  font-family: 'Russo One', sans-serif;
+  font-size: 28px;
+  color: black;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.bio-text {
+  font-family: 'Alumni Sans', sans-serif;
+  font-size: 30px;
+  color: black;
+  line-height: 1.5;
+  margin-top: 0;
+  text-align: left;
+}
+
+.bio-text_2 {
+  font-family: 'Alumni Sans', sans-serif;
+  font-size: 25px;
+  color: black;
+  line-height: 1.5;
+  margin-top: 0;
+  text-align: left;
+}
+
+.bio-quote {
+  font-family: 'Russo One', sans-serif;
+  font-size: 45px;
+  color: black;
+  line-height: 1.2;
+  text-align: left;
+}
+
 
     .footer {
   width: 100%;
@@ -277,28 +373,74 @@ html {
   <div class="case-wrapper">
     <div class="case-image"> </div>
     <div class="case-panel">
-      <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
+      <div class="logo-wrapper">
+        <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
+      </div>
 
-      <h3>О конпании</h3>
-      <p>
-        Разработка логотипа компании, рекламной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение
-      </p> <br>
-      <h3>Заявка</h3>
-      <p>
-        Разработка логотипа компании, рекламной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение
-      </p> <br>
-      <h3>Решение</h3>
-      <p>
-        Разработка логотипа компании, рекламной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение
-      </p> <br>
+      <div class="text-wrapper">
+        <h3>О компании</h3>
+        <p>
+        Независимая студия дизайна и производства одежды, работающая на пересечении формы, технологии и человека. В каждой коллекции мы стремимся к лаконичности, в которой материал говорит сам за себя. Мы не следуем за трендами — мы исследуем структуру, движение, контраст и смысл.
+
+Наша одежда и аксессуары созданы для тех, кто ценит тактильность, пропорцию и чистую эстетику. 
+
+<br> <br> Мы используем премиальные ткани европейских и японских производителей, работаем с архитектурным кроем и уделяем особое внимание посадке, потому что знаем: вещь должна быть продолжением тела, а не формой вне его.
+
+Мы производим ограниченные серии. Это принципиально. Каждая модель проходит через ручную доводку и финальную сборку в мастерской. Никакой спешки, никакой перегрузки — только вещи, которые останутся с вами надолго.
+</p>
+<div class="icon-row">
+  <a href="https://example.com/1" target="_blank">
+    <img src="img/cases/fp7d/logo_tw_w.svg" alt="иконка 1">
+  </a>
+  <a href="https://example.com/2" target="_blank">
+    <img src="img/cases/fp7d/logo_inst_w.svg" alt="иконка 2">
+  </a>
+  <a href="https://example.com/3" target="_blank">
+    <img src="img/cases/fp7d/logo_wt_w.svg" alt="иконка 3">
+  </a>
+  <a href="https://example.com/4" target="_blank">
+    <img src="img/cases/fp7d/logo_vk_w.svg" alt="иконка 4">
+  </a>
+  <a href="https://example.com/5" target="_blank">
+    <img src="img/cases/fp7d/logo_inter_w.svg" alt="иконка 5">
+  </a>
+  <a href="https://example.com/5" target="_blank">
+    <img src="img/cases/fp7d/logo_yt_w.svg" alt="иконка 6">
+  </a>
+  <a href="https://example.com/5" target="_blank">
+    <img src="img/cases/fp7d/logo_phone_w.svg" alt="иконка 7">
+  </a>
+  <a href="https://example.com/5" target="_blank">
+    <img src="img/cases/fp7d/logo_tg_w.svg" alt="иконка 8">
+  </a>
+</div>
+
+       </div>
     </div>
   </div>
 
-  <div class="case-info">Вводные данные:</div>
-  <div class="case-bio">
-    Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
-    Ставлю перед собой основную задачу в успешной реализации бренда или продукта своего партнера.
+ 
+
+<!-- БЛОК БИО-ПРЕЗЕНТАЦИИ -->
+<section class="case-bio-section">
+  <div class="bio-image-wrapper">
+    <img src="img/cases/case_fp7d_im_2.png" alt="Фото" class="bio-image">
   </div>
+
+  <div class="bio-text-block">
+    <div class="bio-quote">Поставленная задача</div>
+
+    <p class="bio-text">
+      Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
+      Ставлю перед собой основную задачу в успешной реализации бренда или продукта своего партнера.
+    </p>
+    <h2 class="bio-title">теги:</h2>
+    <p class="bio-text_2">
+      разработка логотипа, верстка рекламных материалов, визуализация дизайна кофеен, элементы оформления дизайна кофеен, дизайн сопровождение
+    </p>
+  </div>
+</section>
+
 
   <!-- 🔻 ФУТЕР -->
 <footer class="footer">
@@ -329,3 +471,4 @@ html {
 
 </body>
 </html>
+
