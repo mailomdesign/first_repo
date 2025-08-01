@@ -988,7 +988,7 @@ html {
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
   <section class="direction-wrapper" id="direction">
-  <div class="direction-block scroll-fade">
+  <div class="direction-block scroll-fade"> <!-- ВАЖНО: scroll-fade здесь -->
 
     <!-- Фон -->
     <div class="direction-bg"></div>
@@ -1017,6 +1017,7 @@ html {
 
     <!-- Квадрат -->
     <div class="direction-square"></div>
+
   </div>
 </section>
 
