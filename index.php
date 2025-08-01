@@ -888,22 +888,22 @@ html {
 <body>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const fadeElements = document.querySelectorAll('.scroll-fade');
+document.addEventListener('DOMContentLoaded', () => {
+  const elements = document.querySelectorAll('.scroll-fade');
 
-    const onScroll = () => {
-      fadeElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.85) {
-          el.classList.add('visible');
-        }
-      });
-    };
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
 
-    document.addEventListener('scroll', onScroll);
-    window.addEventListener('load', onScroll);
-  });
+  elements.forEach(el => observer.observe(el));
+});
 </script>
+
 
 
 <script src="js/script.js"></script>
@@ -1022,7 +1022,7 @@ html {
 </div>
   
 
-<div class="skills-grid">
+<div class="skills-grid scroll-fade">
   <div class="skill-column">
     <div class="skill-label">растр/ретушь</div>
     <div class="tool">Photoshop</div>
@@ -1119,7 +1119,7 @@ if ($cases && is_array($cases)) {
     echo '<div class="case-row">';
     foreach ($cases as $index => $case) {
         echo '<a href="' . htmlspecialchars($case["page"]) . '" class="case-link">';
-        echo '<div class="case-block">';
+        echo '<div class="case-block scroll-fade">';
 
         // ЧБ слой
         echo '<div class="case-layer case-bw">';
