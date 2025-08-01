@@ -64,17 +64,24 @@
 }
 
 .testimonial-card {
+  position: absolute;
+  top: 480px;
+  left: 25px;
   width: 228px;
-  height: 297px;
+  height: auto;
   background: white;
-  opacity: 0.9;
+  opacity: 0.7;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px 15px;
   box-sizing: border-box;
   font-family: 'Alumni Sans', sans-serif;
+  z-index: 3; /* выше изображения и панели */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* необязательно, но красиво */
+  border-radius: 8px;
 }
+
 
 .testimonial-avatar {
   width: 150px;
@@ -108,7 +115,7 @@
 }
 
 .testimonial-text {
-  font-size: 14px;
+  font-size: 18px;
   color: black;
   line-height: 1.4;
   text-align: left;
@@ -500,25 +507,25 @@ html {
 
   <div class="case-wrapper scroll-fade">
 
-      <!-- БЛОК ОТЗЫВА / КАРТОЧКА -->
-<div class="testimonial-card">
-  <div class="testimonial-avatar"></div>
+          <!-- БЛОК ОТЗЫВА / КАРТОЧКА -->
+          <div class="testimonial-card scroll-fade">
+            <img class="testimonial-avatar" src="img/portr-1.png" alt="Портрет отзыв" />
+          
+            <div class="testimonial-name">Имя<br>Фамилия</div>
+          
+            <div class="testimonial-position">должность в компании</div>
+          
+            <div class="testimonial-line"></div>
+          
+            <div class="testimonial-text">
+              Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.
+                </div>
+          </div>
+          
 
-  <div class="testimonial-name">Имя<br>Фамилия</div>
-
-  <div class="testimonial-position">должность в компании</div>
-
-  <div class="testimonial-line"></div>
-
-  <div class="testimonial-text">
-    Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.
-    <br><br>
-    Ставлю перед собой основную задачу в успешной реализации бренда или продукта своего партнера.
-  </div>
-</div>
-
-    <div class="case-image"> </div>
+          <div class="case-image"> </div>
     <div class="case-panel">
+
       <div class="logo-wrapper scroll-fade">
         <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
       </div>
@@ -534,6 +541,9 @@ html {
 
 Мы производим ограниченные серии. Это принципиально. Каждая модель проходит через ручную доводку и финальную сборку в мастерской. Никакой спешки, никакой перегрузки — только вещи, которые останутся с вами надолго.
 </p>
+</div>
+</div>
+
 <div class="icon-row">
   <a href="https://example.com/1" target="_blank">
     <img src="img/cases/fp7d/logo_tw_w.svg" alt="иконка 1">
@@ -560,10 +570,8 @@ html {
     <img src="img/cases/fp7d/logo_tg_w.svg" alt="иконка 8">
   </a>
 </div>
+</div>
 
-       </div>
-    </div>
-  </div>
 
  
 
