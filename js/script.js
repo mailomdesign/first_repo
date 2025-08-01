@@ -22,3 +22,19 @@ fetch('cases.json')
     console.error('Ошибка загрузки кейсов:', err);
   });
 */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const fadeElements = document.querySelectorAll('.scroll-fade');
+
+  const onScroll = () => {
+    fadeElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  document.addEventListener('scroll', onScroll);
+  window.addEventListener('load', onScroll);
+});

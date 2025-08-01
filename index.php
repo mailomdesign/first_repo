@@ -668,13 +668,14 @@ if (!is_array($cases)) {
 .scroll-fade {
   opacity: 0;
   transform: translateY(40px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.9s ease, transform 0.6s ease;
 }
 
 .scroll-fade.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
 
 
 
@@ -887,19 +888,21 @@ html {
 <body>
 
 <script>
-  const fadeElements = document.querySelectorAll('.scroll-fade');
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.scroll-fade');
 
-  const onScroll = () => {
-    fadeElements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight * 0.85) {
-        el.classList.add('visible');
-      }
-    });
-  };
+    const onScroll = () => {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.85) {
+          el.classList.add('visible');
+        }
+      });
+    };
 
-  document.addEventListener('scroll', onScroll);
-  window.addEventListener('load', onScroll);
+    document.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+  });
 </script>
 
 
@@ -907,7 +910,7 @@ html {
 
 
   <!-- Hero-блок -->
-  <section class="hero" id="hero">
+  <section class="hero scroll-fade" id="hero">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
     <div class="hero-caption">не виртуального дизайнер</div>
@@ -940,7 +943,7 @@ html {
   <div class="vertical-bar-left"></div>
 
   <!-- Bio: блок с именем и описанием -->
-  <section class="bio" id="bio">
+  <section class="bio scroll-fade" id="bio">
     <div class="bio-content">
       <div class="bio-anchor">
         <h1 class="bio-name">михаил образцов</h1>
@@ -960,7 +963,7 @@ html {
   </section>
 
   <!-- Цифры -->
-  <section class="stats-numbers">
+  <section class="stats-numbers scroll-fade">
   <div class="number-block">
   <div class="number-value">17</div>
   <div class="number-desc">лет непрерывной коммерческой практики в дизайне</div>
@@ -987,39 +990,30 @@ html {
   
 
   <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
-  <section class="direction-wrapper" id="direction">
-  <div class="direction-block scroll-fade"> <!-- ВАЖНО: scroll-fade здесь -->
+  <section class="direction-wrapper scroll-fade" id="direction">
+  <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
+   
+  <div class="direction-bg"></div>
 
-    <!-- Фон -->
-    <div class="direction-bg"></div>
+  
+  <h2 class="direction-title">НАПРАВЛЕНИЕ</h2>
 
-    <!-- Заголовок -->
-    <h2 class="direction-title">направление</h2>
+  <div class="direction-line"></div>
 
-    <!-- Линия под заголовком -->
-    <div class="direction-line"></div>
-
-    <!-- Список направлений -->
-    <p class="direction-list">
-      веб дизайн<br />
-      полиграфия<br />
-      графический дизайн<br />
-      наружная реклама<br />
+  <p class="direction-list">
+      веб дизайн<br>
+      полиграфия<br>
+      графический дизайн<br>
+      наружная реклама<br>
       ретушь
     </p>
 
-    <!-- Изображение -->
-    <img
-      class="direction-image"
-      src="img/napr-im-1.png"
-      alt="Макет черных папок"
-    />
+    <img class="direction-image" src="img/napr-im-1.png" alt="...">
 
-    <!-- Квадрат -->
-    <div class="direction-square"></div>
-
-  </div>
+  <div class="direction-square"></div>
+</div>
 </section>
+
 
 <!-- 🔻 ХАРД-СКИЛЛ -->
 <div class="skills-header">
@@ -1096,7 +1090,7 @@ html {
 </section>
 
 <!-- 🔻 Обучение 2-->
-<section class="quote-section">
+<section class="quote-section scroll-fade">
   <h2 class="quote-title">
     Наставник, который сопровождает  <br />
   </h2>
@@ -1109,9 +1103,9 @@ html {
 </section>
 
 <!-- 🔻 Заголовок "КЕЙСЫ_" с подчёркиванием по правому краю -->
-<div class="cases-header" id="cases">
-  <span class="cases-text">КЕЙСЫ</span>
-  <span class="cases-line"></span>
+<div class="cases-header scroll-fade" id="cases">
+  <span class="cases-text scroll-fade">КЕЙСЫ</span>
+  <span class="cases-line scroll-fade"></span>
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
@@ -1175,7 +1169,7 @@ if ($cases && is_array($cases)) {
 
 
 <!-- ЦИТАТА 2 -->
-<section class="quote-section 2">
+<section class="quote-section 2 scroll-fade">
   <h2 class="quote-title">
     Дизайн без воплощения — это идея. <br />
     Я делаю — чтобы работало
@@ -1188,7 +1182,7 @@ if ($cases && is_array($cases)) {
 
 
 <!-- 🔻 КОНТАКТЫ -->
-<section class="contacts-section" id="contacts">
+<section class="contacts-section scroll-fade" id="contacts">
   <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>

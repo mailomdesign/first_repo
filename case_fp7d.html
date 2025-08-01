@@ -318,6 +318,52 @@ html {
   color: #AAAAAA; /* регулируй по вкусу */
 }
 
+.quote-section {
+  width: 100%;
+  max-width: 1227px;
+  margin: 200px auto;
+  text-align: center;
+  padding: 0 20px; /* чтобы не упиралось в края на мобильных */
+}
+
+.quote-title {
+  font-size: 64px;
+  font-family: 'Russo One', sans-serif;
+  font-weight: 400;
+  color: black;
+  line-height: 1.3;
+  margin: 0 0 40px;
+}
+
+.quote-text {
+  font-size: 32px;
+  font-family: 'Alumni Sans', sans-serif;
+  font-weight: 400;
+  color: black;
+  line-height: 1.6;
+  max-width: 1149px;
+  margin: 0 auto;
+}
+
+.quote-button {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 12px 24px;
+  background: black;
+  color: white;
+  font-family: 'Russo One', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid black;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.quote-button:hover {
+  background: white;
+  color: black;
+}
+
 .scroll-top {
   position: fixed;
   bottom: 10px;
@@ -338,9 +384,38 @@ html {
   background: #333;
 }
 
+.scroll-fade {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.9s ease, transform 0.6s ease;
+}
+
+.scroll-fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
   </style>
 </head>
 <body>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeElements = document.querySelectorAll('.scroll-fade');
+  
+      const onScroll = () => {
+        fadeElements.forEach(el => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.85) {
+            el.classList.add('visible');
+          }
+        });
+      };
+  
+      document.addEventListener('scroll', onScroll);
+      window.addEventListener('load', onScroll);
+    });
+  </script>
 
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
@@ -367,17 +442,17 @@ html {
     <span class="cases-text">КЕЙСЫ</span>
     <span class="cases-line"></span>
   </div> <br><br>
-  <div class="case-title">free play<br>seven design</div><br><br>
+  <div class="case-title scroll-fade">free play<br>seven design</div><br><br>
 
 
-  <div class="case-wrapper">
+  <div class="case-wrapper scroll-fade">
     <div class="case-image"> </div>
     <div class="case-panel">
-      <div class="logo-wrapper">
+      <div class="logo-wrapper scroll-fade">
         <img class="case-logo" src="img/logos/logo-fp7d_w.svg" alt="Логотип компании Free Play Seven">
       </div>
 
-      <div class="text-wrapper">
+      <div class="text-wrapper scroll-fade">
         <h3>О компании</h3>
         <p>
         Независимая студия дизайна и производства одежды, работающая на пересечении формы, технологии и человека. В каждой коллекции мы стремимся к лаконичности, в которой материал говорит сам за себя. Мы не следуем за трендами — мы исследуем структуру, движение, контраст и смысл.
@@ -422,7 +497,7 @@ html {
  
 
 <!-- БЛОК БИО-ПРЕЗЕНТАЦИИ -->
-<section class="case-bio-section">
+<section class="case-bio-section scroll-fade">
   <div class="bio-image-wrapper">
     <img src="img/cases/case_fp7d_im_2.png" alt="Фото" class="bio-image">
   </div>
@@ -441,6 +516,16 @@ html {
   </div>
 </section>
 
+<!-- ЦИТАТА 2 -->
+<section class="quote-section 2 scroll-fade">
+  <h2 class="quote-title">
+    Более 80 разработанных макетов продукции для маркетплейсов <br />
+  </h2>
+  <p class="quote-text">
+    Логотипы для 4х направлений бренда. Карточки товаров и визуализация продукции <br />
+    Фирменные элементы оформления всей линейки продукции FP7D
+  </p>
+</section>
 
   <!-- 🔻 ФУТЕР -->
 <footer class="footer">
