@@ -23,10 +23,9 @@ fetch('cases.json')
   });
 */
 
+// 🔹 АНИМАЦИЯ ПОЯВЛЕНИЯ
 document.addEventListener('DOMContentLoaded', () => {
-  const selector = '.scroll-fade, .scroll-auto-fade';
-  document.querySelectorAll(selector).forEach(el => observer.observe(el));
-  
+  const fadeElements = document.querySelectorAll('.scroll-fade, .scroll-auto-fade');
 
   const onScroll = () => {
     fadeElements.forEach(el => {
@@ -41,9 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('load', onScroll);
 });
 
+
+// 🔹 СКРОЛЛ-ИНДИКАТОР
 window.addEventListener('scroll', () => {
   const bar = document.querySelector('.scroll-indicator-bar');
+  if (!bar) return;
   const scrollTop = window.scrollY;
   const docHeight = document.documentElement.scrollHeight - window.innerHeight;
   bar.style.height = `${(scrollTop / docHeight) * 100}%`;
 });
+
