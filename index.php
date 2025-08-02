@@ -25,7 +25,9 @@ if (!is_array($cases)) {
     }
     
 
-    /* ------------------- Hero-блок ------------------- */
+
+ /* -- Hero -- */
+ 
     .hero {
       width: 1700px;
       height: 950px;
@@ -72,7 +74,9 @@ if (!is_array($cases)) {
       transform: translateX(-50%);
     }
 
-    /* ------------------- Bio-блок ------------------- */
+
+ /* -- Блок био -- */
+
     .bio {
       margin-top: 240px;
       display: flex;
@@ -124,7 +128,9 @@ if (!is_array($cases)) {
 }
 
 
-    /* ------------------- Плашка "идеология" справа ------------------- */
+
+ /* -- Плашка идеология -- */
+
     .ideology-wrapper {
       position: absolute;
       top: 60px; /* теперь плашка на уровне bio-name */
@@ -159,7 +165,9 @@ if (!is_array($cases)) {
       z-index: 2;
     }
 
-    /* ------------------- Цифровой блок ------------------- */
+
+ /* -- Блоки цифры -- */
+
     .stats-numbers {
   display: flex;
   justify-content: center;
@@ -207,7 +215,8 @@ if (!is_array($cases)) {
 
 
 
-    /* ------------------- НАПРАВЛЕНИЕ ------------------- */
+
+ /* -- Направление -- */
 
 .direction-wrapper {
   width: 100%;
@@ -287,7 +296,9 @@ if (!is_array($cases)) {
 }
 
 
-    /* ------------------- Декор слева ------------------- */
+    
+ /* -- Черная полоса слева -- */
+
     .vertical-bar-left {
       position: absolute;
       left: 0;
@@ -298,7 +309,9 @@ if (!is_array($cases)) {
       z-index: 1;
     }
 
-    /* ------------------- Адаптация ------------------- */
+    
+ /* -- Адаптация-- */
+
     @media (max-width: 768px) {
       .hero {
         width: 100%;
@@ -329,6 +342,10 @@ if (!is_array($cases)) {
 
 
 <style>
+
+  
+ /* -- Хард скиллс -- */
+
 .hard-skill-section {
   width: 100%;
   max-width: 1920px;
@@ -428,6 +445,9 @@ if (!is_array($cases)) {
   background: #AAAAAA;
 }
 
+
+ /* -- Обучение цитата -- */
+
 .quote-section {
   width: 100%;
   max-width: 1227px;
@@ -474,6 +494,7 @@ if (!is_array($cases)) {
   color: black;
 }
 
+ /* -- Блоки кейсы -- */
 
 .cases-header {
   width: 100%;
@@ -665,6 +686,8 @@ if (!is_array($cases)) {
   transform: translateY(-5px);
 }
 
+ /* -- Эффект появления-- */
+
 .scroll-fade {
   opacity: 0;
   transform: translateY(40px);
@@ -678,6 +701,7 @@ if (!is_array($cases)) {
 
 
 
+ /* -- Контакты -- */
 
   .contacts-section {
   position: relative; /* чтобы .contacts-header мог позиционироваться внутри */
@@ -712,8 +736,7 @@ if (!is_array($cases)) {
   margin-top: 500px; /* регулируй по вкусу */
 }
 
-
-  .contacts-header {
+.contacts-header {
   position: absolute;
   top: 160px;
   right: 0;
@@ -772,6 +795,8 @@ if (!is_array($cases)) {
     background: white;
   }
 
+   /* -- Футер -- */
+
   .footer {
   width: 100%;
   max-width: 1920px;
@@ -796,9 +821,7 @@ if (!is_array($cases)) {
   text-transform: uppercase;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+ /* -- Меню -- */
 
 .fixed-menu {
   position: fixed;
@@ -831,6 +854,9 @@ html {
   color: #AAAAAA; /* или любой другой: #505050, #888 — регулируй по вкусу */
 }
 
+
+ /* -- Плашка Вакансия -- */
+
 .fixed-education {
   position: fixed;
   top: 40px; /* как у .hero */
@@ -858,6 +884,8 @@ html {
 .education-box:hover {
   color: #AAAAAA; /* регулируй по вкусу */
 }
+
+ /* -- Скролл бар -- */
 
 .scroll-top {
   position: fixed;
@@ -894,7 +922,7 @@ body::-webkit-scrollbar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 6px;
+  width: 10px;
   height: 100vh;
   z-index: 9999;
   background-color: transparent;
@@ -934,10 +962,11 @@ body {
 
 /* Сам движущийся ползунок */
 .scroll-thumb {
-  width: 6px;
-  height: 55px;
+  width: 25px;
+  height: 120px;
   background-color: black;
-  border-radius: 3px;
+  border: 1px solid rgb(58, 58, 58);
+  border-radius: 2px;
   position: absolute;
   top: 0;
   cursor: pointer;
@@ -1050,7 +1079,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
   
 
-  <!-- 🔻 НАПРАВЛЕНИЕ: Точное соответствие Figma -->
+  <!-- НАПРАВЛЕНИЕ -->
   <section class="direction-wrapper scroll-fade" id="direction">
   <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
    
@@ -1076,7 +1105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 
-<!-- 🔻 ХАРД-СКИЛЛ -->
+<!-- ХАРД-СКИЛЛ -->
 <div class="skills-header">
   <span class="skills-text">Хард-скилл</span>
   <span class="skills-line"></span>
@@ -1150,7 +1179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </section>
 
-<!-- 🔻 Обучение 2-->
+<!-- Обучение 2 -->
 <section class="quote-section scroll-fade">
   <h2 class="quote-title">
     Наставник, который сопровождает  <br />
@@ -1163,7 +1192,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </section>
 
-<!-- 🔻 Заголовок "КЕЙСЫ_" с подчёркиванием по правому краю -->
+<!-- Заголовок "КЕЙСЫ_" -->
 <div class="cases-header" id="cases">
   <span class="cases-text">КЕЙСЫ</span>
   <span class="cases-line"></span>
@@ -1242,7 +1271,7 @@ if ($cases && is_array($cases)) {
 </section>
 
 
-<!-- 🔻 КОНТАКТЫ -->
+<!-- КОНТАКТЫ -->
 <section class="contacts-section scroll-fade" id="contacts">
   <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
@@ -1266,14 +1295,7 @@ if ($cases && is_array($cases)) {
   </div>
 </section>
 
-<div class="custom-scrollbar">
-  <div class="scroll-thumb"></div>
-</div>
-
-
-
-
-<!-- 🔻 ФУТЕР -->
+<!-- Футер -->
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
@@ -1300,6 +1322,11 @@ if ($cases && is_array($cases)) {
   }
 </script>
 
+<div class="custom-scrollbar">
+  <div class="scroll-thumb"></div>
+</div>
+
+<!-- Скролл бар -->
 <script>
   window.addEventListener('scroll', () => {
     const bar = document.querySelector('.scroll-indicator-bar');
