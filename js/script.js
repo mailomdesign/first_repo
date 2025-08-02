@@ -40,3 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('scroll', onScroll);
   window.addEventListener('load', onScroll);
 });
+
+window.addEventListener('scroll', () => {
+  const bar = document.querySelector('.scroll-indicator-bar');
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.height = `${(scrollTop / docHeight) * 100}%`;
+});

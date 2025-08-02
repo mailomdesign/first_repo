@@ -907,7 +907,41 @@ body::-webkit-scrollbar {
   transition: height 0.25s ease;
 }
 
+/* Убирает скроллбар для браузеров FireFox, Edge и Internet Explorer */
+html {
+  scrollbar-width: none;         /* Firefox */
+  -ms-overflow-style: none;      /* IE & Edge */
+}
 
+body::-webkit-scrollbar {        /* Chrome, Safari, Opera */
+  display: none;
+}
+
+body {
+  overflow-y: scroll;            /* Обеспечивает прокрутку */
+}
+
+/* Контейнер скроллбара */
+.custom-scrollbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100%;
+  background: transparent;
+  z-index: 9999;
+}
+
+/* Сам движущийся ползунок */
+.scroll-thumb {
+  width: 6px;
+  height: 55px;
+  background-color: black;
+  border-radius: 3px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+}
 
 
 </style>
@@ -1232,9 +1266,11 @@ if ($cases && is_array($cases)) {
   </div>
 </section>
 
-<div class="scroll-indicator-wrapper">
-  <div class="scroll-indicator-bar"></div>
+<div class="custom-scrollbar">
+  <div class="scroll-thumb"></div>
 </div>
+
+
 
 
 <!-- 🔻 ФУТЕР -->
@@ -1273,6 +1309,52 @@ if ($cases && is_array($cases)) {
     bar.style.height = `${progress}%`;
   });
 </script>
+
+<script>
+  const thumb = document.querySelector('.scroll-thumb');
+  const scrollbar = document.querySelector('.custom-scrollbar');
+
+  // Обновляет позицию ползунка при прокрутке страницы
+  function updateThumbPosition() {
+    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollRatio = window.scrollY / totalHeight;
+    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
+    thumb.style.top = `${scrollRatio * maxThumbTop}px`;
+  }
+
+  window.addEventListener('scroll', updateThumbPosition);
+  window.addEventListener('resize', updateThumbPosition);
+  updateThumbPosition();
+
+  // Drag-to-scroll: плавное поведение
+  let isDragging = false;
+  let dragStartY = 0;
+  let startScrollY = 0;
+
+  thumb.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    dragStartY = e.clientY;
+    startScrollY = window.scrollY;
+    document.body.style.userSelect = 'none';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const deltaY = e.clientY - dragStartY;
+    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
+    window.scrollTo(0, startScrollY + scrollDelta);
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    document.body.style.userSelect = '';
+  });
+</script>
+
 
 
 
