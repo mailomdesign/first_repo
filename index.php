@@ -879,6 +879,33 @@ html {
   background: #333;
 }
 
+/* Для большинства браузеров */
+body {
+  overflow-y: scroll;
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE и Edge */
+}
+
+body::-webkit-scrollbar {
+  display: none;                /* Chrome, Safari, Opera */
+}
+
+.scroll-indicator-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 6px;
+  height: 100vh;
+  z-index: 9999;
+  background-color: transparent;
+}
+
+.scroll-indicator-bar {
+  width: 100%;
+  height: 0;
+  background-color: black;
+  transition: height 0.25s ease;
+}
 
 
 
@@ -1205,6 +1232,11 @@ if ($cases && is_array($cases)) {
   </div>
 </section>
 
+<div class="scroll-indicator-wrapper">
+  <div class="scroll-indicator-bar"></div>
+</div>
+
+
 <!-- 🔻 ФУТЕР -->
 <footer class="footer">
   <div class="footer-content">
@@ -1231,6 +1263,17 @@ if ($cases && is_array($cases)) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
+
+<script>
+  window.addEventListener('scroll', () => {
+    const bar = document.querySelector('.scroll-indicator-bar');
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / docHeight) * 100;
+    bar.style.height = `${progress}%`;
+  });
+</script>
+
 
 
 </body>
