@@ -50,8 +50,10 @@ window.addEventListener('scroll', () => {
   bar.style.height = `${(scrollTop / docHeight) * 100}%`;
 });
 
-document.querySelectorAll('.case-gallery-grid img').forEach(img => {
-  img.addEventListener('click', () => {
-    img.classList.toggle('expanded');
+document.querySelectorAll('.grid-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.grid-item').forEach(i => i.classList.remove('expanded'));
+    item.classList.add('expanded');
   });
 });
+

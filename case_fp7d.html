@@ -502,32 +502,51 @@
 }
 
 .case-gallery-grid {
-  column-count: 3;
-  column-gap: 40px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
-
-.case-gallery-grid img {
+.grid-item {
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.grid-item img {
+  object-fit: cover;
   width: 100%;
-  margin-bottom: 40px;
-  break-inside: avoid;
-  border-radius: 4px;
-  transition: transform 0.3s ease;
+  height: 100%;
+  transition: all 0.3s ease;
+}
+
+.grid-item.expanded {
+  grid-column: span 3;
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+.grid-item.expanded img {
+  object-fit: contain;
+  width: 100%;
+  height: auto;
 }
 
 
-.case-gallery-grid img:hover {
-  transform: scale(1.03);
+.grid-item:hover img {
+  transform: scale(1.05);
+  z-index: 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* Адаптивность */
 @media (max-width: 1024px) {
   .case-gallery-grid {
-    column-count: 2;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 600px) {
   .case-gallery-grid {
-    column-count: 1;
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1006,13 +1025,13 @@ body {
 
 <section class="case-gallery-section scroll-fade">
   <div class="case-gallery-grid">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6">
-    <img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7">
+    <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1"> </div>
+      <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2"> </div>
+        <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3"> </div>
+          <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4"> </div>
+            <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5"> </div>
+              <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6"> </div>
+                <div class="grid-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7"> </div>
     <!-- добавляй сколько хочешь -->
   </div>
 </section>
