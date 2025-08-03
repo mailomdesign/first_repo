@@ -228,13 +228,14 @@
   max-width: 1400px;
   margin: 120px auto;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   gap: 60px;
   padding: 0 60px;
   box-sizing: border-box;
   margin-bottom: 200px;
   margin-top: 200px;
+  
 }
 
 .bio-image-wrapper {
@@ -370,6 +371,47 @@
   margin-top: 15px;
 }
 
+/* -- Блоки цифры -- */
+
+.stats-numbers {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  max-width: 1550px;
+  margin: 140px auto 100px;
+  padding: 0 60px;
+  box-sizing: border-box;
+  flex-wrap: nowrap;
+}
+
+.number-block {
+  text-align: center;
+  color: black;
+  font-family: 'Russo One', sans-serif;
+  width: 392px;
+}
+
+.number-value {
+  font-size: 128px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.number-desc {
+  font-size: 14px;
+  text-transform: lowercase;
+  margin-top: 20px;
+  line-height: 1.4;
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 200px;
+  background: black;
+  align-self: center;
+}
+
 /*-- Плавающее меню -- */
 
 .case-data-block {
@@ -423,21 +465,73 @@
   line-height: 1.5;
   margin: 0;
 }
-
 .pattern-bg-full {
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect width='1' height='20' fill='gray'/><rect width='20' height='1' fill='gray'/></svg>");
+  width: 100vw;
+  height: 600px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect width='1' height='20' fill='gray' fill-opacity='0.1'/><rect width='20' height='1' fill='gray' fill-opacity='0.1'/></svg>");
   background-repeat: repeat;
-  background-color: white;
-  width: 100vw;            /* на всю ширину экрана */
-  position: relative;      /* важно */
+  display: flex;
+  align-items: center;
 }
 
 .review-bio-section {
-  max-width: 100vwx;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+
+.review-bio-section {
+  max-width: 1400px;
   margin: 0 auto;
   padding: 120px 60px;
   box-sizing: border-box;
 }
+
+/* Сетка галерея */
+
+.case-gallery-section {
+  max-width: 1400px;
+  margin: 160px auto;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+.case-gallery-grid {
+  column-count: 3;
+  column-gap: 40px;
+}
+
+.case-gallery-grid img {
+  width: 100%;
+  margin-bottom: 40px;
+  break-inside: avoid;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+
+.case-gallery-grid img:hover {
+  transform: scale(1.03);
+}
+
+@media (max-width: 1024px) {
+  .case-gallery-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .case-gallery-grid {
+    column-count: 1;
+  }
+}
+
+
 
 
 
@@ -811,9 +905,9 @@ body {
 
 
 <!-- ОТЗЫВ КЛИЕНТА-->
+<div class="pattern-bg-full">
+  <section class="review-bio-section scroll-fade">
 <section class="review-bio-section scroll-fade">
-  <div class="pattern-bg-full">
-    <section class="review-bio-section scroll-fade">
      <div class="review-image-wrapper">
     <img class="review-avatar" src="img/portr-1.png" alt="Портрет отзыв" />
   </div>
@@ -834,13 +928,39 @@ body {
 </div>
 </section>
 
+  <!-- Цифры -->
+  <section class="stats-numbers scroll-fade">
+    <div class="number-block">
+    <div class="number-value">4</div>
+    <div class="number-desc">разработанных логотипа для направлений бренда</div>
+    </div>
+  
+    <div class="divider-vertical"></div>  
+    <div class="number-block">
+    <div class="number-value">80+</div>
+    <div class="number-desc">карточек товара для маркетплейсов</div>
+    </div>
+  
+    <div class="divider-vertical"></div >
+    <div class="number-block">
+    <div class="number-value">3</div>
+    <div class="number-desc">торговых площадки размещающие рекламные материалы</div>
+    </div>
+  
+    <div class="divider-vertical"></div>
+    <div class="number-block">
+      <div class="number-value">9</div>
+      <div class="number-desc">различных катерогий макетов продукции</div>
+    </div>
+  </section>
+
 <!-- ЦИТАТА 2 -->
 <section class="quote-section 2 scroll-fade">
   <h2 class="quote-title">
-    Более 80 разработанных макетов продукции для маркетплейсов <br />
+    Более 5 лет успешного сотрудническа с брендом FP7D <br />
   </h2>
   <p class="quote-text">
-    Логотипы для 4х направлений бренда. Карточки товаров и визуализация продукции <br />
+    Успешное и продуктивное взаимодействие с компание в качестве надежного партнера.<br />
     Фирменные элементы оформления всей линейки продукции FP7D
   </p>
 </section>
@@ -853,10 +973,9 @@ body {
     <img src="img/cases/case_fp7d_corb.png" alt="Визуал" class="case-data-image" />
 
     <div class="case-data-text">
-      <h2 class="case-data-title">вводные данные:</h2>
+      <h2 class="case-data-title">Разработка с учетом реализации продукта</h2>
       <p class="case-data-paragraph">
-        Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио —
-        только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.
+        Когда вы доверяете профессионалам разработку вашей продукции, то получаете не только визуальные состовляющие, но и возможность технической реализации благодаря опыту в создании множества решений.
       </p>
     </div>
   </div>
@@ -868,11 +987,10 @@ body {
 
 
   <div class="bio-text-block">
-    <div class="bio-quote">Поставленная задача</div>
+    <div class="bio-quote">Задачи</div>
 
     <p class="bio-text">
-      Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
-      Ставлю перед собой основную задачу в успешной реализации бренда или продукта своего партнера.
+      Начиная от разработки логотипа, одного из 4х направлений бренда. Пройден путь до оформления страницы готового товара на маркетплейсах. Дизайн, упаковка, ассортимент - все позиции с учетов заданного стилистического ритма бренда.
     </p>
     <h2 class="bio-title">теги:</h2>
     <p class="bio-text_2">
@@ -885,6 +1003,20 @@ body {
   </div>
   
 </section> 
+
+<section class="case-gallery-section scroll-fade">
+  <div class="case-gallery-grid">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6">
+    <img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7">
+    <!-- добавляй сколько хочешь -->
+  </div>
+</section>
+
 
   <!-- 🔻 ФУТЕР -->
 <footer class="footer">

@@ -50,3 +50,8 @@ window.addEventListener('scroll', () => {
   bar.style.height = `${(scrollTop / docHeight) * 100}%`;
 });
 
+document.querySelectorAll('.case-gallery-grid img').forEach(img => {
+  img.addEventListener('click', () => {
+    img.classList.toggle('expanded');
+  });
+});
