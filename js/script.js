@@ -50,7 +50,7 @@ window.addEventListener('scroll', () => {
   bar.style.height = `${(scrollTop / docHeight) * 100}%`;
 });
 
-// 🔹 СЕТКа
+// 🔹 СЕТКА
 grid.addEventListener('click', e => {
   const item = e.target.closest('.gallery-item');
   if (!item) return;
@@ -58,4 +58,11 @@ grid.addEventListener('click', e => {
   item.classList.add('expanded');
 });
 
+
+Masonry(grid, {
+  columnWidth: '.grid-sizer',
+  itemSelector: '.grid-item',
+  percentPosition: true,
+  gutter: 10
+});
 
