@@ -50,10 +50,12 @@ window.addEventListener('scroll', () => {
   bar.style.height = `${(scrollTop / docHeight) * 100}%`;
 });
 
-document.querySelectorAll('.grid-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.grid-item').forEach(i => i.classList.remove('expanded'));
-    item.classList.add('expanded');
-  });
+// 🔹 СЕТКа
+grid.addEventListener('click', e => {
+  const item = e.target.closest('.gallery-item');
+  if (!item) return;
+  document.querySelectorAll('.gallery-item').forEach(i => i.classList.remove('expanded'));
+  item.classList.add('expanded');
 });
+
 

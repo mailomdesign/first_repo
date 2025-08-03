@@ -501,34 +501,34 @@
   box-sizing: border-box;
 }
 
-.case-gallery-grid {
+.gallery-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 200px; /* фиксированная высота строк */
   gap: 10px;
 }
-.grid-item {
-  aspect-ratio: 1/1;
-  overflow: hidden;
+.gallery-item {
   position: relative;
+  overflow: hidden;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
-.grid-item img {
-  object-fit: cover;
+.gallery-item img {
   width: 100%;
   height: 100%;
-  transition: all 0.3s ease;
+  object-fit: cover;
 }
 
-.grid-item.expanded {
-  grid-column: span 3;
+
+.gallery-item.expanded {
+  grid-column: span 2;
   grid-row: span 2;
-  aspect-ratio: auto;
-}
-.grid-item.expanded img {
-  object-fit: contain;
-  width: 100%;
   height: auto;
 }
+.gallery-item.expanded img {
+  object-fit: contain;
+}
+
 
 
 .grid-item:hover img {
