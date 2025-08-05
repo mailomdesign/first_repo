@@ -13,18 +13,18 @@ if (!is_array($cases)) {
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<link rel="icon" type="image/x-icon" href="logo_fav_bw.ico" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Михаил Образцов — Портфолио</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet" />
   <style>
-    body {
+        body {
       margin: 0;
       background: white;
       font-family: 'Russo One', sans-serif;
     }
     
-
 
  /* -- Hero -- */
  
@@ -978,6 +978,23 @@ body {
 <body>
 
 <script>
+  document.querySelectorAll('.fixed-menu a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        targetElement.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+    });
+  });
+</script>
+
+
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   const elements = document.querySelectorAll('.scroll-fade');
 
@@ -1010,14 +1027,15 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
   <ul>
-    <li><a href="#hero">Главная</a></li>
-    <li><a href="#bio">Био</a></li>
-    <li><a href="#direction">Направление</a></li>
-    <li><a href="education.html">Обучение</a></li>
-    <li><a href="#cases">Кейсы</a></li>
-    <li><a href="#contacts">Контакты</a></li>
+    <li><a href="#" data-target="hero">Главная</a></li>
+    <li><a href="#" data-target="bio">Био</a></li>
+    <li><a href="#" data-target="direction">Направление</a></li>
+    <li><a href="#" data-target="quote">Обучение</a></li>
+    <li><a href="#" data-target="cases">Кейсы</a></li>
+    <li><a href="#" data-target="contacts">Контакты</a></li>
   </ul>
 </nav>
+
   
 <div class="fixed-education">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
@@ -1181,7 +1199,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Обучение 2 -->
 <section class="quote-section scroll-fade">
-  <h2 class="quote-title">
+  <h2 class="quote-title" id="quote">
     Наставник, который сопровождает  <br />
   </h2>
   <p class="quote-text">
