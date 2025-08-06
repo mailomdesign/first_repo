@@ -18,12 +18,42 @@ if (!is_array($cases)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Михаил Образцов — Портфолио</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet" />
+
+  
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "@id": "https://mailomdesign.ru#person",
+  "name": "Михаил Образцов",
+  "jobTitle": "Дизайнер, основатель Mailom Design",
+  "url": "https://mailomdesign.ru",
+  "sameAs": [
+    "https://www.behance.net/mailom",
+    "https://www.linkedin.com/in/mailom"
+  ],
+  "description": "Портфолио дизайнера Михаила Образцова — брендинг, визуальные системы, менторство."
+}
+</script>
+
+
+  <style>
+    body {
+      margin: 0;
+      background: white;
+      font-family: 'Russo One', sans-serif;
+    }
+  </style>
+</head>
+
   <style>
         body {
       margin: 0;
       background: white;
       font-family: 'Russo One', sans-serif;
     }
+
+    
     
 
  /* -- Hero -- */
