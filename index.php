@@ -977,21 +977,7 @@ body {
 </head>
 <body>
 
-<script>
-  document.querySelectorAll('.fixed-menu a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const targetId = link.getAttribute('data-target');
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }
-    });
-  });
-</script>
+
 
 
 <script>
@@ -1051,10 +1037,10 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="vertical-bar-left"></div>
 
   <!-- Bio: блок с именем и описанием -->
-  <section class="bio scroll-fade" id="bio">
+  <section class="bio scroll-fade">
     <div class="bio-content">
-      <div class="bio-anchor">
-        <h1 class="bio-name">михаил образцов</h1>
+      <div class="bio-anchor" id="bio">
+        <h1 class="bio-name">михаил образцов</h1> 
         <div class="bio-underline"></div> <!-- ← чёрная полоска -->
       </div>
       <p class="bio-description">
@@ -1211,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Заголовок "КЕЙСЫ_" -->
-<div class="cases-header" id="cases">
+<div class="cases-header" >
   <span class="cases-text">КЕЙСЫ</span>
   <span class="cases-line"></span>
 </div>
@@ -1224,7 +1210,7 @@ $jsonData = file_get_contents('cases.json');
 $cases = json_decode($jsonData, true);
 
 if ($cases && is_array($cases)) {
-    echo '<div class="case-row">';
+    echo '<div class="case-row" id="cases">';
     foreach ($cases as $index => $case) {
         echo '<a href="' . htmlspecialchars($case["page"]) . '" class="case-link">';
         echo '<div class="case-block scroll-fade">';
@@ -1400,6 +1386,21 @@ if ($cases && is_array($cases)) {
   });
 </script>
 
+
+<script>
+  document.querySelectorAll('.fixed-menu a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+        const scrollTo = targetTop - (window.innerHeight / 2) + (targetEl.offsetHeight / 2);
+        window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
 
 
 
