@@ -855,6 +855,20 @@ body {
   font-size: 30px;
 }
 
+.lb{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.85); z-index:9999;
+}
+.lb[hidden]{ display:none; }
+.lb-img{ max-width: min(90vw,1600px); max-height:90vh; }
+.lb-btn{
+  position:fixed; width:40px; height:40px; border:1px solid #000; background:#000;
+  color:#fff; cursor:pointer; display:grid; place-items:center; font-size:20px;
+}
+.lb-close{ top:20px; right:20px; }
+.lb-prev{  left:20px; top:50%; transform:translateY(-50%); }
+.lb-next{  right:20px; top:50%; transform:translateY(-50%); }
+
 
   </style>
 </head>
@@ -1076,6 +1090,14 @@ body {
   
 </section> 
 
+<div id="lightbox" class="lb" hidden>
+  <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
+  <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
+  <img class="lb-img" alt="">
+  <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
+</div>
+
+
 <section class="case-gallery-section scroll-fade">
   <div class="gallery-grid">
     <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1"> </div>
@@ -1187,6 +1209,63 @@ body {
     document.body.style.userSelect = '';
   });
 </script>
+
+<script>
+  (() => {
+    const tiles = Array.from(document.querySelectorAll('.js-lb'));
+    const box = document.getElementById('lightbox');
+    const img = box.querySelector('.lb-img');
+    const btnClose = box.querySelector('.lb-close');
+    const btnPrev  = box.querySelector('.lb-prev');
+    const btnNext  = box.querySelector('.lb-next');
+    let i = 0;
+  
+    const getSrc = (el) => {
+      if (el.dataset.src) return el.dataset.src;
+      const tagImg = el.querySelector('img');
+      if (tagImg) return tagImg.src;
+      const bg = getComputedStyle(el).backgroundImage;
+      return bg && bg !== 'none'
+        ? bg.replace(/^url\\(["']?/, '').replace(/["']?\\)$/, '')
+        : '';
+    };
+  
+    const open = (idx) => {
+      i = idx;
+      img.src = getSrc(tiles[i]);
+      box.hidden = false;
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      box.hidden = true;
+      img.src = '';
+      document.body.style.overflow = '';
+    };
+    const next = () => open((i + 1) % tiles.length);
+    const prev = () => open((i - 1 + tiles.length) % tiles.length);
+  
+    tiles.forEach((el, idx) => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
+    });
+  
+    btnClose.addEventListener('click', close);
+    btnNext.addEventListener('click', next);
+    btnPrev.addEventListener('click', prev);
+  
+    // клик по фону — закрыть
+    box.addEventListener('click', (e) => { if (e.target === box) close(); });
+  
+    // клавиатура
+    document.addEventListener('keydown', (e) => {
+      if (box.hidden) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  })();
+  </script>
+  
 
 </body>
 </html>
