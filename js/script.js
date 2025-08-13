@@ -79,48 +79,59 @@ document.querySelectorAll('.fixed-menu a[href^="#"]').forEach(link => {
     }
   });
 });
+ 
+(() => {
+  // было: '.js-lb'
+  const tiles = Array.from(document.querySelectorAll('.case-gallery-section .gallery-item'));
 
-document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".case-img img");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lightbox-img");
-  const closeBtn = document.querySelector(".close-btn");
-  const prevBtn = document.querySelector(".prev-btn");
-  const nextBtn = document.querySelector(".next-btn");
+  const box = document.getElementById('lightbox');
+  const img = box.querySelector('.lb-img');
+  const btnClose = box.querySelector('.lb-close');
+  const btnPrev = box.querySelector('.lb-prev');
+  const btnNext = box.querySelector('.lb-next');
 
-  let currentIndex = 0;
+  let i = 0;
 
-  function showImage(index) {
-    lightboxImg.src = images[index].src;
-    currentIndex = index;
-  }
+  const getSrc = (el) => {
+    if (el.dataset.src) return el.dataset.src;
+    const tagImg = el.querySelector('img');
+    if (tagImg) return tagImg.src;
+    const bg = getComputedStyle(el).backgroundImage;
+    return bg && bg !== 'none'
+      ? bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
+      : '';
+  };
 
-  images.forEach((img, index) => {
-    img.addEventListener("click", () => {
-      lightbox.style.display = "block";
-      showImage(index);
-    });
+  const open = (idx) => {
+    i = idx;
+    img.src = getSrc(tiles[i]);
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const close = () => {
+    box.hidden = true;
+    img.src = '';
+    document.body.style.overflow = '';
+  };
+  const next = () => open((i + 1) % tiles.length);
+  const prev = () => open((i - 1 + tiles.length) % tiles.length);
+
+  tiles.forEach((el, idx) => {
+    el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
   });
 
-  closeBtn.addEventListener("click", () => {
-    lightbox.style.display = "none";
-  });
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
 
-  prevBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    showImage(currentIndex);
-  });
+  // клик по фону — закрыть
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
 
-  nextBtn.addEventListener("click", () => {
-    currentIndex = (currentIndex + 1) % images.length;
-    showImage(currentIndex);
+  // клавиатура
+  document.addEventListener('keydown', (e) => {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
   });
-
-  // Закрытие по клику на фон
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      lightbox.style.display = "none";
-    }
-  });
-});
-
+})();

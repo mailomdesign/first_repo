@@ -860,14 +860,17 @@ body {
   background:rgba(0,0,0,.85); z-index:9999;
 }
 .lb[hidden]{ display:none; }
-.lb-img{ max-width: min(90vw,1600px); max-height:90vh; }
+.lb-img{ max-width:min(90vw,1600px); max-height:90vh; }
 .lb-btn{
   position:fixed; width:40px; height:40px; border:1px solid #000; background:#000;
   color:#fff; cursor:pointer; display:grid; place-items:center; font-size:20px;
 }
 .lb-close{ top:20px; right:20px; }
-.lb-prev{  left:20px; top:50%; transform:translateY(-50%); }
-.lb-next{  right:20px; top:50%; transform:translateY(-50%); }
+.lb-prev{ left:20px; top:50%; transform:translateY(-50%); }
+.lb-next{ right:20px; top:50%; transform:translateY(-50%); }
+
+/* чтобы было видно, что квадраты кликабельны */
+.case-gallery-section .gallery-item{ cursor:pointer; }
 
 
   </style>
@@ -1229,8 +1232,8 @@ body {
         ? bg.replace(/^url\\(["']?/, '').replace(/["']?\\)$/, '')
         : '';
     };
-  
-    const open = (idx) => {
+
+      const open = (idx) => {
       i = idx;
       img.src = getSrc(tiles[i]);
       box.hidden = false;
