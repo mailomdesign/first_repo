@@ -135,3 +135,62 @@ document.querySelectorAll('.fixed-menu a[href^="#"]').forEach(link => {
     if (e.key === 'ArrowLeft') prev();
   });
 })();
+
+document.addEventListener("DOMContentLoaded", function () {
+  const galleryItems = document.querySelectorAll(".case-gallery-section .gallery-item");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lb-img");
+  const btnClose = document.getElementById("lb-close");
+  const btnPrev = document.getElementById("lb-prev");
+  const btnNext = document.getElementById("lb-next");
+
+  let currentIndex = 0;
+  let images = [];
+
+  // Собираем ссылки на картинки
+  galleryItems.forEach((item, index) => {
+      const style = getComputedStyle(item);
+      const bg = style.backgroundImage.slice(4, -1).replace(/["']/g, "");
+      images.push(bg);
+
+      item.addEventListener("click", () => {
+          currentIndex = index;
+          openLightbox();
+      });
+  });
+
+  function openLightbox() {
+      lightboxImg.src = images[currentIndex];
+      lightbox.style.display = "block";
+  }
+
+  function closeLightbox() {
+      lightbox.style.display = "none";
+  }
+
+  function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      openLightbox();
+  }
+
+  function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      openLightbox();
+  }
+
+  btnClose.addEventListener("click", closeLightbox);
+  btnPrev.addEventListener("click", showPrev);
+  btnNext.addEventListener("click", showNext);
+
+  // Закрытие по клику на фон
+  lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+  });
+
+  // Закрытие по Esc
+  document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+  });
+});
