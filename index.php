@@ -14,11 +14,24 @@ if (!is_array($cases)) {
 <html lang="ru">
 <head>
 <link rel="icon" type="image/x-icon" href="logo_fav_bw.ico" />
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Михаил Образцов — Портфолио</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet" />
 
+  <meta name="description" content="Портфолио Михаила Образцова — дизайн, креатив, арт-дирекшн. Mailom Design.">
+  <meta name="keywords" content="дизайнер, портфолио, Михаил Образцов, Mailom Design, графический дизайн, визуал, креатив">
+  <meta name="author" content="Михаил Образцов">
+
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:locale" content="ru_RU">
+
+  <meta property="og:title" content="Михаил Образцов — Портфолио">
+  <meta property="og:description" content="Дизайнер и основатель Mailom Design. Работы, биография, контакты.">
+  <meta property="og:image" content="https://mailomdesign.ru/img/preview.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mailomdesign.ru">
   
   <script type="application/ld+json">
 {
@@ -995,7 +1008,7 @@ body {
   width: 25px;
   height: 120px;
   background-color: black;
-  border: 1px solid rgb(58, 58, 58);
+  border: 2px solid rgb(90, 90, 90);
   border-radius: 2px;
   position: absolute;
   top: 0;
