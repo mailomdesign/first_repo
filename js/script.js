@@ -144,53 +144,67 @@ document.addEventListener("DOMContentLoaded", function () {
   const btnPrev = document.getElementById("lb-prev");
   const btnNext = document.getElementById("lb-next");
 
+  if (!galleryItems.length || !lightbox || !lightboxImg) return;
+
   let currentIndex = 0;
-  let images = [];
+  const images = [];
 
-  // Собираем ссылки на картинки
+  // Собираем ссылки на картинки (img внутри элемента или background-image)
   galleryItems.forEach((item, index) => {
-      const style = getComputedStyle(item);
-      const bg = style.backgroundImage.slice(4, -1).replace(/["']/g, "");
-      images.push(bg);
+    let src = "";
+    const imgEl = item.querySelector("img");
+    if (imgEl) {
+      src = imgEl.getAttribute("src");
+    } else {
+      const bg = getComputedStyle(item).backgroundImage;
+      src = bg && bg !== "none" ? bg.slice(4, -1).replace(/["']/g, "") : "";
+    }
+    images.push(src);
+    
 
-      item.addEventListener("click", () => {
-          currentIndex = index;
-          openLightbox();
-      });
+    item.addEventListener("click", () => {
+      // если нет src — ничего не делаем
+      if (!images[index]) return;
+      currentIndex = index;
+      openLightbox();
+    });
   });
 
   function openLightbox() {
-      lightboxImg.src = images[currentIndex];
-      lightbox.style.display = "block";
+    lightboxImg.src = images[currentIndex] || "";
+    lightbox.style.display = "block";
+    document.body.style.overflow = "hidden"; // запрет скролла страницы при открытом лайтбоксе
   }
 
   function closeLightbox() {
-      lightbox.style.display = "none";
+    lightbox.style.display = "none";
+    lightboxImg.src = "";
+    document.body.style.overflow = "";
   }
 
   function showPrev() {
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      openLightbox();
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    openLightbox();
   }
 
   function showNext() {
-      currentIndex = (currentIndex + 1) % images.length;
-      openLightbox();
+    currentIndex = (currentIndex + 1) % images.length;
+    openLightbox();
   }
 
-  btnClose.addEventListener("click", closeLightbox);
-  btnPrev.addEventListener("click", showPrev);
-  btnNext.addEventListener("click", showNext);
+  btnClose && btnClose.addEventListener("click", closeLightbox);
+  btnPrev  && btnPrev.addEventListener("click", showPrev);
+  btnNext  && btnNext.addEventListener("click", showNext);
 
   // Закрытие по клику на фон
   lightbox.addEventListener("click", (e) => {
-      if (e.target === lightbox) closeLightbox();
+    if (e.target === lightbox) closeLightbox();
   });
 
-  // Закрытие по Esc
+  // Клавиши
   document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") closeLightbox();
-      if (e.key === "ArrowLeft") showPrev();
-      if (e.key === "ArrowRight") showNext();
+    if (e.key === "Escape") closeLightbox();
+    if (e.key === "ArrowLeft") showPrev();
+    if (e.key === "ArrowRight") showNext();
   });
 });
