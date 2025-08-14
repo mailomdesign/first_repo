@@ -806,71 +806,48 @@ body {
   cursor: pointer;
 }
 
-/* Фон */
-.lightbox {
+/* ===== Лайтбокс ===== */
+.gallery-lightbox { 
   display: none;
   position: fixed;
-  z-index: 999;
-  padding-top: 40px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: rgba(0,0,0,0.9);
-}
-
-/* Контент */
-.lightbox-content {
-  position: relative;
-  display: flex;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 9999;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  padding: 4vh 2vw;
 }
-
-/* Фото */
-.lightbox-content img {
-  max-width: 90%;
-  max-height: 90%;
+.gallery-lightbox.open { display: flex; }
+.gallery-lightbox .lb-img {
+  max-width: 90vw;
+  max-height: 90vh;
   object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
-/* Кнопки */
-.prev-btn, .next-btn, .close-btn {
+/* кнопки */
+.lb-btn {
   position: absolute;
-  background: black;
-  color: white;
-  border: none;
-  padding: 12px;
+  width: 44px;
+  height: 44px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  display: grid;
+  place-items: center;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 18px;
+  opacity: 0.95;
+}
+.lb-close { top: 20px; right: 20px; }
+.lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
+.lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
+
+/* на мобильных уменьшаем кнопки */
+@media (max-width: 600px) {
+  .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
 
-.prev-btn { left: 20px; }
-.next-btn { right: 20px; }
-.close-btn {
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
-}
-
-.lb{
-  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
-  background:rgba(0,0,0,.85); z-index:9999;
-}
-.lb[hidden]{ display:none; }
-.lb-img{ max-width:min(90vw,1600px); max-height:90vh; }
-.lb-btn{
-  position:fixed; width:40px; height:40px; border:1px solid #000; background:#000;
-  color:#fff; cursor:pointer; display:grid; place-items:center; font-size:20px;
-}
-.lb-close{ top:20px; right:20px; }
-.lb-prev{ left:20px; top:50%; transform:translateY(-50%); }
-.lb-next{ right:20px; top:50%; transform:translateY(-50%); }
-
-/* чтобы было видно, что квадраты кликабельны */
-.case-gallery-section .gallery-item{ cursor:pointer; }
 
 
   </style>
@@ -1148,39 +1125,30 @@ body {
   
 </section> 
 
-<!-- Убедитесь, что на странице есть ТОЛЬКО ОДИН этот блок -->
-<div id="lightbox" class="lb" hidden>
-  <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
-  <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
-  <img class="lb-img" src="" alt="">
-  <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
-</div>
-
-
+<!-- ===== Галерея (заменить существующий section) ===== -->
 <section class="case-gallery-section scroll-fade">
-  <div class="gallery-grid">
-    <div class="gallery-item" data-src="img/cases/fp7d/port/cases_port_fp7d_.jpg"> <img src="img/thumbs/1.jpg" alt="Проект 1">
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3"> </div>
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4"> </div>
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5"> </div>
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6"> </div>
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7"> </div>
-    <!-- добавляй сколько хочешь -->
+  <div class="gallery-grid" id="gallery-grid">
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7" loading="lazy"></div>
   </div>
 </section>
 
-<!-- Модальное окно для фото -->
-<div id="lightbox" class="lightbox">
-  <span class="close-btn">&times;</span>
-  <div class="lightbox-content">
-    <button class="prev-btn">&#10094;</button>
-    <img id="lightbox-img" src="" alt="full view">
-    <button class="next-btn">&#10095;</button>
-  </div>
+<!-- ===== Лайтбокс (один экземпляр) ===== -->
+<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
+  <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
+  <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
+  <img class="lb-img" src="" alt="">
+  <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
 </div>
+<!-- ===== /Лайтбокс ===== -->
 
 
-  <!-- 🔻 ФУТЕР -->
+<!-- 🔻 ФУТЕР -->
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
@@ -1251,74 +1219,7 @@ body {
     document.body.style.userSelect = 'none';
   });
 
-  <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const tiles = Array.from(document.querySelectorAll('.gallery-grid .gallery-item'));
-  const box = document.getElementById('lightbox');
-  if (!box) return; // если нет лайтбокса — выходим
-  const img = box.querySelector('.lb-img');
-  const btnClose = box.querySelector('.lb-close');
-  const btnPrev  = box.querySelector('.lb-prev');
-  const btnNext  = box.querySelector('.lb-next');
 
-  if (!img || !btnClose || !btnPrev || !btnNext) {
-    console.warn('Лайтбокс: отсутствуют элементы управления или изображение.');
-    return;
-  }
-
-  let i = 0;
-  const getSrc = (el) => {
-    if (!el) return '';
-    if (el.dataset && el.dataset.src) return el.dataset.src;
-    const tagImg = el.querySelector('img');
-    if (tagImg && tagImg.src) return tagImg.src;
-    const bg = getComputedStyle(el).backgroundImage;
-    if (!bg || bg === 'none') return '';
-    // корректный regex — убираем wrapper url("...") 
-    return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-  };
-
-  const open = (idx) => {
-    if (!tiles.length) return;
-    i = idx;
-    const src = getSrc(tiles[i]);
-    if (!src) return;
-    img.src = src;
-    box.hidden = false;
-    document.body.style.overflow = 'hidden';
-  };
-
-  const close = () => {
-    box.hidden = true;
-    img.src = '';
-    document.body.style.overflow = '';
-  };
-
-  const next = () => open((i + 1) % tiles.length);
-  const prev = () => open((i - 1 + tiles.length) % tiles.length);
-
-  tiles.forEach((el, idx) => {
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
-  });
-
-  btnClose.addEventListener('click', close);
-  btnNext.addEventListener('click', next);
-  btnPrev.addEventListener('click', prev);
-
-  // клик по фону — закрыть
-  box.addEventListener('click', (e) => { if (e.target === box) close(); });
-
-  // клавиши
-  document.addEventListener('keydown', (e) => {
-    if (box.hidden) return;
-    if (e.key === 'Escape') close();
-    if (e.key === 'ArrowRight') next();
-    if (e.key === 'ArrowLeft') prev();
-  });
-});
-</script>
-  
 
 </body>
 </html>

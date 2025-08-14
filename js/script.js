@@ -136,75 +136,62 @@ document.querySelectorAll('.fixed-menu a[href^="#"]').forEach(link => {
   });
 })();
 
-document.addEventListener("DOMContentLoaded", function () {
-  const galleryItems = document.querySelectorAll(".case-gallery-section .gallery-item");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxImg = document.getElementById("lb-img");
-  const btnClose = document.getElementById("lb-close");
-  const btnPrev = document.getElementById("lb-prev");
-  const btnNext = document.getElementById("lb-next");
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Array.from(document.querySelectorAll('.js-lb'));
+  if (!items.length) return;
 
-  if (!galleryItems.length || !lightbox || !lightboxImg) return;
+  const modal = document.getElementById('gallery-lightbox');
+  const modalImg = modal.querySelector('.lb-img');
+  const btnClose = modal.querySelector('.lb-close');
+  const btnPrev  = modal.querySelector('.lb-prev');
+  const btnNext  = modal.querySelector('.lb-next');
+  let idx = 0;
 
-  let currentIndex = 0;
-  const images = [];
+  const getImgSrc = (item) => {
+    const img = item.querySelector('img');
+    if (!img) return '';
+    return img.dataset.large || img.src;
+  };
 
-  // Собираем ссылки на картинки (img внутри элемента или background-image)
-  galleryItems.forEach((item, index) => {
-    let src = "";
-    const imgEl = item.querySelector("img");
-    if (imgEl) {
-      src = imgEl.getAttribute("src");
-    } else {
-      const bg = getComputedStyle(item).backgroundImage;
-      src = bg && bg !== "none" ? bg.slice(4, -1).replace(/["']/g, "") : "";
-    }
-    images.push(src);
-    
+  function open(i) {
+    idx = i;
+    modalImg.src = getImgSrc(items[idx]);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+  function close() {
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    modalImg.src = '';
+    document.body.style.overflow = '';
+  }
+  function next() { open((idx + 1) % items.length); }
+  function prev() { open((idx - 1 + items.length) % items.length); }
 
-    item.addEventListener("click", () => {
-      // если нет src — ничего не делаем
-      if (!images[index]) return;
-      currentIndex = index;
-      openLightbox();
+  items.forEach((el, i) => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(i);
     });
   });
 
-  function openLightbox() {
-    lightboxImg.src = images[currentIndex] || "";
-    lightbox.style.display = "block";
-    document.body.style.overflow = "hidden"; // запрет скролла страницы при открытом лайтбоксе
-  }
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', (e) => { e.stopPropagation(); next(); });
+  btnPrev.addEventListener('click', (e) => { e.stopPropagation(); prev(); });
 
-  function closeLightbox() {
-    lightbox.style.display = "none";
-    lightboxImg.src = "";
-    document.body.style.overflow = "";
-  }
-
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    openLightbox();
-  }
-
-  function showNext() {
-    currentIndex = (currentIndex + 1) % images.length;
-    openLightbox();
-  }
-
-  btnClose && btnClose.addEventListener("click", closeLightbox);
-  btnPrev  && btnPrev.addEventListener("click", showPrev);
-  btnNext  && btnNext.addEventListener("click", showNext);
-
-  // Закрытие по клику на фон
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
+  // закрыть кликом по фону (если клик по самому оверлею)
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close();
   });
 
-  // Клавиши
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") showPrev();
-    if (e.key === "ArrowRight") showNext();
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
   });
 });
+</script>
