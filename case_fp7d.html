@@ -806,42 +806,30 @@ body {
   cursor: pointer;
 }
 
-/* ===== Лайтбокс ===== */
-.gallery-lightbox { 
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.88);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  padding: 4vh 2vw;
+/* Lightbox (единственный набор стилей) */
+.lb{
+  position:fixed;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,.85);
+  z-index:9999;
 }
-.gallery-lightbox.open { display: flex; }
-.gallery-lightbox .lb-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
+.lb[hidden]{ display:none; }
+.lb-img{ max-width:min(90vw,1600px); max-height:90vh; object-fit:contain; }
 
 /* кнопки */
-.lb-btn {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  font-size: 18px;
-  opacity: 0.95;
+.lb-btn{
+  position:fixed;
+  width:44px; height:44px;
+  border:1px solid #000; background:#000;
+  color:#fff; cursor:pointer; display:grid; place-items:center;
+  font-size:20px; z-index:10000;
 }
-.lb-close { top: 20px; right: 20px; }
-.lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
-.lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
+.lb-close{ top:20px; right:20px; }
+.lb-prev{ left:20px; top:50%; transform:translateY(-50%); }
+.lb-next{ right:20px; top:50%; transform:translateY(-50%); }
 
 /* на мобильных уменьшаем кнопки */
 @media (max-width: 600px) {
@@ -854,78 +842,74 @@ body {
 </head>
 <body>
 
-<!-- Лайтбокс -->
-<div class="lightbox" id="lightbox">
-  <span class="close" id="lb-close">&#10005;</span>
-  <span class="prev" id="lb-prev">&#10094;</span>
-  <img class="lightbox-img" id="lb-img" src="" alt="">
-  <span class="next" id="lb-next">&#10095;</span>
-</div>
-
-<style>
-/* Лайтбокс стили */
-/* Лайтбокс стили */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  text-align: center;
-}
-
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  margin-top: 5vh;
-  object-fit: contain;
-}
-
-/* кнопки: close / prev / next */
-.lightbox .close,
-.lightbox .prev,
-.lightbox .next {
-  position: absolute;
-  color: white;
-  font-size: 20px;
-  background: black;
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 2px;
-}
-
-.lightbox .close { top: 20px; right: 20px; }
-.lightbox .prev  { left: 20px;  top: 50%; transform: translateY(-50%); }
-.lightbox .next  { right: 20px; top: 50%; transform: translateY(-50%); }
-</style>
-
-
   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const fadeElements = document.querySelectorAll('.scroll-fade');
-  
-      const onScroll = () => {
-        fadeElements.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.85) {
-            el.classList.add('visible');
-          }
-        });
+    (function() {
+      // выбираем элементы галереи (используем .gallery-item — чтобы не менять HTML)
+      const tiles = Array.from(document.querySelectorAll('.gallery-item'));
+      const box = document.getElementById('lightbox');
+      if (!box) return; // если нет lightbox — не ломаем остальной код
+    
+      const img = box.querySelector('.lb-img');
+      const btnClose = box.querySelector('.lb-close');
+      const btnPrev  = box.querySelector('.lb-prev');
+      const btnNext  = box.querySelector('.lb-next');
+      let i = 0;
+    
+      const getSrc = (el) => {
+        if (!el) return '';
+        // если есть data-src
+        if (el.dataset && el.dataset.src) return el.dataset.src;
+        // если внутри <img>
+        const tagImg = el.querySelector('img');
+        if (tagImg && tagImg.src) return tagImg.src;
+        // если фон через CSS background-image
+        const bg = getComputedStyle(el).backgroundImage;
+        if (!bg || bg === 'none') return '';
+        // правильная регулярка: убираем url("...") обёртку
+        return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
       };
-  
-      document.addEventListener('scroll', onScroll);
-      window.addEventListener('load', onScroll);
-    });
-  </script>
+    
+      const open = (idx) => {
+        i = idx;
+        const src = getSrc(tiles[i]);
+        if (!src) return;
+        img.src = src;
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+    
+      const close = () => {
+        box.hidden = true;
+        img.src = '';
+        document.body.style.overflow = '';
+      };
+    
+      const next = () => open((i + 1) % tiles.length);
+      const prev = () => open((i - 1 + tiles.length) % tiles.length);
+    
+      tiles.forEach((el, idx) => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
+      });
+    
+      btnClose && btnClose.addEventListener('click', close);
+      btnNext && btnNext.addEventListener('click', next);
+      btnPrev && btnPrev.addEventListener('click', prev);
+    
+      // клик по фону — закрыть
+      box.addEventListener('click', (e) => { if (e.target === box) close(); });
+    
+      // клавиатура
+      document.addEventListener('keydown', (e) => {
+        if (box.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+    </script>
+    
+
 
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
@@ -1138,14 +1122,14 @@ body {
   </div>
 </section>
 
-<!-- ===== Лайтбокс (один экземпляр) ===== -->
-<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
+<!-- === Lightbox: только один экземпляр === -->
+<div id="lightbox" class="lb" hidden>
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
-  <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
-  <img class="lb-img" src="" alt="">
-  <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
+  <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
+  <img class="lb-img" alt="">
+  <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
 </div>
-<!-- ===== /Лайтбокс ===== -->
+
 
 
 <!-- 🔻 ФУТЕР -->
@@ -1218,7 +1202,7 @@ body {
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
   });
-
+</script>
 
 
 </body>
