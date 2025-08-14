@@ -720,9 +720,9 @@
   transform: translateY(0);
 }
 
-/* -- Скролл бар -- */
+ /* -- Скролл бар -- */
 
-.scroll-top {
+ .scroll-top {
   position: fixed;
   bottom: 10px;
   right: 10px;
@@ -800,40 +800,11 @@ body {
   width: 25px;
   height: 120px;
   background-color: black;
+  border: 2px solid rgb(90, 90, 90);
   border-radius: 2px;
   position: absolute;
   top: 0;
   cursor: pointer;
-}
-
-/* Lightbox (единственный набор стилей) */
-.lb{
-  position:fixed;
-  inset:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.85);
-  z-index:9999;
-}
-.lb[hidden]{ display:none; }
-.lb-img{ max-width:min(90vw,1600px); max-height:90vh; object-fit:contain; }
-
-/* кнопки */
-.lb-btn{
-  position:fixed;
-  width:44px; height:44px;
-  border:1px solid #000; background:#000;
-  color:#fff; cursor:pointer; display:grid; place-items:center;
-  font-size:20px; z-index:10000;
-}
-.lb-close{ top:20px; right:20px; }
-.lb-prev{ left:20px; top:50%; transform:translateY(-50%); }
-.lb-next{ right:20px; top:50%; transform:translateY(-50%); }
-
-/* на мобильных уменьшаем кнопки */
-@media (max-width: 600px) {
-  .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
 
 
@@ -842,74 +813,84 @@ body {
 </head>
 <body>
 
-  <script>
-    (function() {
-      // выбираем элементы галереи (используем .gallery-item — чтобы не менять HTML)
-      const tiles = Array.from(document.querySelectorAll('.gallery-item'));
-      const box = document.getElementById('lightbox');
-      if (!box) return; // если нет lightbox — не ломаем остальной код
-    
-      const img = box.querySelector('.lb-img');
-      const btnClose = box.querySelector('.lb-close');
-      const btnPrev  = box.querySelector('.lb-prev');
-      const btnNext  = box.querySelector('.lb-next');
-      let i = 0;
-    
-      const getSrc = (el) => {
-        if (!el) return '';
-        // если есть data-src
-        if (el.dataset && el.dataset.src) return el.dataset.src;
-        // если внутри <img>
-        const tagImg = el.querySelector('img');
-        if (tagImg && tagImg.src) return tagImg.src;
-        // если фон через CSS background-image
-        const bg = getComputedStyle(el).backgroundImage;
-        if (!bg || bg === 'none') return '';
-        // правильная регулярка: убираем url("...") обёртку
-        return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-      };
-    
-      const open = (idx) => {
-        i = idx;
-        const src = getSrc(tiles[i]);
-        if (!src) return;
-        img.src = src;
-        box.hidden = false;
-        document.body.style.overflow = 'hidden';
-      };
-    
-      const close = () => {
-        box.hidden = true;
-        img.src = '';
-        document.body.style.overflow = '';
-      };
-    
-      const next = () => open((i + 1) % tiles.length);
-      const prev = () => open((i - 1 + tiles.length) % tiles.length);
-    
-      tiles.forEach((el, idx) => {
-        el.style.cursor = 'pointer';
-        el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
-      });
-    
-      btnClose && btnClose.addEventListener('click', close);
-      btnNext && btnNext.addEventListener('click', next);
-      btnPrev && btnPrev.addEventListener('click', prev);
-    
-      // клик по фону — закрыть
-      box.addEventListener('click', (e) => { if (e.target === box) close(); });
-    
-      // клавиатура
-      document.addEventListener('keydown', (e) => {
-        if (box.hidden) return;
-        if (e.key === 'Escape') close();
-        if (e.key === 'ArrowRight') next();
-        if (e.key === 'ArrowLeft') prev();
-      });
-    })();
-    </script>
-    
+<!-- ===== Lightbox (единственный экземпляр) ===== -->
+<style>
+  /* Минимальные стили для модалки (вставь рядом с остальными стилями) */
+  .gallery-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 9999; align-items: center; justify-content: center; padding: 4vh 2vw; }
+  .gallery-lightbox.open { display:flex; }
+  .gallery-lightbox .lb-img { max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .lb-btn { position: absolute; width: 44px; height: 44px; background: #000; color: #fff; border: 1px solid #000; display: grid; place-items: center; cursor: pointer; font-size: 18px; opacity: .95; }
+  .lb-close { top: 20px; right: 20px; }
+  .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+  body.modal-open { overflow: hidden; }
+  @media (max-width:600px){ .lb-btn{ width:36px;height:36px;font-size:16px; } }
+</style>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tiles = Array.from(document.querySelectorAll('.gallery-item'));
+    const box = document.getElementById('gallery-lightbox');
+    if (!tiles.length || !box) return;
+  
+    const img = box.querySelector('.lb-img');
+    const btnClose = box.querySelector('.lb-close');
+    const btnPrev  = box.querySelector('.lb-prev');
+    const btnNext  = box.querySelector('.lb-next');
+    let idx = 0;
+  
+    const getSrc = (tile) => {
+      if (!tile) return '';
+      const t = tile.querySelector('img');
+      if (t && t.src) return t.src;
+      if (tile.dataset && tile.dataset.src) return tile.dataset.src;
+      const bg = getComputedStyle(tile).backgroundImage;
+      if (!bg || bg === 'none') return '';
+      return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+    };
+  
+    const open = (i) => {
+      idx = i;
+      const src = getSrc(tiles[idx]);
+      if (!src) return;
+      img.src = src;
+      box.classList.add('open');
+      box.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    };
+  
+    const close = () => {
+      box.classList.remove('open');
+      box.setAttribute('aria-hidden', 'true');
+      img.src = '';
+      document.body.classList.remove('modal-open');
+    };
+  
+    const next = () => open((idx + 1) % tiles.length);
+    const prev = () => open((idx - 1 + tiles.length) % tiles.length);
+  
+    tiles.forEach((el, i) => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', (e) => { e.preventDefault(); open(i); });
+    });
+  
+    btnClose.addEventListener('click', close);
+    btnNext.addEventListener('click', next);
+    btnPrev.addEventListener('click', prev);
+  
+    // Закрытие кликом по фону (только если клик прямо по контейнеру)
+    box.addEventListener('click', (e) => { if (e.target === box) close(); });
+  
+    // Клавиши
+    document.addEventListener('keydown', (e) => {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowRight') next();
+      if (e.key === 'ArrowLeft') prev();
+    });
+  });
+  </script>
+  
 
   <!-- Плавающее меню -->
   <nav class="fixed-menu">
@@ -1012,7 +993,6 @@ body {
 <!-- ОТЗЫВ КЛИЕНТА-->
 <div class="pattern-bg-full">
   <section class="review-bio-section scroll-fade">
-<section class="review-bio-section scroll-fade">
      <div class="review-image-wrapper">
     <img class="review-avatar" src="img/portr-1.png" alt="Портрет отзыв" />
   </div>
@@ -1060,7 +1040,7 @@ body {
   </section>
 
 <!-- ЦИТАТА 2 -->
-<section class="quote-section 2 scroll-fade">
+<section class="quote-section-2 scroll-fade">
   <h2 class="quote-title">
     Более 5 лет успешного сотрудничества с брендом FP7D <br />
   </h2>
@@ -1109,25 +1089,26 @@ body {
   
 </section> 
 
-<!-- ===== Галерея (заменить существующий section) ===== -->
+<!-- ===== Галерея (оставляем сетку как есть) ===== -->
 <section class="case-gallery-section scroll-fade">
   <div class="gallery-grid" id="gallery-grid">
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6" loading="lazy"></div>
-    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6" loading="lazy"></div>
+    <div class="gallery-item"><img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7" loading="lazy"></div>
   </div>
 </section>
 
-<!-- === Lightbox: только один экземпляр === -->
-<div id="lightbox" class="lb" hidden>
+
+
+<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
-  <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
-  <img class="lb-img" alt="">
-  <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
+  <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
+  <img class="lb-img" src="" alt="Просмотр">
+  <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
 </div>
 
 
@@ -1202,9 +1183,25 @@ body {
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
   });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const deltaY = e.clientY - dragStartY;
+    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
+    window.scrollTo(0, startScrollY + scrollDelta);
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    document.body.style.userSelect = '';
+  });
+</script>
 </script>
 
-
-</body>
+  </body>
 </html>
 
