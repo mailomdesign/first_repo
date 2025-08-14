@@ -1148,18 +1148,18 @@ body {
   
 </section> 
 
+<!-- Убедитесь, что на странице есть ТОЛЬКО ОДИН этот блок -->
 <div id="lightbox" class="lb" hidden>
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
   <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
-  <img class="lb-img" alt="">
+  <img class="lb-img" src="" alt="">
   <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
 </div>
 
 
 <section class="case-gallery-section scroll-fade">
   <div class="gallery-grid">
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_.jpg" alt="Проект 1"> </div>
-    <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_2.jpg" alt="Проект 2"> </div>
+    <div class="gallery-item" data-src="img/cases/fp7d/port/cases_port_fp7d_.jpg"> <img src="img/thumbs/1.jpg" alt="Проект 1">
     <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_3.jpg" alt="Проект 3"> </div>
     <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_4.jpg" alt="Проект 4"> </div>
     <div class="gallery-item"> <img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5"> </div>
@@ -1251,79 +1251,73 @@ body {
     document.body.style.userSelect = 'none';
   });
 
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tiles = Array.from(document.querySelectorAll('.gallery-grid .gallery-item'));
+  const box = document.getElementById('lightbox');
+  if (!box) return; // если нет лайтбокса — выходим
+  const img = box.querySelector('.lb-img');
+  const btnClose = box.querySelector('.lb-close');
+  const btnPrev  = box.querySelector('.lb-prev');
+  const btnNext  = box.querySelector('.lb-next');
 
-    const deltaY = e.clientY - dragStartY;
-    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (!img || !btnClose || !btnPrev || !btnNext) {
+    console.warn('Лайтбокс: отсутствуют элементы управления или изображение.');
+    return;
+  }
 
-    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
-    window.scrollTo(0, startScrollY + scrollDelta);
+  let i = 0;
+  const getSrc = (el) => {
+    if (!el) return '';
+    if (el.dataset && el.dataset.src) return el.dataset.src;
+    const tagImg = el.querySelector('img');
+    if (tagImg && tagImg.src) return tagImg.src;
+    const bg = getComputedStyle(el).backgroundImage;
+    if (!bg || bg === 'none') return '';
+    // корректный regex — убираем wrapper url("...") 
+    return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+  };
+
+  const open = (idx) => {
+    if (!tiles.length) return;
+    i = idx;
+    const src = getSrc(tiles[i]);
+    if (!src) return;
+    img.src = src;
+    box.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+
+  const close = () => {
+    box.hidden = true;
+    img.src = '';
+    document.body.style.overflow = '';
+  };
+
+  const next = () => open((i + 1) % tiles.length);
+  const prev = () => open((i - 1 + tiles.length) % tiles.length);
+
+  tiles.forEach((el, idx) => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
   });
 
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    document.body.style.userSelect = '';
+  btnClose.addEventListener('click', close);
+  btnNext.addEventListener('click', next);
+  btnPrev.addEventListener('click', prev);
+
+  // клик по фону — закрыть
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+
+  // клавиши
+  document.addEventListener('keydown', (e) => {
+    if (box.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
   });
+});
 </script>
-
-<script>
-  (() => {
-    const tiles = Array.from(document.querySelectorAll('.js-lb'));
-    const box = document.getElementById('lightbox');
-    const img = box.querySelector('.lb-img');
-    const btnClose = box.querySelector('.lb-close');
-    const btnPrev  = box.querySelector('.lb-prev');
-    const btnNext  = box.querySelector('.lb-next');
-    let i = 0;
-  
-    const getSrc = (el) => {
-  if (el.dataset.src) return el.dataset.src;
-  const tagImg = el.querySelector('img');
-  if (tagImg) return tagImg.src;
-  const bg = getComputedStyle(el).backgroundImage;
-  return bg && bg !== 'none'
-    ? bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
-    : '';
-};
-
-
-      const open = (idx) => {
-      i = idx;
-      img.src = getSrc(tiles[i]);
-      box.hidden = false;
-      document.body.style.overflow = 'hidden';
-    };
-    const close = () => {
-      box.hidden = true;
-      img.src = '';
-      document.body.style.overflow = '';
-    };
-    const next = () => open((i + 1) % tiles.length);
-    const prev = () => open((i - 1 + tiles.length) % tiles.length);
-  
-    tiles.forEach((el, idx) => {
-      el.style.cursor = 'pointer';
-      el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
-    });
-  
-    btnClose.addEventListener('click', close);
-    btnNext.addEventListener('click', next);
-    btnPrev.addEventListener('click', prev);
-  
-    // клик по фону — закрыть
-    box.addEventListener('click', (e) => { if (e.target === box) close(); });
-  
-    // клавиатура
-    document.addEventListener('keydown', (e) => {
-      if (box.hidden) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    });
-  })();
-  </script>
   
 
 </body>
