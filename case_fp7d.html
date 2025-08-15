@@ -898,51 +898,54 @@ body.modal-open { overflow: hidden; }
 </head>
 <body>
 
+<!-- Lightbox CSS -->
 <style>
-/* Лайтбокс стили */
-/* Лайтбокс стили */
-.lightbox {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.9);
-  text-align: center;
-}
+  /* Контейнер */
+  .gallery-lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.88);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 4vh 2vw;
+  }
+  .gallery-lightbox.open { display: flex; }
 
-.lightbox-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  margin-top: 5vh;
-  object-fit: contain;
-}
+  /* Изображение */
+  .gallery-lightbox .lb-img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
 
-/* кнопки: close / prev / next */
-.lightbox .close,
-.lightbox .prev,
-.lightbox .next {
-  position: absolute;
-  color: white;
-  font-size: 20px;
-  background: black;
-  padding: 10px;
-  cursor: pointer;
-  user-select: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 2px;
-}
+  /* Кнопки */
+  .lb-btn {
+    position: absolute;
+    width: 44px;
+    height: 44px;
+    background: #000;
+    color: #fff;
+    border: 1px solid #000;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: .95;
+  }
+  .lb-close { top: 20px; right: 20px; }
+  .lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
+  .lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
 
-.lightbox .close { top: 20px; right: 20px; }
-.lightbox .prev  { left: 20px;  top: 50%; transform: translateY(-50%); }
-.lightbox .next  { right: 20px; top: 50%; transform: translateY(-50%); }
+  body.modal-open { overflow: hidden; }
+
+  @media (max-width:600px){
+    .lb-btn { width:36px; height:36px; font-size:16px; }
+  }
 </style>
+
 
 
   <script>
@@ -1174,14 +1177,14 @@ body.modal-open { overflow: hidden; }
   </div>
 </section>
 
-<!-- ===== Лайтбокс (один экземпляр) ===== -->
+<!-- Lightbox (single instance) -->
 <div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
   <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
-  <img class="lb-img" src="" alt="">
+  <img class="lb-img" src="" alt="Просмотр">
   <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
 </div>
-<!-- ===== /Лайтбокс ===== -->
+
 
 
 <!-- 🔻 ФУТЕР -->
@@ -1254,6 +1257,74 @@ body.modal-open { overflow: hidden; }
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
   });
+
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const tiles = Array.from(document.querySelectorAll('.gallery-item'));
+  const box = document.getElementById('gallery-lightbox');
+  if (!box) return;
+
+  const img = box.querySelector('.lb-img');
+  const btnClose = box.querySelector('.lb-close');
+  const btnPrev  = box.querySelector('.lb-prev');
+  const btnNext  = box.querySelector('.lb-next');
+  let idx = 0;
+
+  const getSrc = (tile) => {
+    if (!tile) return '';
+    const t = tile.querySelector('img');
+    if (t && t.src) return t.src;
+    if (tile.dataset && tile.dataset.src) return tile.dataset.src;
+    const bg = getComputedStyle(tile).backgroundImage;
+    if (!bg || bg === 'none') return '';
+    return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+  };
+
+  const open = (i) => {
+    idx = i;
+    const src = getSrc(tiles[idx]);
+    if (!src) return;
+    img.src = src;
+    box.classList.add('open');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+    // фокус для доступности
+    btnClose.focus();
+  };
+
+  const close = () => {
+    box.classList.remove('open');
+    box.setAttribute('aria-hidden', 'true');
+    img.src = '';
+    document.body.classList.remove('modal-open');
+  };
+
+  const next = () => open((idx + 1) % tiles.length);
+  const prev = () => open((idx - 1 + tiles.length) % tiles.length);
+
+  // Навесим обработчики на каждый .gallery-item
+  tiles.forEach((el, i) => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => { e.preventDefault(); open(i); });
+  });
+
+  btnClose && btnClose.addEventListener('click', close);
+  btnNext && btnNext.addEventListener('click', next);
+  btnPrev && btnPrev.addEventListener('click', prev);
+
+  // Закрыть по клику на фон (если клик по контейнеру)
+  box.addEventListener('click', (e) => { if (e.target === box) close(); });
+
+  // Управление клавишами
+  document.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+});
+</script>
 
 
 
