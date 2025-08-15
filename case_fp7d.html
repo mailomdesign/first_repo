@@ -806,12 +806,12 @@ body {
   cursor: pointer;
 }
 
-/* ===== Лайтбокс ===== */
-.gallery-lightbox { 
+
+.gallery-lightbox {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.88);
+  background: rgba(0,0,0,.88);
   z-index: 9999;
   align-items: center;
   justify-content: center;
@@ -843,117 +843,21 @@ body {
 .lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
 .lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
 
-/* на мобильных уменьшаем кнопки */
+body.modal-open { overflow: hidden; }
+
 @media (max-width: 600px) {
   .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
 
-/* Lightbox styles (place in <head> with other styles) */
-  .gallery-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.88);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  padding: 4vh 2vw;
-}
-.gallery-lightbox.open { display: flex; }
-.gallery-lightbox .lb-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-
-/* buttons */
-.lb-btn {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  font-size: 18px;
-  opacity: 0.95;
-}
-.lb-close { top: 20px; right: 20px; }
-.lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
-.lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
-
-/* helper while modal open */
-body.modal-open { overflow: hidden; }
-
-@media (max-width:600px){
-  .lb-btn { width:36px; height:36px; font-size:16px; }
-}
-
-
-
-  </style>
+</style>
 </head>
 <body>
 
-<!-- Lightbox styles: вставьте один раз -->
-<style>
-  /* lightbox container */
-  #gallery-lightbox {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.88);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    padding: 4vh 2vw;
-  }
-  
-  /* вид открытой модалки */
-  #gallery-lightbox.open {
-    display: flex;
-  }
-  
-  /* картинка внутри */
-  #gallery-lightbox .lb-img {
-    max-width: 90vw;
-    max-height: 90vh;
-    object-fit: contain;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-  }
-  
-  /* кнопки */
-  .lb-btn {
-    position: absolute;
-    width: 44px;
-    height: 44px;
-    background: #000;
-    color: #fff;
-    border: 1px solid #000;
-    display: grid;
-    place-items: center;
-    cursor: pointer;
-    font-size: 18px;
-    opacity: 0.95;
-  }
-  .lb-close { top: 20px; right: 20px; }
-  .lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
-  .lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
-  
-  body.modal-open { overflow: hidden; }
-  
-  @media (max-width:600px){
-    .lb-btn{ width:36px; height:36px; font-size:16px; }
-  }
-  </style>
-  
 
 
 
-  <script>
+
+<script>
     document.addEventListener('DOMContentLoaded', () => {
       const fadeElements = document.querySelectorAll('.scroll-fade');
   
@@ -1182,19 +1086,22 @@ body.modal-open { overflow: hidden; }
   </div>
 </section>
 
-<!-- Lightbox HTML (единственный экземпляр) -->
-<div id="gallery-lightbox" aria-hidden="true" role="dialog">
+<!-- единственный экземпляр lightbox -->
+<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
-  <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
+  <button class="lb-btn lb-prev"  aria-label="Назад">◀</button>
   <img class="lb-img" src="" alt="Просмотр">
-  <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
+  <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
 </div>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // обязательно: галерея
+    const grid = document.getElementById('gallery-grid'); // <-- добавлено
     const tiles = Array.from(document.querySelectorAll('.gallery-item'));
     const box = document.getElementById('gallery-lightbox');
-    if (!box) return; // если вдруг удалили - не ломать страницу
+    if (!tiles.length || !box) return;
   
     const img = box.querySelector('.lb-img');
     const btnClose = box.querySelector('.lb-close');
@@ -1232,17 +1139,23 @@ body.modal-open { overflow: hidden; }
     const next = () => open((idx + 1) % tiles.length);
     const prev = () => open((idx - 1 + tiles.length) % tiles.length);
   
+    // открытие по клику на item
     tiles.forEach((el, i) => {
       el.style.cursor = 'pointer';
       el.addEventListener('click', (e) => { e.preventDefault(); open(i); });
     });
   
+    // fallback: если хотите открыть модалку при клике на пустое место — уберите это,
+    // но сейчас мы не добавляем глобальный click на body чтобы не было ложных срабатываний.
+  
     btnClose && btnClose.addEventListener('click', close);
     btnNext && btnNext.addEventListener('click', next);
     btnPrev && btnPrev.addEventListener('click', prev);
   
+    // Закрытие кликом по фону (клик именно по контейнеру)
     box.addEventListener('click', (e) => { if (e.target === box) close(); });
   
+    // Клавиши
     document.addEventListener('keydown', (e) => {
       if (!box.classList.contains('open')) return;
       if (e.key === 'Escape') close();
@@ -1251,6 +1164,7 @@ body.modal-open { overflow: hidden; }
     });
   });
   </script>
+  
   
 
 
@@ -1324,7 +1238,7 @@ body.modal-open { overflow: hidden; }
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
   });
-
+</script>
 
   
 
