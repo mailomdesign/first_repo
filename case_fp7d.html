@@ -813,83 +813,62 @@ body {
 </head>
 <body>
 
-<!-- ===== Lightbox (единственный экземпляр) ===== -->
-<style>
-  /* Минимальные стили для модалки (вставь рядом с остальными стилями) */
-  .gallery-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 9999; align-items: center; justify-content: center; padding: 4vh 2vw; }
-  .gallery-lightbox.open { display:flex; }
-  .gallery-lightbox .lb-img { max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
-  .lb-btn { position: absolute; width: 44px; height: 44px; background: #000; color: #fff; border: 1px solid #000; display: grid; place-items: center; cursor: pointer; font-size: 18px; opacity: .95; }
-  .lb-close { top: 20px; right: 20px; }
-  .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
-  .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
-  body.modal-open { overflow: hidden; }
-  @media (max-width:600px){ .lb-btn{ width:36px;height:36px;font-size:16px; } }
-</style>
 
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const tiles = Array.from(document.querySelectorAll('.gallery-item'));
-    const box = document.getElementById('gallery-lightbox');
-    if (!tiles.length || !box) return;
-  
-    const img = box.querySelector('.lb-img');
-    const btnClose = box.querySelector('.lb-close');
-    const btnPrev  = box.querySelector('.lb-prev');
-    const btnNext  = box.querySelector('.lb-next');
-    let idx = 0;
-  
-    const getSrc = (tile) => {
-      if (!tile) return '';
-      const t = tile.querySelector('img');
-      if (t && t.src) return t.src;
-      if (tile.dataset && tile.dataset.src) return tile.dataset.src;
-      const bg = getComputedStyle(tile).backgroundImage;
-      if (!bg || bg === 'none') return '';
-      return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    };
-  
-    const open = (i) => {
-      idx = i;
-      const src = getSrc(tiles[idx]);
-      if (!src) return;
-      img.src = src;
-      box.classList.add('open');
-      box.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-    };
-  
-    const close = () => {
-      box.classList.remove('open');
-      box.setAttribute('aria-hidden', 'true');
-      img.src = '';
-      document.body.classList.remove('modal-open');
-    };
-  
-    const next = () => open((idx + 1) % tiles.length);
-    const prev = () => open((idx - 1 + tiles.length) % tiles.length);
-  
-    tiles.forEach((el, i) => {
-      el.style.cursor = 'pointer';
-      el.addEventListener('click', (e) => { e.preventDefault(); open(i); });
-    });
-  
-    btnClose.addEventListener('click', close);
-    btnNext.addEventListener('click', next);
-    btnPrev.addEventListener('click', prev);
-  
-    // Закрытие кликом по фону (только если клик прямо по контейнеру)
-    box.addEventListener('click', (e) => { if (e.target === box) close(); });
-  
-    // Клавиши
-    document.addEventListener('keydown', (e) => {
-      if (!box.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
-    });
-  });
-  </script>
+
+  <script>
+    // Логика модального окна
+    (() => {
+      const tiles = Array.from(document.querySelectorAll('.js-lb'));
+      const box = document.getElementById('gallery-lightbox');
+      const img = box.querySelector('.lb-img');
+      const btnClose = box.querySelector('.lb-close');
+      const btnPrev  = box.querySelector('.lb-prev');
+      const btnNext  = box.querySelector('.lb-next');
+      let i = 0;
+    
+      const getSrc = (el) => {
+        if (el.dataset.src) return el.dataset.src;
+        const tagImg = el.querySelector('img');
+        if (tagImg) return tagImg.src;
+        const bg = getComputedStyle(el).backgroundImage;
+        return bg && bg !== 'none'
+          ? bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
+          : '';
+      };
+    
+      const open = (idx) => {
+        i = idx;
+        img.src = getSrc(tiles[i]);
+        box.hidden = false;
+        document.body.style.overflow = 'hidden';
+      };
+      const close = () => {
+        box.hidden = true;
+        img.src = '';
+        document.body.style.overflow = '';
+      };
+      const next = () => open((i + 1) % tiles.length);
+      const prev = () => open((i - 1 + tiles.length) % tiles.length);
+    
+      tiles.forEach((el, idx) => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', (e) => { e.preventDefault(); open(idx); });
+      });
+    
+      btnClose.addEventListener('click', close);
+      btnNext.addEventListener('click', next);
+      btnPrev.addEventListener('click', prev);
+    
+      box.addEventListener('click', (e) => { if (e.target === box) close(); });
+    
+      document.addEventListener('keydown', (e) => {
+        if (box.hidden) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowRight') next();
+        if (e.key === 'ArrowLeft') prev();
+      });
+    })();
+    </script>
   
 
   <!-- Плавающее меню -->
@@ -1086,7 +1065,7 @@ body {
   <div class="bio-image-wrapper">
     <img src="img/cases/case_fp7d_im_2.png" alt="Фото" class="bio-image">
   </div>
-  
+
 </section> 
 
 <!-- ===== Галерея (оставляем сетку как есть) ===== -->
@@ -1173,7 +1152,9 @@ body {
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
   });
+</script>
 
+<script>
   document.addEventListener('mousemove', (e) => {
     if (!isDragging) return;
 
@@ -1184,7 +1165,10 @@ body {
     const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
     window.scrollTo(0, startScrollY + scrollDelta);
   });
+</script>
 
+
+<script>
   document.addEventListener('mouseup', () => {
     isDragging = false;
     document.body.style.userSelect = '';
@@ -1192,13 +1176,32 @@ body {
 </script>
 
 
-<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" role="dialog">
+<!-- Модальное окно -->
+<div id="gallery-lightbox" class="gallery-lightbox" hidden>
   <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
+  <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
+  <img class="lb-img" src="" alt="Просмотр изображения">
+  <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
+</div>  <button class="lb-btn lb-close" aria-label="Закрыть">✕</button>
   <button class="lb-btn lb-prev" aria-label="Назад">◀</button>
   <img class="lb-img" src="" alt="Просмотр">
   <button class="lb-btn lb-next" aria-label="Вперёд">▶</button>
 </div>
 </script>
+
+<!-- ===== Lightbox (единственный экземпляр) ===== -->
+<style>
+  /* Минимальные стили для модалки (вставь рядом с остальными стилями) */
+  .gallery-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.88); z-index: 9999; align-items: center; justify-content: center; padding: 4vh 2vw; }
+  .gallery-lightbox.open { display:flex; }
+  .gallery-lightbox .lb-img { max-width: 90vw; max-height: 90vh; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+  .lb-btn { position: absolute; width: 44px; height: 44px; background: #000; color: #fff; border: 1px solid #000; display: grid; place-items: center; cursor: pointer; font-size: 18px; opacity: .95; }
+  .lb-close { top: 20px; right: 20px; }
+  .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+  body.modal-open { overflow: hidden; }
+  @media (max-width:600px){ .lb-btn{ width:36px;height:36px;font-size:16px; } }
+</style>
 
   </body>
 </html>
