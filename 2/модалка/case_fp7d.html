@@ -848,50 +848,6 @@ body {
   .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
 
-/* Lightbox styles (place in <head> with other styles) */
-  .gallery-lightbox {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.88);
-  z-index: 9999;
-  align-items: center;
-  justify-content: center;
-  padding: 4vh 2vw;
-}
-.gallery-lightbox.open { display: flex; }
-.gallery-lightbox .lb-img {
-  max-width: 90vw;
-  max-height: 90vh;
-  object-fit: contain;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-}
-
-/* buttons */
-.lb-btn {
-  position: absolute;
-  width: 44px;
-  height: 44px;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  font-size: 18px;
-  opacity: 0.95;
-}
-.lb-close { top: 20px; right: 20px; }
-.lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
-.lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
-
-/* helper while modal open */
-body.modal-open { overflow: hidden; }
-
-@media (max-width:600px){
-  .lb-btn { width:36px; height:36px; font-size:16px; }
-}
-
 
 
   </style>

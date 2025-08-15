@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tagImg) return tagImg.src;
     const bg = getComputedStyle(el).backgroundImage;
     return bg && bg !== 'none'
-      ? bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '')
+      ? bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
       : '';
   };
 
