@@ -1168,7 +1168,7 @@ body.modal-open { overflow: hidden; }
   
 
 
-<!-- 🔻 ФУТЕР -->
+<!-- Футер -->
 <footer class="footer">
   <div class="footer-content">
     <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
@@ -1194,7 +1194,6 @@ body.modal-open { overflow: hidden; }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 </script>
-
 
 <div class="custom-scrollbar">
   <div class="scroll-thumb"></div>
@@ -1237,6 +1236,38 @@ body.modal-open { overflow: hidden; }
     dragStartY = e.clientY;
     startScrollY = window.scrollY;
     document.body.style.userSelect = 'none';
+  });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+
+    const deltaY = e.clientY - dragStartY;
+    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
+    window.scrollTo(0, startScrollY + scrollDelta);
+  });
+
+  document.addEventListener('mouseup', () => {
+    isDragging = false;
+    document.body.style.userSelect = '';
+  });
+</script>
+
+
+<script>
+  document.querySelectorAll('.fixed-menu a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      const targetEl = document.getElementById(targetId);
+      if (targetEl) {
+        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY;
+        const scrollTo = targetTop - (window.innerHeight / 2) + (targetEl.offsetHeight / 2);
+        window.scrollTo({ top: scrollTo, behavior: 'smooth' });
+      }
+    });
   });
 </script>
 
