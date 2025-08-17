@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <!-- Hero-блок -->
-  <section id="hero" class="hero scroll-fade" id="hero">
+  <section id="hero" class="hero scroll-fade">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
     <div class="hero-caption">не виртуального дизайнер</div>
@@ -87,14 +87,15 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="index.php#hero">Главная</a></li>
-    <li><a href="index.php#bio">Био</a></li>
-    <li><a href="index.php#direction">Направление</a></li>
-    <li><a href="index.php#education.html">Обучение</a></li>
-    <li><a href="index.php#cases">Кейсы</a></li>
-    <li><a href="index.php#contacts">Контакты</a></li>
+    <li><a href="/index.php#hero">Главная</a></li>
+    <li><a href="/index.php#bio">Био</a></li>
+    <li><a href="/index.php#direction">Направление</a></li>
+    <li><a href="/index.php#education">Обучение</a></li>
+    <li><a href="/index.php#cases">Кейсы</a></li>
+    <li><a href="/index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
+
 
   
 <div class="fixed-vacancy">
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <!-- Bio: блок с именем и описанием -->
   <section id="bio" class="bio scroll-fade">
     <div class="bio-content">
-      <div class="bio-anchor" id="bio">
+      <div class="bio-anchor">
         <h1 class="bio-name">михаил образцов</h1> 
         <div class="bio-underline"></div> <!-- ← чёрная полоска -->
       </div>
@@ -158,7 +159,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   <!-- НАПРАВЛЕНИЕ -->
-  <section id="direction" class="direction-wrapper scroll-fade" id="direction">
+  <section id="direction" class="direction-wrapper scroll-fade">
+
   <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
    
   <div class="direction-bg"></div>
@@ -350,7 +352,8 @@ if ($cases && is_array($cases)) {
 
 
 <!-- КОНТАКТЫ -->
-<section id="contacts" class="contacts-section scroll-fade" id="contacts">
+<section id="contacts" class="contacts-section scroll-fade">
+
   <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>
