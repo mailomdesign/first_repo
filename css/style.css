@@ -1477,12 +1477,12 @@ body.modal-open { overflow: hidden; }
   .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
 
-/* Нативная плавная прокрутка на всякий случай */
-html {
-  scroll-behavior: smooth;
+/* Гладкая прокрутка и отступ под фикс-меню */
+html { scroll-behavior: smooth; }
+#hero, #bio, #direction, #cases, #contacts { scroll-margin-top: 100px; } /* без пробела: 100px */
+
+/* Исправь такие места (убери пробел перед px) */
+@media (max-width: 600px) {
+  .lb-btn { width: 36px; height: 36px; font-size: 16px; } /* раньше было 36 px и т.п. */
 }
 
-/* Чтобы якорь не «упирался» под фикс-элементы (подправь величину под себя) */
-#hero, #bio, #direction, #education, #cases, #contacts {
-  scroll-margin-top: 100px;
-}

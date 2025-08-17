@@ -71,8 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-
-
 <script src="js/script.js"></script>
 
 
@@ -87,25 +85,23 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="/index.php#hero">Главная</a></li>
-    <li><a href="/index.php#bio">Био</a></li>
-    <li><a href="/index.php#direction">Направление</a></li>
-    <li><a href="/index.php#education">Обучение</a></li>
-    <li><a href="/index.php#cases">Кейсы</a></li>
-    <li><a href="/index.php#contacts">Контакты</a></li>
+    <li><a class="js-nav" href="/index.php#hero">Главная</a></li>
+    <li><a class="js-nav" href="/index.php#bio">Био</a></li>
+    <li><a class="js-nav" href="/index.php#direction">Направление</a></li>
+    <li><a href="/education.html">Обучение</a></li>
+    <li><a class="js-nav" href="/index.php#cases">Кейсы</a></li>
+    <li><a class="js-nav" href="/index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
 
-
-  
+<!-- Плашка Вакансия (если нужна на всех страницах) -->
 <div class="fixed-vacancy">
-  <a href="vacancy.html" style="text-decoration: none; color: inherit;">
-    <div class="vacancy-box">
-      Вакансия
-    </div>
+  <a href="vacancy.html" style="text-decoration:none;color:inherit;">
+    <div class="vacancy-box">Вакансия</div>
   </a>
 </div>
+
 
   
 
@@ -405,57 +401,80 @@ if ($cases && is_array($cases)) {
   }
 </script>
 
+<!-- Кастомный скроллбар -->
 <div class="custom-scrollbar">
   <div class="scroll-thumb"></div>
 </div>
 
-<!-- Скролл бар -->
 <script>
-  window.addEventListener('scroll', () => {
-    const bar = document.querySelector('.scroll-indicator-bar');
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
-    bar.style.height = `${progress}%`;
-  });
-</script>
-
-<script>
-  const thumb = document.querySelector('.scroll-thumb');
-  const scrollbar = document.querySelector('.custom-scrollbar');
-
-  // Обновляет позицию ползунка при прокрутке страницы
-  (function () {
-  // Если мы НЕ на index — ничего не трогаем, пусть браузер просто перейдёт по ссылке /index.php#...
-  const onIndex =
-    location.pathname === '/' ||
-    /(^|\/)index\.php$/.test(location.pathname);
-
-  if (!onIndex) return;
-
-  // На главной — мягкая прокрутка только для тех ссылок, чей hash реально существует
-  const links = document.querySelectorAll('.fixed-menu a[href*="#"]');
-  if (!links.length) return;
-
-  // Включаем нативный smooth
-  document.documentElement.style.scrollBehavior = 'smooth';
+document.addEventListener('DOMContentLoaded', function () {
+  // === Навигация из меню ===
+  const links = document.querySelectorAll('.fixed-menu a.js-nav');
+  const onIndex = location.pathname.endsWith('index.php') || location.pathname === '/' || location.pathname === '';
 
   links.forEach(link => {
-    const hash = link.hash; // например "#bio"
-    if (!hash) return;
+    const url = new URL(link.href, location.origin);
+    const hash = url.hash; // например, #bio
 
-    const target = document.getElementById(hash.slice(1));
-    if (!target) return; // якоря нет — ничего не ломаем
-
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // обновим адресную строку, чтобы hash был виден
-      history.replaceState(null, '', hash);
-    });
+    if (onIndex && hash) {
+      // На главной: скроллим без перезагрузки
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        const id = hash.slice(1);
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    } else {
+      // На внутренних страницах: просто переходим по ссылке (на index.php#id)
+      // Ничего не перехватываем.
+    }
   });
-})();
+
+  // === Кастомный скроллбар (обновление + drag) ===
+  const thumb = document.querySelector('.scroll-thumb');
+  const bar = document.querySelector('.custom-scrollbar');
+
+  if (thumb && bar) {
+    function updateThumb() {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const ratio = total > 0 ? (window.scrollY / total) : 0;
+      const maxTop = window.innerHeight - thumb.offsetHeight;
+      thumb.style.top = (ratio * maxTop) + 'px';
+    }
+
+    window.addEventListener('scroll', updateThumb);
+    window.addEventListener('resize', updateThumb);
+    updateThumb();
+
+    let dragging = false;
+    let startY = 0;
+    let startScrollY = 0;
+
+    thumb.addEventListener('mousedown', (e) => {
+      dragging = true;
+      startY = e.clientY;
+      startScrollY = window.scrollY;
+      document.body.style.userSelect = 'none';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (!dragging) return;
+      const maxTop = window.innerHeight - thumb.offsetHeight;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      const deltaY = e.clientY - startY;
+      const scrollDelta = (deltaY / maxTop) * scrollable;
+      window.scrollTo({ top: startScrollY + scrollDelta, left: 0, behavior: 'auto' });
+    });
+
+    document.addEventListener('mouseup', () => {
+      dragging = false;
+      document.body.style.userSelect = '';
+    });
+  }
+});
 </script>
+
 
 
 <script>
