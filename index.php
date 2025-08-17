@@ -77,29 +77,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   <!-- Hero-блок -->
-  <section class="hero scroll-fade" id="hero">
+  <section id="hero" class="hero scroll-fade" id="hero">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
     <div class="hero-caption">не виртуального дизайнер</div>
     <img class="hero-image" src="img/portr-1.png" alt="Портрет Михаила" />
   </section>
 
-  <!-- Плавающее меню -->
-  <nav class="fixed-menu">
+<!-- Плавающее меню -->
+<nav class="fixed-menu">
   <ul>
-    <li><a href="#" data-target="hero">Главная</a></li>
-    <li><a href="#" data-target="bio">Био</a></li>
-    <li><a href="#" data-target="direction">Направление</a></li>
-    <li><a href="#" data-target="quote">Обучение</a></li>
-    <li><a href="#" data-target="cases">Кейсы</a></li>
-    <li><a href="#" data-target="contacts">Контакты</a></li>
+    <li><a href="index.php#hero">Главная</a></li>
+    <li><a href="index.php#bio">Био</a></li>
+    <li><a href="index.php#direction">Направление</a></li>
+    <li><a href="index.php#education.html">Обучение</a></li>
+    <li><a href="index.php#cases">Кейсы</a></li>
+    <li><a href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
   
-<div class="fixed-education">
+<div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
-    <div class="education-box">
+    <div class="vacancy-box">
       Вакансия
     </div>
   </a>
@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
   <div class="vertical-bar-left"></div>
 
   <!-- Bio: блок с именем и описанием -->
-  <section class="bio scroll-fade">
+  <section id="bio" class="bio scroll-fade">
     <div class="bio-content">
       <div class="bio-anchor" id="bio">
         <h1 class="bio-name">михаил образцов</h1> 
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   <!-- НАПРАВЛЕНИЕ -->
-  <section class="direction-wrapper scroll-fade" id="direction">
+  <section id="direction" class="direction-wrapper scroll-fade" id="direction">
   <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
    
   <div class="direction-bg"></div>
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
-<div class="cases-container scroll-auto-fade"></div>
+<div id="cases" class="cases-container scroll-auto-fade"></div>
 
 <?php
 $jsonData = file_get_contents('cases.json');
@@ -350,7 +350,7 @@ if ($cases && is_array($cases)) {
 
 
 <!-- КОНТАКТЫ -->
-<section class="contacts-section scroll-fade" id="contacts">
+<section id="contacts" class="contacts-section scroll-fade" id="contacts">
   <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>
