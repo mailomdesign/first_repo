@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </nav>
 
 
+
   
 <div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
@@ -359,6 +360,7 @@ if ($cases && is_array($cases)) {
   </div>
 
   <div class="contacts-right">
+
     <!-- Заголовок КОНТАКТЫ_ в едином стиле с кейсами -->
     <div class="contacts-header">
       <span class="contacts-text">КОНТАКТЫ</span>
@@ -423,44 +425,36 @@ if ($cases && is_array($cases)) {
   const scrollbar = document.querySelector('.custom-scrollbar');
 
   // Обновляет позицию ползунка при прокрутке страницы
-  function updateThumbPosition() {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollRatio = window.scrollY / totalHeight;
-    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
-    thumb.style.top = `${scrollRatio * maxThumbTop}px`;
-  }
+  (function () {
+  // Если мы НЕ на index — ничего не трогаем, пусть браузер просто перейдёт по ссылке /index.php#...
+  const onIndex =
+    location.pathname === '/' ||
+    /(^|\/)index\.php$/.test(location.pathname);
 
-  window.addEventListener('scroll', updateThumbPosition);
-  window.addEventListener('resize', updateThumbPosition);
-  updateThumbPosition();
+  if (!onIndex) return;
 
-  // Drag-to-scroll: плавное поведение
-  let isDragging = false;
-  let dragStartY = 0;
-  let startScrollY = 0;
+  // На главной — мягкая прокрутка только для тех ссылок, чей hash реально существует
+  const links = document.querySelectorAll('.fixed-menu a[href*="#"]');
+  if (!links.length) return;
 
-  thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    dragStartY = e.clientY;
-    startScrollY = window.scrollY;
-    document.body.style.userSelect = 'none';
+  // Включаем нативный smooth
+  document.documentElement.style.scrollBehavior = 'smooth';
+
+  links.forEach(link => {
+    const hash = link.hash; // например "#bio"
+    if (!hash) return;
+
+    const target = document.getElementById(hash.slice(1));
+    if (!target) return; // якоря нет — ничего не ломаем
+
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // обновим адресную строку, чтобы hash был виден
+      history.replaceState(null, '', hash);
+    });
   });
-
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-
-    const deltaY = e.clientY - dragStartY;
-    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
-    window.scrollTo(0, startScrollY + scrollDelta);
-  });
-
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    document.body.style.userSelect = '';
-  });
+})();
 </script>
 
 

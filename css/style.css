@@ -1476,3 +1476,13 @@ body.modal-open { overflow: hidden; }
 @media (max-width: 600px) {
   .lb-btn { width: 36px; height: 36px; font-size: 16px; }
 }
+
+/* Нативная плавная прокрутка на всякий случай */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Чтобы якорь не «упирался» под фикс-элементы (подправь величину под себя) */
+#hero, #bio, #direction, #education, #cases, #contacts {
+  scroll-margin-top: 100px;
+}
