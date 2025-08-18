@@ -85,12 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="/index.php#hero">Главная</a></li>
-    <li><a href="/index.php#bio">Био</a></li>
-    <li><a href="/index.php#direction">Направление</a></li>
-    <li><a href="/index.php#education">Обучение</a></li>
-    <li><a href="/index.php#cases">Кейсы</a></li>
-    <li><a href="/index.php#contacts">Контакты</a></li>
+    <li><a href="index.php#hero">Главная</a></li>
+    <li><a href="index.php#bio">Био</a></li>
+    <li><a href="index.php#direction">Направление</a></li>
+    <li><a href="index.php#education">Обучение</a></li>
+    <li><a href="index.php#cases">Кейсы</a></li>
+    <li><a href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Обучение 2 -->
 <section class="quote-section scroll-fade">
-  <h2 class="quote-title" id="quote">
+  <h2 id="education" class="quote-title" id="quote">
     Наставник, который сопровождает  <br />
   </h2>
   <p class="quote-text">
