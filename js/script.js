@@ -32,10 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
   // ========== КАСТОМНЫЙ СКРОЛЛБАР ==========
   const thumb = document.querySelector('.scroll-thumb');
   if (thumb) {
@@ -108,3 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
     elements.forEach(el => observer.observe(el));
   }
 });
+
+// ВНЕ document.addEventListener(...), в самом начале или конце файла:
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
