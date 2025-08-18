@@ -407,74 +407,7 @@ if ($cases && is_array($cases)) {
   <div class="scroll-thumb"></div>
 </div>
 
-<!-- Скролл бар -->
-<script>
-  window.addEventListener('scroll', () => {
-    const bar = document.querySelector('.scroll-indicator-bar');
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
-    bar.style.height = `${progress}%`;
-  });
-</script>
 
-<script>
-  const thumb = document.querySelector('.scroll-thumb');
-  const scrollbar = document.querySelector('.custom-scrollbar');
-
-  // Обновляет позицию ползунка при прокрутке страницы
-  (function () {
-  // Если мы НЕ на index — ничего не трогаем, пусть браузер просто перейдёт по ссылке /index.php#...
-  const onIndex =
-    location.pathname === '/' ||
-    /(^|\/)index\.php$/.test(location.pathname);
-
-  if (!onIndex) return;
-
-  // На главной — мягкая прокрутка только для тех ссылок, чей hash реально существует
-  const links = document.querySelectorAll('.fixed-menu a[href*="#"]');
-  if (!links.length) return;
-
-  // Включаем нативный smooth
-  document.documentElement.style.scrollBehavior = 'smooth';
-
-  links.forEach(link => {
-    const hash = link.hash; // например "#bio"
-    if (!hash) return;
-
-    const target = document.getElementById(hash.slice(1));
-    if (!target) return; // якоря нет — ничего не ломаем
-
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      // обновим адресную строку, чтобы hash был виден
-      history.replaceState(null, '', hash);
-    });
-  });
-})();
-</script>
-
-
-<script>
-  document.querySelectorAll('.fixed-menu a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const targetId = link.getAttribute('data-target');
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY;
-        const scrollTo = targetTop - (window.innerHeight / 2) + (targetEl.offsetHeight / 2);
-        window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-      }
-    });
-  });
-</script>
-
-
-
-</body>
-</html>
 
 </body>
 </html>
