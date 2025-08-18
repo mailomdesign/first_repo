@@ -922,28 +922,37 @@ html {
 
 
 
-/* Контейнер скроллбара */
+/* ---- кастомный скроллбар (фиксируем ширину и pointer-events) ---- */
 .custom-scrollbar {
   position: fixed;
   top: 0;
   right: 0;
-  width: 6px;
+  width: 26px;                /* ширина области клика */
   height: 100%;
   background: transparent;
-  z-index: 9999;
+  z-index: 99999;             /* обязательно поверх всех слоёв */
+  display: block;
+  pointer-events: auto;
 }
 
-/* Сам движущийся ползунок */
+/* Сам ползунок: занимать всю ширину контейнера, чтобы была большая зона для клика */
 .scroll-thumb {
-  width: 25px;
-  height: 120px;
+  width: 100%;
+  height: 120px;              /* регулируйте при необходимости */
   background-color: black;
-  border: 2px solid rgb(90, 90, 90);
   border-radius: 2px;
   position: absolute;
   top: 0;
-  cursor: pointer;
+  left: 0;
+  cursor: grab;
+  touch-action: none;         /* предотвращает "дребезг" тачев */
 }
+
+/* Когда перетаскиваем — меняем курсор */
+.scroll-thumb:active { cursor: grabbing; }
+
+/* Чтобы JS мог временно отключать выделение текста во время drag */
+html.no-select, .no-select { user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; }
 
 
 

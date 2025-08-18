@@ -12,7 +12,7 @@
 
 
 
-
+  <script src="js/script.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -35,16 +35,17 @@
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="/index.php#hero">Главная</a></li>
-    <li><a href="/index.php#bio">Био</a></li>
-    <li><a href="/index.php#direction">Направление</a></li>
-    <li><a href="/index.php#education">Обучение</a></li>
-    <li><a href="/index.php#cases">Кейсы</a></li>
-    <li><a href="/index.php#contacts">Контакты</a></li>
+    <li><a href="index.php#hero">Главная</a></li>
+    <li><a href="index.php#bio">Био</a></li>
+    <li><a href="index.php#direction">Направление</a></li>
+    <li><a href="index.php#education">Обучение</a></li>
+    <li><a href="index.php#cases">Кейсы</a></li>
+    <li><a href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
-  
+
+ 
 <div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
     <div class="vacancy-box">
@@ -333,100 +334,21 @@
   </div>
 </footer>
 
-<script>
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-</script>
 
 <button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
   ↑
 </button>
 
-<script>
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
+
 
 <div class="custom-scrollbar">
   <div class="scroll-thumb"></div>
 </div>
 
-<!-- Скролл бар -->
-<script>
-  window.addEventListener('scroll', () => {
-    const bar = document.querySelector('.scroll-indicator-bar');
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = (scrollTop / docHeight) * 100;
-    bar.style.height = `${progress}%`;
-  });
-</script>
-
-<script>
-  const thumb = document.querySelector('.scroll-thumb');
-  const scrollbar = document.querySelector('.custom-scrollbar');
-
-  // Обновляет позицию ползунка при прокрутке страницы
-  function updateThumbPosition() {
-    const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollRatio = window.scrollY / totalHeight;
-    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
-    thumb.style.top = `${scrollRatio * maxThumbTop}px`;
-  }
-
-  window.addEventListener('scroll', updateThumbPosition);
-  window.addEventListener('resize', updateThumbPosition);
-  updateThumbPosition();
-
-  // Drag-to-scroll: плавное поведение
-  let isDragging = false;
-  let dragStartY = 0;
-  let startScrollY = 0;
-
-  thumb.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    dragStartY = e.clientY;
-    startScrollY = window.scrollY;
-    document.body.style.userSelect = 'none';
-  });
-
-  document.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-
-    const deltaY = e.clientY - dragStartY;
-    const maxThumbTop = window.innerHeight - thumb.offsetHeight;
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-
-    const scrollDelta = (deltaY / maxThumbTop) * scrollableHeight;
-    window.scrollTo(0, startScrollY + scrollDelta);
-  });
-
-  document.addEventListener('mouseup', () => {
-    isDragging = false;
-    document.body.style.userSelect = '';
-  });
-</script>
 
 
-<script>
-  document.querySelectorAll('.fixed-menu a').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const targetId = link.getAttribute('data-target');
-      const targetEl = document.getElementById(targetId);
-      if (targetEl) {
-        const targetTop = targetEl.getBoundingClientRect().top + window.scrollY;
-        const scrollTo = targetTop - (window.innerHeight / 2) + (targetEl.offsetHeight / 2);
-        window.scrollTo({ top: scrollTo, behavior: 'smooth' });
-      }
-    });
-  });
-</script>
+</body>
+</html>
 
   
 

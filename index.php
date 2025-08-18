@@ -52,28 +52,6 @@ if (!is_array($cases)) {
 <body>
 
 
-
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const elements = document.querySelectorAll('.scroll-fade');
-
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.15 });
-
-  elements.forEach(el => observer.observe(el));
-});
-</script>
-
-<script src="js/script.js"></script>
-
-
   <!-- Hero-блок -->
   <section id="hero" class="hero scroll-fade">
     <div class="hero-subtitle">сайт</div>
@@ -85,18 +63,17 @@ document.addEventListener('DOMContentLoaded', () => {
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="index.php#hero">Главная</a></li>
-    <li><a href="index.php#bio">Био</a></li>
-    <li><a href="index.php#direction">Направление</a></li>
-    <li><a href="index.php#education">Обучение</a></li>
-    <li><a href="index.php#cases">Кейсы</a></li>
-    <li><a href="index.php#contacts">Контакты</a></li>
+  <li><a class="js-nav" href="index.php#hero">Главная</a></li>
+  <li><a class="js-nav" href="index.php#bio">Био</a></li>
+  <li><a class="js-nav" href="index.php#direction">Направление</a></li>
+  <li><a class="js-nav" href="index.php#education">Обучение</a></li>
+  <li><a class="js-nav" href="index.php#cases">Кейсы</a></li>
+  <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
 
-
-  
+ 
 <div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
     <div class="vacancy-box">
@@ -158,11 +135,11 @@ document.addEventListener('DOMContentLoaded', () => {
   
 
   <!-- НАПРАВЛЕНИЕ -->
-  <section id="direction" class="direction-wrapper scroll-fade">
+  <section class="direction-wrapper scroll-fade">
 
   <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
    
-  <div class="direction-bg"></div>
+  <div id="direction" class="direction-bg"></div>
 
   
   <h2 class="direction-title">НАПРАВЛЕНИЕ</h2>
@@ -259,8 +236,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </section>
 
 <!-- Обучение 2 -->
-<section class="quote-section scroll-fade">
-  <h2 id="education" class="quote-title" id="quote">
+<section id="education" class="quote-section scroll-fade">
+  <h2 class="quote-title" id="quote">
     Наставник, который сопровождает  <br />
   </h2>
   <p class="quote-text">
@@ -273,12 +250,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 <!-- Заголовок "КЕЙСЫ_" -->
 <div class="cases-header" >
-  <span class="cases-text">КЕЙСЫ</span>
+  <span id="cases" class="cases-text">КЕЙСЫ</span>
   <span class="cases-line"></span>
 </div>
 
 <!-- СЕКЦИЯ КЕЙСЫ -->
-<div id="cases" class="cases-container scroll-auto-fade"></div>
+<div class="cases-container scroll-auto-fade"></div>
 
 <?php
 $jsonData = file_get_contents('cases.json');
@@ -351,9 +328,9 @@ if ($cases && is_array($cases)) {
 
 
 <!-- КОНТАКТЫ -->
-<section id="contacts" class="contacts-section scroll-fade">
+<section class="contacts-section scroll-fade">
 
-  <div class="contacts-left">
+  <div id="contacts" class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>
 
@@ -384,30 +361,18 @@ if ($cases && is_array($cases)) {
   </div>
 </footer>
 
-<script>
-  function scrollToSection(id) {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-</script>
 
 <button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
   ↑
 </button>
 
-<script>
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-</script>
+
 
 <div class="custom-scrollbar">
   <div class="scroll-thumb"></div>
 </div>
 
-
+<script src="js/script.js"></script>
 
 </body>
 </html>
