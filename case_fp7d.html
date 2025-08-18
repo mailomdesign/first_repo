@@ -10,37 +10,15 @@
 </head>
 <body>
 
-
-
-  <script src="js/script.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const fadeElements = document.querySelectorAll('.scroll-fade');
-  
-      const onScroll = () => {
-        fadeElements.forEach(el => {
-          const rect = el.getBoundingClientRect();
-          if (rect.top < window.innerHeight * 0.85) {
-            el.classList.add('visible');
-          }
-        });
-      };
-  
-      document.addEventListener('scroll', onScroll);
-      window.addEventListener('load', onScroll);
-    });
-  </script>
-
 <!-- Плавающее меню -->
 <nav class="fixed-menu">
   <ul>
-    <li><a href="index.php#hero">Главная</a></li>
-    <li><a href="index.php#bio">Био</a></li>
-    <li><a href="index.php#direction">Направление</a></li>
-    <li><a href="index.php#education">Обучение</a></li>
-    <li><a href="index.php#cases">Кейсы</a></li>
-    <li><a href="index.php#contacts">Контакты</a></li>
+  <li><a class="js-nav" href="index.php#hero">Главная</a></li>
+  <li><a class="js-nav" href="index.php#bio">Био</a></li>
+  <li><a class="js-nav" href="index.php#direction">Направление</a></li>
+  <li><a class="js-nav" href="index.php#education">Обучение</a></li>
+  <li><a class="js-nav" href="index.php#cases">Кейсы</a></li>
+  <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
 
@@ -325,7 +303,6 @@
   
   
 
-
 <!-- Футер -->
 <footer class="footer">
   <div class="footer-content">
@@ -345,7 +322,7 @@
   <div class="scroll-thumb"></div>
 </div>
 
-
+<script src="js/script.js"></script>
 
 </body>
 </html>
@@ -354,6 +331,4 @@
 
 
 
-</body>
-</html>
 
