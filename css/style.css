@@ -927,7 +927,7 @@ html {
   position: fixed;
   top: 0;
   right: 0;
-  width: 26px;                /* ширина области клика */
+  width: 13px;                /* ширина области клика */
   height: 100%;
   background: transparent;
   z-index: 99999;             /* обязательно поверх всех слоёв */
@@ -938,7 +938,7 @@ html {
 /* Сам ползунок: занимать всю ширину контейнера, чтобы была большая зона для клика */
 .scroll-thumb {
   width: 100%;
-  height: 120px;              /* регулируйте при необходимости */
+  height: 170px;              /* регулируйте при необходимости */
   background-color: black;
   border-radius: 2px;
   position: absolute;
@@ -947,6 +947,12 @@ html {
   cursor: grab;
   touch-action: none;         /* предотвращает "дребезг" тачев */
 }
+
+.scroll-thumb:hover {
+  border-color: #ffffff;          /* меняем цвет при наведении */
+  box-shadow: 0 0 6px #ffffff;    /* лёгкое свечение */
+}
+
 
 /* Когда перетаскиваем — меняем курсор */
 .scroll-thumb:active { cursor: grabbing; }
@@ -1060,9 +1066,9 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
   position: absolute;
   top: 0;
   left: 0;
-  width: 70%; /* или нужное значение */
+  width: 100%; /* или нужное значение */
   height: 100%;
-  background-image: url("img/cases/case_fp7d_im.png");
+  background-image: url("img/cases/case_fp7d_im.jpg");
   background-size: cover;
   background-position: center;
   z-index: 1;
@@ -1075,7 +1081,7 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
   right: 0;
   width: 40%;
   height: 100%;
-  background: black;
+  background: linear-gradient(90deg, #000000 0%, rgb(17, 17, 17) 50%, #2c2c2c 100%);
   color: white;
   clip-path: polygon(5% 0%, 100% 0, 100% 100%, 0 100%);
   z-index: 2;
@@ -1313,7 +1319,7 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
 
 .case-data-block {
   height: 400px;
-  background: linear-gradient(90deg, #464343 0%, black 50%, #3C3B3B 100%);
+  background: linear-gradient(90deg, #000000 0%, rgb(17, 17, 17) 50%, #2c2c2c 100%);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1386,6 +1392,171 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
   margin: 0 auto;
   padding: 120px 60px;
   box-sizing: border-box;
+}
+
+/* Страница вакансии */
+.vacancy-section {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 120px 0 240px;
+  box-sizing: border-box;
+}
+
+.vacancy-title {
+  font-size: 64px;
+  text-transform: uppercase;
+  color: black;
+  margin-bottom: 30px;
+}
+
+.vacancy-subtitle {
+  font-size: 32px;
+  font-family: 'Alumni Sans', sans-serif;
+  line-height: 1.6;
+  color: black;
+  max-width: 1149px;
+  margin-bottom: 80px;
+}
+
+.vacancy-black-block {
+  width: 100vw;
+  background: linear-gradient(90deg, #000000 0%, rgb(17, 17, 17) 50%, #2c2c2c 100%);
+  margin: 20px 0;
+}
+
+.vacancy-black-inner {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 60px 240px;
+  box-sizing: border-box;
+  transform: translateY(-20px); /* ← поднимает текст вверх на 20px */
+}
+
+.vacancy-black-title {
+  font-size: 64px;
+  color: white;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.vacancy-black-text {
+  font-size: 32px;
+  font-family: 'Alumni Sans', sans-serif;
+  color: white;
+  line-height: 1.6;
+  max-width: 1149px;
+  margin: 0;
+}
+
+.vacancy-image {
+width: 100vw;
+height: 500px;
+object-fit: cover;
+display: block;
+margin: 0px 0;
+}
+
+/* === EDUCATION subnav === */
+.edu-subnav-wrap { position: relative; }
+
+/* было: top: var(--stick-offset); — из-за этого прилипало сразу */
+.edu-subnav {
+  position: sticky;
+  top: 0;                     /* ← прилипает, только когда дойдёт до верха вьюпорта */
+  z-index: 8;
+  background: #fff;
+  padding: 16px 0 8px;
+}
+
+/* невидимый «маяк» для расчёта момента фиксации */
+.edu-sentinel { height: var(--stick-offset); }
+
+/* состояние, когда подменю уже плавает по всей странице */
+.edu-subnav.is-fixed {
+  position: fixed;
+  top: var(--stick-offset);   /* висит ровно под основным меню */
+  left: 0;
+  right: 0;
+  z-index: 9;
+  background: #fff;
+}
+
+/* плейсхолдер, чтобы не было скачка верстки */
+.edu-subnav-placeholder { height: 0; }
+
+/* заголовок сверху (меняет цвет в зависимости от выбранной вкладки) */
+.edu-title {
+  text-align: right;
+  color: var(--title-color);
+  font: 400 24px/1 "Russo One", system-ui, sans-serif;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-sizing: border-box;
+
+  /* ключевой момент */
+  padding-right: 105px; /* подобрать число под ширину «ОБУЧЕНИЕ» */
+}
+
+
+
+/* под заголовком тонкая линия */
+.edu-line {
+  height: 1px;
+  background: #000;
+  margin: 10px auto; /* по центру */
+  width: 89%;       /* 100% - 20% слева - 20% справа */
+  box-sizing: border-box;
+}
+
+
+/* кнопки-вкладки */
+.edu-tabs {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  box-sizing: border-box;
+
+  /* ключевой момент */
+  padding-right: 105px; /* подобрать число под ширину «ОБУЧЕНИЕ» */
+}
+
+.edu-tab {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: 400 36px/1 "Russo One", system-ui, sans-serif;
+  text-transform: uppercase;
+  color: var(--tab-inactive);
+  transition: color .2s ease;
+}
+
+.edu-tab.is-active {
+  color: var(--tab-active);
+}
+
+/* панели контента */
+.edu-panels { margin-top: 24px; }
+.edu-panel.is-hidden { display: none; }
+
+/* адаптив (при желании) */
+@media (max-width: 768px) {
+  .edu-subnav { --stick-offset: 72px; } /* меньше отступ под меню на мобильных */
+  .edu-tab { font-size: 24px; }
+  .edu-title { font-size: 18px; }
+
+  .edu-subnav .edu-title { color: var(--tab-active); }  /* заменит var(--title-color) */
+
 }
 
 

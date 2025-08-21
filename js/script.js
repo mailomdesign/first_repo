@@ -109,3 +109,59 @@ document.addEventListener('DOMContentLoaded', () => {
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const subnav = document.getElementById('edu-subnav');
+  if (!subnav) return;
+
+  const wrap = subnav.closest('.edu-subnav-wrap');
+  const sentinel = wrap && wrap.querySelector('.edu-sentinel');
+  if (!wrap || !sentinel) return;
+
+  // плейсхолдер, чтобы не дергалась верстка при position:fixed
+  const ph = document.createElement('div');
+  ph.className = 'edu-subnav-placeholder';
+  wrap.insertBefore(ph, subnav);
+
+  const css = getComputedStyle(subnav);
+  const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
+
+  function fix() {
+    if (!subnav.classList.contains('is-fixed')) {
+      ph.style.height = subnav.offsetHeight + 'px';
+      subnav.classList.add('is-fixed');
+    }
+  }
+  function unfix() {
+    if (subnav.classList.contains('is-fixed')) {
+      subnav.classList.remove('is-fixed');
+      ph.style.height = '0px';
+    }
+  }
+
+  // Когда «маяк» пересекает верх вьюпорта С УЧЁТОМ отступа — фиксируем подменю
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Маяк виден -> подменю едет в потоке (не фиксировано)
+        unfix();
+      } else {
+        // Маяк ушёл выше точки — фиксируем
+        fix();
+      }
+    });
+  }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
+
+  io.observe(sentinel);
+
+  // Пересчитать высоту плейсхолдера при ресайзе
+  window.addEventListener('resize', () => {
+    if (subnav.classList.contains('is-fixed')) {
+      ph.style.height = subnav.offsetHeight + 'px';
+    }
+  });
+});
+
+

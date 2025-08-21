@@ -5,210 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Обучение</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet"/>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: white;
-      font-family: 'Russo One', sans-serif;
-    }
+  <link rel="stylesheet" href="css/style.css">
 
-    .education-section {
-      max-width: 1920px;
-      margin: 0 auto;
-      padding: 0 120px 0 240px;
-      box-sizing: border-box;
-    }
+</head>
+<body>
 
-    .education-title {
-      font-size: 64px;
-      text-transform: uppercase;
-      color: black;
-      margin-bottom: 30px;
-    }
-
-    .education-subtitle {
-      font-size: 32px;
-      font-family: 'Alumni Sans', sans-serif;
-      line-height: 1.6;
-      color: black;
-      max-width: 1149px;
-      margin-bottom: 80px;
-    }
-
-    .education-black-block {
-      width: 100vw;
-      background: black;
-      margin: 20px 0;
-    }
-
-    .education-black-inner {
-      max-width: 1920px;
-      margin: 0 auto;
-      padding: 60px 240px;
-      box-sizing: border-box;
-      transform: translateY(-20px); /* ← поднимает текст вверх на 20px */
-    }
-
-    .education-black-title {
-      font-size: 64px;
-      color: white;
-      text-transform: uppercase;
-      margin-bottom: 30px;
-    }
-
-    .education-black-text {
-      font-size: 32px;
-      font-family: 'Alumni Sans', sans-serif;
-      color: white;
-      line-height: 1.6;
-      max-width: 1149px;
-      margin: 0;
-    }
-
-    .education-image {
-  width: 100vw;
-  height: 500px;
-  object-fit: cover;
-  display: block;
-  margin: 0px 0;
-}
-
-    .footer {
-  width: 100%;
-  max-width: 1920px;
-  height: 40px;
-  background: #212121;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Russo One', sans-serif;
-}
-
-.footer-content {
-  width: 100%;
-  max-width: 1920px; /* или 1920px — зависит от центральной сетки */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 60px;
-  box-sizing: border-box;
-  color: white;
-  font-size: 16px;
-  text-transform: uppercase;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.fixed-menu {
-  position: fixed;
-  top: 40px; /* как у .hero */
-  right: 51%;
-  transform: translateX(850px); /* 1700px / 2 - точно к правому краю рамки hero */
-  z-index: 1000;
-}
-
-.fixed-menu ul {
-  display: flex;
-  gap: 20px;
-  background: white;
-  border: 1px solid rgb(255, 255, 255);
-  padding: 5px 10px;
-  margin: 0;
-  list-style: none;
-}
-
-.fixed-menu li a {
-  text-decoration: none;
-  color: black;
-  font-family: 'Russo One', sans-serif;
-  font-size: 14px;
-  text-transform: uppercase;
-  transition: color 0.3s ease;
-}
-
-.fixed-menu li a:hover {
-  color: #AAAAAA; /* или любой другой: #505050, #888 — регулируй по вкусу */
-}
-
-.fixed-education {
-  position: fixed;
-  top: 40px; /* как у .hero */
-  left: 51%;
-  transform: translateX(-850px); /* 1700px / 2 — левый край рамки */
-  z-index: 1000;
-}
-
-.education-box {
-  width: 190px;
-  height: 28px;
-  background: white;
-  border: 1px solid white; /* если нужен бордер */
-  color: black;
-  font-size: 14px;
-  font-family: 'Russo One', sans-serif;
-  font-weight: 400;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  padding-left: 10px;
-  transition: color 0.3s ease;
-}
-
-.education-box:hover {
-  color: #AAAAAA; /* регулируй по вкусу */
-}
-
-.scroll-top {
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  width: 25px;         /* как .ideology-wrapper */
-  height: 30px;
-  background: black;
-  color: white;
-  font-size: 16px;
-  font-family: 'Russo One', sans-serif;
-  border: none;
-  cursor: pointer;
-  z-index: 1000;
-  transition: background 0.3s ease;
-}
-
-.scroll-top:hover {
-  background: #333;
-}
-
-.quote-text {
-  font-size: 32px;
-  font-family: 'Alumni Sans', sans-serif;
-  font-weight: 400;
-  color: black;
-  line-height: 1.6;
-  max-width: 1149px;
-  margin: 0 auto;
-}
-
-.quote-button {
-  display: inline-block;
-  margin-top: 40px;
-  padding: 12px 24px;
-  background: black;
-  color: white;
-  font-family: 'Russo One', sans-serif;
-  font-size: 18px;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 1px solid black;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.quote-button:hover {
-  background: white;
-  color: black;
-}
 
   </style>
 </head>
@@ -236,86 +37,245 @@ html {
   </a>
 </div>
 
-  <img class="education-image" src="img/vak_1_1.png" alt="визуализация стажировки" />
+<!-- Плавающее меню -->
+<nav class="fixed-menu">
+  <ul>
+  <li><a class="js-nav" href="index.php#hero">Главная</a></li>
+  <li><a class="js-nav" href="index.php#bio">Био</a></li>
+  <li><a class="js-nav" href="index.php#direction">Направление</a></li>
+  <li><a class="js-nav" href="index.php#education">Обучение</a></li>
+  <li><a class="js-nav" href="index.php#cases">Кейсы</a></li>
+  <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
+  </ul>
+</nav>
 
-  <section class="education-section">
-    <h1 class="education-title">Дизайнер в будущем</h1>
-    <p class="education-subtitle">
-        Привет. Я рад, что ты оказался именно тут. Когда-то и я искал пути и решения, для улучшения навыков и знаний в области дизайна. Все было неочевидно и большую часть я получал из личного опыта.
-      <br/>
-      Это отнимает немало времени и помощь на пути развития всегда на пользу.
-      Не предлагаю волшебную таблетку или путь к одной кнопке, но могу помочь понять,
-      простым языком донести то, что кажется сложным.
-    </p>
-  </section>
-  
 
-  <div class="education-black-block">
-    <div class="education-black-inner">
-      <h2 class="education-black-title">Тут ты найдешь</h2>
-      <p class="education-black-text">
-        &#10003; Базовый курс для общих навыков в полиграфическом и веб дизайне<br/>
-        &#10003; Улучшение текущих навыков <br/>
-      </p>
+ 
+<div class="fixed-vacancy">
+  <a href="vacancy.html" style="text-decoration: none; color: inherit;">
+    <div class="vacancy-box">
+      Вакансия
+    </div>
+  </a>
+</div>
+
+
+  <div class="cases-header-2" id="cases">
+    <br><br>
+    <span class="cases-text-2">Обучение</span>
+    <span class="cases-line"></span>
+  </div> <br><br>
+
+  <!-- Внутреннее меню раздела "Обучение" -->
+<section class="edu-subnav-wrap">
+  <div id="edu-subnav" class="edu-subnav scroll-fade" data-active="novice" role="tablist" aria-label="Категория курсов">
+    <div class="edu-title">доступные курсы</div>
+    <div class="edu-line" aria-hidden="true"></div>
+
+    <div class="edu-tabs">
+      <button class="edu-tab is-active" role="tab" aria-selected="true" tabindex="0" data-tab="novice">
+        дизайнер с нуля
+      </button>
+      <button class="edu-tab" role="tab" aria-selected="false" tabindex="-1" data-tab="junior">
+        Junior
+      </button>
     </div>
   </div>
+</section>
 
-  <section class="education-section">
-    <h2 class="education-title">Как проходит обучение</h2>
-    <p class="education-subtitle">
-      &bull; Предварительно мы обсуждаем твои цели и текущий опыт, знания<br/>
-      &bull; Выбираем путь и составляем график<br/>
-      &bull; Виесте проходим курс от основ до реализации проекта 
-    </p>
+<!-- Контент для вкладок -->
+<section class="edu-panels">
+  <div class="edu-panel" data-panel="novice">
 
-    <h2 class="education-title">Что ты получишь по итогу</h2>
-    <p class="education-subtitle">
-      &bull; Точное понимание, если такового еще нет, что такое проект от идеи до финала<br/>
-      &bull; Усиление собственных скиллов и помощь в разборе вопросов<br/>
-      &bull; Сопровождение от дизайнера с реальным опытом<br/>
-    </p>
-
-    <h2 class="education-title">Никаких обещаний</h2>
-    <p class="education-subtitle">
-      &bull; Вызывает улыбку, когда пишут о гарантиях трудоустройства и высокой з/п - все зависит от тебя<br/>
-      &bull; Помню, что такое начинать и хочу направить на путь меньшего трения<br/>
-      &bull; Тревзый взгляд на твой рост и развитие
-    </p>
-
-    <h2 class="education-title">оставь заявку?</h2>
-    <p class="education-subtitle">
-      просто заполни гугл-форму — я обязательно рассмотрю твое резюме и дам обратную связь
-    <a href="#request" class="quote-button">Оставить заявку</a>
-  </p>
-</p>
-  </section>
-
-<!-- 🔻 ФУТЕР -->
-<footer class="footer">
-    <div class="footer-content">
-      <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
-      <div class="footer-right">2025</div>
+    <!-- ваш контент "Дизайнер с нуля" -->
+    <section class="vacancy-section">
+      <h1 class="vacancy-title">Программа курса</h1>
+      <p class="vacancy-subtitle">
+        <b>Вводная лекиця</b><br/>
+  
+        &bull; Что такое современный дизайн<br/>
+        &bull; Области применения<br/>
+        &bull; Путь дизайнера: от нуля до <b>реального проекта</b><br/>
+        <br/>
+  
+        <b>Инструменты и навык работы |  1 неделя</b><br/>
+  
+        &bull; Figma, Photoshop, Illustrator, InDesign, Font Expert, Adobe Pdf — интерфейс, логика <br/>
+        &bull; Цвет, типографика, сетки <br/>
+        &#10003; <b>Создание</b> первых простых макетов: афиша, карточка, баннер <br/>
+        <br/>
+  
+        <b>Основы композиции и визуального языка |  2-3 неделя</b><br/>
+  
+        &bull; Смысл и эмоция в дизайне <br/>
+        &bull; Иерархия, пространство, модуль <br/>
+        &#10003; <b>Практика:</b> афиша, презентация, лендинг <br/>
+        <br/>
+  
+        <b>Проект и защита |  4 неделя</b><br/>
+  
+        &bull; Разработка проекта по ТЗ <br/>
+        &bull; Подготовка под печать или публикацию <br/>
+        &#10003; <b>Онлайн-защита проекта / ревью</b> <br/>
+        <br/>
+      </p>
+    </section>
+    
+  
+    <div class="vacancy-black-block">
+      <div class="vacancy-black-inner">
+        <h2 class="vacancy-black-title">Продолжительность:</h2>
+        <p class="vacancy-black-text">
+          <b>4 недели (полный интенсив)</b><br/>
+          &bull; 2 занятия в неделю<br/>
+          &bull; Продолжительность занятия 1,5 часа<br/>
+          &#10003; Теория, практика, задание для проработки     <br/>
+          <br/>
+        <b>или</b>        <br/>
+        <br/>
+        <b>8 недель (лайт-график)</b><br/>
+        &bull; 1 занятие в неделю<br/>
+        &bull; Продолжительность занятия 1,5 часа<br/>
+        &#10003; Теория, практика, задание для проработки
+      </div>
     </div>
-  </footer>
   
-  <script>
-    function scrollToSection(id) {
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  </script>
+    <section class="vacancy-section">        
+      <br/>
+      <h2 class="vacancy-title">Оформить заявку</h2>
+      <p class="vacancy-subtitle">
+        Пожалуйста, заполните форму, 
+        с удобным для вас графиком, указанием опыта и ваших целей в обучении и контактными данными. 
+        Я обязательно свяжусь с вами после ознакомления с информацией 
+        <br/>
+     <a href="#request" class="quote-button">Оформить заявку на обучение</a>
+    </p>
+  </p>
+    </section>
+
+  </div>
+
+  <div class="edu-panel is-hidden" data-panel="junior">
+
+    <!-- ваш контент "Junior" -->
+    <section class="vacancy-section">
+      <h1 class="vacancy-title">Программа курса 2</h1>
+      <p class="vacancy-subtitle">
+        <b>Вводная лекиця</b><br/>
   
-  <button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
-    ↑
-  </button>
+        &bull; Что такое современный дизайн<br/>
+        &bull; Области применения<br/>
+        &bull; Путь дизайнера: от нуля до <b>реального проекта</b><br/>
+        <br/>
   
-  <script>
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
+        <b>Инструменты и навык работы |  1 неделя</b><br/>
+  
+        &bull; Figma, Photoshop, Illustrator, InDesign, Font Expert, Adobe Pdf — интерфейс, логика <br/>
+        &bull; Цвет, типографика, сетки <br/>
+        &#10003; <b>Создание</b> первых простых макетов: афиша, карточка, баннер <br/>
+        <br/>
+  
+        <b>Основы композиции и визуального языка |  2-3 неделя</b><br/>
+  
+        &bull; Смысл и эмоция в дизайне <br/>
+        &bull; Иерархия, пространство, модуль <br/>
+        &#10003; <b>Практика:</b> афиша, презентация, лендинг <br/>
+        <br/>
+  
+        <b>Проект и защита |  4 неделя</b><br/>
+  
+        &bull; Разработка проекта по ТЗ <br/>
+        &bull; Подготовка под печать или публикацию <br/>
+        &#10003; <b>Онлайн-защита проекта / ревью</b> <br/>
+        <br/>
+      </p>
+    </section>
+    
+  
+    <div class="vacancy-black-block">
+      <div class="vacancy-black-inner">
+        <h2 class="vacancy-black-title">Продолжительность:</h2>
+        <p class="vacancy-black-text">
+          <b>4 недели (полный интенсив)</b><br/>
+          &bull; 2 занятия в неделю<br/>
+          &bull; Продолжительность занятия 1,5 часа<br/>
+          &#10003; Теория, практика, задание для проработки     <br/>
+          <br/>
+        <b>или</b>        <br/>
+        <br/>
+        <b>8 недель (лайт-график)</b><br/>
+        &bull; 1 занятие в неделю<br/>
+        &bull; Продолжительность занятия 1,5 часа<br/>
+        &#10003; Теория, практика, задание для проработки
+      </div>
+    </div>
+  
+    <section class="vacancy-section">        
+      <br/>
+      <h2 class="vacancy-title">Оформить заявку</h2>
+      <p class="vacancy-subtitle">
+        Пожалуйста, заполните форму, 
+        с удобным для вас графиком, указанием опыта и ваших целей в обучении и контактными данными. 
+        Я обязательно свяжусь с вами после ознакомления с информацией 
+        <br/>
+     <a href="#request" class="quote-button">Оформить заявку на обучение</a>
+    </p>
+  </p>
+    </section>
+
+  </div>
+</section>
+
+
+  
+
+
+<!-- КОНТАКТЫ -->
+<section class="contacts-section scroll-fade">
+
+  <div id="contacts" class="contacts-left">
+    <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
+  </div>
+
+  <div class="contacts-right">
+
+    <!-- Заголовок КОНТАКТЫ_ в едином стиле с кейсами -->
+    <div class="contacts-header">
+      <span class="contacts-text">КОНТАКТЫ</span>
+      <span class="contacts-line"></span>
+    </div>
+
+    <div class="contact-subtitle">готов к сотрудничеству</div>
+    <div class="contact-phone">+7 (928) 418-35-37</div>
+
+    <div class="contact-links">
+      <div class="contact-label">мессенджеры</div>
+      <div class="contact-dot"></div>
+      <div class="contact-label">почта</div>
+    </div>
+  </div>
+</section>
+
+<!-- Футер -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
+    <div class="footer-right">2025</div>
+  </div>
+</footer>
+
+
+<button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
+  ↑
+</button>
+
+
+
+<div class="custom-scrollbar">
+  <div class="scroll-thumb"></div>
+</div>
+
+<script src="js/script.js"></script>
 
 </body>
 </html>
