@@ -1477,60 +1477,37 @@ margin: 0px 0;
 }
 
 /* === EDUCATION subnav === */
-.edu-subnav-wrap { position: relative; }
+.edu-subnav-wrap {
+  position: relative;
+}
 
-/* "маяк" для прилипания */
-.edu-sentinel { height: var(--stick-offset); }
-
-
-/* само подменю */
+/* подменю */
 .edu-subnav {
-  --stick-offset: 100px;        /* отступ от основного меню */
+  --stick-offset: 100px;       /* отступ под основное меню */
   --title-color: #b9b9b9;
   --tab-active: #000000;
   --tab-inactive: #9b9b9b;
 
   position: sticky;
   top: var(--stick-offset);
-  z-index: 90;           /* выше overlay */
-  background: #fff;
+  z-index: 900;                /* выше оверлея, ниже fixed-menu */
+  background: transparent;     /* фон даём оверлеем */
   padding: 16px 0 8px;
 }
 
-.edu-overlay {
+/* глобальный белый оверлей */
+#edu-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;                    /* top:0; right:0; bottom:0; left:0 */
   background: #fff;
   opacity: 0;
-  pointer-events: none;
-  z-index: 800;       /* ниже саб-меню */
-  transition: opacity .25s ease;
+  pointer-events: none;        /* не блокирует клики */
+  z-index: 800;                /* ниже .edu-subnav (900) и .fixed-menu (1000) */
+  transition: opacity .18s ease;
 }
-
-.edu-overlay.is-visible {
+#edu-overlay.on {
   opacity: 1;
 }
-
-/* когда меню прилипло */
-.edu-subnav.is-fixed {
-  position: fixed;
-  top: var(--stick-offset);
-  left: 0;
-  right: 0;
-  z-index: 10;                /* выше оверлея */
-  background: transparent;    /* фон идёт через overlay */
-}
-
-
-.edu-subnav.is-fixed.show-bg::before {
-  opacity: 1;
-}
-
-/* плейсхолдер для компенсации высоты */
-.edu-subnav-placeholder { height: 0; }
 
 /* заголовок */
 .edu-title {
@@ -1539,11 +1516,12 @@ margin: 0px 0;
   font: 400 24px/1 "Russo One", system-ui, sans-serif;
   text-transform: uppercase;
   margin-bottom: 8px;
+
   width: 100%;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding-right: 105px; /* выравниваем по правому краю "ОБУЧЕНИЕ" */
+  padding-right: 105px; /* выравниваем под "ОБУЧЕНИЕ" */
 }
 
 /* линия */
@@ -1551,7 +1529,7 @@ margin: 0px 0;
   height: 1px;
   background: #000;
   margin: 10px auto;
-  width: 89%; /* 100% -20% слева/справа */
+  width: 89%; /* 100% - 20% слева/справа */
 }
 
 /* вкладки */
@@ -1573,26 +1551,28 @@ margin: 0px 0;
   color: var(--tab-inactive);
   transition: color .2s ease;
 }
-.edu-tab.is-active { color: var(--tab-active); }
+.edu-tab.is-active {
+  color: var(--tab-active);
+}
 
+/* панели */
 .edu-panels {
-  margin-top: 24px;   /* было 24 px — из-за этого правило не работало */
-  position: relative; /* чтобы z-index при необходимости учитывался */
+  margin-top: 24px;
+  position: relative;
   z-index: 1;
 }
+.edu-panel.is-hidden {
+  display: none;
+}
 
-.edu-panel.is-hidden { display: none; }
-
-
-/* адаптив (при желании) */
+/* адаптив */
 @media (max-width: 768px) {
-  .edu-subnav { --stick-offset: 72px; } /* меньше отступ под меню на мобильных */
+  .edu-subnav { --stick-offset: 72px; }
   .edu-tab { font-size: 24px; }
   .edu-title { font-size: 18px; }
-
-  .edu-subnav .edu-title { color: var(--tab-active); }  /* заменит var(--title-color) */
-
+  .edu-subnav .edu-title { color: var(--tab-active); }
 }
+
 
 
 /* Сетка галерея */

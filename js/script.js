@@ -110,106 +110,50 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// === EDUCATION subnav tabs ===
-document.addEventListener('DOMContentLoaded', () => {
-  const subnav = document.getElementById('edu-subnav');
-  if (!subnav) return;
-
-  const tabs = Array.from(subnav.querySelectorAll('.edu-tab'));
-  const panels = Array.from(document.querySelectorAll('.edu-panel'));
-  const wrap = subnav.closest('.edu-subnav-wrap');
-  const sentinel = wrap && wrap.querySelector('.edu-sentinel');
-
-  // === переключение вкладок ===
-  function setActive(id) {
-    subnav.dataset.active = id;
-
-    tabs.forEach(btn => {
-      const on = btn.dataset.tab === id;
-      btn.classList.toggle('is-active', on);
-      btn.setAttribute('aria-selected', on ? 'true' : 'false');
-      btn.setAttribute('tabindex', on ? '0' : '-1');
-    });
-
-    panels.forEach(p => {
-      p.classList.toggle('is-hidden', p.dataset.panel !== id);
-    });
-  }
-
-  tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
-      setActive(btn.dataset.tab);
-    });
-  });
-
-  // === фиксация подменю ===
-  if (wrap && sentinel) {
-    const ph = document.createElement('div');
-    ph.className = 'edu-subnav-placeholder';
-    wrap.insertBefore(ph, subnav);
-
-    const css = getComputedStyle(subnav);
-    const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
-
-    function fix() {
-      if (!subnav.classList.contains('is-fixed')) {
-        ph.style.height = subnav.offsetHeight + 'px';
-        subnav.classList.add('is-fixed');
-      }
-    }
-    function unfix() {
-      if (subnav.classList.contains('is-fixed')) {
-        subnav.classList.remove('is-fixed');
-        ph.style.height = '0px';
-      }
-    }
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          unfix(); // пока маяк в зоне — едет в потоке
-        } else {
-          fix();   // как только ушёл вверх — фиксируем
-        }
-      });
-    }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
-
-    io.observe(sentinel);
-
-    window.addEventListener('resize', () => {
-      if (subnav.classList.contains('is-fixed')) {
-        ph.style.height = subnav.offsetHeight + 'px';
-      }
-    });
-  }
-});
-
+// === EDUCATION: overlay + sticky state ======================================
 (() => {
   const subnav = document.getElementById('edu-subnav');
-  const overlay = document.querySelector('.edu-overlay'); // один на странице
+  const wrap   = subnav ? subnav.closest('.edu-subnav-wrap') : null;
+  if (!subnav || !wrap) return;
 
-  if (!subnav || !overlay) return;
-
-  // "Сторожок" сразу ПЕРЕД .edu-subnav-wrap (или внутри, выше саб-меню)
-  let sent = document.getElementById('edu-stick-sentinel');
-  if (!sent) {
-    sent = document.createElement('div');
-    sent.id = 'edu-stick-sentinel';
-    sent.style.position = 'relative';
-    sent.style.height = '1px';
-    // Вставим сторожок прямо перед саб-меню
-    subnav.parentElement.insertBefore(sent, subnav);
+  // Создаём (или берём) глобальный белый оверлей в <body>
+  let overlay = document.getElementById('edu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'edu-overlay';
+    document.body.appendChild(overlay);
   }
 
-  const io = new IntersectionObserver(([entry]) => {
-    // Когда сторожок скрывается сверху — саб-меню "прилипло"
-    const stuck = entry.isIntersecting === false;
-    subnav.classList.toggle('is-stuck', stuck);
-    overlay.classList.toggle('is-visible', stuck);
-  }, { rootMargin: `-${getComputedStyle(subnav).getPropertyValue('--stick-offset') || '100px'} 0px 0px 0px`, threshold: 0 });
+  const cs = getComputedStyle(subnav);
+  const stickOffset = parseInt(cs.getPropertyValue('--stick-offset')) || 100;
 
-  io.observe(sent);
+  let raf = 0;
+  function tick() {
+    raf = 0;
+
+    // положение обёртки относительно вьюпорта
+    const r = wrap.getBoundingClientRect();
+    const subH = subnav.offsetHeight;
+
+    // Саб-меню считается "в зоне прилипания", если его верх уже дошёл до offset,
+    // и нижняя граница секции ещё не вышла выше позиции саб-меню.
+    const shouldStick = (r.top <= stickOffset) && (r.bottom > stickOffset + subH);
+
+    // Переключаем состояние
+    subnav.classList.toggle('is-stuck', shouldStick);
+    overlay.classList.toggle('on', shouldStick);
+  }
+
+  function onScroll() {
+    if (!raf) raf = requestAnimationFrame(tick);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  // первый расчёт
+  onScroll();
 })();
+
 
   
 
