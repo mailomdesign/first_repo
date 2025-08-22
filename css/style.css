@@ -823,7 +823,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   top: 40px; /* как у .hero */
   right: 51%;
   transform: translateX(850px); /* 1700px / 2 - точно к правому краю рамки hero */
-  z-index: 100;
+  z-index: 1000;
 }
 
 .fixed-menu ul {
@@ -1502,11 +1502,11 @@ margin: 0px 0;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;          /* вместо ограниченной высоты */
+  bottom: 0;
   background: #fff;
   opacity: 0;
   pointer-events: none;
-  z-index: 80;        /* ниже саб-меню (90) и основного меню (100) */
+  z-index: 800;       /* ниже саб-меню */
   transition: opacity .25s ease;
 }
 
