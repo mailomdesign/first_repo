@@ -110,58 +110,79 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-
+// === EDUCATION subnav tabs ===
 document.addEventListener('DOMContentLoaded', () => {
   const subnav = document.getElementById('edu-subnav');
   if (!subnav) return;
 
+  const tabs = Array.from(subnav.querySelectorAll('.edu-tab'));
+  const panels = Array.from(document.querySelectorAll('.edu-panel'));
   const wrap = subnav.closest('.edu-subnav-wrap');
   const sentinel = wrap && wrap.querySelector('.edu-sentinel');
-  if (!wrap || !sentinel) return;
 
-  // плейсхолдер, чтобы не дергалась верстка при position:fixed
-  const ph = document.createElement('div');
-  ph.className = 'edu-subnav-placeholder';
-  wrap.insertBefore(ph, subnav);
+  // === переключение вкладок ===
+  function setActive(id) {
+    subnav.dataset.active = id;
 
-  const css = getComputedStyle(subnav);
-  const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
+    tabs.forEach(btn => {
+      const on = btn.dataset.tab === id;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+    });
 
-  function fix() {
-    if (!subnav.classList.contains('is-fixed')) {
-      ph.style.height = subnav.offsetHeight + 'px';
-      subnav.classList.add('is-fixed');
-    }
-  }
-  function unfix() {
-    if (subnav.classList.contains('is-fixed')) {
-      subnav.classList.remove('is-fixed');
-      ph.style.height = '0px';
-    }
+    panels.forEach(p => {
+      p.classList.toggle('is-hidden', p.dataset.panel !== id);
+    });
   }
 
-  // Когда «маяк» пересекает верх вьюпорта С УЧЁТОМ отступа — фиксируем подменю
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Маяк виден -> подменю едет в потоке (не фиксировано)
-        unfix();
-      } else {
-        // Маяк ушёл выше точки — фиксируем
-        fix();
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActive(btn.dataset.tab);
+    });
+  });
+
+  // === фиксация подменю ===
+  if (wrap && sentinel) {
+    const ph = document.createElement('div');
+    ph.className = 'edu-subnav-placeholder';
+    wrap.insertBefore(ph, subnav);
+
+    const css = getComputedStyle(subnav);
+    const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
+
+    function fix() {
+      if (!subnav.classList.contains('is-fixed')) {
+        ph.style.height = subnav.offsetHeight + 'px';
+        subnav.classList.add('is-fixed');
+      }
+    }
+    function unfix() {
+      if (subnav.classList.contains('is-fixed')) {
+        subnav.classList.remove('is-fixed');
+        ph.style.height = '0px';
+      }
+    }
+
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          unfix(); // пока маяк в зоне — едет в потоке
+        } else {
+          fix();   // как только ушёл вверх — фиксируем
+        }
+      });
+    }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
+
+    io.observe(sentinel);
+
+    window.addEventListener('resize', () => {
+      if (subnav.classList.contains('is-fixed')) {
+        ph.style.height = subnav.offsetHeight + 'px';
       }
     });
-  }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
-
-  io.observe(sentinel);
-
-  // Пересчитать высоту плейсхолдера при ресайзе
-  window.addEventListener('resize', () => {
-    if (subnav.classList.contains('is-fixed')) {
-      ph.style.height = subnav.offsetHeight + 'px';
-    }
-  });
+  }
 });
+
 
 

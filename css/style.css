@@ -501,6 +501,15 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   margin-top: 350px;
 }
 
+.cases-text-3 {
+  font-size: 96px;
+  font-weight: 400;
+  color: #505050;
+  text-transform: uppercase;
+  line-height: 0.65;
+  margin-top: 500px;
+}
+
 .cases-line {
   width: 90px;
   height: 16px;
@@ -961,6 +970,17 @@ html {
 html.no-select, .no-select { user-select: none !important; -webkit-user-select: none !important; -ms-user-select: none !important; }
 
 
+.cases-header-3 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-right: 0px; /* как у .ideology-wrapper */
+  box-sizing: border-box;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  font-family: 'Russo One', sans-serif;
+}
 
 
 /* страница Кейсы карточка клиента */
@@ -1459,76 +1479,78 @@ margin: 0px 0;
 /* === EDUCATION subnav === */
 .edu-subnav-wrap { position: relative; }
 
-/* было: top: var(--stick-offset); — из-за этого прилипало сразу */
+/* "маяк" для прилипания */
+.edu-sentinel { height: var(--stick-offset); }
+
+.edu-subnav.is-fixed::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;        /* тянется до низа экрана */
+  background: #fff; 
+  z-index: -1;      /* уводим под само подменю */
+}
+
+
+/* само подменю */
 .edu-subnav {
+  --stick-offset: 100px;        /* отступ под основное меню */
+  --title-color: #b9b9b9;       /* цвет заголовка по умолчанию */
+  --tab-active: #000000;        /* активная вкладка */
+  --tab-inactive: #9b9b9b;      /* неактивные вкладки */
+
   position: sticky;
-  top: 0;                     /* ← прилипает, только когда дойдёт до верха вьюпорта */
+  top: 0;                       /* двигается до верхнего края */
   z-index: 8;
   background: #fff;
   padding: 16px 0 8px;
 }
 
-/* невидимый «маяк» для расчёта момента фиксации */
-.edu-sentinel { height: var(--stick-offset); }
-
-/* состояние, когда подменю уже плавает по всей странице */
+/* состояние, когда зафиксировано */
 .edu-subnav.is-fixed {
   position: fixed;
-  top: var(--stick-offset);   /* висит ровно под основным меню */
+  top: var(--stick-offset);     /* прилипает под меню */
   left: 0;
   right: 0;
   z-index: 9;
   background: #fff;
 }
 
-/* плейсхолдер, чтобы не было скачка верстки */
+/* плейсхолдер для компенсации высоты */
 .edu-subnav-placeholder { height: 0; }
 
-/* заголовок сверху (меняет цвет в зависимости от выбранной вкладки) */
+/* заголовок */
 .edu-title {
   text-align: right;
   color: var(--title-color);
   font: 400 24px/1 "Russo One", system-ui, sans-serif;
   text-transform: uppercase;
   margin-bottom: 8px;
-
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
   box-sizing: border-box;
-
-  /* ключевой момент */
-  padding-right: 105px; /* подобрать число под ширину «ОБУЧЕНИЕ» */
+  padding-right: 105px; /* выравниваем по правому краю "ОБУЧЕНИЕ" */
 }
 
-
-
-/* под заголовком тонкая линия */
+/* линия */
 .edu-line {
   height: 1px;
   background: #000;
-  margin: 10px auto; /* по центру */
-  width: 89%;       /* 100% - 20% слева - 20% справа */
-  box-sizing: border-box;
+  margin: 10px auto;
+  width: 89%; /* 100% -20% слева/справа */
 }
 
-
-/* кнопки-вкладки */
+/* вкладки */
 .edu-tabs {
   display: flex;
   gap: 24px;
-  align-items: center;
-  width: 100%;
-  display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
+  padding-right: 105px;
   box-sizing: border-box;
-
-  /* ключевой момент */
-  padding-right: 105px; /* подобрать число под ширину «ОБУЧЕНИЕ» */
 }
-
 .edu-tab {
   appearance: none;
   background: none;
@@ -1540,14 +1562,11 @@ margin: 0px 0;
   color: var(--tab-inactive);
   transition: color .2s ease;
 }
+.edu-tab.is-active { color: var(--tab-active); }
 
-.edu-tab.is-active {
-  color: var(--tab-active);
-}
-
-/* панели контента */
 .edu-panels { margin-top: 24px; }
 .edu-panel.is-hidden { display: none; }
+
 
 /* адаптив (при желании) */
 @media (max-width: 768px) {
