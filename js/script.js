@@ -184,55 +184,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// === EDUCATION subnav sticky + фон ===
 (() => {
   const subnav = document.getElementById('edu-subnav');
-  if (!subnav) return;
+  const overlay = document.querySelector('.edu-overlay'); // один на странице
 
-  // создаём оверлей один раз
-  let overlay = document.querySelector('.edu-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'edu-overlay';
-    document.body.appendChild(overlay);
+  if (!subnav || !overlay) return;
+
+  // "Сторожок" сразу ПЕРЕД .edu-subnav-wrap (или внутри, выше саб-меню)
+  let sent = document.getElementById('edu-stick-sentinel');
+  if (!sent) {
+    sent = document.createElement('div');
+    sent.id = 'edu-stick-sentinel';
+    sent.style.position = 'relative';
+    sent.style.height = '1px';
+    // Вставим сторожок прямо перед саб-меню
+    subnav.parentElement.insertBefore(sent, subnav);
   }
 
-  // сколько отступать от верха под основное меню
-  const stickOffset = parseInt(
-    getComputedStyle(subnav).getPropertyValue('--stick-offset')
-  ) || 100;
+  const io = new IntersectionObserver(([entry]) => {
+    // Когда сторожок скрывается сверху — саб-меню "прилипло"
+    const stuck = entry.isIntersecting === false;
+    subnav.classList.toggle('is-stuck', stuck);
+    overlay.classList.toggle('is-visible', stuck);
+  }, { rootMargin: `-${getComputedStyle(subnav).getPropertyValue('--stick-offset') || '100px'} 0px 0px 0px`, threshold: 0 });
 
-  // ставим "якорь" перед саб-меню, чтобы корректно вычислять момент прилипания
-  let sentinel = subnav.previousElementSibling;
-  if (!sentinel || !sentinel.classList.contains('edu-sentinel')) {
-    sentinel = document.createElement('div');
-    sentinel.className = 'edu-sentinel';
-    sentinel.style.height = '1px';
-    sentinel.style.marginTop = '0';
-    subnav.parentNode.insertBefore(sentinel, subnav);
-  }
-
-  function onScroll() {
-    const top = sentinel.getBoundingClientRect().top;
-    if (top <= stickOffset) {
-      // прилипли
-      if (!subnav.classList.contains('is-fixed')) {
-        subnav.classList.add('is-fixed');
-      }
-      if (!overlay.classList.contains('is-visible')) {
-        // покажем фон плавно
-        requestAnimationFrame(() => overlay.classList.add('is-visible'));
-      }
-    } else {
-      // отлипли
-      overlay.classList.remove('is-visible');
-      subnav.classList.remove('is-fixed');
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  onScroll();
+  io.observe(sent);
 })();
 
   

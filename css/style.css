@@ -1490,26 +1490,31 @@ margin: 0px 0;
   --tab-active: #000000;
   --tab-inactive: #9b9b9b;
 
-  position: relative;
-  background: transparent; /* фон убираем, чтобы не мешал псевдоэлемент */
+  position: sticky;
+  top: var(--stick-offset);
+  z-index: 90;           /* выше overlay */
+  background: #fff;
   padding: 16px 0 8px;
-  z-index: 8;
 }
 
 .edu-overlay {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  /* перекрываем только "зазор" сверху — ту же высоту, что и top у саб-меню */
+  height: var(--stick-offset);
+
   background: #fff;
   opacity: 0;
-  pointer-events: none;
-  z-index: 0;                 /* ниже контента */
+  pointer-events: none; /* не блокируем клики по вкладкам */
+  z-index: 80;          /* ниже саб-меню (90), но выше контента */
   transition: opacity .25s ease;
 }
 
 .edu-overlay.is-visible {
   opacity: 1;
-  outline: 2px solid red;
-  background: #fff;
 }
 
 /* когда меню прилипло */
@@ -1573,10 +1578,12 @@ margin: 0px 0;
 }
 .edu-tab.is-active { color: var(--tab-active); }
 
-.edu-panels { 
-  z-index: 3;
-  margin-top: 24px; }
-  
+.edu-panels {
+  margin-top: 24px;   /* было 24 px — из-за этого правило не работало */
+  position: relative; /* чтобы z-index при необходимости учитывался */
+  z-index: 1;
+}
+
 .edu-panel.is-hidden { display: none; }
 
 
