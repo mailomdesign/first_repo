@@ -186,28 +186,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === EDUCATION subnav sticky + фон ===
 (() => {
-  const subnav = document.getElementById("edu-subnav");
+  const subnav = document.getElementById('edu-subnav');
   if (!subnav) return;
 
-  const offset = parseInt(
-    getComputedStyle(subnav).getPropertyValue("--stick-offset")
+  // создаём оверлей один раз
+  let overlay = document.querySelector('.edu-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'edu-overlay';
+    document.body.appendChild(overlay);
+  }
+
+  // сколько отступать от верха под основное меню
+  const stickOffset = parseInt(
+    getComputedStyle(subnav).getPropertyValue('--stick-offset')
   ) || 100;
 
-  function updateSticky() {
-    const rect = subnav.getBoundingClientRect();
-    if (rect.top <= offset) {
-      subnav.classList.add("is-fixed");
-      // плавно включаем фон
-      requestAnimationFrame(() => subnav.classList.add("show-bg"));
+  // ставим "якорь" перед саб-меню, чтобы корректно вычислять момент прилипания
+  let sentinel = subnav.previousElementSibling;
+  if (!sentinel || !sentinel.classList.contains('edu-sentinel')) {
+    sentinel = document.createElement('div');
+    sentinel.className = 'edu-sentinel';
+    sentinel.style.height = '1px';
+    sentinel.style.marginTop = '0';
+    subnav.parentNode.insertBefore(sentinel, subnav);
+  }
+
+  function onScroll() {
+    const top = sentinel.getBoundingClientRect().top;
+    if (top <= stickOffset) {
+      // прилипли
+      if (!subnav.classList.contains('is-fixed')) {
+        subnav.classList.add('is-fixed');
+      }
+      if (!overlay.classList.contains('is-visible')) {
+        // покажем фон плавно
+        requestAnimationFrame(() => overlay.classList.add('is-visible'));
+      }
     } else {
-      subnav.classList.remove("show-bg");
-      subnav.classList.remove("is-fixed");
+      // отлипли
+      overlay.classList.remove('is-visible');
+      subnav.classList.remove('is-fixed');
     }
   }
 
-  window.addEventListener("scroll", updateSticky, { passive: true });
-  window.addEventListener("resize", updateSticky);
-  updateSticky();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  onScroll();
 })();
 
   

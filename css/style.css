@@ -1496,28 +1496,29 @@ margin: 0px 0;
   z-index: 8;
 }
 
+.edu-overlay {
+  position: fixed;
+  inset: 0;                  /* top:0; right:0; bottom:0; left:0 */
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;      /* не перехватывает клики */
+  z-index: 80;               /* под саб-меню, но над контентом */
+  transition: opacity .25s ease;
+}
+
+.edu-overlay.is-visible {
+  opacity: 1;
+}
+
 /* когда меню прилипло */
 .edu-subnav.is-fixed {
   position: fixed;
   top: var(--stick-offset);
   left: 0;
   right: 0;
-  z-index: 9; /* ниже чем .fixed-menu */
+  z-index: 90;
 }
 
-/* белый фон на весь экран позади меню */
-.edu-subnav.is-fixed::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;             /* до самого низа окна */
-  background: #fff;
-  opacity: 0;            /* по умолчанию прозрачный */
-  transition: opacity 0.3s ease;
-  z-index: -1;           /* чтобы сам блок был выше */
-}
 
 .edu-subnav.is-fixed.show-bg::before {
   opacity: 1;
