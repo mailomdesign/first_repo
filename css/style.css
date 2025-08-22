@@ -1491,7 +1491,7 @@ margin: 0px 0;
   --tab-inactive: #9b9b9b;
 
   position: relative;
-  background: #fff;
+  background: transparent; /* фон убираем, чтобы не мешал псевдоэлемент */
   padding: 16px 0 8px;
   z-index: 8;
 }
@@ -1502,7 +1502,7 @@ margin: 0px 0;
   top: var(--stick-offset);
   left: 0;
   right: 0;
-  z-index: 8;  /* ниже чем .fixed-menu */
+  z-index: 9; /* ниже чем .fixed-menu, но выше контента */
 }
 
 /* белый фон на весь экран позади меню */
@@ -1512,9 +1512,9 @@ margin: 0px 0;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;   /* перекрывает до низа */
+  bottom: 0;
   background: #fff;
-  z-index: -1; /* чтобы само меню было поверх */
+  z-index: -1; /* фон уходит за меню */
 }
 
 

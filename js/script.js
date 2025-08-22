@@ -189,16 +189,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const subnav = document.getElementById("edu-subnav");
   if (!subnav) return;
 
-  const offset = parseInt(getComputedStyle(subnav).getPropertyValue("--stick-offset")) || 100;
+  const offset = parseInt(
+    getComputedStyle(subnav).getPropertyValue("--stick-offset")
+  ) || 100;
 
   function updateSticky() {
     const rect = subnav.getBoundingClientRect();
 
     if (rect.top <= offset) {
-      // прилипло
       subnav.classList.add("is-fixed");
     } else {
-      // вернулось в нормальное состояние
       subnav.classList.remove("is-fixed");
     }
   }
@@ -207,6 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener("resize", updateSticky);
   updateSticky();
 })();
+
 
 
 
