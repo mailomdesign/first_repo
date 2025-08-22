@@ -1482,41 +1482,41 @@ margin: 0px 0;
 /* "маяк" для прилипания */
 .edu-sentinel { height: var(--stick-offset); }
 
+
+/* само подменю */
+.edu-subnav {
+  --stick-offset: 100px;        /* отступ от основного меню */
+  --title-color: #b9b9b9;
+  --tab-active: #000000;
+  --tab-inactive: #9b9b9b;
+
+  position: relative;
+  background: #fff;
+  padding: 16px 0 8px;
+  z-index: 8;
+}
+
+/* когда меню прилипло */
+.edu-subnav.is-fixed {
+  position: fixed;
+  top: var(--stick-offset);
+  left: 0;
+  right: 0;
+  z-index: 8;  /* ниже чем .fixed-menu */
+}
+
+/* белый фон на весь экран позади меню */
 .edu-subnav.is-fixed::before {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;        /* тянется до низа экрана */
-  background: #fff; 
-  z-index: -1;      /* уводим под само подменю */
-}
-
-
-/* само подменю */
-.edu-subnav {
-  --stick-offset: 100px;        /* отступ под основное меню */
-  --title-color: #b9b9b9;       /* цвет заголовка по умолчанию */
-  --tab-active: #000000;        /* активная вкладка */
-  --tab-inactive: #9b9b9b;      /* неактивные вкладки */
-
-  position: sticky;
-  top: 0;                       /* двигается до верхнего края */
-  z-index: 8;
+  bottom: 0;   /* перекрывает до низа */
   background: #fff;
-  padding: 16px 0 8px;
+  z-index: -1; /* чтобы само меню было поверх */
 }
 
-/* состояние, когда зафиксировано */
-.edu-subnav.is-fixed {
-  position: fixed;
-  top: var(--stick-offset);     /* прилипает под меню */
-  left: 0;
-  right: 0;
-  z-index: 9;
-  background: #fff;
-}
 
 /* плейсхолдер для компенсации высоты */
 .edu-subnav-placeholder { height: 0; }
