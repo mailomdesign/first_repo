@@ -1503,7 +1503,6 @@ margin: 0px 0;
   left: 0;
   right: 0;
   z-index: 9; /* ниже чем .fixed-menu */
-  background: #fff;
 }
 
 /* белый фон на весь экран позади меню */
@@ -1513,11 +1512,16 @@ margin: 0px 0;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;        /* до низа окна */
-  background: #fff; /* перекрывает всё */
-  z-index: -1;      /* уходит за сабменю */
+  bottom: 0;             /* до самого низа окна */
+  background: #fff;
+  opacity: 0;            /* по умолчанию прозрачный */
+  transition: opacity 0.3s ease;
+  z-index: -1;           /* чтобы сам блок был выше */
 }
 
+.edu-subnav.is-fixed.show-bg::before {
+  opacity: 1;
+}
 
 /* плейсхолдер для компенсации высоты */
 .edu-subnav-placeholder { height: 0; }
