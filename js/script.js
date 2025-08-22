@@ -154,6 +154,28 @@ function scrollToTop() {
   onScroll();
 })();
 
+document.addEventListener("DOMContentLoaded", () => {
+  const subnav = document.querySelector(".edu-subnav");
+  const overlay = document.getElementById("edu-overlay");
+
+  if (subnav && overlay) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio < 1) {
+            overlay.classList.add("on");   // включаем фон
+          } else {
+            overlay.classList.remove("on"); // отключаем
+          }
+        });
+      },
+      { threshold: [1] }
+    );
+    observer.observe(subnav);
+  }
+});
+
+
 
   
 

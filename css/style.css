@@ -1481,28 +1481,24 @@ margin: 0px 0;
   position: relative;
 }
 
-/* подменю */
+/* === EDUCATION subnav === */
 .edu-subnav {
-  --stick-offset: 100px;       /* отступ под основное меню */
-  --title-color: #b9b9b9;
-  --tab-active: #000000;
-  --tab-inactive: #9b9b9b;
-
+  --stick-offset: 100px;
   position: sticky;
   top: var(--stick-offset);
-  z-index: 900;                /* выше оверлея, ниже fixed-menu */
-  background: transparent;     /* фон даём оверлеем */
+  z-index: 900;
+  background: transparent;
   padding: 16px 0 8px;
 }
 
 /* глобальный белый оверлей */
 #edu-overlay {
   position: fixed;
-  inset: 0;                    /* top:0; right:0; bottom:0; left:0 */
+  inset: 0;
   background: #fff;
   opacity: 0;
-  pointer-events: none;        /* не блокирует клики */
-  z-index: 800;                /* ниже .edu-subnav (900) и .fixed-menu (1000) */
+  pointer-events: none;
+  z-index: 800;
   transition: opacity .18s ease;
 }
 #edu-overlay.on {
