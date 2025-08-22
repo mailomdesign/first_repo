@@ -1508,6 +1508,8 @@ margin: 0px 0;
 
 .edu-overlay.is-visible {
   opacity: 1;
+  outline: 2px solid red;
+  background: #fff;
 }
 
 /* когда меню прилипло */
@@ -1571,7 +1573,10 @@ margin: 0px 0;
 }
 .edu-tab.is-active { color: var(--tab-active); }
 
-.edu-panels { margin-top: 24px; }
+.edu-panels { 
+  z-index: 3;
+  margin-top: 24px; }
+  
 .edu-panel.is-hidden { display: none; }
 
 
