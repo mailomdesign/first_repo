@@ -1502,7 +1502,8 @@ margin: 0px 0;
   top: var(--stick-offset);
   left: 0;
   right: 0;
-  z-index: 9; /* ниже чем .fixed-menu, но выше контента */
+  z-index: 9; /* ниже чем .fixed-menu */
+  background: #fff;
 }
 
 /* белый фон на весь экран позади меню */
@@ -1512,9 +1513,9 @@ margin: 0px 0;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: #fff;
-  z-index: -1; /* фон уходит за меню */
+  bottom: 0;        /* до низа окна */
+  background: #fff; /* перекрывает всё */
+  z-index: -1;      /* уходит за сабменю */
 }
 
 

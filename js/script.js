@@ -186,28 +186,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // === EDUCATION subnav sticky + фон ===
 (() => {
-  const subnav = document.getElementById("edu-subnav");
-  if (!subnav) return;
-
-  const offset = parseInt(
-    getComputedStyle(subnav).getPropertyValue("--stick-offset")
-  ) || 100;
-
-  function updateSticky() {
-    const rect = subnav.getBoundingClientRect();
-
-    if (rect.top <= offset) {
-      subnav.classList.add("is-fixed");
-    } else {
-      subnav.classList.remove("is-fixed");
+    const subnav = document.getElementById("edu-subnav");
+    if (!subnav) return;
+  
+    const offset = parseInt(
+      getComputedStyle(subnav).getPropertyValue("--stick-offset")
+    ) || 100;
+  
+    function updateSticky() {
+      const rect = subnav.getBoundingClientRect();
+      if (rect.top <= offset) {
+        subnav.classList.add("is-fixed");
+      } else {
+        subnav.classList.remove("is-fixed");
+      }
     }
-  }
-
-  window.addEventListener("scroll", updateSticky, { passive: true });
-  window.addEventListener("resize", updateSticky);
-  updateSticky();
-})();
-
+  
+    window.addEventListener("scroll", updateSticky, { passive: true });
+    window.addEventListener("resize", updateSticky);
+    updateSticky();
+  })();
+  
 
 
 
