@@ -1502,14 +1502,11 @@ margin: 0px 0;
   top: 0;
   left: 0;
   right: 0;
-
-  /* перекрываем только "зазор" сверху — ту же высоту, что и top у саб-меню */
-  height: var(--stick-offset);
-
+  bottom: 0;          /* вместо ограниченной высоты */
   background: #fff;
   opacity: 0;
-  pointer-events: none; /* не блокируем клики по вкладкам */
-  z-index: 80;          /* ниже саб-меню (90), но выше контента */
+  pointer-events: none;
+  z-index: 80;        /* ниже саб-меню (90) и основного меню (100) */
   transition: opacity .25s ease;
 }
 
