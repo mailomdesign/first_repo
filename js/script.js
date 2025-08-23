@@ -249,25 +249,43 @@ document.addEventListener('DOMContentLoaded', () => {
 (() => {
   const subnav  = document.getElementById('edu-subnav');
   const overlay = document.getElementById('edu-overlay');
-  const sentinel = document.getElementById('edu-stick-sentinel');
-  if (!subnav || !overlay || !sentinel) return;
+  if (!subnav || !overlay) return;
 
-  const stickOffset = parseInt(getComputedStyle(subnav).getPropertyValue('--stick-offset')) || 100;
+  // sentinel (маяк для Observer)
+  let sent = document.getElementById('edu-stick-sentinel');
+  if (!sent) {
+    sent = document.createElement('div');
+    sent.id = 'edu-stick-sentinel';
+    sent.style.position = 'relative';
+    sent.style.height = '1px';
+    subnav.parentElement.insertBefore(sent, subnav);
+  }
+
+  const stickOffset = parseInt(
+    getComputedStyle(subnav).getPropertyValue('--stick-offset')
+  ) || 100;
 
   const io = new IntersectionObserver(([entry]) => {
-    if (entry.boundingClientRect.top < stickOffset && !entry.isIntersecting) {
-      // ушёл выше — фиксируем
-      subnav.classList.add('is-fixed');
-      overlay.classList.add('on');
-    } else {
-      // вернулся в зону — убираем фикс
-      subnav.classList.remove('is-fixed');
-      overlay.classList.remove('on');
-    }
-  }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
+    const stuck = entry.isIntersecting === false;
+    subnav.classList.toggle('is-stuck', stuck);
+    overlay.classList.toggle('is-visible', stuck);
+  }, { 
+    rootMargin: `-${stickOffset}px 0px 0px 0px`,
+    threshold: 0 
+  });
 
-  io.observe(sentinel);
+  io.observe(sent);
+
+  // дополнительная проверка на scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY <= sent.getBoundingClientRect().top + window.scrollY) {
+      // в верхней части страницы → сбрасываем фиксацию
+      subnav.classList.remove('is-stuck');
+      overlay.classList.remove('is-visible');
+    }
+  });
 })();
+
 
 
 
