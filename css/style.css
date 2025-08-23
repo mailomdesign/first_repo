@@ -1479,113 +1479,70 @@ margin: 0px 0;
 /* === EDUCATION subnav === */
 .edu-subnav-wrap { position: relative; }
 
-/* Саб-меню в потоке */
 .edu-subnav {
   --stick-offset: 100px;
   --title-color: #b9b9b9;
   --tab-active: #000000;
   --tab-inactive: #9b9b9b;
-  position: relative;  /* больше не sticky — фиксацией управляет JS */
-  z-index: 900;
-  background: transparent; /* фон даёт overlay */
+  position: relative;            /* изначально в потоке */
+  z-index: 900;                  /* выше контента, ниже основного меню */
+  background: transparent;       /* белый даёт overlay-полоса */
   padding: 16px 0 8px;
 }
 
-/* глобальный белый оверлей */
-#edu-overlay {
-  position: fixed;
-  inset: 0;
-  background: #fff;
-  opacity: 0;
-  pointer-events: none;
-  z-index: 800; /* ниже саб-меню (900) и fixed-menu (1000) */
-  transition: opacity .18s ease;
-}
-#edu-overlay.on {
-  opacity: 1;
-}
-
-/* когда меню прилипло */
+/* когда прилипло — фиксируем и красим фон самого саб-меню */
 .edu-subnav.is-fixed {
   position: fixed;
   top: var(--stick-offset, 100px);
   left: 0;
   right: 0;
+  background: #fff;              /* белая подложка под сам блок */
   z-index: 900;
 }
 
+/* белая ПОЛОСА сверху (только до саб-меню), а не на весь экран */
+#edu-overlay {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: var(--stick-offset, 100px); /* заполняем «просвет» до верха */
+  background: #fff;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 850;                  /* ниже .edu-subnav (900), ниже .fixed-menu (1000+) */
+  transition: opacity .18s ease;
+}
+#edu-overlay.on { opacity: 1; }
 
-/* заголовок */
+/* остальное остаётся как у тебя */
 .edu-title {
   text-align: right;
   color: var(--title-color);
   font: 400 24px/1 "Russo One", system-ui, sans-serif;
   text-transform: uppercase;
   margin-bottom: 8px;
-
   width: 100%;
   display: flex;
   justify-content: flex-end;
   box-sizing: border-box;
-  padding-right: 105px; /* выравниваем под "ОБУЧЕНИЕ" */
-}
-
-/* линия */
-.edu-line {
-  height: 1px;
-  background: #000;
-  margin: 10px auto;
-  width: 89%; /* 100% - 20% слева/справа */
-}
-
-/* вкладки */
-.edu-tabs {
-  display: flex;
-  gap: 24px;
-  justify-content: flex-end;
   padding-right: 105px;
-  box-sizing: border-box;
 }
-.edu-tab {
-  appearance: none;
-  background: none;
-  border: 0;
-  padding: 0;
-  cursor: pointer;
-  font: 400 36px/1 "Russo One", system-ui, sans-serif;
-  text-transform: uppercase;
-  color: var(--tab-inactive);
-  transition: color .2s ease;
-}
-.edu-tab.is-active {
-  color: var(--tab-active);
+.edu-line { height:1px; background:#000; margin:10px auto; width:89%; }
+.edu-tabs { display:flex; gap:24px; justify-content:flex-end; padding-right:105px; box-sizing:border-box; }
+.edu-tab { appearance:none; background:none; border:0; padding:0; cursor:pointer; font:400 36px/1 "Russo One",system-ui,sans-serif; text-transform:uppercase; color:var(--tab-inactive); transition:color .2s; }
+.edu-tab.is-active { color:var(--tab-active); }
+.edu-panels { margin-top:24px; position:relative; z-index:1; }
+.edu-panel.is-hidden { display:none; }
+
+@media (max-width:768px){
+  .edu-subnav{ --stick-offset:72px; }
+  #edu-overlay{ height:var(--stick-offset,72px); }
+  .edu-tab{ font-size:24px; }
+  .edu-title{ font-size:18px; }
+  .edu-subnav .edu-title{ color:var(--tab-active); }
 }
 
-/* панели */
-.edu-panels {
-  margin-top: 24px;
-  position: relative;
-  z-index: 1; /* выше overlay только когда overlay прозрачный */
-}
-.edu-panel.is-hidden {
-  display: none;
-}
-
-/* адаптив */
-@media (max-width: 768px) {
-  .edu-subnav {
-    --stick-offset: 72px;
-  }
-  .edu-tab {
-    font-size: 24px;
-  }
-  .edu-title {
-    font-size: 18px;
-  }
-  .edu-subnav .edu-title {
-    color: var(--tab-active);
-  }
-}
 
 
 

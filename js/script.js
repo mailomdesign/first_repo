@@ -247,11 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 (() => {
-  const subnav = document.getElementById('edu-subnav');
-  const overlay = document.getElementById('edu-overlay');
+  const subnav   = document.getElementById('edu-subnav');
+  const overlay  = document.getElementById('edu-overlay');
   if (!subnav || !overlay) return;
 
-  // Сторожок перед саб-меню
+  // маяк прямо перед саб-меню
   let sentinel = document.getElementById('edu-stick-sentinel');
   if (!sentinel) {
     sentinel = document.createElement('div');
@@ -263,11 +263,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const stickOffset = parseInt(getComputedStyle(subnav).getPropertyValue('--stick-offset')) || 100;
 
   const io = new IntersectionObserver(([entry]) => {
-    const stuck = !entry.isIntersecting;
+    const stuck = !entry.isIntersecting;          // ушёл вверх — липнем
     subnav.classList.toggle('is-fixed', stuck);
-    overlay.classList.toggle('on', stuck);
+    overlay.classList.toggle('on', stuck);        // показываем только верхнюю полосу
   }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
 
   io.observe(sentinel);
 })();
+
 
