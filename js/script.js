@@ -245,3 +245,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 })();
+
+(() => {
+  const subnav = document.getElementById('edu-subnav');
+  const overlay = document.getElementById('edu-overlay');
+  if (!subnav || !overlay) return;
+
+  // Сторожок перед саб-меню
+  let sentinel = document.getElementById('edu-stick-sentinel');
+  if (!sentinel) {
+    sentinel = document.createElement('div');
+    sentinel.id = 'edu-stick-sentinel';
+    sentinel.style.height = '1px';
+    subnav.parentElement.insertBefore(sentinel, subnav);
+  }
+
+  const stickOffset = parseInt(getComputedStyle(subnav).getPropertyValue('--stick-offset')) || 100;
+
+  const io = new IntersectionObserver(([entry]) => {
+    const stuck = !entry.isIntersecting;
+    subnav.classList.toggle('is-fixed', stuck);
+    overlay.classList.toggle('on', stuck);
+  }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
+
+  io.observe(sentinel);
+})();
+
