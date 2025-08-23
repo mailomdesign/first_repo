@@ -1481,24 +1481,28 @@ margin: 0px 0;
   position: relative;
 }
 
-/* === EDUCATION subnav === */
+/* саб-меню */
 .edu-subnav {
   --stick-offset: 100px;
+  --title-color: #b9b9b9;
+  --tab-active: #000000;
+  --tab-inactive: #9b9b9b;
+
   position: sticky;
   top: var(--stick-offset);
   z-index: 900;
-  background: transparent;
+  background: transparent; /* фон даёт overlay */
   padding: 16px 0 8px;
 }
 
 /* глобальный белый оверлей */
 #edu-overlay {
   position: fixed;
-  inset: 0;
+  inset: 0;               /* top:0; right:0; bottom:0; left:0 */
   background: #fff;
   opacity: 0;
-  pointer-events: none;
-  z-index: 800;
+  pointer-events: none;   /* не перехватывает клики */
+  z-index: 800;           /* ниже саб-меню и основного меню */
   transition: opacity .18s ease;
 }
 #edu-overlay.on {
@@ -1555,7 +1559,7 @@ margin: 0px 0;
 .edu-panels {
   margin-top: 24px;
   position: relative;
-  z-index: 1;
+  z-index: 1; /* выше overlay только когда overlay прозрачный */
 }
 .edu-panel.is-hidden {
   display: none;
@@ -1563,11 +1567,20 @@ margin: 0px 0;
 
 /* адаптив */
 @media (max-width: 768px) {
-  .edu-subnav { --stick-offset: 72px; }
-  .edu-tab { font-size: 24px; }
-  .edu-title { font-size: 18px; }
-  .edu-subnav .edu-title { color: var(--tab-active); }
+  .edu-subnav {
+    --stick-offset: 72px;
+  }
+  .edu-tab {
+    font-size: 24px;
+  }
+  .edu-title {
+    font-size: 18px;
+  }
+  .edu-subnav .edu-title {
+    color: var(--tab-active);
+  }
 }
+
 
 
 

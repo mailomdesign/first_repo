@@ -110,75 +110,138 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// === EDUCATION: overlay + sticky state ======================================
-(() => {
+// === EDUCATION subnav tabs ===
+document.addEventListener('DOMContentLoaded', () => {
   const subnav = document.getElementById('edu-subnav');
-  const wrap   = subnav ? subnav.closest('.edu-subnav-wrap') : null;
-  if (!subnav || !wrap) return;
+  if (!subnav) return;
 
-  // Создаём (или берём) глобальный белый оверлей в <body>
-  let overlay = document.getElementById('edu-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.id = 'edu-overlay';
-    document.body.appendChild(overlay);
+  const tabs = Array.from(subnav.querySelectorAll('.edu-tab'));
+  const panels = Array.from(document.querySelectorAll('.edu-panel'));
+  const wrap = subnav.closest('.edu-subnav-wrap');
+  const sentinel = wrap && wrap.querySelector('.edu-sentinel');
+
+  // === переключение вкладок ===
+  function setActive(id) {
+    subnav.dataset.active = id;
+
+    tabs.forEach(btn => {
+      const on = btn.dataset.tab === id;
+      btn.classList.toggle('is-active', on);
+      btn.setAttribute('aria-selected', on ? 'true' : 'false');
+      btn.setAttribute('tabindex', on ? '0' : '-1');
+    });
+
+    panels.forEach(p => {
+      p.classList.toggle('is-hidden', p.dataset.panel !== id);
+    });
   }
 
-  const cs = getComputedStyle(subnav);
-  const stickOffset = parseInt(cs.getPropertyValue('--stick-offset')) || 100;
+  tabs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActive(btn.dataset.tab);
+    });
+  });
 
-  let raf = 0;
-  function tick() {
-    raf = 0;
+  // === фиксация подменю ===
+  if (wrap && sentinel) {
+    const ph = document.createElement('div');
+    ph.className = 'edu-subnav-placeholder';
+    wrap.insertBefore(ph, subnav);
 
-    // положение обёртки относительно вьюпорта
-    const r = wrap.getBoundingClientRect();
-    const subH = subnav.offsetHeight;
+    const css = getComputedStyle(subnav);
+    const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
 
-    // Саб-меню считается "в зоне прилипания", если его верх уже дошёл до offset,
-    // и нижняя граница секции ещё не вышла выше позиции саб-меню.
-    const shouldStick = (r.top <= stickOffset) && (r.bottom > stickOffset + subH);
+    function fix() {
+      if (!subnav.classList.contains('is-fixed')) {
+        ph.style.height = subnav.offsetHeight + 'px';
+        subnav.classList.add('is-fixed');
+      }
+    }
+    function unfix() {
+      if (subnav.classList.contains('is-fixed')) {
+        subnav.classList.remove('is-fixed');
+        ph.style.height = '0px';
+      }
+    }
 
-    // Переключаем состояние
-    subnav.classList.toggle('is-stuck', shouldStick);
-    overlay.classList.toggle('on', shouldStick);
-  }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          unfix(); // пока маяк в зоне — едет в потоке
+        } else {
+          fix();   // как только ушёл вверх — фиксируем
+        }
+      });
+    }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
 
-  function onScroll() {
-    if (!raf) raf = requestAnimationFrame(tick);
-  }
+    io.observe(sentinel);
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  // первый расчёт
-  onScroll();
-})();
-
-document.addEventListener("DOMContentLoaded", () => {
-  const subnav = document.querySelector(".edu-subnav");
-  const overlay = document.getElementById("edu-overlay");
-
-  if (subnav && overlay) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio < 1) {
-            overlay.classList.add("on");   // включаем фон
-          } else {
-            overlay.classList.remove("on"); // отключаем
-          }
-        });
-      },
-      { threshold: [1] }
-    );
-    observer.observe(subnav);
+    window.addEventListener('resize', () => {
+      if (subnav.classList.contains('is-fixed')) {
+        ph.style.height = subnav.offsetHeight + 'px';
+      }
+    });
   }
 });
 
+// === EDUCATION subnav: фиксация + overlay ===
+(() => {
+  const subnav  = document.getElementById('edu-subnav');
+  const wrap    = subnav?.parentElement;
+  const overlay = document.getElementById('edu-overlay');
 
+  if (!subnav || !wrap || !overlay) return;
 
-  
+  // placeholder, чтобы не прыгал контент
+  const ph = document.createElement('div');
+  ph.className = 'edu-subnav-placeholder';
+  wrap.insertBefore(ph, subnav);
 
+  // сторожок — для отслеживания момента прилипания
+  let sent = document.getElementById('edu-stick-sentinel');
+  if (!sent) {
+    sent = document.createElement('div');
+    sent.id = 'edu-stick-sentinel';
+    sent.style.position = 'relative';
+    sent.style.height = '1px';
+    wrap.insertBefore(sent, subnav);
+  }
 
+  const css         = getComputedStyle(subnav);
+  const stickOffset = parseInt(css.getPropertyValue('--stick-offset')) || 100;
 
+  function fix() {
+    if (!subnav.classList.contains('is-fixed')) {
+      ph.style.height = subnav.offsetHeight + 'px';
+      subnav.classList.add('is-fixed');
+      overlay.classList.add('on');
+    }
+  }
+  function unfix() {
+    if (subnav.classList.contains('is-fixed')) {
+      subnav.classList.remove('is-fixed');
+      ph.style.height = '0px';
+      overlay.classList.remove('on');
+    }
+  }
 
+  const io = new IntersectionObserver(([entry]) => {
+    if (entry.isIntersecting) {
+      unfix();   // пока sentinel виден → меню в потоке
+    } else {
+      fix();     // sentinel ушёл вверх → фиксируем
+    }
+  }, {
+    rootMargin: `-${stickOffset}px 0px 0px 0px`,
+    threshold: 0
+  });
+
+  io.observe(sent);
+
+  // при ресайзе пересчитываем высоту
+  window.addEventListener('resize', () => {
+    if (subnav.classList.contains('is-fixed')) {
+      ph.style.height = subnav.offsetHeight + 'px';
+    }
+  });
+})();
