@@ -247,28 +247,27 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 (() => {
-  const subnav   = document.getElementById('edu-subnav');
-  const overlay  = document.getElementById('edu-overlay');
-  if (!subnav || !overlay) return;
-
-  // маяк прямо перед саб-меню
-  let sentinel = document.getElementById('edu-stick-sentinel');
-  if (!sentinel) {
-    sentinel = document.createElement('div');
-    sentinel.id = 'edu-stick-sentinel';
-    sentinel.style.height = '1px';
-    subnav.parentElement.insertBefore(sentinel, subnav);
-  }
+  const subnav  = document.getElementById('edu-subnav');
+  const overlay = document.getElementById('edu-overlay');
+  const sentinel = document.getElementById('edu-stick-sentinel');
+  if (!subnav || !overlay || !sentinel) return;
 
   const stickOffset = parseInt(getComputedStyle(subnav).getPropertyValue('--stick-offset')) || 100;
 
   const io = new IntersectionObserver(([entry]) => {
-    const stuck = !entry.isIntersecting;          // ушёл вверх — липнем
-    subnav.classList.toggle('is-fixed', stuck);
-    overlay.classList.toggle('on', stuck);        // показываем только верхнюю полосу
+    if (entry.boundingClientRect.top < stickOffset && !entry.isIntersecting) {
+      // ушёл выше — фиксируем
+      subnav.classList.add('is-fixed');
+      overlay.classList.add('on');
+    } else {
+      // вернулся в зону — убираем фикс
+      subnav.classList.remove('is-fixed');
+      overlay.classList.remove('on');
+    }
   }, { rootMargin: `-${stickOffset}px 0px 0px 0px`, threshold: 0 });
 
   io.observe(sentinel);
 })();
+
 
 

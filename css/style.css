@@ -884,10 +884,10 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
 .scroll-top {
   position: fixed;
-  bottom: 10px;
+  bottom: 0px;
   right: 10px;
-  width: 25px;         /* как .ideology-wrapper */
-  height: 30px;
+  width: 30px;         /* как .ideology-wrapper */
+  height: 40px;
   background: black;
   color: white;
   font-size: 16px;
@@ -1496,9 +1496,10 @@ margin: 0px 0;
   top: var(--stick-offset, 100px);
   left: 0;
   right: 0;
-  background: #fff;              /* белая подложка под сам блок */
+  background: #fff;
   z-index: 900;
 }
+
 
 /* белая ПОЛОСА сверху (только до саб-меню), а не на весь экран */
 #edu-overlay {
