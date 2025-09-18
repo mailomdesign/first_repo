@@ -343,22 +343,8 @@ if ($cases && is_array($cases)) {
     </div>
 
     <div class="contact-subtitle">готов к сотрудничеству</div>
-    
-    <!-- Кнопка обратного звонка -->
-<button class="contact-callback" id="openCallbackBtn">Обратный звонок</button>
+    <div class="contact-phone" id="openCallback" role="button" tabindex="0">Обратный звонок</div>
 
-<!-- Модальное окно -->
-<div id="callbackModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h2>Оставьте свой номер</h2>
-    <form>
-      <input type="text" placeholder="Ваше имя" required>
-      <input type="tel" placeholder="Телефон" required>
-      <button type="submit">Отправить</button>
-    </form>
-  </div>
-</div>
 
    <!-- <div class="contact-links">
       <div class="contact-label">мессенджеры</div>
