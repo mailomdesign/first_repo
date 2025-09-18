@@ -73,14 +73,14 @@ if (!is_array($cases)) {
 </nav>
 
 
- 
+ <!-- 
 <div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
     <div class="vacancy-box">
       Вакансия
     </div>
   </a>
-</div>
+</div>  -->
 
   
 
@@ -343,13 +343,28 @@ if ($cases && is_array($cases)) {
     </div>
 
     <div class="contact-subtitle">готов к сотрудничеству</div>
-    <div class="contact-phone">+7 (928) 418-35-37</div>
+    
+    <!-- Кнопка обратного звонка -->
+<button class="contact-callback" id="openCallbackBtn">Обратный звонок</button>
 
-    <div class="contact-links">
+<!-- Модальное окно -->
+<div id="callbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Оставьте свой номер</h2>
+    <form>
+      <input type="text" placeholder="Ваше имя" required>
+      <input type="tel" placeholder="Телефон" required>
+      <button type="submit">Отправить</button>
+    </form>
+  </div>
+</div>
+
+   <!-- <div class="contact-links">
       <div class="contact-label">мессенджеры</div>
       <div class="contact-dot"></div>
       <div class="contact-label">почта</div>
-    </div>
+    </div> -->
   </div>
 </section>
 

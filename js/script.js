@@ -299,6 +299,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
+// Получаем элементы
+const modal = document.getElementById("callbackModal");
+const openBtn = document.getElementById("openCallbackBtn");
+const closeBtn = document.getElementById("closeModal");
+
+// Открыть модальное окно
+openBtn.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+// Закрыть модальное окно по крестику
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Закрыть модальное окно по клику вне его
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 
 
 
