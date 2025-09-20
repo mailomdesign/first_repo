@@ -343,9 +343,9 @@ if ($cases && is_array($cases)) {
     </div>
 
     <div class="contact-subtitle">готов к сотрудничеству</div>
-    <div class="contact-phone" id="openModal">Обратная связь</div>
-
-
+    <div class="contact-phone" id="openModal" role="button" tabindex="0">
+  Обратная связь
+</div>
 
 
    <!-- <div class="contact-links">
@@ -355,47 +355,6 @@ if ($cases && is_array($cases)) {
     </div> -->
   </div>
 </section>
-
-<section id="contacts">
-  <!-- Заголовок -->
-  <div class="contacts-header">
-    <span class="contacts-text">КОНТАКТЫ</span>
-    <span class="contacts-line"></span>
-  </div>
-
-  <div class="contact-subtitle">готов к сотрудничеству</div>
-  
-  <!-- Текст-кнопка -->
-  <div class="contact-phone" id="openModal">Обратная связь</div>
-</section>
-
-<!-- Модальное окно (всегда внизу, но изначально скрыто) -->
-<div id="feedbackModal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="closeModal">&times;</span>
-    <h2>Обратная связь</h2>
-
-    <form action="send.php" method="post" class="feedback-form">
-      <label for="name">Ваше имя</label>
-      <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
-
-      <label for="phone">Контактный номер телефона</label>
-      <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
-
-      <label for="subject">Тема сообщения</label>
-      <select id="subject" name="subject" required>
-        <option value="">Выберите необходимое</option>
-        <option value="Сотрудничество">Сотрудничество</option>
-        <option value="Обучение">Обучение</option>
-      </select>
-
-      <label for="message">Краткое описание</label>
-      <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
-
-      <button type="submit">Отправить</button>
-    </form>
-  </div>
-</div>
 
 
 <!-- Футер -->
@@ -418,6 +377,38 @@ if ($cases && is_array($cases)) {
 </div>
 
 <script src="js/script.js"></script>
+
+<!-- модалка: вставлять перед </body> -->
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Обратная связь</h2>
+    <form action="php/send.php" method="post" class="feedback-form">
+      <label for="name">Ваше имя</label>
+      <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
+      <label for="phone">Контактный номер телефона</label>
+      <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
+      <label for="subject">Тема сообщения</label>
+      <select id="subject" name="subject" required>
+        <option value="">Выберите необходимое</option>
+        <option value="Сотрудничество">Сотрудничество</option>
+        <option value="Обучение">Обучение</option>
+      </select>
+      <label for="message">Краткое описание</label>
+      <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
+      <button type="submit">Отправить</button>
+      <div class="consent">
+  <input type="checkbox" id="consent" name="consent" required>
+  <label for="consent">
+    Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
+  </label>
+</div>
+
+
+    </form>
+  </div>
+</div>
+
 
 </body>
 </html>

@@ -772,8 +772,10 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
     text-transform: uppercase;
     margin-bottom: 60px;
     color: #ffffff;
-    text-decoration: none;   /* убираем подчеркивание */
-}
+    cursor: pointer;      /* при наведении курсор-рука */
+    user-select: none;    /* нельзя выделять текст */
+  }
+  
 
 
   .contact-links {
@@ -796,11 +798,13 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
 /* Фон затемнения */
 .modal {
-  display: none; /* изначально скрыто */
+  display: none;
   position: fixed;
   z-index: 1000;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0,0,0,0.7);
 }
 
@@ -808,11 +812,11 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 .modal-content {
   background: #fff;
   margin: 10% auto;
-  padding: 30px;
-  width: 500px;
+  padding: 30px;        /* было 30 px */
+  width: 500px;         /* было 500 px */
   border-radius: 12px;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* исправлены пробелы */
 }
 
 /* Закрыть */
@@ -835,7 +839,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
 /* Поля */
 .feedback-form label {
-  font-size: 14px;
+  font-size: 14px; /* было 14 px */
   color: #333;
   display: block;
   margin-top: 15px;
@@ -844,21 +848,19 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 .feedback-form input,
 .feedback-form select,
 .feedback-form textarea {
-  width: 100%;
-  padding: 10px;
+  padding: 10px; /* было 10 px */
   margin-top: 5px;
-  font-size: 14px;
+  font-size: 14px; /* было 14 px */
   border: 1px solid #bfbfbf;
   border-radius: 6px;
 }
 
 .feedback-form button {
   margin-top: 20px;
-  width: 100%;
-  padding: 12px;
+  padding: 12px; /* было 12 px */
   background: #000;
   color: #fff;
-  font-size: 16px;
+  font-size: 16px; /* было 16 px */
   text-transform: uppercase;
   border: none;
   border-radius: 6px;
@@ -868,6 +870,36 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 .feedback-form button:hover {
   background: #333;
 }
+
+.feedback-form input,
+.feedback-form select,
+.feedback-form textarea,
+.feedback-form button {
+  width: 100%;       /* одинаковая ширина */
+  box-sizing: border-box; /* ширина учитывает padding и border */
+}
+
+.consent {
+  margin-top: 15px;
+  font-size: 8px;
+  color: #666;
+  line-height: 1.4;
+  display: flex;
+  align-items: flex-start; /* выравнивание галочки по верхней линии текста */
+}
+
+.consent label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.consent input[type="checkbox"] {
+  margin-right: 8px;   /* отступ справа от галочки */
+  margin-top: 2px;     /* немного опустить галочку */
+  transform: scale(1.1);
+}
+
 
 
 

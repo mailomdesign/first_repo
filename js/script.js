@@ -305,20 +305,24 @@ document.addEventListener('DOMContentLoaded', () => {
   const openBtn = document.getElementById('openModal');
   const closeBtn = document.getElementById('closeModal');
 
+  // открыть модалку
   openBtn.addEventListener('click', () => {
     modal.style.display = 'block';
   });
 
+  // закрыть по кнопке "×"
   closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
   });
 
+  // закрыть по клику на фон
   window.addEventListener('click', (e) => {
     if (e.target === modal) {
       modal.style.display = 'none';
     }
   });
 });
+
 
 
 
