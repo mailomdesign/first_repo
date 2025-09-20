@@ -343,7 +343,9 @@ if ($cases && is_array($cases)) {
     </div>
 
     <div class="contact-subtitle">готов к сотрудничеству</div>
-    <div class="contact-phone" id="openCallback" role="button" tabindex="0">Обратный звонок</div>
+    <a href="feedback.html" class="contact-phone">Обратная связь</a>
+
+
 
 
    <!-- <div class="contact-links">

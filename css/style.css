@@ -771,7 +771,10 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
     font-size: 64px;
     text-transform: uppercase;
     margin-bottom: 60px;
-  }
+    color: #ffffff;
+    text-decoration: none;   /* убираем подчеркивание */
+}
+
 
   .contact-links {
     display: flex;

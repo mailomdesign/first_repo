@@ -299,53 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-(function(){
-  function attachCallbackListener(){
-    // ищем элемент по id или по классу как fallback
-    const cb = document.getElementById('openCallback') || document.querySelector('.contact-phone');
-    if (!cb) return false;
-
-    // даём семантику для доступности (визуально ничего не меняет)
-    cb.setAttribute('role', 'button');
-    cb.setAttribute('tabindex', '0');
-
-    function openCallback() {
-      console.log('openCallback fired');
-      // если есть модал с id="callbackModal" — переключаем его видимость
-      const modal = document.getElementById('callbackModal');
-      if (modal) {
-        modal.style.display = (getComputedStyle(modal).display === 'none' || modal.style.display === '') ? 'block' : 'none';
-      } else {
-        // если модала нет — просто логируем (без изменения стиля)
-        console.log('callbackModal not found on page');
-      }
-    }
-
-    // клики и клавиши
-    cb.addEventListener('click', openCallback);
-    cb.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-        e.preventDefault();
-        openCallback();
-      }
-    });
-
-    return true;
-  }
-
-  // попытка прикрепиться сразу; если DOM ещё не готов — ждать DOMContentLoaded
-  if (!attachCallbackListener()) {
-    document.addEventListener('DOMContentLoaded', () => {
-      if (!attachCallbackListener()) {
-        // на крайний случай — наблюдаем за DOM и прикрепляемся, как только появится элемент
-        const mo = new MutationObserver((mutations, obs) => {
-          if (attachCallbackListener()) obs.disconnect();
-        });
-        mo.observe(document.documentElement, { childList: true, subtree: true });
-      }
-    });
-  }
-})();
 
 
 
