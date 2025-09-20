@@ -300,8 +300,25 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('feedbackModal');
+  const openBtn = document.getElementById('openModal');
+  const closeBtn = document.getElementById('closeModal');
 
+  openBtn.addEventListener('click', () => {
+    modal.style.display = 'block';
+  });
 
+  closeBtn.addEventListener('click', () => {
+    modal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+});
 
 
 
