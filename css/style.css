@@ -512,7 +512,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
 .cases-line {
   width: 90px;
-  height: 16px;
+  height: 13px;
   background-color: #505050;
   margin-left: 0px; /* расстояние между "КЕЙСЫ" и линией */
 }
@@ -814,7 +814,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   margin: 10% auto;
   padding: 30px;        /* было 30 px */
   width: 500px;         /* было 500 px */
-  border-radius: 12px;
+  border-radius: 6px;
   position: relative;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* исправлены пробелы */
 }
@@ -840,9 +840,9 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 /* Поля */
 .feedback-form label {
   font-size: 14px; /* было 14 px */
-  color: #333;
+  color: #000000;
   display: block;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .feedback-form input,
@@ -851,7 +851,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   padding: 10px; /* было 10 px */
   margin-top: 5px;
   font-size: 14px; /* было 14 px */
-  border: 1px solid #bfbfbf;
+  border: 1px solid #dddddd;
   border-radius: 6px;
 }
 
@@ -879,26 +879,44 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   box-sizing: border-box; /* ширина учитывает padding и border */
 }
 
+/* общий контейнер — равен ширине формы (форму расположить внутри modal-content) */
 .consent {
+  width: 100%;               /* равняется ширине формы */
+  box-sizing: border-box;    /* учитываем padding в ширине */
+  display: flex;             /* ВСЁ в одну строку */
+  align-items: center;       /* выравнивание по вертикали */
+  gap: 20px;                 /* отступ между чекбоксом и текстом (20px как просил) */
   margin-top: 15px;
-  font-size: 8px;
-  color: #666;
-  line-height: 1.4;
-  display: flex;
-  align-items: flex-start; /* выравнивание галочки по верхней линии текста */
 }
 
-.consent label {
-  display: flex;
-  align-items: flex-start;
-  cursor: pointer;
-}
-
+/* чекбокс: фиксированная ширина 20-30px */
 .consent input[type="checkbox"] {
-  margin-right: 8px;   /* отступ справа от галочки */
-  margin-top: 2px;     /* немного опустить галочку */
-  transform: scale(1.1);
+  flex: 0 0 24px;            /* не растёт, не сжимается, занимает 24px */
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  margin-top: 25px;
+  padding: 0;
+  cursor: pointer;
+  box-sizing: border-box;
 }
+
+/* label занимает оставшееся пространство, но может сжиматься (ключ — min-width:0) */
+.consent .consent-label {
+  flex: 1 1 auto;            /* растёт/сжимается по необходимости */
+  min-width: 0;              /* ВАЖНО — разрешаем сжатие, без этого overflow */
+  margin: 0;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.2;
+  /* если хочешь, чтобы текст не переносился, включи следующую строку:
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
+  */
+}
+
+
 
 
 

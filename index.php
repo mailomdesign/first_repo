@@ -398,8 +398,7 @@ if ($cases && is_array($cases)) {
       <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
       <button type="submit">Отправить</button>
       <div class="consent">
-  <input type="checkbox" id="consent" name="consent" required>
-  <label for="consent">
+  <input type="checkbox" id="consent" name="consent" required>   <label for="consent">
     Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
   </label>
 </div>
