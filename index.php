@@ -20,6 +20,8 @@ if (!is_array($cases)) {
   <title>Михаил Образцов — Портфолио</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
 
   <meta name="description" content="сайт Портфолио Михаила Образцова — дизайн, реклама, маркетинг, обучение">
   <meta name="keywords" content="дизайнер, портфолио, Михаил Образцов, дизайне Краснодра, реклама Краснодар, маркетинг, графический дизайн, визуал, креатив, обучение дизайну">
@@ -47,6 +49,8 @@ if (!is_array($cases)) {
 }
 </script>
 
+<script src="js/menu.js"></script>
+
 
 </head>
 <body>
@@ -56,7 +60,7 @@ if (!is_array($cases)) {
   <section id="hero" class="hero scroll-fade">
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
-    <div class="hero-caption">не виртуального дизайнер</div>
+    <div class="hero-caption">не виртуального дизайнера</div>
     <img class="hero-image" src="img/portr-1.png" alt="Портрет Михаила" />
   </section>
 
@@ -71,6 +75,24 @@ if (!is_array($cases)) {
   <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
+
+<!-- Мобильное меню -->
+<div class="mobile-menu">
+  <div class="menu-header" id="menuToggle">МЕНЮ</div>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <nav class="menu-content">
+      <a href="#home">Главная</a>
+      <a href="#bio">Био</a>
+      <a href="#direction">Направление</a>
+      <a href="#edu">Обучение</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="menu-close" id="menuClose">&times;</div>
+  </div>
+</div>
+
 
 
  <!-- 
@@ -318,11 +340,10 @@ if ($cases && is_array($cases)) {
 <section class="quote-section 2 scroll-fade">
   <h2 class="quote-title">
     Дизайн без воплощения — это идея. <br />
-    Я делаю — чтобы работало
   </h2>
   <p class="quote-text">
-    Реализация творческих амбиций — это всегда хорошо, но продукт порой требует практичных решений в рекламе. <br />
-    Вместе с вами я смогу найти путь к успешной презентации.
+  Творческие идеи вдохновляют, но эффективность требует конкретных решений. <br />
+   Я помогу вам воплотить их в презентацию, которая работает.
   </p>
 </section>
 
@@ -346,13 +367,6 @@ if ($cases && is_array($cases)) {
     <div class="contact-phone" id="openModal" role="button" tabindex="0">
   Обратная связь
 </div>
-
-
-   <!-- <div class="contact-links">
-      <div class="contact-label">мессенджеры</div>
-      <div class="contact-dot"></div>
-      <div class="contact-label">почта</div>
-    </div> -->
   </div>
 </section>
 
@@ -397,8 +411,11 @@ if ($cases && is_array($cases)) {
       <label for="message">Краткое описание</label>
       <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
       <button type="submit">Отправить</button>
-      <div class="consent">
-  <input type="checkbox" id="consent" name="consent" required>   <label for="consent">
+      
+<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
+<div class="consent">
+  <input type="checkbox" id="consent" name="consent" required aria-required="true">
+  <label for="consent" class="consent-label">
     Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
   </label>
 </div>

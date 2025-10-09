@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $to = "mail.om.design@gmail.com; // ← сюда придёт письмо
+    $to = "mail.om.design@gmail.com"; // ← сюда придёт письмо
     $subject = $_POST['subject'];
     $name = htmlspecialchars($_POST['name']);
     $phone = htmlspecialchars($_POST['phone']);

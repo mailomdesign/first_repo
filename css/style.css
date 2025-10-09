@@ -895,7 +895,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
   width: 24px;
   height: 24px;
   margin: 0;
-  margin-top: 25px;
+  margin-top: 0px;
   padding: 0;
   cursor: pointer;
   box-sizing: border-box;

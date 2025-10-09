@@ -24,14 +24,14 @@
 </nav>
 
 
- 
+ <!-- 
 <div class="fixed-vacancy">
   <a href="vacancy.html" style="text-decoration: none; color: inherit;">
     <div class="vacancy-box">
       Вакансия
     </div>
   </a>
-</div>
+</div>  -->
 
 
   <div class="cases-header-2" id="cases">
@@ -120,7 +120,7 @@
   <section class="review-bio-section scroll-fade">
 <section class="review-bio-section scroll-fade">
      <div class="review-image-wrapper">
-    <img class="review-avatar" src="img/portr-1.png" alt="Портрет отзыв" />
+    <img class="review-avatar" src="img/portr-2.png" alt="Портрет отзыв" />
   </div>
 
 
@@ -132,7 +132,8 @@
     <h2 class="review-title">должность в компании</h2>
 
     <p class="review-text">
-      Рад знакомству. В коммерческом дизайне с 2008 года. Нет выдуманных компаний, нет макетов для портфолио — только реальные проекты, разработка с нуля до выхода продукта на рынок, последующее сопровождение.<br><br>
+      Текст отзыв о совместной работе на 300-500 символов. Описание проделанной работы, успешно реализованных проектах. Текст отзыв о совместной работе на 300-500 символов. 
+      Описание проделанной работы, успешно реализованных проектах.<br><br>
     </p>
   </div>
 </section>
@@ -186,7 +187,7 @@
     <div class="case-data-text">
       <h2 class="case-data-title">Разработка с учетом реализации продукта</h2>
       <p class="case-data-paragraph">
-        Когда вы доверяете профессионалам разработку вашей продукции, то получаете не только визуальные состовляющие, но и возможность технической реализации благодаря опыту в создании множества решений.
+        Доверяя разработку профессионалу, вы получаете не просто визуальную идею, а решение, которое можно воплотить. Опыт множества проектов гарантирует практичность и результат.
       </p>
     </div>
   </div>
@@ -199,11 +200,15 @@
     <div class="bio-quote">Задачи</div>
 
     <p class="bio-text">
-      Начиная от разработки логотипа, одного из 4х направлений бренда. Пройден путь до оформления страницы готового товара на маркетплейсах. Дизайн, упаковка, ассортимент - все позиции с учетов заданного стилистического ритма бренда.
+      Работа началась с поиска характерного знака, отражающего суть и настроение компании. 
+      Несколько направлений позволили выявить тот язык символов, который наилучшим образом передаёт ценности бренда. 
+      Разработана целая система: оформление продукции, детали и элементы, которые делают ее узнаваемой, упаковка, рассказывающая историю еще до того, 
+      как товар попадает в руки, и информационные носители, формирующие доверие и создающие ясность. Карточки для маркетплейсов были проработаны так, 
+      чтобы сохранить единство образа, усилив его привлекательность и ясность. 
     </p>
     <h2 class="bio-title">теги:</h2>
     <p class="bio-text_2">
-      разработка логотипа, верстка рекламных материалов, визуализация дизайна кофеен, элементы оформления дизайна кофеен, дизайн сопровождение
+      разработка логотипа, верстка рекламных материалов, визуализация продукции, верстка презентации товара, стилистическая проработка элементов продукции
     </p>
   </div>
 
@@ -223,6 +228,7 @@
     <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_5.jpg" alt="Проект 5" loading="lazy"></div>
     <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_6.jpg" alt="Проект 6" loading="lazy"></div>
     <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_7.jpg" alt="Проект 7" loading="lazy"></div>
+    <div class="gallery-item js-lb"><img src="img/cases/fp7d/port/cases_port_fp7d_8.jpg" alt="Проект 8" loading="lazy"></div>
   </div>
 </section>
 
@@ -307,6 +313,29 @@
   
   
 
+<!-- КОНТАКТЫ -->
+<section class="contacts-section scroll-fade">
+
+  <div id="contacts" class="contacts-left">
+    <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
+  </div>
+
+  <div class="contacts-right">
+
+    <!-- Заголовок КОНТАКТЫ_ в едином стиле с кейсами -->
+    <div class="contacts-header">
+      <span class="contacts-text">КОНТАКТЫ</span>
+      <span class="contacts-line"></span>
+    </div>
+
+    <div class="contact-subtitle">готов к сотрудничеству</div>
+    <div class="contact-phone" id="openModal" role="button" tabindex="0">
+  Обратная связь
+</div>
+  </div>
+</section>
+
+
 <!-- Футер -->
 <footer class="footer">
   <div class="footer-content">
@@ -328,9 +357,42 @@
 
 <script src="js/script.js"></script>
 
+<!-- модалка: вставлять перед </body> -->
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <h2>Обратная связь</h2>
+    <form action="php/send.php" method="post" class="feedback-form">
+      <label for="name">Ваше имя</label>
+      <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
+      <label for="phone">Контактный номер телефона</label>
+      <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
+      <label for="subject">Тема сообщения</label>
+      <select id="subject" name="subject" required>
+        <option value="">Выберите необходимое</option>
+        <option value="Сотрудничество">Сотрудничество</option>
+        <option value="Обучение">Обучение</option>
+      </select>
+      <label for="message">Краткое описание</label>
+      <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
+      <button type="submit">Отправить</button>
+      
+<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
+<div class="consent">
+  <input type="checkbox" id="consent" name="consent" required aria-required="true">
+  <label for="consent" class="consent-label">
+    Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
+  </label>
+</div>
+
+
+    </form>
+  </div>
+</div>
+
+
 </body>
 </html>
-
   
 
 
