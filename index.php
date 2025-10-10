@@ -51,8 +51,6 @@ if (!is_array($cases)) {
 }
 </script>
 
-<script src="js/menu.js"></script>
-
 
 </head>
 <body>

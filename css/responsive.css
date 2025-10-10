@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 100000; /* ← чуть выше, чем у overlay */
   }
 
   /* Верхняя панель */
@@ -54,7 +54,7 @@
     align-items: center;
     flex-direction: column;
     text-align: center;
-    z-index: 999;
+    z-index: 99999;
     transition: opacity 0.3s ease;
   }
 
@@ -66,12 +66,16 @@
   .menu-content a {
     display: block;
     color: #000;
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 48px;        /* ← крупнее шрифт */
+    font-weight: 800;       /* ← плотнее визуально */
+    text-transform: uppercase; /* ← все буквы ЗАГЛАВНЫЕ */
     text-decoration: none;
-    margin: 15px 0;
+    margin: 40px 0;         /* ← увеличенный интервал между пунктами */
+    letter-spacing: 1px;    /* ← немного воздуха между буквами */
+    line-height: 1.6;       /* ← увеличенное межстрочное расстояние */
     transition: color 0.3s ease, transform 0.2s ease;
   }
+  
 
   .menu-content a:hover {
     color: #555;
@@ -83,14 +87,14 @@
     position: absolute;
     top: 20px;
     right: 25px;
-    font-size: 36px;
+    font-size: 50px;
     color: #000;
     cursor: pointer;
     transition: opacity 0.3s ease;
   }
 
   .menu-close:hover {
-    opacity: 0.6;
+    opacity: 0.9;
   }
 
   /* Прячем десктопное меню */
@@ -98,3 +102,14 @@
     display: none !important;
   }
 }
+
+@media (max-width: 768px) {
+  .vertical-bar-left {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
