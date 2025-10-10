@@ -34,6 +34,8 @@ if (!is_array($cases)) {
   <meta property="og:url" content="https://mailomdesign.ru">
   
   <script type="application/ld+json">
+
+  
 {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -56,6 +58,7 @@ if (!is_array($cases)) {
 <body>
 
 
+
   <!-- Hero-блок -->
   <section id="hero" class="hero scroll-fade">
     <div class="hero-subtitle">сайт</div>
@@ -75,12 +78,15 @@ if (!is_array($cases)) {
   <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
+ 
 
-<!-- Мобильное меню -->
+<!-- === Мобильное меню === -->
 <div class="mobile-menu">
   <div class="menu-header" id="menuToggle">МЕНЮ</div>
 
   <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-close" id="menuClose">&times;</div>
+
     <nav class="menu-content">
       <a href="#home">Главная</a>
       <a href="#bio">Био</a>
@@ -89,22 +95,11 @@ if (!is_array($cases)) {
       <a href="#cases">Кейсы</a>
       <a href="#contacts">Контакты</a>
     </nav>
-    <div class="menu-close" id="menuClose">&times;</div>
   </div>
 </div>
 
 
 
- <!-- 
-<div class="fixed-vacancy">
-  <a href="vacancy.html" style="text-decoration: none; color: inherit;">
-    <div class="vacancy-box">
-      Вакансия
-    </div>
-  </a>
-</div>  -->
-
-  
 
   <!-- Вертикальная полоса слева -->
   <div class="vertical-bar-left"></div>
@@ -392,6 +387,9 @@ if ($cases && is_array($cases)) {
 
 <script src="js/script.js"></script>
 
+
+
+
 <!-- модалка: вставлять перед </body> -->
 <div id="feedbackModal" class="modal">
   <div class="modal-content">
@@ -426,5 +424,6 @@ if ($cases && is_array($cases)) {
 </div>
 
 
+<script src="js/menu.js"></script>
 </body>
 </html>
