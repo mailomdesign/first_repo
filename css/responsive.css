@@ -106,6 +106,7 @@
 @media (max-width: 768px) {
   .vertical-bar-left, 
   .side-block-right,
+  .custom-scrollbar,
   .vertical-text-right {
     display: none !important;
     visibility: hidden !important;
@@ -124,29 +125,129 @@
   }
 }
 
-/* === Мобильная версия: позиционирование и размер аватара === */
+
+/* === Мобильная версия: изображение в hero === */
 @media (max-width: 768px) {
+  #hero {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   /* выравниваем всё содержимое по центру */
+    text-align: center;
+    top: 150px;    
+    padding-bottom: 60px;  /* добавляем воздух под изображением */
+  }
+
+  .hero-image {
+    width: 320px;          /* увеличенный размер */
+    height: auto;          /* сохраняем пропорции */
+    display: block;
+    margin: 20px auto 0;   /* отступ сверху и центрирование */
+    position: relative;
+    top: 50;                /* убираем смещение вверх */
+    left: 0;
+    transform: none;       /* сбрасываем старые трансформации */
+    border-radius: 50%;    /* если изображение круглое */
+    object-fit: cover;
+  }
+}
+
+/* === Для совсем маленьких экранов (до 480px) === */
+@media (max-width: 480px) {
   .hero-image {
     width: 280px;
-    height: auto;
-    display: block;
-    margin: 0 auto 25px;   /* ← центрируем по горизонтали */
-    position: relative;
-    top: -30px;
-    left: 50%;             /* ← центрируем при возможных сдвигах контейнера */
-    transform: translateX(-50%); /* ← идеально по центру */
-    border-radius: 50%;
-    object-fit: cover;
+  }
+}
+
+/* === BIO — мобильная адаптация === */
+@media (max-width: 768px) {
+  /* Убираем левую полосу (на всякий случай дублируем) */
+  .vertical-bar-left {
+    display: none !important;
+  }
+
+  /* Контейнер блока */
+  #bio {
+    padding: 60px 20px;              /* внутренние отступы для воздуха */
+    text-align: center;              /* выравнивание по центру */
+    display: flex;
+    flex-direction: column;
+    height: auto;           /* адаптируем под контент */
+    padding-top: 60px;
+    padding-bottom: 80px;
+    align-items: center;
+  }
+
+  /* Основной контент */
+  .bio-content {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  /* Имя */
+  .bio-name {
+    font-size: 56px;                 /* крупно, но читаемо */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+
+  /* Подчёркивание под именем */
+  .bio-underline {
+    width: 80px;
+    height: 3px;
+    background-color: #000;
+    margin: 0 auto 20px;             /* центрируем */
+  }
+
+  /* Текст описания */
+  .bio-description {
+    font-size: 22px;
+    line-height: 1.6;
+    color: #000000;                  /* или основной цвет твоего текста */
+    margin: 0 auto;
+    text-align: center;                /* можно заменить на center, если хочешь всё по центру */
   }
 }
 
 /* === Маленькие экраны (до 480px) === */
 @media (max-width: 480px) {
-  .hero-image {
-    width: 240px;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
+  .bio-name {
+    font-size: 30px;
+  }
+
+  .bio-description {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .bio-underline {
+    width: 60px;
+  }
+}
+
+/* === Scroll-to-top — адаптация под мобильные === */
+@media (max-width: 768px) {
+  .scroll-top {
+    width: 78px;           /* чуть меньше */
+    height: 78px;
+    font-size: 40px;       /* размер стрелки */
+    bottom: 25px;          /* позиция выше нижнего края */
+    right: 40px;           /* чуть левее от края экрана */
+    border-radius: 50%;
+    opacity: 0.9;          /* лёгкая прозрачность */
+    z-index: 900;          /* ниже мобильного меню */
+  }
+}
+
+/* === Для совсем маленьких экранов (до 480px) === */
+@media (max-width: 480px) {
+  .scroll-top {
+    width: 42px;
+    height: 42px;
+    font-size: 20px;
+    bottom: 20px;
+    right: 15px;
   }
 }
 
