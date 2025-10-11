@@ -173,8 +173,8 @@
     display: flex;
     flex-direction: column;
     height: auto;           /* адаптируем под контент */
-    padding-top: 60px;
-    padding-bottom: 80px;
+    margin-top: -50px; /* поднимаем блок вверх на 100px */
+    padding-top: 40px;  /* чтобы контент не прижался к фото */
     align-items: center;
   }
 
@@ -250,4 +250,51 @@
     right: 15px;
   }
 }
+
+@media (max-width: 768px) {
+  /* Скрываем старые вертикальные линии */
+  .stats-item::after,
+  .stats-item::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Новая мобильная структура блока */
+  .stats-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 40px;
+    width: 100%;
+  }
+
+  .stats-item {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    padding-bottom: 40px;
+  }
+
+  /* === Новые горизонтальные разделители === */
+  .stats-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.25); /* или #000, если фон светлый */
+  }
+
+  .stats-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+
+
 
