@@ -418,13 +418,12 @@
   }
 
   .direction-block {
-    width: 100%;
-    max-width: 420px;
-    background-color: #000;        /* чёрный фон */
+    background-color: #000;
     color: #fff;
+    width: 100vw;           /* фон на всю ширину экрана */
+    margin: 0;
     padding: 40px 20px;
-    box-sizing: border-box;
-    position: relative;
+    text-align: center;
   }
 
   /* Убираем изображение */
