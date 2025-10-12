@@ -176,6 +176,7 @@
     margin-top: -50px; /* поднимаем блок вверх на 100px */
     padding-top: 40px;  /* чтобы контент не прижался к фото */
     align-items: center;
+    margin-bottom: -250px !important;
   }
 
   /* Основной контент */
@@ -403,3 +404,80 @@
     }
   }
 }
+
+/* === НАПРАВЛЕНИЕ — адаптация для мобильных устройств === */
+@media (max-width: 768px) {
+
+  /* Контейнер: центрирование, упрощение структуры */
+  .direction-wrapper {
+    padding: 60px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .direction-block {
+    width: 100%;
+    max-width: 420px;
+    background-color: #000;        /* чёрный фон */
+    color: #fff;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Убираем изображение */
+  .direction-image {
+    display: none !important;
+  }
+
+  /* Текст и оформление */
+  .direction-title {
+    font-size: 36px;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .direction-line {
+    width: 60%;
+    height: 2px;
+    background-color: #fff;
+    margin: 0 auto 20px auto;
+  }
+
+  .direction-list {
+    font-size: 20px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+
+  /* Скрываем квадрат, если он декоративный */
+  .direction-square {
+    display: none !important;
+  }
+
+  /* Фон адаптируем под ширину экрана */
+  .direction-bg {
+    width: 100%;
+    height: auto;
+    background: none;
+  }
+}
+
+/* === Маленькие экраны (до 480px) === */
+@media (max-width: 480px) {
+  .direction-block {
+    padding: 40px 15px;
+  }
+
+  .direction-title {
+    font-size: 28px;
+  }
+
+  .direction-list {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
