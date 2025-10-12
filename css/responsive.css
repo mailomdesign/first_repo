@@ -252,40 +252,43 @@
 }
 
 @media (max-width: 768px) {
-  /* Скрываем старые вертикальные линии */
+  /* Полный сброс старых разделителей */
   .stats-item::after,
   .stats-item::before {
     display: none !important;
     content: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: none !important;
   }
 
-  /* Новая мобильная структура блока */
+  /* Перестраиваем структуру */
   .stats-numbers {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 40px;
-    width: 100%;
+    gap: 50px;
+    position: relative;
   }
 
   .stats-item {
     position: relative;
     width: 100%;
     max-width: 340px;
-    padding-bottom: 40px;
+    padding-bottom: 50px; /* отступ под линию */
   }
 
-  /* === Новые горизонтальные разделители === */
+  /* === Добавляем новые горизонтальные линии === */
   .stats-item:not(:last-child)::after {
     content: "";
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%;
-    height: 2px;
-    background-color: rgba(255, 255, 255, 0.25); /* или #000, если фон светлый */
+    width: 80%;              /* длина линии */
+    height: 2px;             /* толщина линии */
+    background-color: #000;  /* цвет линии */
   }
 
   .stats-item p {
@@ -294,7 +297,3 @@
     line-height: 1.4;
   }
 }
-
-
-
-
