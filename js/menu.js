@@ -33,3 +33,24 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 });
+
+(function() {
+  function updateStatsMode() {
+    var wrap = document.querySelector('.stats-numbers');
+    if (!wrap) return;
+    if (window.innerWidth <= 768) {
+      wrap.classList.add('mobile-stats');
+    } else {
+      wrap.classList.remove('mobile-stats');
+    }
+  }
+
+  // запуск при загрузке
+  document.addEventListener('DOMContentLoaded', updateStatsMode);
+  // запуск при изменении размера
+  window.addEventListener('resize', function() {
+    // мелкая оптимизация: запускаем с небольшой задержкой
+    clearTimeout(window._mobileStatsResizeTimer);
+    window._mobileStatsResizeTimer = setTimeout(updateStatsMode, 120);
+  });
+})();
