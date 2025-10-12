@@ -251,7 +251,7 @@
   }
 }
 
-media (max-width: 768px) {
+@media (max-width: 768px) {
   /* Полный сброс старых разделителей */
   .stats-item::after,
   .stats-item::before {
