@@ -250,55 +250,132 @@
     right: 15px;
   }
 }
+
 @media (max-width: 768px) {
-  /* полное отключение вертикалей (сброс старых) */
+  /* Полный сброс старых разделителей */
+  .stats-item::after,
   .stats-item::before {
+    display: none !important;
+    content: none !important;
     width: 0 !important;
     height: 0 !important;
     background: none !important;
   }
 
-  /* структура колонкой */
+  /* Перестраиваем структуру */
+  .stats-numbers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 50px;
+    position: relative;
+  }
+
+  .stats-item {
+    position: relative;
+    width: 100%;
+    max-width: 340px;
+    padding-bottom: 50px; /* отступ под линию */
+  }
+
+  /* === Добавляем новые горизонтальные линии === */
+  .stats-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;              /* длина линии */
+    height: 2px;             /* толщина линии */
+    background-color: #000;  /* цвет линии */
+  }
+
+  .stats-item p {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+}
+
+/* ==========================
+   MOBILE STATS — FORCED PATCH
+   ==========================
+   Полный сброс вертикальных линий и установка
+   горизонтальных разделителей только для mobile
+*/
+@media (max-width: 768px) {
+
+  /* 1) Полный сброс: прячем все псевдо/бордер/фоны, которые могли рисовать вертикаль */
+  .stats-numbers *,
+  .stats-item,
+  .stats-item::before,
+  .stats-item::after {
+    border: none !important;
+    background: none !important;
+    box-shadow: none !important;
+    content: none !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: 0 !important;
+    min-height: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  /* Дополнительно: убрать реальные border-right / left которые могли делать вертикаль */
+  .stats-item,
+  .stats-item * {
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  /* 2) Перекладываем структуру в вертикальную колонку и центрируем */
   .stats-numbers {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
+    justify-content: flex-start !important;
     text-align: center !important;
     gap: 40px !important;
     width: 100% !important;
     padding: 0 12px !important;
-    position: relative !important;
   }
 
   .stats-item {
     position: relative !important;
     width: 100% !important;
     max-width: 360px !important;
-    padding: 0 0 30px 0 !important;
+    padding: 0 0 30px 0 !important; /* место под горизонтальный разделитель */
     box-sizing: border-box !important;
     background: transparent !important;
   }
 
-  /* **ЗДЕСЬ** — явное создание горизонтальных линий (без mobile-stats) */
-  .stats-numbers .stats-item:not(:last-child)::after {
+  /* 3) Новые горизонтальные линии: создаём с высокой специфичностью
+     и !important — это гарантирует, что они будут именно горизонтальными */
+  .stats-numbers.mobile-stats .stats-item:not(:last-child)::after {
     content: "" !important;
     position: absolute !important;
-    bottom: 0 !important;
+    bottom: 8px !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     width: 80% !important;
     height: 2px !important;
-    background-color: rgba(0,0,0,0.85) !important;
+    background-color: rgba(0,0,0,0.85) !important; /* цвет — подстрой под фон */
+    pointer-events: none !important;
   }
-  
 
+  /* Варианты для светлого/тёмного фона — можно переключать */
+  /* .stats-numbers.mobile-stats .stats-item:not(:last-child)::after { background-color: rgba(255,255,255,0.2) !important; } */
+
+  /* подписи внутри статов — отступы и центровка */
   .stats-item .stat-value {
     font-size: 56px !important;
     line-height: 1 !important;
     font-weight: 800 !important;
     margin: 18px 0 8px 0 !important;
   }
-
   .stats-item p {
     margin: 0 !important;
     padding: 0 10px !important;
@@ -307,12 +384,19 @@
     color: inherit !important;
   }
 
-  /* адаптация для <=480 */
+  /* на совсем узких дисплеях уменьшаем отступы */
   @media (max-width: 480px) {
-    .stats-numbers { gap: 28px !important; }
-    .stats-item { max-width: 300px !important; padding-bottom: 24px !important; }
-    .stats-item .stat-value { font-size: 48px !important; }
-    .stats-numbers .stats-item:not(:last-child)::after {
+    .stats-numbers {
+      gap: 28px !important;
+    }
+    .stats-item {
+      max-width: 300px !important;
+      padding-bottom: 24px !important;
+    }
+    .stats-item .stat-value {
+      font-size: 48px !important;
+    }
+    .stats-numbers.mobile-stats .stats-item:not(:last-child)::after {
       width: 75% !important;
       bottom: 6px !important;
       height: 1px !important;
