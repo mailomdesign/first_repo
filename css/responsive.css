@@ -408,8 +408,10 @@
 /* === НАПРАВЛЕНИЕ — адаптация для мобильных устройств === */
 @media (max-width: 768px) {
 
+  /* Контейнер блока */
   .direction-wrapper {
-    width: 100vw;
+    position: relative;
+    width: 100%;
     margin: 0;
     padding: 0;
     background: none;
@@ -418,46 +420,54 @@
     align-items: center;
   }
 
+  /* Чёрный фон */
   .direction-bg {
-    width: 100vw;
-    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-color: #000;
+    z-index: 1;
   }
 
+  /* Контент поверх фона */
   .direction-block {
     position: relative;
-    width: 100vw;
-    background-color: #000;
-    color: #fff;
-    box-sizing: border-box;
-    padding: 80px 20px;
-    text-align: right;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: flex-end; /* <-- гарантирует выравнивание текста по правому краю */
+    align-items: flex-end;   /* всё по правому краю */
+    justify-content: center;
+    width: 100%;
+    min-height: 90vh;        /* растягиваем под экран */
+    box-sizing: border-box;
+    padding-right: 100px;    /* визуальный отступ справа */
+    padding-left: 20px;
+    color: #fff;
+    background: transparent; /* убрали лишний фон */
+    text-align: right;
   }
 
   .direction-title {
     font-size: 72px;
     line-height: 1.1;
     letter-spacing: 2px;
-    margin: 0 100px 14px 0; /* ← визуальный отступ справа */
+    margin: 0 0 14px 0;
   }
 
   .direction-line {
     width: 120px;
     height: 2px;
     background-color: #fff;
-    margin: 0 100px 30px 0; /* ← такая же логика */
+    margin: 0 0 30px 0;
   }
 
   .direction-list {
     font-size: 28px;
     line-height: 1.7;
     letter-spacing: 1px;
-    margin: 0 100px 0 0;
-    padding: 0;
-    text-align: right;
+    margin: 0;
   }
 
   .direction-image,
@@ -469,22 +479,22 @@
 /* === Маленькие экраны (до 480px) === */
 @media (max-width: 480px) {
   .direction-block {
-    padding: 60px 15px;
+    padding-right: 60px;
+    padding-left: 15px;
+    min-height: 85vh;
   }
 
   .direction-title {
     font-size: 48px;
-    margin-right: 60px;
   }
 
   .direction-list {
     font-size: 22px;
     line-height: 1.5;
-    margin-right: 60px;
   }
 
   .direction-line {
     width: 80px;
-    margin: 0 60px 24px 0;
+    margin-bottom: 24px;
   }
 }
