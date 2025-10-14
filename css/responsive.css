@@ -410,43 +410,27 @@
 
   /* Контейнер блока */
   .direction-wrapper {
-    position: relative;
     width: 100%;
-    margin: 0;
-    padding: 0;
-    background: none;
+    background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  /* Чёрный фон */
+  /* Убираем старый фон, чтобы не перекрывал текст */
   .direction-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #000;
-    z-index: 1;
+    display: none !important;
   }
 
-  /* Контент поверх фона */
+  /* Контент поверх */
   .direction-block {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;   /* всё по правому краю */
-    justify-content: center;
     width: 100%;
-    min-height: 90vh;        /* растягиваем под экран */
-    box-sizing: border-box;
-    padding-right: 100px;    /* визуальный отступ справа */
+    max-width: 768px;   /* ширина контента */
+    padding-right: 100px;
     padding-left: 20px;
     color: #fff;
-    background: transparent; /* убрали лишний фон */
     text-align: right;
+    box-sizing: border-box;
   }
 
   .direction-title {
@@ -454,23 +438,19 @@
     line-height: 1.1;
     letter-spacing: 2px;
     margin: 0 0 14px 0;
-  }
-
-  .direction-line {
-    width: 120px;
-    height: 2px;
-    background-color: #fff;
-    margin: 0 0 30px 0;
+    left: -42px;
   }
 
   .direction-list {
-    font-size: 28px;
+    font-size: 48px;
     line-height: 1.7;
     letter-spacing: 1px;
     margin: 0;
+    left: -120px;
   }
 
   .direction-image,
+  .direction-line,
   .direction-square {
     display: none !important;
   }
@@ -498,3 +478,269 @@
     margin-bottom: 24px;
   }
 }
+
+/* === Заголовки секций (Skills / Cases / Contacts) — адаптация для мобильных устройств === */
+@media (max-width: 768px) {
+
+  .skills-header,
+  .cases-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;   /* сохраняем прижатие к правому краю */
+    align-items: flex-end;
+    margin-top: 80px;            /* уменьшаем отступ сверху */
+    padding-right: 0;
+  }
+
+  .contacts-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;   /* сохраняем прижатие к правому краю */
+    align-items: flex-end;
+    margin-top: 80px;            /* уменьшаем отступ сверху */
+    padding-right: 0;
+  }
+
+  .skills-text,
+  .cases-text {
+    font-size: 65px;             /* уменьшаем шрифт с 96px */
+    line-height: 0.8;
+    color: #505050;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .contacts-text {
+    font-size: 65px;             /* уменьшаем шрифт с 96px */
+    line-height: 0.8;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  .skills-line,
+  .cases-line {
+    width: 45px;                 /* уменьшаем длину линии */
+    height: 9px;                 /* уменьшаем толщину */
+    background-color: #505050;
+    margin-left: 0;
+  }
+
+  .contacts-line {
+    width: 45px;                 /* уменьшаем длину линии */
+    height: 9px;                 /* уменьшаем толщину */
+    background-color: #ffffff;
+    margin-left: 0;
+  }
+}
+
+
+
+/* === Маленькие экраны (до 480px) === */
+@media (max-width: 480px) {
+
+  .skills-header,
+  .cases-header,
+  .contacts-header {
+    margin-top: 60px;
+  }
+
+  .skills-text,
+  .cases-text,
+  .contacts-text {
+    font-size: 36px;             /* ещё компактнее */
+    line-height: 0.8;
+  }
+
+  .skills-line,
+  .cases-line,
+  .contacts-line {
+    width: 35px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr); /* две колонки */
+    justify-content: center; /* центрирование всей сетки */
+    align-items: start;
+    gap: 5px 8px; /* ← расстояние между рядами и колонками */
+    width: 100%;
+    max-width: 650px; /* ограничиваем, чтобы всё было по центру */
+    margin: 0 auto; /* выравнивание блока по центру */
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .skill {
+    width: 100%;
+    max-width: 160px;
+    text-align: left;
+  }
+
+  .tool {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 340px;
+  }
+}
+
+/* === ОБУЧЕНИЕ — адаптация для мобильных устройств === */
+@media (max-width: 768px) {
+  .quote-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 100px auto; /* уменьшаем вертикальные отступы */
+    padding: 0 30px;    /* небольшие внутренние отступы */
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .quote-title {
+    font-size: 48px;   /* ↓ уменьшишь вручную по вкусу */
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .quote-text {
+    font-size: 24px;   /* ↓ можешь регулировать позже */
+    line-height: 1.5;
+    max-width: 100%;
+    margin: 0 auto 30px;
+  }
+
+  .quote-button {
+    margin-top: 30px;
+  }
+}
+
+/* === Очень маленькие экраны (до 480px) === */
+@media (max-width: 480px) {
+  .quote-section {
+    margin: 80px auto;
+    padding: 0 20px;
+  }
+
+  .quote-title {
+    font-size: 36px; /* просто ориентирами, ты скорректируешь */
+    line-height: 1.2;
+  }
+
+  .quote-text {
+    font-size: 20px;
+    line-height: 1.4;
+  }
+
+  .quote-button {
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .contacts-section {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    background: #000;
+    position: relative;
+    overflow: hidden; /* предотвращает сдвиги */
+  }
+
+  /* Верхняя черная зона */
+  .contacts-header-block {
+    background-color: #000;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    padding-right: 20px;
+    box-sizing: border-box;
+    color: #fff;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Контейнер с изображением */
+  .contacts-left {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: #000; /* ← черный фон под изображением */
+    overflow: hidden;
+  }
+
+  .contact-image {
+    position: relative;
+    top: 500px;              /* ← опускаем изображение вниз */
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Блок текста поверх изображения */
+  .contacts-right {
+    width: 100%;
+    margin-top: -120px;
+    padding: 0 30px;
+    box-sizing: border-box;
+    text-align: center;
+    color: #fff;
+    position: relative;
+    z-index: 3;
+  }
+
+  .contact-subtitle {
+    font-size: 24px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    color: #e0e0e0;
+  }
+
+  .contact-phone {
+    font-size: 36px;
+    font-weight: 400;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+/* === Очень маленькие экраны === */
+@media (max-width: 480px) {
+  .contact-image {
+    top: 160px; /* немного меньше сдвиг */
+  }
+
+  .contacts-right {
+    margin-top: -100px;
+  }
+
+  .contact-subtitle {
+    font-size: 20px;
+  }
+
+  .contact-phone {
+    font-size: 30px;
+  }
+}
+
+
