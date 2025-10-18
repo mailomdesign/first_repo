@@ -17,39 +17,36 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
 
-// Плавный скролл и переход для ссылок меню
+ // Плавный скролл и переход для ссылок меню
 document.querySelectorAll(".menu-content a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
 
     const href = link.getAttribute("href");
-    const currentPage = window.location.pathname.split("/").pop();
+    const currentPage = window.location.pathname.split("/").pop() || "index.php";
 
-    // Если ссылка указывает просто на якорь (#bio и т.п.)
+    // если ссылка — это якорь (например, #bio)
     if (href.startsWith("#")) {
-      const targetId = href;
-      const target = document.querySelector(targetId);
+      const target = document.querySelector(href);
 
-      // Если мы уже на index.php и якорь существует — плавно скроллим
-      if (currentPage === "index.php" && target) {
+      // если мы уже на главной и элемент существует → плавно скроллим
+      if ((currentPage === "index.php" || currentPage === "") && target) {
         window.scrollTo({
           top: target.offsetTop,
           behavior: "smooth"
         });
-      } 
-      // Если мы не на index.php — переходим туда с якорем
-      else {
+      } else {
+        // иначе переходим на index.php с нужным якорем
         window.location.href = "index.php" + href;
       }
-    } 
-    // Если это полная ссылка (index.php#bio и т.д.)
-    else {
+    } else {
+      // если ссылка содержит index.php# — просто переходим
       window.location.href = href;
     }
 
-    // Закрываем меню после клика
+    // закрываем меню
     const menuOverlay = document.getElementById("menuOverlay");
     if (menuOverlay) menuOverlay.classList.remove("active");
   });
 });
-
+})();
