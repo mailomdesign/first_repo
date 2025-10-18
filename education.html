@@ -7,6 +7,9 @@
   <title>Обучение</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  
 
 </head>
 <body>
@@ -29,7 +32,25 @@
   <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
   </ul>
 </nav>
+ 
 
+<!-- === Мобильное меню === -->
+<div class="mobile-menu">
+  <div class="menu-header" id="menuToggle">МЕНЮ</div>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-close" id="menuClose">&times;</div>
+
+    <nav class="menu-content">
+      <a href="#home">Главная</a>
+      <a href="#bio">Био</a>
+      <a href="#direction">Направление</a>
+      <a href="#edu">Обучение</a>
+      <a href="#cases">Кейсы</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</div>
 
  <!-- 
 <div class="fixed-vacancy">
@@ -295,6 +316,6 @@
   </div>
 </div>
 
-
+<script src="js/menu.js"></script>
 </body>
 </html>

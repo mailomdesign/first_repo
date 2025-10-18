@@ -86,15 +86,16 @@ if (!is_array($cases)) {
     <div class="menu-close" id="menuClose">&times;</div>
 
     <nav class="menu-content">
-      <a href="#home">Главная</a>
-      <a href="#bio">Био</a>
-      <a href="#direction">Направление</a>
-      <a href="#edu">Обучение</a>
-      <a href="#cases">Кейсы</a>
-      <a href="#contacts">Контакты</a>
+      <a class="js-nav" href="#hero">Главная</a>
+      <a class="js-nav" href="#bio">Био</a>
+      <a class="js-nav" href="#direction">Направление</a>
+      <a class="js-nav" href="#education">Обучение</a>
+      <a class="js-nav" href="#cases">Кейсы</a>
+      <a class="js-nav" href="#contacts">Контакты</a>
     </nav>
   </div>
 </div>
+
 
 
 
