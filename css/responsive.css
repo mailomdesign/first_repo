@@ -765,23 +765,30 @@
   font-size: 48px;
 }
 
-/* === Мобильная адаптация: перенос .case-image-2 под .case-panel === */
 @media (max-width: 768px) {
-
+  /* Убедимся, что flex работает на правильном уровне */
   .case-wrapper {
     display: flex;
-    flex-direction: column; /* выстраиваем элементы в колонку */
+    flex-direction: column;
+  }
+
+  /* Меняем порядок элементов */
+  .case-panel {
+    order: 1;
+    clip-path: none !important;
   }
 
   .case-image-2 {
-    order: 2; /* ставим ниже */
+    order: 2;
+    margin-top: 40px; /* небольшой отступ для визуального разделения */
   }
 
-  .case-panel {
-    order: 1; /* оставляем выше */
+  /* Важно: убрать float и фиксированные ширины, если есть */
+  .case-panel, .case-image-2 {
+    width: 100%;
+    float: none;
   }
 
-  /* Чтобы не было лишних отступов */
   .case-image-2 img {
     width: 100%;
     height: auto;
