@@ -150,19 +150,14 @@ if (!is_array($cases)) {
 </section>
   
 
-  <!-- НАПРАВЛЕНИЕ -->
-  <section class="direction-wrapper scroll-fade">
+<!-- НАПРАВЛЕНИЕ -->
+<section id="direction" class="direction-wrapper scroll-fade">
+  <div class="direction-block scroll-fade">
+    <div class="direction-bg"></div>
 
-  <div class="direction-block scroll-fade"> <!-- ← scroll-fade должен быть именно здесь -->
-   
-  <div id="direction" class="direction-bg"></div>
-
-  
-  <h2 class="direction-title">НАПРАВЛЕНИЕ</h2>
-
-  <div class="direction-line"></div>
-
-  <p class="direction-list">
+    <h2 class="direction-title">НАПРАВЛЕНИЕ</h2>
+    <div class="direction-line"></div>
+    <p class="direction-list">
       веб дизайн<br>
       полиграфия<br>
       графический дизайн<br>
@@ -171,10 +166,10 @@ if (!is_array($cases)) {
     </p>
 
     <img class="direction-image" src="img/napr-im-1.png" alt="...">
-
-  <div class="direction-square"></div>
-</div>
+    <div class="direction-square"></div>
+  </div>
 </section>
+
 
 
 <!-- ХАРД-СКИЛЛ -->
@@ -343,15 +338,12 @@ if ($cases && is_array($cases)) {
 
 
 <!-- КОНТАКТЫ -->
-<section class="contacts-section scroll-fade">
-
-  <div id="contacts" class="contacts-left">
+<section id="contacts" class="contacts-section scroll-fade">
+  <div class="contacts-left">
     <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
   </div>
 
   <div class="contacts-right">
-
-    <!-- Заголовок КОНТАКТЫ_ в едином стиле с кейсами -->
     <div class="contacts-header">
       <span class="contacts-text">КОНТАКТЫ</span>
       <span class="contacts-line"></span>
@@ -359,10 +351,11 @@ if ($cases && is_array($cases)) {
 
     <div class="contact-subtitle">готов к сотрудничеству</div>
     <div class="contact-phone" id="openModal" role="button" tabindex="0">
-  Обратная связь
-</div>
+      Обратная связь
+    </div>
   </div>
 </section>
+
 
 
 <!-- Футер -->

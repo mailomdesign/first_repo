@@ -483,6 +483,7 @@
 @media (max-width: 768px) {
 
   .skills-header,
+  .cases-header-3,
   .cases-header {
     width: 100%;
     display: flex;
@@ -503,6 +504,8 @@
   }
 
   .skills-text,
+  .cases-text-3,
+  .cases-text-2,
   .cases-text {
     font-size: 65px;             /* уменьшаем шрифт с 96px */
     line-height: 0.8;
@@ -519,10 +522,11 @@
     font-weight: 400;
   }
 
-  .skills-line,
+  .skills-line, 
+  .cases-line,
   .cases-line {
     width: 45px;                 /* уменьшаем длину линии */
-    height: 9px;                 /* уменьшаем толщину */
+    height: 8px;                 /* уменьшаем толщину */
     background-color: #505050;
     margin-left: 0;
   }
@@ -548,6 +552,7 @@
 
   .skills-text,
   .cases-text,
+  .cases-text-2,
   .contacts-text {
     font-size: 36px;             /* ещё компактнее */
     line-height: 0.8;
@@ -555,6 +560,7 @@
 
   .skills-line,
   .cases-line,
+  .cases-line-2,
   .contacts-line {
     width: 35px;
     height: 6px;
@@ -732,5 +738,53 @@
 
   .contact-phone {
     font-size: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .vacancy-section {
+    position: relative;
+    left: -150px;
+  }
+}
+
+/* --- Перенос блока .edu-subnav в мобильную версию --- */
+
+.edu-subnav-mobile {
+  display: none; /* по умолчанию скрыта */
+}
+
+@media (max-width: 768px) {
+  .vacancy-black-inner {
+    position: relative;
+    left: -150px;
+  }
+}
+
+.vacancy-black-title {
+  font-size: 48px;
+}
+
+/* === Мобильная адаптация: перенос .case-image-2 под .case-panel === */
+@media (max-width: 768px) {
+
+  .case-wrapper {
+    display: flex;
+    flex-direction: column; /* выстраиваем элементы в колонку */
+  }
+
+  .case-image-2 {
+    order: 2; /* ставим ниже */
+  }
+
+  .case-panel {
+    order: 1; /* оставляем выше */
+  }
+
+  /* Чтобы не было лишних отступов */
+  .case-image-2 img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 }
