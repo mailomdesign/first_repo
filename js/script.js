@@ -324,22 +324,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// === МОДАЛЬНОЕ ОКНО: обратная связь и обучение ===
 document.addEventListener("DOMContentLoaded", () => {
   const modal = document.getElementById("feedbackModal");
-  const openModalButtons = document.querySelectorAll("#openModal, #openModalEdu");
   const closeModal = document.getElementById("closeModal");
+  const openButtons = document.querySelectorAll("#openModal, #openModalEdu");
 
   if (!modal) return;
 
-  openModalButtons.forEach(button => {
-    button.addEventListener("click", (e) => {
+  openButtons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
       e.preventDefault();
       modal.style.display = "block";
       document.body.style.overflow = "hidden";
 
-      // Автоматический выбор темы, если нажали из блока обучения
+      // если нажали кнопку из раздела "Обучение" — сразу выбираем нужную тему
       const subjectSelect = modal.querySelector("#subject");
-      if (button.id === "openModalEdu" && subjectSelect) {
+      if (btn.id === "openModalEdu" && subjectSelect) {
         subjectSelect.value = "Обучение";
       }
     });
@@ -352,12 +353,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  window.addEventListener("click", (event) => {
-    if (event.target === modal) {
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
       modal.style.display = "none";
       document.body.style.overflow = "";
     }
   });
 });
-
 
