@@ -324,5 +324,40 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("feedbackModal");
+  const openModalButtons = document.querySelectorAll("#openModal, #openModalEdu");
+  const closeModal = document.getElementById("closeModal");
+
+  if (!modal) return;
+
+  openModalButtons.forEach(button => {
+    button.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.style.display = "block";
+      document.body.style.overflow = "hidden";
+
+      // Автоматический выбор темы, если нажали из блока обучения
+      const subjectSelect = modal.querySelector("#subject");
+      if (button.id === "openModalEdu" && subjectSelect) {
+        subjectSelect.value = "Обучение";
+      }
+    });
+  });
+
+  if (closeModal) {
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    });
+  }
+
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      document.body.style.overflow = "";
+    }
+  });
+});
 
 
