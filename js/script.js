@@ -300,64 +300,80 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('feedbackModal');
-  const openBtn = document.getElementById('openModal');
-  const closeBtn = document.getElementById('closeModal');
+// === Универсальный делегированный обработчик модалки (ставь в конец menu.js) ===
+(function() {
+  const modalId = "feedbackModal";
+  const modal = () => document.getElementById(modalId);
+  const closeSelector = "#closeModal, .modal .close"; // крестик или .close внутри модалки
 
-  // открыть модалку
-  openBtn.addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
+  // Функция открытия (опционально передать subjectValue)
+  function openFeedback(subjectValue) {
+    const m = modal();
+    if (!m) return;
+    // показываем модалку
+    m.style.display = "block";
+    document.body.style.overflow = "hidden";
 
-  // закрыть по кнопке "×"
-  closeBtn.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  // закрыть по клику на фон
-  window.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.style.display = 'none';
+    // если есть select темы — выставим значение
+    const subjectSel = m.querySelector("#subject");
+    if (subjectSel && subjectValue) {
+      // поставим значение безопасно (если такое значение есть в опциях)
+      const opt = Array.from(subjectSel.options).find(o => o.value === subjectValue);
+      if (opt) subjectSel.value = subjectValue;
     }
-  });
-});
-
-
-// === МОДАЛЬНОЕ ОКНО: обратная связь и обучение ===
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("feedbackModal");
-  const closeModal = document.getElementById("closeModal");
-  const openButtons = document.querySelectorAll("#openModal, #openModalEdu");
-
-  if (!modal) return;
-
-  openButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      modal.style.display = "block";
-      document.body.style.overflow = "hidden";
-
-      // если нажали кнопку из раздела "Обучение" — сразу выбираем нужную тему
-      const subjectSelect = modal.querySelector("#subject");
-      if (btn.id === "openModalEdu" && subjectSelect) {
-        subjectSelect.value = "Обучение";
-      }
-    });
-  });
-
-  if (closeModal) {
-    closeModal.addEventListener("click", () => {
-      modal.style.display = "none";
-      document.body.style.overflow = "";
-    });
   }
 
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-      document.body.style.overflow = "";
+  function closeFeedback() {
+    const m = modal();
+    if (!m) return;
+    m.style.display = "none";
+    document.body.style.overflow = "";
+  }
+
+  // Делегируем клики по документу
+  document.addEventListener("click", function(e) {
+    const target = e.target;
+
+    // 1) клик по элементу, который открывает модалку (id либо data-attr)
+    // поддерживаем: #openModal, #openModalEdu, [data-open-feedback]
+    const opener = target.closest("#openModal, #openModalEdu, [data-open-feedback]");
+    if (opener) {
+      e.preventDefault();
+
+      // если у opener есть data-open-feedback-value, используем его как тему
+      const subjectValue = opener.getAttribute("data-open-feedback-value") || (opener.id === "openModalEdu" ? "Обучение" : null);
+
+      openFeedback(subjectValue);
+      return;
+    }
+
+    // 2) клик по крестику закрытия
+    if (target.closest(closeSelector)) {
+      e.preventDefault();
+      closeFeedback();
+      return;
+    }
+
+    // 3) клик по фону модалки — закрываем
+    const m = modal();
+    if (m && target === m) {
+      closeFeedback();
+      return;
+    }
+  }, { passive: false });
+
+  // Обработаем клавишу Esc для закрытия
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+      const m = modal();
+      if (m && m.style.display === "block") closeFeedback();
     }
   });
-});
+
+  // небольшой sanity-check: покажем в консоли, если модалка не найдена
+  window.addEventListener("load", () => {
+    if (!modal()) console.warn("feedbackModal не найден в DOM — модалка не будет открываться.");
+  });
+})();
+
 
