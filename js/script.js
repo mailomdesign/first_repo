@@ -300,24 +300,20 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// === Универсальный делегированный обработчик модалки (ставь в конец menu.js) ===
+// === Универсальный делегированный обработчик модалки ===
 (function() {
   const modalId = "feedbackModal";
   const modal = () => document.getElementById(modalId);
-  const closeSelector = "#closeModal, .modal .close"; // крестик или .close внутри модалки
+  const closeSelector = "#closeModal, .modal .close";
 
-  // Функция открытия (опционально передать subjectValue)
   function openFeedback(subjectValue) {
     const m = modal();
     if (!m) return;
-    // показываем модалку
     m.style.display = "block";
     document.body.style.overflow = "hidden";
 
-    // если есть select темы — выставим значение
     const subjectSel = m.querySelector("#subject");
     if (subjectSel && subjectValue) {
-      // поставим значение безопасно (если такое значение есть в опциях)
       const opt = Array.from(subjectSel.options).find(o => o.value === subjectValue);
       if (opt) subjectSel.value = subjectValue;
     }
@@ -330,49 +326,31 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = "";
   }
 
-  // Делегируем клики по документу
   document.addEventListener("click", function(e) {
-    const target = e.target;
-
-    // 1) клик по элементу, который открывает модалку (id либо data-attr)
-    // поддерживаем: #openModal, #openModalEdu, [data-open-feedback]
-    const opener = target.closest("#openModal, #openModalEdu, [data-open-feedback]");
+    const opener = e.target.closest("#openModal, #openModalEdu, [data-open-feedback]");
     if (opener) {
       e.preventDefault();
-
-      // если у opener есть data-open-feedback-value, используем его как тему
-      const subjectValue = opener.getAttribute("data-open-feedback-value") || (opener.id === "openModalEdu" ? "Обучение" : null);
-
+      const subjectValue = opener.getAttribute("data-open-feedback-value") ||
+        (opener.id === "openModalEdu" ? "Обучение" : null);
       openFeedback(subjectValue);
       return;
     }
 
-    // 2) клик по крестику закрытия
-    if (target.closest(closeSelector)) {
+    if (e.target.closest(closeSelector)) {
       e.preventDefault();
       closeFeedback();
       return;
     }
 
-    // 3) клик по фону модалки — закрываем
     const m = modal();
-    if (m && target === m) {
-      closeFeedback();
-      return;
-    }
-  }, { passive: false });
+    if (m && e.target === m) closeFeedback();
+  });
 
-  // Обработаем клавишу Esc для закрытия
-  document.addEventListener("keydown", function(e) {
+  document.addEventListener("keydown", e => {
     if (e.key === "Escape") {
       const m = modal();
       if (m && m.style.display === "block") closeFeedback();
     }
-  });
-
-  // небольшой sanity-check: покажем в консоли, если модалка не найдена
-  window.addEventListener("load", () => {
-    if (!modal()) console.warn("feedbackModal не найден в DOM — модалка не будет открываться.");
   });
 })();
 
