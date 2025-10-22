@@ -61,7 +61,6 @@ function buildIndexURL() {
   return window.location.origin + basePath + "index.php";
 }
 
-})();
 
 // На index.php: если есть хэш в URL, прокручиваем к section после загрузки
 document.addEventListener("DOMContentLoaded", () => {
@@ -77,3 +76,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 120); // 100–200 ms обычно достаточно
   }
 });
+}); // закрывает последний document.addEventListener
+
