@@ -1,3 +1,5 @@
+console.log("✅ script.js запущен");
+
 document.addEventListener('DOMContentLoaded', () => {
 // ========== НАВИГАЦИЯ МЕНЮ ==========
 const isIndex = location.pathname === '/' || /(^|\/)index\.php$/.test(location.pathname);
@@ -305,12 +307,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalId = "feedbackModal";
   const modal = () => document.getElementById(modalId);
   const closeSelector = "#closeModal, .modal .close";
+  
 
   function openFeedback(subjectValue) {
     const m = modal();
     if (!m) return;
     m.style.display = "block";
     document.body.style.overflow = "hidden";
+
+    
 
     const subjectSel = m.querySelector("#subject");
     if (subjectSel && subjectValue) {
@@ -352,6 +357,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (m && m.style.display === "block") closeFeedback();
     }
   });
+  
 })();
 
+console.log("✅ script.js дошёл до конца");
 

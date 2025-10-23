@@ -411,10 +411,6 @@ if ($cases && is_array($cases)) {
 </div>
 
 
-    </form>
-  </div>
-</div>
-
 
 <script src="js/menu.js"></script>
 </body>
