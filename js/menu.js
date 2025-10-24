@@ -40,16 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // 2️⃣ абсолютные ссылки (education.html и т.д.)
+      // 2️⃣ абсолютные ссылки (index.php#contacts, education.html#contacts и т.д.)
       else if (href.includes("#")) {
         try {
           const url = new URL(href, location.origin);
           const hash = url.hash;
+          // если ссылка указывает на текущую страницу — скроллим
           if (url.pathname === location.pathname) {
             const target = document.querySelector(hash);
             if (target) smoothScrollToElement(target);
             else window.location.href = buildIndexURL() + hash;
           } else {
+            // иначе — обычный переход
             window.location.href = href;
           }
         } catch {
