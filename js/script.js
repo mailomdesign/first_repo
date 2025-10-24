@@ -1,50 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-// ========== НАВИГАЦИЯ МЕНЮ ==========
-const isIndex = location.pathname === '/' || /(^|\/)index\.php$/.test(location.pathname);
-const menuLinks = document.querySelectorAll('.fixed-menu a');
-
-menuLinks.forEach(link => {
-  const href = link.getAttribute('href') || '';
-  let targetId = link.dataset.target || null;
-
-  if (!targetId) {
-    if (href.startsWith('#')) targetId = href.slice(1);
-    else if (href.includes('#')) {
-      try {
-        targetId = new URL(href, location.origin).hash.slice(1);
-      } catch (e) {
-        targetId = null;
-      }
-    }
-  }
-  if (!targetId) return;
-
-  if (isIndex) {
-    link.addEventListener('click', (e) => {
-      e.preventDefault();
-      const el = document.getElementById(targetId);
-      if (!el) {
-        location.href = '/index.php#' + targetId;
-        return;
-      }
-
-      // --- Центровка по экрану ---
-      const targetRect = el.getBoundingClientRect();
-      const targetY = window.scrollY + targetRect.top;
-      const offset = 0; // регулируй ↑↓: отриц. выше, положит. ниже
-      const centerY = targetY - (window.innerHeight / 2) + (el.offsetHeight / 2) + offset;
-
-      window.scrollTo({ top: centerY, behavior: 'smooth' });
-      history.replaceState(null, '', '#' + targetId);
-    });
-  } else {
-    if (href.startsWith('#')) {
-      link.href = '/index.php#' + targetId;
-    }
-  }
-});
-
-
   // ========== КАСТОМНЫЙ СКРОЛЛБАР ==========
   const thumb = document.querySelector('.scroll-thumb');
   if (thumb) {
@@ -117,6 +71,7 @@ menuLinks.forEach(link => {
     elements.forEach(el => observer.observe(el));
   }
 });
+
 
 // ВНЕ document.addEventListener(...), в самом начале или конце файла:
 function scrollToTop() {
