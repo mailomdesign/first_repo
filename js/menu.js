@@ -20,28 +20,24 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", e => {
       e.preventDefault();
 
-      let hash = "";
-      let page = "";
-
-      // разбираем ссылку (например, index.php#contacts)
-      if (href.includes("#")) {
-        const [maybePage, maybeHash] = href.split("#");
-        page = maybePage;
-        hash = "#" + (maybeHash || "");
-      } else if (href.startsWith("#")) {
-        hash = href;
+      // если ссылка указывает на index.php или другую страницу — просто перейти
+      if (href.includes("index.php") || href.includes(".html")) {
+        window.location.href = href;
+        return;
       }
 
-      // если якорь есть и элемент существует на текущей странице
-      if (hash && document.querySelector(hash)) {
-        smoothScrollToElement(document.querySelector(hash));
-      } 
-      // если якорь есть, но элемента нет — перейти на index.php#hash
-      else if (hash) {
-        window.location.href = buildIndexURL() + hash;
-      } 
-      // иначе обычный переход
-      else {
+      // якорные ссылки внутри текущей страницы
+      if (href.startsWith("#")) {
+        const target = document.querySelector(href);
+
+        if (target) {
+          smoothScrollToElement(target);
+        } else {
+          // блока нет — перейти на index.php#...
+          window.location.href = buildIndexURL() + href;
+        }
+      } else {
+        // обычные прямые ссылки
         window.location.href = href;
       }
 
@@ -63,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return window.location.origin + basePath + "index.php";
   }
 
-  // если страница загружается с хэшем (например, ...#contacts)
   function tryScrollToHash() {
     const hash = window.location.hash;
     if (!hash) return;
