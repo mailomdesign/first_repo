@@ -1,5 +1,3 @@
-console.log("✅ script.js запущен");
-
 document.addEventListener('DOMContentLoaded', () => {
 // ========== НАВИГАЦИЯ МЕНЮ ==========
 const isIndex = location.pathname === '/' || /(^|\/)index\.php$/.test(location.pathname);
@@ -332,8 +330,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const opener = e.target.closest("#openModal, #openModalEdu, [data-open-feedback]");
     if (opener) {
       e.preventDefault();
-      const subjectValue = opener.getAttribute("data-open-feedback-value") ||
-        (opener.id === "openModalEdu" ? "Обучение" : null);
+
+      // Определяем, какая кнопка была нажата
+      let subjectValue = opener.getAttribute("data-open-feedback-value") || null;
+
+      if (!subjectValue) {
+        if (opener.id === "openModalEdu") subjectValue = "Обучение";
+        else if (opener.id === "openModal") subjectValue = "Сотрудничество";
+      }
+
       openFeedback(subjectValue);
       return;
     }
@@ -354,8 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (m && m.style.display === "block") closeFeedback();
     }
   });
-  
 })();
 
-console.log("✅ script.js дошёл до конца");
+
 
