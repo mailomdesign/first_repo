@@ -307,15 +307,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalId = "feedbackModal";
   const modal = () => document.getElementById(modalId);
   const closeSelector = "#closeModal, .modal .close";
-  
 
   function openFeedback(subjectValue) {
     const m = modal();
     if (!m) return;
     m.style.display = "block";
     document.body.style.overflow = "hidden";
-
-    
 
     const subjectSel = m.querySelector("#subject");
     if (subjectSel && subjectValue) {
