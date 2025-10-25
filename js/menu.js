@@ -20,27 +20,22 @@ document.addEventListener("DOMContentLoaded", () => {
     link.addEventListener("click", e => {
       e.preventDefault();
   
-      // --- если ссылка указывает на index.php с якорем (например index.php#contacts)
-      if (href.includes("index.php#")) {
+      // --- если ссылка ведёт на index.php с якорем ---
+      if (href.startsWith("index.php#")) {
         const hash = href.split("#")[1];
         const target = document.getElementById(hash);
+  
         if (target) {
-          // блок есть на текущей странице → плавный скролл
+          // элемент найден на текущей странице → скроллим
           smoothScrollToElement(target);
         } else {
-          // блока нет → переход на index.php#...
+          // элемента нет → переходим на index.php
           window.location.href = href;
         }
         return;
       }
   
-      // --- если ссылка указывает на другую страницу (education.html и т.д.)
-      if (href.endsWith(".html")) {
-        window.location.href = href;
-        return;
-      }
-  
-      // --- якорные ссылки внутри текущей страницы (#contacts и т.п.)
+      // --- если ссылка ведёт на якорь (#contacts и т.п.) ---
       if (href.startsWith("#")) {
         const target = document.querySelector(href);
         if (target) {
@@ -51,12 +46,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
   
-      // --- fallback: обычная ссылка
+      // --- если ссылка ведёт на другую страницу (.html) ---
+      if (href.endsWith(".html")) {
+        window.location.href = href;
+        return;
+      }
+  
+      // --- запасной вариант ---
       window.location.href = href;
   
       if (menuOverlay) menuOverlay.classList.remove("active");
     });
   });
+  
   
 
   function smoothScrollToElement(el) {
