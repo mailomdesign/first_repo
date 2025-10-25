@@ -16,34 +16,48 @@ document.addEventListener("DOMContentLoaded", () => {
   allMenuLinks.forEach(link => {
     const href = link.getAttribute("href");
     if (!href) return;
-
+  
     link.addEventListener("click", e => {
       e.preventDefault();
-
-      // если ссылка указывает на index.php или другую страницу — просто перейти
-      if (href.includes("index.php") || href.includes(".html")) {
+  
+      // --- если ссылка указывает на index.php с якорем (например index.php#contacts)
+      if (href.includes("index.php#")) {
+        const hash = href.split("#")[1];
+        const target = document.getElementById(hash);
+        if (target) {
+          // блок есть на текущей странице → плавный скролл
+          smoothScrollToElement(target);
+        } else {
+          // блока нет → переход на index.php#...
+          window.location.href = href;
+        }
+        return;
+      }
+  
+      // --- если ссылка указывает на другую страницу (education.html и т.д.)
+      if (href.endsWith(".html")) {
         window.location.href = href;
         return;
       }
-
-      // якорные ссылки внутри текущей страницы
+  
+      // --- якорные ссылки внутри текущей страницы (#contacts и т.п.)
       if (href.startsWith("#")) {
         const target = document.querySelector(href);
-
         if (target) {
           smoothScrollToElement(target);
         } else {
-          // блока нет — перейти на index.php#...
           window.location.href = buildIndexURL() + href;
         }
-      } else {
-        // обычные прямые ссылки
-        window.location.href = href;
+        return;
       }
-
+  
+      // --- fallback: обычная ссылка
+      window.location.href = href;
+  
       if (menuOverlay) menuOverlay.classList.remove("active");
     });
   });
+  
 
   function smoothScrollToElement(el) {
     const headerOffset = 80;
