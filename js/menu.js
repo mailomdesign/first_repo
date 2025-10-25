@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === Общая обработка ссылок меню ===
+  // === Общая обработка ссылок (фикс + мобильное меню) ===
   const allMenuLinks = document.querySelectorAll(".menu-content a, .fixed-menu a");
   allMenuLinks.forEach(link => {
     link.addEventListener("click", e => {
@@ -21,71 +21,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
       handleNavigation(href);
 
-      // закрыть мобильное меню
       if (menuOverlay) menuOverlay.classList.remove("active");
     });
   });
 
-  // === Универсальная функция навигации ===
+  // === Основная логика ===
   function handleNavigation(href) {
-    // 1️⃣ чистый якорь (#contacts и т.п.)
-    if (href.startsWith("#")) {
-      const target = document.querySelector(href);
-      if (target) {
-        smoothScrollToElement(target);
+    const isOnIndex = isIndexPage();
+
+    // --- Контакты ---
+    if (href.includes("#contacts")) {
+      const localContacts = document.querySelector("#contacts") || document.querySelector(".contacts-section");
+      if (localContacts) {
+        smoothScrollToElement(localContacts);
       } else {
-        window.location.href = buildIndexURL() + href;
+        window.location.href = buildIndexURL() + "#contacts";
       }
       return;
     }
 
-    // 2️⃣ ссылка вида index.php#section
-    if (href.includes("index.php#")) {
-      const [base, hash] = href.split("#");
-      const target = document.querySelector(`#${hash}`);
+    // --- Главная / Био / Направление / Обучение / Кейсы ---
+    const mainSections = ["#hero", "#bio", "#direction", "#education", "#cases"];
+    const match = mainSections.find(sec => href.includes(sec));
 
-      // если мы не на index.php → перейти
-      if (!isCurrentPage(base)) {
-        window.location.href = href;
-        return;
-      }
-
-      // если блок найден → скролл, иначе переход
-      if (target) {
-        smoothScrollToElement(target);
+    if (match) {
+      if (!isOnIndex) {
+        // если не на главной → перейти на index.php#section
+        window.location.href = buildIndexURL() + match;
       } else {
-        window.location.href = href;
+        // если уже на главной → просто скролл
+        const target = document.querySelector(match);
+        if (target) smoothScrollToElement(target);
+        else window.location.href = buildIndexURL() + match;
       }
       return;
     }
 
-    // 3️⃣ ссылки на другие страницы (education.html#block)
-    if (href.includes(".html#")) {
-      const [base, hash] = href.split("#");
-      const target = document.querySelector(`#${hash}`);
-
-      if (!isCurrentPage(base)) {
-        window.location.href = href;
-        return;
-      }
-
-      if (target) {
-        smoothScrollToElement(target);
-      } else {
-        window.location.href = href;
-      }
-      return;
-    }
-
-    // 4️⃣ просто переход, если не якорь
+    // --- Любые другие случаи (education.html и т.д.) ---
     window.location.href = href;
   }
 
-  // === вспомогательные функции ===
-  function isCurrentPage(base) {
-    const current = window.location.pathname.split("/").pop() || "index.php";
-    const compareTo = base.split("/").pop();
-    return current === compareTo;
+  // === Вспомогательные ===
+  function isIndexPage() {
+    const file = window.location.pathname.split("/").pop();
+    return file === "" || file === "index.php";
   }
 
   function smoothScrollToElement(el) {
@@ -102,16 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return window.location.origin + basePath + "index.php";
   }
 
+  // === Автоскролл при загрузке страницы с хэшем ===
   function tryScrollToHash() {
     const hash = window.location.hash;
     if (!hash) return;
-
     let attempts = 0;
     const maxAttempts = 40;
+
     const interval = setInterval(() => {
       const el = document.querySelector(hash);
       attempts++;
-
       if (el) {
         clearInterval(interval);
         requestAnimationFrame(() => smoothScrollToElement(el));

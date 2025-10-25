@@ -766,32 +766,32 @@
 }
 
 @media (max-width: 768px) {
-  /* Убедимся, что flex работает на правильном уровне */
   .case-wrapper {
     display: flex;
     flex-direction: column;
   }
 
-  /* Меняем порядок элементов */
+  /* Панель идёт первой, фон остаётся за ней */
   .case-panel {
     order: 1;
-    clip-path: none !important;
+    position: static; /* убираем абсолютное/фиксированное позиционирование */
+    z-index: auto;
+    background: rgba(0,0,0,0.85); /* если у тебя был чёрный фон, он остаётся, но не перекрывает следующую секцию */
   }
 
+  /* Изображение идёт вторым, полностью в потоке */
   .case-image-2 {
     order: 2;
-    margin-top: 40px; /* небольшой отступ для визуального разделения */
-  }
-
-  /* Важно: убрать float и фиксированные ширины, если есть */
-  .case-panel, .case-image-2 {
-    width: 100%;
-    float: none;
+    position: static; /* возвращаем нормальный поток */
+    z-index: 1;
+    margin-top: 0;
   }
 
   .case-image-2 img {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
   }
 }
+
+
