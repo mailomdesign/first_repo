@@ -16,50 +16,34 @@ document.addEventListener("DOMContentLoaded", () => {
   allMenuLinks.forEach(link => {
     const href = link.getAttribute("href");
     if (!href) return;
-  
+
     link.addEventListener("click", e => {
       e.preventDefault();
-  
-      // --- если ссылка ведёт на index.php с якорем ---
-      if (href.startsWith("index.php#")) {
-        const hash = href.split("#")[1];
-        const target = document.getElementById(hash);
-  
-        if (target) {
-          // элемент найден на текущей странице → скроллим
-          smoothScrollToElement(target);
-        } else {
-          // элемента нет → переходим на index.php
-          window.location.href = href;
-        }
-        return;
-      }
-  
-      // --- если ссылка ведёт на якорь (#contacts и т.п.) ---
-      if (href.startsWith("#")) {
-        const target = document.querySelector(href);
-        if (target) {
-          smoothScrollToElement(target);
-        } else {
-          window.location.href = buildIndexURL() + href;
-        }
-        return;
-      }
-  
-      // --- если ссылка ведёт на другую страницу (.html) ---
-      if (href.endsWith(".html")) {
+
+      // если ссылка указывает на index.php или другую страницу — просто перейти
+      if (href.includes("index.php") || href.includes(".html")) {
         window.location.href = href;
         return;
       }
-  
-      // --- запасной вариант ---
-      window.location.href = href;
-  
+
+      // якорные ссылки внутри текущей страницы
+      if (href.startsWith("#")) {
+        const target = document.querySelector(href);
+
+        if (target) {
+          smoothScrollToElement(target);
+        } else {
+          // блока нет — перейти на index.php#...
+          window.location.href = buildIndexURL() + href;
+        }
+      } else {
+        // обычные прямые ссылки
+        window.location.href = href;
+      }
+
       if (menuOverlay) menuOverlay.classList.remove("active");
     });
   });
-  
-  
 
   function smoothScrollToElement(el) {
     const headerOffset = 80;
