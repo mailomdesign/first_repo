@@ -766,23 +766,31 @@
 }
 
 @media (max-width: 768px) {
+  /* Общий контейнер кейса — выстраиваем элементы в колонку */
   .case-wrapper {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    overflow: visible;
   }
 
-  /* Панель идёт первой, фон остаётся за ней */
+  /* Чёрный блок с текстом и логотипом */
   .case-panel {
     order: 1;
-    position: static; /* убираем абсолютное/фиксированное позиционирование */
-    z-index: auto;
-    background: rgba(0,0,0,0.85); /* если у тебя был чёрный фон, он остаётся, но не перекрывает следующую секцию */
+    position: relative;
+    width: 100%;
+    z-index: 2;
+    background-color: #000; /* сохраняет чёрный фон */
+    color: #fff;
+    padding: 20px;
+    clip-path: none !important;
   }
 
-  /* Изображение идёт вторым, полностью в потоке */
+  /* Изображение кейса — ниже панели */
   .case-image-2 {
     order: 2;
-    position: static; /* возвращаем нормальный поток */
+    position: relative;
+    width: 100%;
     z-index: 1;
     margin-top: 0;
   }
@@ -792,6 +800,30 @@
     width: 100%;
     height: auto;
   }
+
+  /* На всякий случай убираем возможное абсолютное позиционирование */
+  .logo-wrapper {
+    position: relative !important;
+    z-index: 2 !important;
+
+  }
+
+  .text-wrapper {
+    position: relative !important;
+    z-index: 2 !important;
+    left: 60px;
+  }
 }
 
+
+@media (max-width: 768px) {
+
+  /* ...твои стили для .case-wrapper и .case-panel... */
+
+  /* Отступ для блока отзывов под кейсом */
+  .pattern-bg-full,
+  .review-bio-section {
+    margin-top: 550px !important;
+  }
+}
 
