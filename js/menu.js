@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // === Общая обработка ссылок (для мобильного и фиксированного меню) ===
+  // === Общая обработка ссылок меню ===
   const allMenuLinks = document.querySelectorAll(".menu-content a, .fixed-menu a");
   allMenuLinks.forEach(link => {
     link.addEventListener("click", e => {
@@ -21,29 +21,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
       handleNavigation(href);
 
-      // закрытие мобильного меню
+      // закрыть мобильное меню
       if (menuOverlay) menuOverlay.classList.remove("active");
     });
   });
 
-  // === Универсальная функция обработки переходов ===
+  // === Универсальная функция навигации ===
   function handleNavigation(href) {
-    // 1️⃣ Если ссылка — якорь (например "#contacts")
+    // 1️⃣ чистый якорь (#contacts и т.п.)
     if (href.startsWith("#")) {
       const target = document.querySelector(href);
       if (target) {
         smoothScrollToElement(target);
       } else {
-        // если на текущей странице нет — перейти на главную
         window.location.href = buildIndexURL() + href;
       }
       return;
     }
 
-    // 2️⃣ Если ссылка указывает на index.php#что-то
+    // 2️⃣ ссылка вида index.php#section
     if (href.includes("index.php#")) {
-      const hash = href.split("#")[1];
-      const target = document.getElementById(hash);
+      const [base, hash] = href.split("#");
+      const target = document.querySelector(`#${hash}`);
+
+      // если мы не на index.php → перейти
+      if (!isCurrentPage(base)) {
+        window.location.href = href;
+        return;
+      }
+
+      // если блок найден → скролл, иначе переход
       if (target) {
         smoothScrollToElement(target);
       } else {
@@ -52,30 +59,35 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // 3️⃣ Если ссылка на другую страницу (.html и т.п.)
-    if (href.includes(".html")) {
-      const hashIndex = href.indexOf("#");
-      if (hashIndex !== -1) {
-        const base = href.substring(0, hashIndex);
-        const hash = href.substring(hashIndex);
-        // проверяем, есть ли элемент с таким id на текущей странице
-        const target = document.querySelector(hash);
-        if (target) {
-          smoothScrollToElement(target);
-        } else {
-          window.location.href = base + hash;
-        }
+    // 3️⃣ ссылки на другие страницы (education.html#block)
+    if (href.includes(".html#")) {
+      const [base, hash] = href.split("#");
+      const target = document.querySelector(`#${hash}`);
+
+      if (!isCurrentPage(base)) {
+        window.location.href = href;
+        return;
+      }
+
+      if (target) {
+        smoothScrollToElement(target);
       } else {
         window.location.href = href;
       }
       return;
     }
 
-    // 4️⃣ Все остальные — просто переход
+    // 4️⃣ просто переход, если не якорь
     window.location.href = href;
   }
 
-  // === Плавный скролл с компенсацией отступа под шапку ===
+  // === вспомогательные функции ===
+  function isCurrentPage(base) {
+    const current = window.location.pathname.split("/").pop() || "index.php";
+    const compareTo = base.split("/").pop();
+    return current === compareTo;
+  }
+
   function smoothScrollToElement(el) {
     const headerOffset = 80;
     const elementPosition = el.getBoundingClientRect().top + window.scrollY;
@@ -83,7 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
     window.scrollTo({ top: offsetPosition, behavior: "smooth" });
   }
 
-  // === Построение полного пути к index.php ===
   function buildIndexURL() {
     const pathParts = window.location.pathname.split("/");
     pathParts.pop();
@@ -91,16 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return window.location.origin + basePath + "index.php";
   }
 
-  // === Автоскролл при загрузке страницы с хэшем ===
   function tryScrollToHash() {
     const hash = window.location.hash;
     if (!hash) return;
+
     let attempts = 0;
     const maxAttempts = 40;
-
     const interval = setInterval(() => {
       const el = document.querySelector(hash);
       attempts++;
+
       if (el) {
         clearInterval(interval);
         requestAnimationFrame(() => smoothScrollToElement(el));
