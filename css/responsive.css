@@ -780,10 +780,15 @@
     position: relative;
     width: 100%;
     z-index: 2;
-    background-color: #000; /* сохраняет чёрный фон */
+    background-color: #000;
     color: #fff;
     padding: 20px;
     clip-path: none !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* центрируем всё по горизонтали */
+    text-align: center;   /* выравниваем текст */
   }
 
   /* Изображение кейса — ниже панели */
@@ -801,19 +806,32 @@
     height: auto;
   }
 
-  /* На всякий случай убираем возможное абсолютное позиционирование */
+  /* Логотип */
   .logo-wrapper {
     position: relative !important;
     z-index: 2 !important;
-
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
 
+  /* Текст в центре по блоку case-panel */
   .text-wrapper {
     position: relative !important;
     z-index: 2 !important;
-    left: 60px;
+    width: 100%;
+    max-width: 90%; /* чуть меньше ширины, чтобы не прилипал к краям */
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+
   }
 }
+
 
 
 @media (max-width: 768px) {
