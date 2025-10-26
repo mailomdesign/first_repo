@@ -522,6 +522,19 @@
     font-weight: 400;
   }
 
+  .case-title-2 {
+    text-align: right;
+    font-size: 160px;
+    color: black;
+    padding: 0px 0px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 50px;
+    letter-spacing: normal; /* убираем визуальные "дыры" между буквами */
+    word-spacing: 0; /* чтобы пробелы между словами не мешали выравниванию */
+    padding-right: 30px; /* ✅ отступ от правого края */
+}
+
   .skills-line, 
   .cases-line,
   .cases-line {
@@ -834,14 +847,99 @@
 
 
 
+/* === Отзыв клиента: адаптация для мобильных устройств === */
 @media (max-width: 768px) {
 
-  /* ...твои стили для .case-wrapper и .case-panel... */
-
-  /* Отступ для блока отзывов под кейсом */
-  .pattern-bg-full,
-  .review-bio-section {
+  /* Отступ под кейсом */
+  .pattern-bg-full {
     margin-top: 550px !important;
+    padding: 40px 20px;
+  }
+
+  /* Контейнер отзыва — горизонтальная выравнивание элементов */
+  .review-bio-section {
+    display: flex;
+    flex-direction: row; /* элементы в один ряд */
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* чтобы при малой ширине не ломалось */
+    text-align: left;
+    gap: 30px;
+    width: 100%;
+  }
+
+  /* Аватар клиента */
+  .review-image-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .review-avatar {
+    height: auto;
+    border-radius: 50%;
+  }
+
+  /* Текстовая часть */
+  .review-text-block {
+    flex: 1 1 300px;
+    max-width: 500px;
+  }
+
+  .review-quote {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .review-line {
+    width: 40px;
+    height: 4px;
+    background-color: #505050;
+    margin: 10px 0;
+  }
+
+  .review-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  .review-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #333;
+  }
+}
+
+/* === Маленькие экраны (до 480px) === */
+@media (max-width: 480px) {
+  .pattern-bg-full {
+    padding: 30px 15px;
+    margin-top: 450px !important;
+  }
+
+  .review-bio-section {
+    flex-direction: column; /* уже на маленьких делаем вертикально */
+    text-align: center;
+  }
+
+  .review-avatar {
+    width: 100px;
+  }
+
+  .review-quote {
+    font-size: 18px;
+  }
+
+  .review-title {
+    font-size: 14px;
+  }
+
+  .review-text {
+    font-size: 14px;
   }
 }
 
