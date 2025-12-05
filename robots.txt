@@ -1,3 +1,16 @@
 User-agent: *
 Allow: /
-Sitemap: https://mailomdesign.ru/sitemap.xml
+
+# Закрываем служебные папки
+Disallow: /css/
+Disallow: /js/
+Disallow: /php/
+Disallow: /fonts/
+Disallow: /img/og_image/  # чтобы не индексировались технические картинки og
+Allow: /img/
+
+# Указываем sitemap
+Sitemap: https://obraztsov.pro/sitemap.xml
+
+# Указываем язык сайта
+Host: obraztsov.pro

@@ -1,23 +1,12 @@
 [
   {
-    "title": "Boroda Group",
-    "logo_bw": "img/logos/logo-BG_b.svg",
-    "logo_color": "img/logos/logo-BG_w.svg",
-    "label": "задачи",
-    "desc": "разработка дизайна меню, верстка меню, допечатная подготовка, дизайн сопровождение",
-    "site": "@borodashvilirest",
-    "tag": "#horeca",
-    "image_color": "img/cases/case_bg.png",
-    "page": "case_bg.html"
-  },
-  {
     "title": "МСК ГРУПП",
     "logo_bw": "img/logos/logo-msk_b.svg",
     "logo_color": "img/logos/logo-msk_w.svg",
     "label": "задачи",
     "desc": "разработка логотипа компании, рекамной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение",
     "site": "msk-development.ru",
-    "tag": "#строительство",
+    "tag": "#development",
     "image_color": "img/cases/case_msk.png",
     "page": "case_msk.html"
   },
@@ -27,21 +16,10 @@
     "logo_color": "img/logos/logo-sep_w.svg",
     "label": "задачи",
     "desc": "раработка логотипа, верстка рекламных материалов, визуализация дизайна кофеен, элементы оформления дизайна кофеен, дизайн сопровождение",
-    "site": "@sepcoffee",
+    "site": "sep-studio.ru",
     "tag": "#horeca",
     "image_color": "img/cases/case_sep.png",
     "page": "case_sep.html"
-  },
-  {
-    "title": "MUVA",
-    "logo_bw": "img/logos/logo-muva_b.svg",
-    "logo_color": "img/logos/logo-muva_w.svg",
-    "label": "задачи",
-    "desc": "разработка фирменного стиля и брендбука компании, pos материалы, допечатная подготовка, альбомы и наружная реклама",
-    "site": "muva-development.ru",
-    "tag": "#строительство",
-    "image_color": "img/cases/case_muva.png",
-    "page": "case_muva.html"
   },
   {
     "title": "FP7D",

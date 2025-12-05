@@ -14,47 +14,152 @@ if (!is_array($cases)) {
 <html lang="ru">
 <head>
 <link rel="icon" type="image/x-icon" href="logo_fav_bw.ico" />
+<link rel="canonical" href="https://obraztsov.pro/">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Михаил Образцов — Портфолио</title>
+  <title>Портфолио дизайнера Михаила Образцова — брендинг, визуальные системы, проекты</title>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
 
 
-  <meta name="description" content="сайт Портфолио Михаила Образцова — дизайн, реклама, маркетинг, обучение">
-  <meta name="keywords" content="дизайнер, портфолио, Михаил Образцов, дизайне Краснодра, реклама Краснодар, маркетинг, графический дизайн, визуал, креатив, обучение дизайну">
+  <meta name="description" content="Портфолио дизайнера Михаила Образцова: брендинг, визуальные системы, графический дизайн, креативные кампании, обучение дизайну и менторство.">
+  <meta name="keywords" content="дизайнер, портфолио, Михаил Образцов, брендинг, дизайнер Краснодар, Краснодар дизайн, графический дизайн, визуальные системы, маркетинг, реклама, креатив, обучение дизайну">
   <meta name="author" content="Михаил Образцов">
+
+  <!-- Schema.org -->
   <meta property="og:locale" content="ru_RU">
   <meta property="og:title" content="Михаил Образцов — Портфолио">
-  <meta property="og:description" content="Дизайнер и основатель Mailom Design. Работы, биография, контакты.">
-  <meta property="og:image" content="https://mailomdesign.ru/img/preview.jpg">
+  <meta property="og:description" content="Портфолио дизайнера Михаила Образцова — брендинг, визуальные системы, проекты, обучение и менторство.">
+  <meta property="og:image" content="https://obraztsov.pro/img/og_image/preview.jpg">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://mailomdesign.ru">
-  
-  <script type="application/ld+json">
+  <meta property="og:url" content="https://obraztsov.pro">
+  <meta property="og:site_name" content="Портфолио дизайнера Михаила Образцова">
+  <meta property="og:image:alt" content="Портфолио дизайнера Михаила Образцова — проекты и визуальные решения">
+  <meta http-equiv="Content-Language" content="ru">
 
-  
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
-  "@id": "https://mailomdesign.ru#person",
+  "@id": "https://obraztsov.pro#person",
   "name": "Михаил Образцов",
-  "jobTitle": "Дизайнер, основатель Mailom Design",
-  "url": "https://mailomdesign.ru",
+  "jobTitle": "Бренд-дизайнер",
+  "image": "https://obraztsov.pro/img/og_image/preview.jpg",
+  "url": "https://obraztsov.pro",
   "sameAs": [
-    "https://www.behance.net/mailom",
-    "https://www.linkedin.com/in/mailom"
+    "https://www.behance.net/MikhailObraztsov",
+    "https://www.linkedin.com/in/obraztsovdesign"
   ],
-  "description": "Портфолио дизайнера Михаила Образцова — брендинг, визуальные системы, менторство."
+  "description": "Портфолио дизайнера Михаила Образцова — брендинг, визуальные системы, креативные проекты, менторство.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Obraztsov Design",
+    "url": "https://obraztsov.pro"
+  },
+  "brand": "Obraztsov Design",
+  "knowsAbout": [
+    "Графический дизайн",
+    "Брендинг",
+    "Айдентика",
+    "Креативные кампании",
+    "Визуальные коммуникации",
+    "Менторство в дизайне"
+  ]
 }
 </script>
+
+<!-- dataLayer с дефолтным отказом (до загрузки GTM) -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  // По умолчанию — аналитика запрещена (GDPR-совместимо)
+  window.dataLayer.push({
+    'event': 'consent_initial',
+    'consent': {
+      'analytics_storage': 'denied',
+      'ad_storage': 'denied'
+    }
+  });
+</script>
+
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true; j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5B2JBGKN');
+</script>
+<!-- End Google Tag Manager -->
 
 
 </head>
 <body>
 
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5B2JBGKN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Cookie banner -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Уведомление о cookie">
+  <div class="cookie-inner">
+    <button class="cookie-close" id="cookieClose" aria-label="Закрыть уведомление">✕</button>
+
+    <div class="cookie-text">
+      Мы используем файлы cookie, чтобы анализировать трафик, подбирать для вас подходящий контент и рекламу, 
+      а также дать вам возможность делиться информацией в социальных сетях. Мы передаем информацию о 
+      ваших действиях на сайте в обезличенном виде нашим партнерам: социальным сетям и компаниям, занимающимся 
+      рекламой и веб-аналитикой. Наши партнеры могут комбинировать эти сведения с предоставленной вами информацией,
+      а также данными, которые они получили при использовании вами их сервисов. Продолжая пользоваться данным сайтом, 
+      вы подтверждаете свое согласие на использование файлов cookie в соответствии с настоящим уведомлением.
+    </div>
+
+    <div class="cookie-actions">
+      <button id="cookieAccept" class="cookie-accept" aria-label="Принять файлы cookie">Принимаю</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Простая логика: скрыть баннер и запомнить выбор в localStorage */
+(function(){
+  const banner = document.getElementById('cookieBanner');
+  const closeBtn = document.getElementById('cookieClose');
+  const acceptBtn = document.getElementById('cookieAccept');
+
+  if (!banner) return;
+
+  // Если пользователь уже согласился — не показываем
+  try {
+    if (localStorage.getItem('cookieAccepted') === '1') {
+      banner.style.display = 'none';
+    } else {
+      banner.style.display = 'block';
+    }
+  } catch(e){ /* localStorage может быть недоступен — тогда показываем */ }
+
+  function hideAndRemember() {
+    banner.classList.add('cookie-hidden');
+    try { localStorage.setItem('cookieAccepted','1'); } catch(e){}
+    // через анимацию полностью убрать из потока
+    setTimeout(()=> { banner.style.display = 'none'; }, 300);
+  }
+
+  closeBtn && closeBtn.addEventListener('click', (e) => { e.preventDefault(); hideAndRemember(); });
+  acceptBtn && acceptBtn.addEventListener('click', (e) => { e.preventDefault(); hideAndRemember(); });
+
+  // Доступность: закрыть по Esc
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && banner && banner.style.display !== 'none') hideAndRemember();
+  });
+})();
+</script>
 
 
   <!-- Hero-блок -->
@@ -121,7 +226,7 @@ if (!is_array($cases)) {
       <div class="side-block-right"></div>
       <div class="vertical-text-right">идеология</div>
     </div>
-  </section>
+  </section> 
 
   <!-- Цифры -->
   <section class="stats-numbers scroll-fade">
@@ -255,7 +360,7 @@ if (!is_array($cases)) {
     Интересуют базовые навыки или требуется поднять уровень до более уверенного специалиста? <br />
     С удовольствием пройду с Вами этот путь, убрав все лишнее с упором на практику
   </p>
-  <a href="education.html" class="quote-button">Перейти к обучению</a>
+  <a href="inprogress.html" class="quote-button">Перейти к обучению</a>
 
 </section>
 

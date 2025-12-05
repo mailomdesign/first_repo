@@ -316,5 +316,54 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
+(function(){
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('cookieAccept');
+  const rejectBtn = document.getElementById('cookieReject');
+
+  function setConsentStorage(valueObj) {
+    // Сохраняем выбор в localStorage — пригодится для последующих загрузок
+    localStorage.setItem('site_consent', JSON.stringify(valueObj));
+  }
+
+  function getStoredConsent() {
+    try { return JSON.parse(localStorage.getItem('site_consent')); } catch(e){ return null; }
+  }
+
+  function applyConsent(consentObj) {
+    // 1) Пушим в dataLayer — GTM увидит обновление consent
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'consent_update',
+      'consent': consentObj
+    });
+
+    // 2) Сохраняем выбор
+    setConsentStorage(consentObj);
+
+    // 3) Прячем баннер
+    if (banner) banner.style.display = 'none';
+  }
+
+  // При загрузке: если уже есть согласие — применяем
+  const stored = getStoredConsent();
+  if (stored) {
+    applyConsent(stored);
+  } else {
+    // Показываем баннер (или отложи показ)
+    if (banner) banner.style.display = 'block';
+  }
+
+  acceptBtn && acceptBtn.addEventListener('click', () => {
+    const cons = { analytics_storage: 'granted', ad_storage: 'denied' }; // пример
+    applyConsent(cons);
+  });
+
+  rejectBtn && rejectBtn.addEventListener('click', () => {
+    const cons = { analytics_storage: 'denied', ad_storage: 'denied' };
+    applyConsent(cons);
+  });
+
+})();
 
 
