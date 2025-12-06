@@ -165,29 +165,6 @@
 }
 
 
-/* — Дополнительная адаптация для совсем маленьких экранов (до 480px) — */
-@media (max-width: 480px) {
-
-  .footer-content {
-    padding: 0 15px;
-    gap: 14px;
-  }
-
-  .footer-left {
-    font-size: 11px;
-  }
-
-  .footer-links {
-    font-size: 10px;
-    gap: 5px;
-  }
-
-  .footer-year {
-    font-size: 11px;
-  }
-}
-
-
 /* === Скрываем мобильное меню на десктопе === */
 @media (min-width: 769px) {
   .mobile-menu {
@@ -221,13 +198,6 @@
     transform: none;       /* сбрасываем старые трансформации */
     border-radius: 50%;    /* если изображение круглое */
     object-fit: cover;
-  }
-}
-
-/* === Для совсем маленьких экранов (до 480px) === */
-@media (max-width: 480px) {
-  .hero-image {
-    width: 280px;
   }
 }
 
@@ -283,21 +253,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .bio-name {
-    font-size: 30px;
-  }
-
-  .bio-description {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .bio-underline {
-    width: 60px;
-  }
-}
 
 /* === Scroll-to-top — адаптация под мобильные === */
 @media (max-width: 768px) {
@@ -313,16 +268,6 @@
   }
 }
 
-/* === Для совсем маленьких экранов (до 480px) === */
-@media (max-width: 480px) {
-  .scroll-top {
-    width: 42px;
-    height: 42px;
-    font-size: 20px;
-    bottom: 20px;
-    right: 15px;
-  }
-}
 
 @media (max-width: 768px) {
   /* Полный сброс старых разделителей */
@@ -456,25 +401,6 @@
     line-height: 1.5 !important;
     color: inherit !important;
   }
-
-  /* на совсем узких дисплеях уменьшаем отступы */
-  @media (max-width: 480px) {
-    .stats-numbers {
-      gap: 28px !important;
-    }
-    .stats-item {
-      max-width: 300px !important;
-      padding-bottom: 24px !important;
-    }
-    .stats-item .stat-value {
-      font-size: 48px !important;
-    }
-    .stats-numbers.mobile-stats .stats-item:not(:last-child)::after {
-      width: 75% !important;
-      bottom: 6px !important;
-      height: 1px !important;
-    }
-  }
 }
 
 /* === НАПРАВЛЕНИЕ — адаптация для мобильных устройств === */
@@ -528,28 +454,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .direction-block {
-    padding-right: 60px;
-    padding-left: 15px;
-    min-height: 85vh;
-  }
-
-  .direction-title {
-    font-size: 48px;
-  }
-
-  .direction-list {
-    font-size: 22px;
-    line-height: 1.5;
-  }
-
-  .direction-line {
-    width: 80px;
-    margin-bottom: 24px;
-  }
-}
 
 /* === Заголовки секций (Skills / Cases / Contacts) — адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -626,31 +530,6 @@
 
 
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .skills-header,
-  .cases-header,
-  .contacts-header {
-    margin-top: 60px;
-  }
-
-  .skills-text,
-  .cases-text,
-  .cases-text-2,
-  .contacts-text {
-    font-size: 36px;             /* ещё компактнее */
-    line-height: 0.8;
-  }
-
-  .skills-line,
-  .cases-line,
-  .cases-line-2,
-  .contacts-line {
-    width: 35px;
-    height: 6px;
-  }
-}
 
 @media (max-width: 768px) {
   .skills-grid {
@@ -683,13 +562,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 340px;
-  }
-}
 
 /* === ОБУЧЕНИЕ — адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -811,27 +683,6 @@
   }
 }
 
-/* === Очень маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .contacts-header {
-    font-size: 36px;
-  }
-
-  .contact-subtitle {
-    font-size: 20px;
-  }
-
-  .contact-phone {
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .vacancy-section {
-    position: relative;
-    left: -150px;
-  }
-}
 
 /* --- Перенос блока .edu-subnav в мобильную версию --- */
 
@@ -996,37 +847,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .pattern-bg-full {
-    margin-top: 0 !important;
-    padding: 30px 15px 20px 15px;
-    clear: both; /* фикс для очень узких экранов */
-  }
-
-  .review-bio-section {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .review-avatar {
-    width: 100px;
-  }
-
-  .review-quote {
-    font-size: 18px;
-  }
-
-  .review-title {
-    font-size: 14px;
-  }
-
-  .review-text {
-    font-size: 14px;
-  }
-}
 
 /* === Блок "самое": адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -1099,26 +919,6 @@ color: #ffffff;
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .case-data-block {
-    padding: 30px 15px;
-    min-height: 1200px; /* больше высоты, если текст длиннее */
-  }
-
-  .case-data-content {
-    gap: 18px;
-  }
-
-  .case-data-title {
-    font-size: 18px;
-  }
-
-  .case-data-paragraph {
-    font-size: 14px;
-  }
-}
 
 
 /* === Блок био-презентации: адаптация для мобильных устройств === */
@@ -1187,30 +987,6 @@ color: #ffffff;
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .case-bio-section {
-    padding: 30px 15px;
-    gap: 25px;
-  }
-
-  .bio-quote {
-    font-size: 20px;
-  }
-
-  .bio-text {
-    font-size: 14px;
-  }
-
-  .bio-title {
-    font-size: 14px;
-  }
-
-  .bio-text_2 {
-    font-size: 13px;
-  }
-}
 
 /* === Lightbox: корректировка кнопки закрытия на мобильных === */
 @media (max-width: 768px) {
@@ -1241,13 +1017,6 @@ color: #ffffff;
   }
 }
 
-/* Для очень маленьких экранов */
-@media (max-width: 480px) {
-  #feedbackModal .modal-content {
-    top: 58% !important;               /* ещё чуть ниже */
-  }
-}
-
 /* === BIO-блок (адаптация для мобильных устройств) === */
 @media (max-width: 768px) {
 
@@ -1274,23 +1043,5 @@ color: #ffffff;
     margin-top: 30px;
     margin-bottom: 300px;
 
-  }
-}
-
-
-/* === Очень маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .bio-content-2 {
-    padding: 0 15px; /* компактнее */
-  }
-
-  .bio-name-2 {
-    font-size: 26px;
-  }
-
-  .bio-description-2 {
-    font-size: 15px;
-    line-height: 1.35;
   }
 }

@@ -316,54 +316,83 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
-(function(){
+(function () {
   const banner = document.getElementById('cookieBanner');
   const acceptBtn = document.getElementById('cookieAccept');
-  const rejectBtn = document.getElementById('cookieReject');
+  const closeBtn = document.getElementById('cookieClose'); // крестик
 
-  function setConsentStorage(valueObj) {
-    // Сохраняем выбор в localStorage — пригодится для последующих загрузок
-    localStorage.setItem('site_consent', JSON.stringify(valueObj));
+  // -------------------------------
+  // чтение / запись состояния
+  // -------------------------------
+  function saveConsent(obj) {
+    localStorage.setItem('site_consent', JSON.stringify(obj));
   }
 
-  function getStoredConsent() {
-    try { return JSON.parse(localStorage.getItem('site_consent')); } catch(e){ return null; }
+  function loadConsent() {
+    try {
+      return JSON.parse(localStorage.getItem('site_consent'));
+    } catch (e) {
+      return null;
+    }
   }
 
   function applyConsent(consentObj) {
-    // 1) Пушим в dataLayer — GTM увидит обновление consent
+    // отправляем в GTM
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({
-      'event': 'consent_update',
-      'consent': consentObj
+      event: 'consent_update',
+      consent: consentObj
     });
 
-    // 2) Сохраняем выбор
-    setConsentStorage(consentObj);
+    // сохраняем выбор
+    saveConsent(consentObj);
 
-    // 3) Прячем баннер
+    // скрываем баннер
     if (banner) banner.style.display = 'none';
   }
 
-  // При загрузке: если уже есть согласие — применяем
-  const stored = getStoredConsent();
+  // -------------------------------
+  // ИНИЦИАЛИЗАЦИЯ
+  // -------------------------------
+
+  const stored = loadConsent();
+
   if (stored) {
+    // Уже был выбор → сразу применяем
     applyConsent(stored);
   } else {
-    // Показываем баннер (или отложи показ)
+    // Показываем баннер
     if (banner) banner.style.display = 'block';
   }
 
+  // -------------------------------
+  // ПОВЕДЕНИЕ КНОПОК
+  // -------------------------------
+
+  // Принять cookies (включить аналитику)
   acceptBtn && acceptBtn.addEventListener('click', () => {
-    const cons = { analytics_storage: 'granted', ad_storage: 'denied' }; // пример
-    applyConsent(cons);
+    applyConsent({
+      analytics_storage: 'granted',
+      ad_storage: 'denied'
+    });
   });
 
-  rejectBtn && rejectBtn.addEventListener('click', () => {
-    const cons = { analytics_storage: 'denied', ad_storage: 'denied' };
-    applyConsent(cons);
+  // Крестик (отклонить аналитику)
+  closeBtn && closeBtn.addEventListener('click', () => {
+    applyConsent({
+      analytics_storage: 'denied',
+      ad_storage: 'denied'
+    });
   });
 
 })();
 
-
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => {
+        console.log('SW registered', reg);
+      })
+      .catch(err => console.warn('SW registration failed:', err));
+  });
+}

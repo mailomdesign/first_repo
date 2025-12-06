@@ -25,6 +25,7 @@ if (!is_array($cases)) {
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="manifest" href="/manifest.json">
 
 
   <meta name="description" content="Портфолио дизайнера Михаила Образцова: брендинг, визуальные системы, графический дизайн, креативные кампании, обучение дизайну и менторство.">
@@ -41,6 +42,15 @@ if (!is_array($cases)) {
   <meta property="og:site_name" content="Портфолио дизайнера Михаила Образцова">
   <meta property="og:image:alt" content="Портфолио дизайнера Михаила Образцова — проекты и визуальные решения">
   <meta http-equiv="Content-Language" content="ru">
+
+  <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#000000">
+
+<!-- Apple (добавочные теги для iOS) -->
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
 
     <script type="application/ld+json">
 {
@@ -221,12 +231,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </p>
     </div>
 
-    <!-- Плашка "идеология" справа -->
+    <!-- Плашка "идеология" справа 
     <div class="ideology-wrapper">
       <div class="side-block-right"></div>
       <div class="vertical-text-right">идеология</div>
-    </div>
-  </section> 
+    </div> -->
+  </section>
 
   <!-- Цифры -->
   <section class="stats-numbers scroll-fade">
@@ -344,7 +354,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="skill-label">изучаю</div>
     <div class="tool">HTML<br>CSS</div>    
     <div class="dots">
-      <div class="dot"></div><div class="dot"></div><div class="dot gray"></div>
+      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       <div class="dot gray"></div><div class="dot gray"></div><div class="dot gray"></div>
     </div>
   </div>
@@ -466,8 +476,20 @@ if ($cases && is_array($cases)) {
 <!-- Футер -->
 <footer class="footer">
   <div class="footer-content">
-    <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
-    <div class="footer-right">2025</div>
+
+    <div class="footer-left">
+      дизайн, прототип, верстка — михаил образцов
+    </div>
+
+    <div class="footer-right">
+
+      <div class="footer-links">
+        <a href="privacy-policy.html">Политика в отношении обработки персональных данных</a>
+        <a href="personal-data.html">Обработка персональных данных</a>
+        <span class="footer-year">2025</span>
+      </div>
+    </div>
+
   </div>
 </footer>
 
