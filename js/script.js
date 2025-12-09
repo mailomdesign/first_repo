@@ -389,10 +389,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(reg => {
-        console.log('SW registered', reg);
-      })
+    navigator.serviceWorker.register('./service-worker.js')
+      .then(reg => console.log('SW registered', reg))
       .catch(err => console.warn('SW registration failed:', err));
   });
 }
+
+(function() {
+  function hideMobileMenuIfDesktop() {
+    const isDesktop = window.innerWidth >= 769;
+    const m = document.querySelector('.mobile-menu');
+    const o = document.querySelector('.menu-overlay');
+    if (m) m.style.display = isDesktop ? 'none' : '';
+    if (o) o.style.display = isDesktop ? 'none' : '';
+  }
+
+  // запускаем сразу и при изменении размера
+  hideMobileMenuIfDesktop();
+  window.addEventListener('resize', hideMobileMenuIfDesktop);
+})();

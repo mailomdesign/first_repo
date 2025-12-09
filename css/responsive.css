@@ -1,72 +1,101 @@
-/* === Мобильное меню === */
+/* === MOBILE BASE GRID — фундамент мобильной версии === */
 @media (max-width: 768px) {
-  /* Показываем мобильное меню */
+
+  html, body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden !important;
+  }
+
+  * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .page-wrapper,
+  .section,
+  .container,
+  .hero,
+  .bio-section,
+  .direction-wrapper,
+  .cases-section,
+  .contacts-section,
+  footer {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .hero-image {
+    width: 300px;
+    height: 300px;
+    bottom: -140px;
+  }
+
+  .hero-subtitle {
+    font-size: 40px;
+  }
+
+  .hero-caption {
+    font-size: 30px;
+  }
+
+/* === MOBILE MENU === */
+@media (max-width: 768px) {
+
+  .desktop-menu, .vertical-bar-left, .custom-scrollbar, .fixed-menu {
+    display: none !important;
+  }
+
+
   .mobile-menu {
-    display: block !important;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    z-index: 100000; /* ← чуть выше, чем у overlay */
-  }
-
-  /* Верхняя панель */
-  .menu-header {
+    z-index: 10000;
     background: #fff;
-    color: #000;
+    border-bottom: 3px solid #000;
     text-align: center;
     padding: 20px 0;
     font-size: 26px;
     font-weight: 600;
-    letter-spacing: 1px;
-    cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    text-decoration: none;
-    border-bottom: 3px solid #000; /* линия внизу белой плашки */
   }
-  
-.menu-header span,
-.menu-header a {
-  text-decoration: none !important;
-  border: none !important;
-}
-  
-  .menu-header::after {
-    content: "";
-    display: none !important; /* убираем короткую полосу под текстом */
-    width: 60px;              /* длина линии */
-    height: 2px;              /* толщина линии */
-    background-color: #000;   /* цвет линии */
-    margin: 6px auto 0;       /* отступ сверху и центрирование */
-  }
-  
 
-  /* Оверлей меню */
   .menu-overlay {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: rgba(255, 255, 255, 1); /* белый с 90% прозрачностью */
-    display: none;
+    max-width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: center;
-    z-index: 99999;
-    transition: opacity 0.3s ease;
   }
 
   .menu-overlay.active {
     display: flex;
   }
 
-  /* Ссылки меню */
   .menu-content a {
     display: block;
     color: #000;
-    font-size: 48px;        /* ← крупнее шрифт */
+    font-size: 40px;        /* ← крупнее шрифт */
     font-weight: 800;       /* ← плотнее визуально */
     text-transform: uppercase; /* ← все буквы ЗАГЛАВНЫЕ */
     text-decoration: none;
@@ -75,390 +104,139 @@
     line-height: 1.6;       /* ← увеличенное межстрочное расстояние */
     transition: color 0.3s ease, transform 0.2s ease;
   }
-  
 
-  .menu-content a:hover {
-    color: #555;
-    transform: translateY(-2px);
-  }
-
-  /* Крестик */
   .menu-close {
     position: absolute;
     top: 20px;
-    right: 25px;
-    font-size: 50px;
-    color: #000;
+    right: 20px;
+    font-size: 45px;
     cursor: pointer;
-    transition: opacity 0.3s ease;
   }
 
-  .menu-close:hover {
-    opacity: 0.6;
-  }
-
-  /* Прячем десктопное меню */
-  .desktop-menu {
-    display: none !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .vertical-bar-left, 
-  .side-block-right,
-  .custom-scrollbar,
-  .vertical-text-right {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-  }
-}
-
-/* === Адаптация футера для мобильной версии === */
-@media (max-width: 768px) {
-
-  .footer {
-    height: auto;                /* футер растягивается по содержимому */
-    padding: 20px 0;
-  }
-
-  .footer-content {
-    flex-direction: column;      /* элементы теперь вертикально */
-    align-items: flex-start;     /* выравнивание слева */
-    padding: 0 20px;             /* общие отступы */
-    gap: 10px;                   /* расстояние между блоками */
-  }
-
-  .footer-left {
-    font-size: 15px;             /* размер текста */
-    line-height: 1.4;
-    text-transform: uppercase;        /* можно включить uppercase если надо */
-  }
-
-  /* Блок ссылок + год */
-  .footer-links {
-    display: flex;
-    flex-direction: column;      /* ссылки в столбик */
-    gap: 6px;                    /* расстояние между ссылками */
-    font-size: 11px;
-    line-height: 1.4;
-  }
-
-  .footer-links a {
-    color: #ffffff;
-    opacity: 0.8;
-    text-decoration: none;
-  }
-
-  .footer-links a:hover {
-    opacity: 1;
-    text-decoration: underline;
-  }
-
-  .footer-year {
-    margin-top: 10px;            /* отступ сверху */
-    font-size: 15px;             /* год не теряется визуально */
-    opacity: 0.8;
-  }
-}
-
-
-/* === Скрываем мобильное меню на десктопе === */
+/* === FORCE: полностью скрыть мобильное меню на ширинах >= 769px === */
 @media (min-width: 769px) {
-  .mobile-menu {
+  /* Сам блок и всё его содержимое */
+  .mobile-menu,
+  .mobile-menu * ,
+  .menu-overlay,
+  .menu-overlay * {
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-  }
-}
-
-
-/* === Мобильная версия: изображение в hero === */
-@media (max-width: 768px) {
-  #hero {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;   /* выравниваем всё содержимое по центру */
-    text-align: center;
-    top: 150px;    
-    padding-bottom: 60px;  /* добавляем воздух под изображением */
-  }
-
-  .hero-image {
-    width: 320px;          /* увеличенный размер */
-    height: auto;          /* сохраняем пропорции */
-    display: block;
-    margin: 20px auto 0;   /* отступ сверху и центрирование */
-    position: relative;
-    top: 50;                /* убираем смещение вверх */
-    left: 0;
-    transform: none;       /* сбрасываем старые трансформации */
-    border-radius: 50%;    /* если изображение круглое */
-    object-fit: cover;
-  }
-}
-
-/* === BIO — мобильная адаптация === */
-@media (max-width: 768px) {
-  /* Убираем левую полосу (на всякий случай дублируем) */
-  .vertical-bar-left {
-    display: none !important;
-  }
-
-  /* Контейнер блока */
-  #bio {
-    padding: 60px 20px;              /* внутренние отступы для воздуха */
-    text-align: center;              /* выравнивание по центру */
-    display: flex;
-    flex-direction: column;
-    height: auto;           /* адаптируем под контент */
-    margin-top: -50px; /* поднимаем блок вверх на 100px */
-    padding-top: 40px;  /* чтобы контент не прижался к фото */
-    align-items: center;
-    margin-bottom: -250px !important;
-  }
-
-  /* Основной контент */
-  .bio-content {
-    max-width: 600px;
-    width: 100%;
-  }
-
-  /* Имя */
-  .bio-name {
-    font-size: 56px;                 /* крупно, но читаемо */
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    letter-spacing: 1px;
-  }
-
-  /* Подчёркивание под именем */
-  .bio-underline {
-    width: 80px;
-    height: 3px;
-    background-color: #000;
-    margin: 0 auto 20px;             /* центрируем */
-  }
-
-  /* Текст описания */
-  .bio-description {
-    font-size: 22px;
-    line-height: 1.6;
-    color: #000000;                  /* или основной цвет твоего текста */
-    margin: 0 auto;
-    text-align: center;                /* можно заменить на center, если хочешь всё по центру */
-  }
-}
-
-
-/* === Scroll-to-top — адаптация под мобильные === */
-@media (max-width: 768px) {
-  .scroll-top {
-    width: 78px;           /* чуть меньше */
-    height: 78px;
-    font-size: 40px;       /* размер стрелки */
-    bottom: 25px;          /* позиция выше нижнего края */
-    right: 40px;           /* чуть левее от края экрана */
-    border-radius: 50%;
-    opacity: 0.9;          /* лёгкая прозрачность */
-    z-index: 900;          /* ниже мобильного меню */
-  }
-}
-
-
-@media (max-width: 768px) {
-  /* Полный сброс старых разделителей */
-  .stats-item::after,
-  .stats-item::before {
-    display: none !important;
-    content: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    background: none !important;
-  }
-
-  /* Перестраиваем структуру */
-  .stats-numbers {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 50px;
-    position: relative;
-  }
-
-  .stats-item {
-    position: relative;
-    width: 100%;
-    max-width: 340px;
-    padding-bottom: 50px; /* отступ под линию */
-  }
-
-  /* === Добавляем новые горизонтальные линии === */
-  .stats-item:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;              /* длина линии */
-    height: 2px;             /* толщина линии */
-    background-color: #000;  /* цвет линии */
-  }
-
-  .stats-item p {
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.4;
-  }
-}
-
-/* ==========================
-   MOBILE STATS — FORCED PATCH
-   ==========================
-   Полный сброс вертикальных линий и установка
-   горизонтальных разделителей только для mobile
-*/
-@media (max-width: 768px) {
-
-  /* 1) Полный сброс: прячем все псевдо/бордер/фоны, которые могли рисовать вертикаль */
-  .stats-numbers *,
-  .stats-item,
-  .stats-item::before,
-  .stats-item::after {
-    border: none !important;
-    background: none !important;
-    box-shadow: none !important;
-    content: none !important;
-    display: block !important;
-    width: auto !important;
-    height: auto !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-
-  /* Дополнительно: убрать реальные border-right / left которые могли делать вертикаль */
-  .stats-item,
-  .stats-item * {
-    border-left: none !important;
-    border-right: none !important;
-  }
-
-  /* 2) Перекладываем структуру в вертикальную колонку и центрируем */
-  .stats-numbers {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    text-align: center !important;
-    gap: 40px !important;
-    width: 100% !important;
-    padding: 0 12px !important;
-  }
-
-  .stats-item {
-    position: relative !important;
-    width: 100% !important;
-    max-width: 360px !important;
-    padding: 0 0 30px 0 !important; /* место под горизонтальный разделитель */
-    box-sizing: border-box !important;
-    background: transparent !important;
-  }
-
-  /* 3) Новые горизонтальные линии: создаём с высокой специфичностью
-     и !important — это гарантирует, что они будут именно горизонтальными */
-  .stats-numbers.mobile-stats .stats-item:not(:last-child)::after {
-    content: "" !important;
-    position: absolute !important;
-    bottom: 8px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 80% !important;
-    height: 2px !important;
-    background-color: rgba(0,0,0,0.85) !important; /* цвет — подстрой под фон */
     pointer-events: none !important;
-  }
-
-  /* Варианты для светлого/тёмного фона — можно переключать */
-  /* .stats-numbers.mobile-stats .stats-item:not(:last-child)::after { background-color: rgba(255,255,255,0.2) !important; } */
-
-  /* подписи внутри статов — отступы и центровка */
-  .stats-item .stat-value {
-    font-size: 56px !important;
-    line-height: 1 !important;
-    font-weight: 800 !important;
-    margin: 18px 0 8px 0 !important;
-  }
-  .stats-item p {
+    height: 0 !important;
+    width: 0 !important;
     margin: 0 !important;
-    padding: 0 10px !important;
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    color: inherit !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Доп. защита: если позиционирование фиксирует полосу — сбросим */
+  .mobile-menu {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+  }
+
+  .menu-overlay {
+    position: static !important;
+    z-index: auto !important;
   }
 }
 
-/* === НАПРАВЛЕНИЕ — адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-
-  /* Контейнер блока */
-  .direction-wrapper {
-    width: 100%;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  /* Убираем старый фон, чтобы не перекрывал текст */
-  .direction-bg {
-    display: none !important;
-  }
-
-  /* Контент поверх */
-  .direction-block {
-    width: 100%;
-    max-width: 768px;   /* ширина контента */
-    padding-right: 100px;
-    padding-left: 20px;
-    color: #fff;
-    text-align: right;
-    box-sizing: border-box;
-  }
-
-  .direction-title {
-    font-size: 72px;
-    line-height: 1.1;
-    letter-spacing: 2px;
-    margin: 0 0 14px 0;
-    left: -42px;
-  }
-
-  .direction-list {
-    font-size: 48px;
-    line-height: 1.7;
-    letter-spacing: 1px;
-    margin: 0;
-    left: -120px;
-  }
-
-  .direction-image,
-  .direction-line,
-  .direction-square {
-    display: none !important;
-  }
+.scroll-top {
+  width: 78px;           /* чуть меньше */
+  height: 78px;
+  font-size: 40px;       /* размер стрелки */
+  bottom: 13px;          /* позиция выше нижнего края */
+  right: 13px;           /* чуть левее от края экрана */
+  border-radius: 50%;
+  opacity: 0.9;          /* лёгкая прозрачность */
+  z-index: 900;          /* ниже мобильного меню */
 }
 
+.bio-name {
+  font-size: 64px;
+  color: black;
+  text-transform: capitalize;
+  line-height: 1.2;       /* ← увеличенное межстрочное расстояние */
+  margin-top: -60px;
+}
 
-/* === Заголовки секций (Skills / Cases / Contacts) — адаптация для мобильных устройств === */
-@media (max-width: 768px) {
+.bio-description {
+  font-size: 28px;
+  color: black;
+  line-height: 1.2;       /* ← увеличенное межстрочное расстояние */
+  margin-top: 20px;
+}
 
-  .skills-header,
+.stats-numbers {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 50px;
+  position: relative;
+}
+
+.stats-item {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  padding-bottom: 50px; /* отступ под линию */
+}
+
+.number-value {
+  font-size: 100px;
+}
+
+.divider-vertical {
+  transform: rotate(90deg);
+  margin-top: -100px;
+  margin-bottom: -100px;
+}
+
+.direction-title {
+  position: absolute;
+  top: 100px;
+  left: 10px;
+  width: 762px;
+  font-size: 47px;
+  color: #505050;
+  text-align: left;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.direction-list {
+  position: absolute;
+  top: 210px;
+  left: 10px;
+  width: 835px;
+  font-size: 45px;
+  color: #8f8f8f;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.direction-block {
+  width: 100%;
+  height: 700px;
+}
+
+.direction-line {
+  position: absolute;
+  top: 180px;
+  left: 0px;
+  width: 150px;
+  height: 0;
+  outline: 4px solid white;
+  outline-offset: -2.5px;
+}
+
+.skills-header,
   .cases-header-3,
   .cases-header {
     width: 100%;
@@ -483,8 +261,7 @@
   .cases-text-3,
   .cases-text-2,
   .cases-text {
-    font-size: 65px;             /* уменьшаем шрифт с 96px */
-    line-height: 0.8;
+    font-size: 50px;             /* уменьшаем шрифт с 96px */
     color: #505050;
     text-transform: uppercase;
     font-weight: 400;
@@ -528,520 +305,164 @@
   }
 }
 
+.skills-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr); /* две колонки */
+  justify-content: space-evenly; /* центрирование всей сетки */
+  align-items: start;
+  width: 100%;
+  max-width: 650px; /* ограничиваем, чтобы всё было по центру */
+  margin: 0 auto; /* выравнивание блока по центру */
+  box-sizing: border-box;
+}
 
+.skill {
+  width: 100%;
+  max-width: 160px;
+  text-align: left;
+}
 
+.tool {
+  font-size: 18px;
+  margin-bottom: 14px;
+}
 
-@media (max-width: 768px) {
-  .skills-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr); /* две колонки */
-    justify-content: center; /* центрирование всей сетки */
-    align-items: start;
-    gap: 5px 8px; /* ← расстояние между рядами и колонками */
-    width: 100%;
-    max-width: 650px; /* ограничиваем, чтобы всё было по центру */
-    margin: 0 auto; /* выравнивание блока по центру */
-    padding: 0 10px;
-    box-sizing: border-box;
-  }
-
-  .skill {
-    width: 100%;
-    max-width: 160px;
-    text-align: left;
-  }
-
-  .tool {
-    font-size: 18px;
-    margin-bottom: 14px;
-  }
-
-  .dot {
-    width: 9px;
-    height: 9px;
-  }
+.dot {
+  width: 9px;
+  height: 9px;
 }
 
 
-/* === ОБУЧЕНИЕ — адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-  .quote-section {
-    width: 100%;
-    max-width: 100%;
-    margin: 100px auto; /* уменьшаем вертикальные отступы */
-    padding: 0 30px;    /* небольшие внутренние отступы */
-    box-sizing: border-box;
-    text-align: center;
-  }
-
-  .quote-title {
-    font-size: 48px;   /* ↓ уменьшишь вручную по вкусу */
-    line-height: 1.2;
-    margin-bottom: 24px;
-  }
-
-  .quote-text {
-    font-size: 24px;   /* ↓ можешь регулировать позже */
-    line-height: 1.5;
-    max-width: 100%;
-    margin: 0 auto 30px;
-  }
-
-  .quote-button {
-    margin-top: 30px;
-  }
+.quote-section {
+  width: 100%;
+  max-width: 100%;
+  margin: 100px auto; /* уменьшаем вертикальные отступы */
+  padding: 0 30px;    /* небольшие внутренние отступы */
+  box-sizing: border-box;
+  text-align: center;
 }
 
-/* === Очень маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .quote-section {
-    margin: 80px auto;
-    padding: 0 20px;
-  }
-
-  .quote-title {
-    font-size: 36px; /* просто ориентирами, ты скорректируешь */
-    line-height: 1.2;
-  }
-
-  .quote-text {
-    font-size: 20px;
-    line-height: 1.4;
-  }
-
-  .quote-button {
-    padding: 10px 20px;
-  }
+.quote-title {
+  font-size: 48px;   /* ↓ уменьшишь вручную по вкусу */
+  line-height: 1;
+  margin-bottom: 24px;
 }
 
-/* === КОНТАКТЫ — адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-
-  .contacts-section {
-    flex-direction: column;   /* вертикальная структура */
-    height: auto;             /* убираем фиксированную высоту */
-    width: 100%;
-    background: #000;         /* верхняя плашка */
-  }
-
-  /* Верхняя чёрная плашка */
-  .contacts-top {
-    width: 100%;
-    height: 200px;
-    background-color: #000;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end; /* элементы прижаты к правому краю */
-    padding-right: 30px;
-    box-sizing: border-box;
-  }
-
-  .contacts-header {
-    font-size: 48px;          /* ↓ уменьшишь вручную по вкусу */
-    margin: 0 0 10px 0;
-  }
-
-
-  /* Изображение под плашкой */
-  .contacts-left {
-    width: 100%;
-    height: auto;
-  }
-
-  .contact-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* Блок с контактами поверх изображения */
-  .contacts-right {
-    width: 100%;
-    margin-top: -140px;       /* поднимаем над изображением */
-    padding: 0 30px;
-    box-sizing: border-box;
-    text-align: center;
-    color: #fff;
-  }
-
-  .contact-subtitle {
-    font-size: 24px;
-    text-transform: uppercase;
-    margin-bottom: 0px;
-    color: #e0e0e0;
-  }
-
-  .contact-phone {
-    font-size: 46px;
-    font-weight: 400;
-    text-transform: uppercase;
-    margin-bottom: 53px;
-    color: #fff;
-    cursor: pointer;
-  }
+.quote-text {
+  font-size: 24px;   /* ↓ можешь регулировать позже */
+  line-height: 1.5;
+  max-width: 100%;
+  margin: 0 auto 30px;
 }
 
-
-/* --- Перенос блока .edu-subnav в мобильную версию --- */
-
-.edu-subnav-mobile {
-  display: none; /* по умолчанию скрыта */
+.quote-button {
+  margin-top: 30px;
 }
 
-@media (max-width: 768px) {
-  .vacancy-black-inner {
-    position: relative;
-    left: -150px;
-  }
+.case-desc {
+  font-size: 13px;
+  left: 33px;
+  top: 405px;
+  width: 350px;
+  color: rgb(121, 121, 121);
 }
 
-.vacancy-black-title {
-  font-size: 48px;
+/* ================================
+   MOBILE — CONTACTS SECTION
+   Адаптация под < 768px
+   ================================ */
+   @media (max-width: 768px) {
+
+    /* Общий контейнер контактов */
+    .contacts-section {
+      position: relative;
+      width: 100%;
+      height: auto;
+      min-height: 520px;                /* << можешь менять */
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;               /* << регулируй отступы */
+      overflow: hidden;
+    }
+  
+    /* Делаем одно целое — убираем левый/правый блоки */
+    .contacts-left,
+    .contacts-right,
+    .contacts-header {
+      display: none !important;
+    }
+  
+    /* Фоновое изображение поверх черного блока */
+    .contact-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.45;                    /* << регулируй прозрачность */
+      z-index: 1;
+    }
+  
+    /* Текст сверху изображения */
+    .contact-subtitle {
+      position: relative;
+      z-index: 2;
+      font-size: 26px;                  /* << размер можно менять */
+      text-transform: uppercase;
+      color: #bdbdbd;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+  
+    .contact-phone {
+      position: relative;
+      z-index: 2;
+      font-size: 40px;                  /* << главное название */
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 30px;
+      text-align: center;
+      cursor: pointer;
+    }
+  
+    /* Блок ссылок (если нужно оставить) */
+    .contact-links {
+      position: relative;
+      z-index: 2;
+      margin-top: 20px;
+      text-align: center;
+      gap: 15px;
+    }
+  
+    .contact-label {
+      font-size: 22px;
+      color: #CFCFCF;
+    }
+  
+    /* Точка (если нужна) */
+    .contact-dot {
+      width: 10px;
+      height: 10px;
+      background: white;
+      margin: 0 auto;
+    }
+  }
+  
+
+.footer {
+  width: 100%;
+  max-width: 100%;
+  height: 40px;
+  background: #212121;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Russo One', sans-serif;
 }
 
-@media (max-width: 768px) {
-  /* Общий контейнер кейса — выстраиваем элементы в колонку */
-  .case-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    overflow: visible;
-  }
-
-  /* Чёрный блок с текстом и логотипом */
-  .case-panel {
-    order: 1;
-    position: relative;
-    width: 100%;
-    z-index: 2;
-    background-color: #000;
-    color: #fff;
-    padding: 20px;
-    clip-path: none !important;
-    padding-left: none !important;
-    padding-right: none !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;  /* центрируем всё по горизонтали */
-    text-align: center;   /* выравниваем текст */
-  }
-
-  /* Изображение кейса — ниже панели */
-  .case-image-2 {
-    order: 2;
-    position: relative;
-    width: 100%;
-    z-index: 1;
-    margin-top: 0;
-  }
-
-  .case-image-2 img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  /* Логотип */
-  .logo-wrapper {
-    position: relative !important;
-    z-index: 2 !important;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  /* Текст в центре по блоку case-panel */
-  .text-wrapper {
-    position: relative !important;
-    z-index: 2 !important;
-    width: 100%;
-    max-width: 90%; /* чуть меньше ширины, чтобы не прилипал к краям */
-    margin: 0 auto;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 30px;
-    padding-left: none !important;
-    padding-right: none !important;
-  }
-}
-
-
-
-/* === Отзыв клиента: адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-
-  /* Блок отзыва — строго после изображения */
-  .pattern-bg-full {
-    position: relative;
-    display: block;
-    margin-top: 500px !important;
-    padding: 40px 20px 30px 20px;
-    z-index: 2;
-    background-color: #fff;
-    clear: both; /* гарантирует начало с новой строки после изображения */
-  }
-
-  /* Контейнер отзыва — горизонтальное выравнивание */
-  .review-bio-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    text-align: center;
-    gap: 30px;
-    width: 100%;
-  }
-
-  .review-image-wrapper {
-    flex: 0 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .review-avatar {
-    height: auto;
-    border-radius: 50%;
-    margin-top: -230px !important;
-  }
-
-  .review-text-block {
-    flex: 1 1 300px;
-    max-width: 500px;
-  }
-
-  .review-quote {
-    font-size: 35px;
-    font-weight: 600;
-    margin-top: -15px;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-
-  .review-line {
-    width: 60px;
-    height: 4px;
-    background-color: #505050;
-    margin: 10px auto;
-  }
-
-  .review-title {
-    font-size: 22px;
-    font-weight: 500;
-    color: #777;
-    text-align: center;
-    margin-bottom: 10px;
-  }
-
-  .review-text {
-    font-size: 21px;
-    line-height: 1.5;
-    color: #333;
-    text-align: center;
-  }
-}
-
-
-/* === Блок "самое": адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-
-  .case-data-block {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 40px 20px;
-    background-color: transparent;
-    overflow: hidden; /* важно, чтобы фон не обрезался */
-    min-height: 750px; /* гарантированно покрывает контент */
-  }
-
-  /* Фоновая подложка — теперь тянется по высоте родителя */
-  .case-data-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0; /* растягиваем фон на всю высоту блока */
-    background-color: #000; /* если чёрный фон */
-    background-size: cover;
-    background-position: center;
-    opacity: 0.1;
-    z-index: 0;
-  }
-
-  /* Контент */
-  .case-data-content {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    z-index: 2;
-    width: 100%;
-    max-width: 600px;
-    gap: 25px;
-  }
-
-  /* Изображение */
-  .case-data-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-
-  /* Текст */
-  .case-data-text {
-    padding: 10px 15px;
-color: #ffffff;
-  }
-
-  .case-data-title {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: #ffffff;
-    line-height: 1.3;
-  }
-
-  .case-data-paragraph {
-    font-size: 25px;
-    line-height: 1.2;
-    color: #ffffff;
-  }
-}
-
-
-
-/* === Блок био-презентации: адаптация для мобильных устройств === */
-@media (max-width: 768px) {
-
-  .case-bio-section {
-    display: flex;
-    flex-direction: column; /* текст сверху, фото ниже */
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-    width: 100%;
-    background-color: #fff;
-    overflow: visible;
-    margin-top: 100px;
-  }
-
-  /* Текстовая часть */
-  .bio-text-block {
-    order: 1;
-    width: 100%;
-    max-width: 600px;
-    text-align: center;
-  }
-
-  .bio-quote {
-    font-size: 30px;
-    font-weight: 600;
-    margin-bottom: 10px;
-  }
-
-  .bio-text {
-    font-size: 25px;
-    line-height: 1.6;
-    color: #333;
-    margin-bottom: 20px;
-  }
-
-  .bio-title {
-    font-size: 20px;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin-bottom: 10px;
-    color: #000;
-  }
-
-  .bio-text_2 {
-    font-size: 18px;
-    line-height: 1.5;
-    color: #555;
-  }
-
-  /* Изображение */
-  .bio-image-wrapper {
-    order: 2;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-
-  .bio-image {
-    width: 100%;
-    height: auto;
-    border-radius: 0px;
-    object-fit: cover;
-  }
-}
-
-
-/* === Lightbox: корректировка кнопки закрытия на мобильных === */
-@media (max-width: 768px) {
-
-  /* Кнопка закрытия — перенос ниже меню */
-  .gallery-lightbox .lb-close {
-    position: fixed;
-    top: 80px;          /* опускаем ниже меню */
-    right: 20px;        /* отступ справа */
-    font-size: 28px;    /* чуть меньше */
-    padding: 6px 10px;
-    background: rgba(0,0,0,0.55);
-    border-radius: 10px;
-    z-index: 10001;     /* выше всего */
-  }
-
-  /* Чтобы изображение не ложилось на кнопку */
-  .gallery-lightbox .lb-img {
-    margin-top: 40px;
-  }
-}
-
-/* === Позиция модального окна на мобильных === */
-@media (max-width: 768px) {
-  #feedbackModal .modal-content {
-    top: 55% !important;               /* было 50%, опускаем ниже */
-    transform: translate(0%, -63%);  /* сохраняем центрирование */
-  }
-}
-
-/* === BIO-блок (адаптация для мобильных устройств) === */
-@media (max-width: 768px) {
-
-  /* Контейнер */
-  .bio-content-2 {
-    /* → ширина блока на мобильных */
-    max-width: 80%;
-    padding: 0 20px;  /* можно менять */
-    text-align: left; /* или center — по желанию */
-  }
-
-  /* Имя */
-  .bio-name-2 {
-    /* → размер шрифта на мобильном */
-    font-size: 32px; /* поправишь по вкусу */
-    margin-top: 170px; /* отступы */
-  }
-
-  /* Описание */
-  .bio-description-2 {
-    /* → уменьшенная типографика */
-    font-size: 16px;
-    line-height: 1.4;
-    margin-top: 30px;
-    margin-bottom: 300px;
-
-  }
 }

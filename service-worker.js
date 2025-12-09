@@ -2,22 +2,23 @@ const VERSION = 'v1';
 const STATIC_CACHE = `static-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;
 
-const STATIC_ASSETS = [
-  '/',
-  '/index.php',
-  '/css/style.css',
-  '/css/responsive.css',
-  '/js/script.js',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png'
-  // + добавьте все критичные ресурсы (шрифты, основные картинки)
-];
+const ASSETS = [
+  '/first_repo/',
+  '/first_repo/index.php',
+  '/first_repo/offline.html',
+  '/first_repo/css/style.css',
+  '/first_repo/css/responsive.css',
+  '/first_repo/js/script.js',
+  '/first_repo/icons/icon-192.png',
+  '/first_repo/icons/icon-512.png',
+  '/first_repo/icons/maskable-512.png'
+  ];
+ 
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(STATIC_CACHE).then(cache => cache.addAll(STATIC_ASSETS))
+    caches.open(STATIC_CACHE).then(cache => cache.addAll(ASSETS))
   );
 });
 
@@ -48,7 +49,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // для статических ассетов — cache-first
-  if (STATIC_ASSETS.includes(url.pathname) || req.destination === 'image' || req.destination === 'font') {
+  if (ASSETS.includes(url.pathname) || req.destination === 'image' || req.destination === 'font') {
     event.respondWith(
       caches.match(req).then(cached => cached || fetch(req).then(res => {
         return caches.open(RUNTIME_CACHE).then(cache => {

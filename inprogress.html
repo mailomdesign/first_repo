@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
 
 </head>
 <body>
@@ -77,11 +77,21 @@
   </section>
   
   
-  <!-- Футер -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-left">дизайн, прототип, верстка — михаил образцов</div>
-      <div class="footer-right">2025</div>
+<!-- Футер -->
+<footer class="footer">
+  <div class="footer-content">
+
+    <div class="footer-left">
+      дизайн, прототип, верстка — михаил образцов
+    </div>
+
+    <div class="footer-right">
+
+      <div class="footer-links">
+        <a href="privacy-policy.html">Политика в отношении обработки персональных данных</a>
+        <a href="personal-data.html">Обработка персональных данных</a>
+        <span class="footer-year">2025</span>
+      </div>
     </div>
   </footer>
   
@@ -117,13 +127,14 @@
         <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
         <button type="submit">Отправить</button>
         
-  <!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
-  <div class="consent">
-    <input type="checkbox" id="consent" name="consent" required aria-required="true">
-    <label for="consent" class="consent-label">
-      Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
-    </label>
-  </div>
+<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
+<div class="consent">
+  <input type="checkbox" id="consent" name="consent" required aria-required="true">
+  <label for="consent" class="consent-label">
+    Я принимаю <a href="privacy-policy.html">условия использования и политику конфиденциальности</a> и даю <a href="personal-data.html">согласие на обработку персональных данных</a>
+  </label>
+</div>
+
   
   <script src="js/script.js"></script>
   <script src="js/menu.js"></script>

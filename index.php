@@ -25,7 +25,8 @@ if (!is_array($cases)) {
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="manifest.json">
+
 
 
   <meta name="description" content="Портфолио дизайнера Михаила Образцова: брендинг, визуальные системы, графический дизайн, креативные кампании, обучение дизайну и менторство.">
@@ -43,8 +44,9 @@ if (!is_array($cases)) {
   <meta property="og:image:alt" content="Портфолио дизайнера Михаила Образцова — проекты и визуальные решения">
   <meta http-equiv="Content-Language" content="ru">
 
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#000000">
+  <meta name="mobile-web-app-capable" content="yes">
+
 
 <!-- Apple (добавочные теги для iOS) -->
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
@@ -383,6 +385,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- СЕКЦИЯ КЕЙСЫ -->
 <div class="cases-container scroll-auto-fade"></div>
 
+
+
 <?php
 $jsonData = file_get_contents('cases.json');
 $cases = json_decode($jsonData, true);
@@ -533,9 +537,10 @@ if ($cases && is_array($cases)) {
 <div class="consent">
   <input type="checkbox" id="consent" name="consent" required aria-required="true">
   <label for="consent" class="consent-label">
-    Я принимаю условия использования и политику конфиденциальности и даю согласие на обработку данных
+    Я принимаю <a href="privacy-policy.html">условия использования и политику конфиденциальности</a> и даю <a href="personal-data.html">согласие на обработку персональных данных</a>
   </label>
 </div>
+
 
 <script src="js/menu.js"></script>
 </body>

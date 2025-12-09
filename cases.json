@@ -31,5 +31,38 @@
     "tag": "#fashion",
     "image_color": "img/cases/case_fp7d.png",
     "page": "case_fp7d.html"
+  },
+  {
+    "title": "Boroda Group",
+    "logo_bw": "img/logos/logo-BG_b.svg",
+    "logo_color": "img/logos/logo-BG_w.svg",
+    "label": "задачи",
+    "desc": "разработка дизайна меню, верстка меню, допечатная подготовка, дизайн сопровождение",
+    "site": "@borodashvilirest",
+    "tag": "#horeca",
+    "image_color": "img/cases/case_bg.png",
+    "page": "inprogress.html"
+    },
+  {
+    "title": "MUVA",
+    "logo_bw": "img/logos/logo-muva_b.svg",
+    "logo_color": "img/logos/logo-muva_w.svg",
+    "label": "задачи",
+    "desc": "разработка фирменного стиля и брендбука компании, pos материалы, допечатная подготовка, альбомы и наружная реклама",
+    "site": "muva-development.ru",
+    "tag": "#development",
+    "image_color": "img/cases/case_muva.png",
+    "page": "inprogress.html"
+  },
+  {
+    "title": "Архив",
+    "logo_bw": "img/logos/logo-OM_b.svg",
+    "logo_color": "img/logos/logo-OM_w.svg",
+    "label": "задачи",
+    "desc": "разработка, дизайн, продвижение, проекты, реализация, подготовка",
+    "site": "obraztsov.pro",
+    "tag": "#design",
+    "image_color": "img/cases/case_om.png",
+    "page": "inprogress.html"
   }
 ]

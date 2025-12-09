@@ -1,5 +1,5 @@
 /* === Мобильное меню === */
-@media (max-width: 768px) {
+@media (max-width: 375px) {
   /* Показываем мобильное меню */
   .mobile-menu {
     display: block !important;
@@ -8,6 +8,8 @@
     left: 0;
     width: 100%;
     z-index: 100000; /* ← чуть выше, чем у overlay */
+    max-width: 375px;
+margin: 0 auto;
   }
 
   /* Верхняя панель */
@@ -23,6 +25,10 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     text-decoration: none;
     border-bottom: 3px solid #000; /* линия внизу белой плашки */
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    
   }
   
 .menu-header span,
@@ -46,7 +52,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
     height: 100vh;
     background: rgba(255, 255, 255, 1); /* белый с 90% прозрачностью */
     display: none;
@@ -56,6 +61,10 @@
     text-align: center;
     z-index: 99999;
     transition: opacity 0.3s ease;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+
   }
 
   .menu-overlay.active {
@@ -66,7 +75,7 @@
   .menu-content a {
     display: block;
     color: #000;
-    font-size: 48px;        /* ← крупнее шрифт */
+    font-size: 40px;        /* ← крупнее шрифт */
     font-weight: 800;       /* ← плотнее визуально */
     text-transform: uppercase; /* ← все буквы ЗАГЛАВНЫЕ */
     text-decoration: none;
@@ -116,6 +125,55 @@
   }
 }
 
+/* === Адаптация футера для мобильной версии === */
+@media (max-width: 768px) {
+
+  .footer {
+    height: auto;                /* футер растягивается по содержимому */
+    padding: 20px 0;
+  }
+
+  .footer-content {
+    flex-direction: column;      /* элементы теперь вертикально */
+    align-items: flex-start;     /* выравнивание слева */
+    padding: 0 20px;             /* общие отступы */
+    gap: 10px;                   /* расстояние между блоками */
+  }
+
+  .footer-left {
+    font-size: 15px;             /* размер текста */
+    line-height: 1.4;
+    text-transform: uppercase;        /* можно включить uppercase если надо */
+  }
+
+  /* Блок ссылок + год */
+  .footer-links {
+    display: flex;
+    flex-direction: column;      /* ссылки в столбик */
+    gap: 6px;                    /* расстояние между ссылками */
+    font-size: 11px;
+    line-height: 1.4;
+  }
+
+  .footer-links a {
+    color: #ffffff;
+    opacity: 0.8;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+
+  .footer-year {
+    margin-top: 10px;            /* отступ сверху */
+    font-size: 15px;             /* год не теряется визуально */
+    opacity: 0.8;
+  }
+}
+
+
 /* === Скрываем мобильное меню на десктопе === */
 @media (min-width: 769px) {
   .mobile-menu {
@@ -149,13 +207,6 @@
     transform: none;       /* сбрасываем старые трансформации */
     border-radius: 50%;    /* если изображение круглое */
     object-fit: cover;
-  }
-}
-
-/* === Для совсем маленьких экранов (до 480px) === */
-@media (max-width: 480px) {
-  .hero-image {
-    width: 280px;
   }
 }
 
@@ -211,21 +262,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .bio-name {
-    font-size: 30px;
-  }
-
-  .bio-description {
-    font-size: 16px;
-    line-height: 1.5;
-  }
-
-  .bio-underline {
-    width: 60px;
-  }
-}
 
 /* === Scroll-to-top — адаптация под мобильные === */
 @media (max-width: 768px) {
@@ -241,16 +277,6 @@
   }
 }
 
-/* === Для совсем маленьких экранов (до 480px) === */
-@media (max-width: 480px) {
-  .scroll-top {
-    width: 42px;
-    height: 42px;
-    font-size: 20px;
-    bottom: 20px;
-    right: 15px;
-  }
-}
 
 @media (max-width: 768px) {
   /* Полный сброс старых разделителей */
@@ -384,25 +410,6 @@
     line-height: 1.5 !important;
     color: inherit !important;
   }
-
-  /* на совсем узких дисплеях уменьшаем отступы */
-  @media (max-width: 480px) {
-    .stats-numbers {
-      gap: 28px !important;
-    }
-    .stats-item {
-      max-width: 300px !important;
-      padding-bottom: 24px !important;
-    }
-    .stats-item .stat-value {
-      font-size: 48px !important;
-    }
-    .stats-numbers.mobile-stats .stats-item:not(:last-child)::after {
-      width: 75% !important;
-      bottom: 6px !important;
-      height: 1px !important;
-    }
-  }
 }
 
 /* === НАПРАВЛЕНИЕ — адаптация для мобильных устройств === */
@@ -456,28 +463,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .direction-block {
-    padding-right: 60px;
-    padding-left: 15px;
-    min-height: 85vh;
-  }
-
-  .direction-title {
-    font-size: 48px;
-  }
-
-  .direction-list {
-    font-size: 22px;
-    line-height: 1.5;
-  }
-
-  .direction-line {
-    width: 80px;
-    margin-bottom: 24px;
-  }
-}
 
 /* === Заголовки секций (Skills / Cases / Contacts) — адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -554,31 +539,6 @@
 
 
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .skills-header,
-  .cases-header,
-  .contacts-header {
-    margin-top: 60px;
-  }
-
-  .skills-text,
-  .cases-text,
-  .cases-text-2,
-  .contacts-text {
-    font-size: 36px;             /* ещё компактнее */
-    line-height: 0.8;
-  }
-
-  .skills-line,
-  .cases-line,
-  .cases-line-2,
-  .contacts-line {
-    width: 35px;
-    height: 6px;
-  }
-}
 
 @media (max-width: 768px) {
   .skills-grid {
@@ -611,13 +571,6 @@
   }
 }
 
-@media (max-width: 480px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    max-width: 340px;
-  }
-}
 
 /* === ОБУЧЕНИЕ — адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -739,27 +692,6 @@
   }
 }
 
-/* === Очень маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-  .contacts-header {
-    font-size: 36px;
-  }
-
-  .contact-subtitle {
-    font-size: 20px;
-  }
-
-  .contact-phone {
-    font-size: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .vacancy-section {
-    position: relative;
-    left: -150px;
-  }
-}
 
 /* --- Перенос блока .edu-subnav в мобильную версию --- */
 
@@ -924,37 +856,6 @@
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .pattern-bg-full {
-    margin-top: 0 !important;
-    padding: 30px 15px 20px 15px;
-    clear: both; /* фикс для очень узких экранов */
-  }
-
-  .review-bio-section {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
-  }
-
-  .review-avatar {
-    width: 100px;
-  }
-
-  .review-quote {
-    font-size: 18px;
-  }
-
-  .review-title {
-    font-size: 14px;
-  }
-
-  .review-text {
-    font-size: 14px;
-  }
-}
 
 /* === Блок "самое": адаптация для мобильных устройств === */
 @media (max-width: 768px) {
@@ -1027,26 +928,6 @@ color: #ffffff;
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .case-data-block {
-    padding: 30px 15px;
-    min-height: 1200px; /* больше высоты, если текст длиннее */
-  }
-
-  .case-data-content {
-    gap: 18px;
-  }
-
-  .case-data-title {
-    font-size: 18px;
-  }
-
-  .case-data-paragraph {
-    font-size: 14px;
-  }
-}
 
 
 /* === Блок био-презентации: адаптация для мобильных устройств === */
@@ -1115,30 +996,6 @@ color: #ffffff;
   }
 }
 
-/* === Маленькие экраны (до 480px) === */
-@media (max-width: 480px) {
-
-  .case-bio-section {
-    padding: 30px 15px;
-    gap: 25px;
-  }
-
-  .bio-quote {
-    font-size: 20px;
-  }
-
-  .bio-text {
-    font-size: 14px;
-  }
-
-  .bio-title {
-    font-size: 14px;
-  }
-
-  .bio-text_2 {
-    font-size: 13px;
-  }
-}
 
 /* === Lightbox: корректировка кнопки закрытия на мобильных === */
 @media (max-width: 768px) {
@@ -1161,3 +1018,39 @@ color: #ffffff;
   }
 }
 
+/* === Позиция модального окна на мобильных === */
+@media (max-width: 768px) {
+  #feedbackModal .modal-content {
+    top: 55% !important;               /* было 50%, опускаем ниже */
+    transform: translate(0%, -63%);  /* сохраняем центрирование */
+  }
+}
+
+/* === BIO-блок (адаптация для мобильных устройств) === */
+@media (max-width: 768px) {
+
+  /* Контейнер */
+  .bio-content-2 {
+    /* → ширина блока на мобильных */
+    max-width: 80%;
+    padding: 0 20px;  /* можно менять */
+    text-align: left; /* или center — по желанию */
+  }
+
+  /* Имя */
+  .bio-name-2 {
+    /* → размер шрифта на мобильном */
+    font-size: 32px; /* поправишь по вкусу */
+    margin-top: 170px; /* отступы */
+  }
+
+  /* Описание */
+  .bio-description-2 {
+    /* → уменьшенная типографика */
+    font-size: 16px;
+    line-height: 1.4;
+    margin-top: 30px;
+    margin-bottom: 300px;
+
+  }
+}
