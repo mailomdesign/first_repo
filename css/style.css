@@ -1299,7 +1299,7 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
       text-align: right;
       font-size: 160px;
       color: black;
-      padding: 0 120px;
+      padding: 0 90px;
       text-transform: uppercase;
       line-height: 1;
       margin-bottom: 50px;
@@ -1398,7 +1398,7 @@ html.no-select, .no-select { user-select: none !important; -webkit-user-select: 
   right: 0;
   width: 40%;
   height: 100%;
-  background: linear-gradient(90deg, #000000 0%, rgb(17, 17, 17) 50%, #2c2c2c 100%);
+  background: #000000;
   color: white;
   clip-path: polygon(5% 0%, 100% 0, 100% 100%, 0 100%);
   z-index: 2;
@@ -1852,7 +1852,34 @@ margin: 0px 0;
   .edu-subnav .edu-title{ color:var(--tab-active); }
 }
 
+.mobdoc {
+  margin-top: 240px;
+  max-width: 68%;
+  position: relative;
+  left: 300px;
+  }
 
+ .mobdoc-content {
+  margin-top: 240px;
+  max-width: 90%;
+  min-width: 80%;
+  position: relative;
+  }
+
+  .mobdoc-name {
+    font-size: 40px;
+    position: relative;
+    left: 30px;
+  }
+
+  .mobdoc-text {
+    font-size: 24px;
+    color: black;
+    line-height: 1.4;
+    font-family: 'Alumni Sans', sans-serif;
+    position: relative;
+    left: 30px;
+  }
 
 
 
@@ -2164,4 +2191,6 @@ html {
     padding-left: 20px;
     padding-right: 20px;
   }
+
+
 }

@@ -3,15 +3,46 @@
 <head>
   <link rel="icon" type="image/x-icon" href="logo_fav_bw.ico" />
   <meta charset="UTF-8" />
-  <title>В разработке</title>
+  <title>страница 404</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+  <link rel="manifest" href="manifest.json">
 
 </head>
 <body>
 
+<!-- Плавающее меню -->
+<nav class="fixed-menu">
+  <ul>
+  <li><a class="js-nav" href="index.php#hero">Главная</a></li>
+  <li><a class="js-nav" href="index.php#bio">Био</a></li>
+  <li><a class="js-nav" href="index.php#direction">Направление</a></li>
+  <li><a class="js-nav" href="index.php#education">Обучение</a></li>
+  <li><a class="js-nav" href="index.php#cases">Кейсы</a></li>
+  <li><a class="js-nav" href="index.php#contacts">Контакты</a></li>
+  </ul>
+</nav>
+ 
+
+<!-- === Мобильное меню === -->
+<div class="mobile-menu">
+  <div class="menu-header" id="menuToggle">МЕНЮ</div>
+
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-close" id="menuClose">&times;</div>
+
+    <nav class="menu-content">
+      <a class="js-nav" href="#hero">Главная</a>
+      <a class="js-nav" href="#bio">Био</a>
+      <a class="js-nav" href="#direction">Направление</a>
+      <a class="js-nav" href="#education">Обучение</a>
+      <a class="js-nav" href="#cases">Кейсы</a>
+      <a class="js-nav" href="#contacts">Контакты</a>
+    </nav>
+  </div>
+</div>
 
 
   <!-- Hero-блок -->
@@ -20,7 +51,93 @@
     <div class="hero-title">404</div>
   </section>
 
- 
+  <!-- Вертикальная полоса слева -->
+  <div class="vertical-bar-left-2"></div>
+
+<!-- КОНТАКТЫ -->
+<section class="contacts-section scroll-fade">
+
+    <div id="contacts" class="contacts-left">
+      <img src="img/mikhail-at-work.webp" alt="Фото в тоне" class="contact-image" />
+    </div>
+  
+    <div class="contacts-right">
+  
+      <!-- Заголовок КОНТАКТЫ_ в едином стиле с кейсами -->
+      <div class="contacts-header">
+        <span class="contacts-text">КОНТАКТЫ</span>
+        <span class="contacts-line"></span>
+      </div>
+  
+      <div class="contact-subtitle">готов к сотрудничеству</div>
+      <div class="contact-phone" id="openModal" role="button" tabindex="0">
+    Обратная связь
+  </div>
+    </div>
+  </section>
+  
+  
+<!-- Футер -->
+<footer class="footer">
+  <div class="footer-content">
+
+    <div class="footer-left">
+      дизайн, прототип, верстка — михаил образцов
+    </div>
+
+    <div class="footer-right">
+
+      <div class="footer-links">
+        <a href="privacy-policy.html">Политика в отношении обработки персональных данных</a>
+        <a href="personal-data.html">Обработка персональных данных</a>
+        <span class="footer-year">2025</span>
+      </div>
+    </div>
+  </footer>
+  
+  
+  <button class="scroll-top" onclick="scrollToTop()" aria-label="Подняться наверх">
+    ↑
+  </button>
+  
+  
+  
+  <div class="custom-scrollbar">
+    <div class="scroll-thumb"></div>
+  </div>
+  
+  
+  <!-- модалка: вставлять перед </body> -->
+  <div id="feedbackModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Обратная связь</h2>
+      <form action="php/send.php" method="post" class="feedback-form">
+        <label for="name">Ваше имя</label>
+        <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
+        <label for="phone">Контактный номер телефона</label>
+        <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
+        <label for="subject">Тема сообщения</label>
+        <select id="subject" name="subject" required>
+          <option value="">Выберите необходимое</option>
+          <option value="Сотрудничество">Сотрудничество</option>
+          <option value="Обучение">Обучение</option>
+        </select>
+        <label for="message">Краткое описание</label>
+        <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
+        <button type="submit">Отправить</button>
+        
+<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
+<div class="consent">
+  <input type="checkbox" id="consent" name="consent" required aria-required="true">
+  <label for="consent" class="consent-label">
+    Я принимаю <a href="privacy-policy.html">условия использования и политику конфиденциальности</a> и даю <a href="personal-data.html">согласие на обработку персональных данных</a>
+  </label>
+</div>
+
+  
+  <script src="js/script.js"></script>
+  <script src="js/menu.js"></script>
   </body>
   </html>
   

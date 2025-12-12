@@ -51,7 +51,7 @@
 /* === MOBILE MENU === */
 @media (max-width: 768px) {
 
-  .desktop-menu, .vertical-bar-left, .custom-scrollbar, .fixed-menu {
+  .desktop-menu, .vertical-bar-left, .vertical-bar-left-2, .custom-scrollbar, .fixed-menu {
     display: none !important;
   }
 
@@ -170,6 +170,38 @@
   margin-top: 20px;
 }
 
+ .mobdoc {
+  margin-top: 240px !important; 
+  max-width: 90% !important;
+  min-width: 80% !important;
+  position: relative !important;
+  left: 0px !important;;
+  }
+
+ .mobdoc-content {
+  margin-top: 240px !important;
+  max-width: 90% !important;
+  min-width: 80% !important;
+  position: relative !important;
+  }
+
+  .mobdoc-name {
+    font-size: 30px !important;
+    position: relative !important;
+    left: 30px !important;
+  }
+
+  .mobdoc-text {
+    font-size: 20px !important;
+    color: black;
+    line-height: 1.2;
+    font-family: 'Alumni Sans', sans-serif;
+    position: relative;
+    left: 30px !important;
+  }
+
+
+
 .stats-numbers {
   display: flex;
   flex-direction: column;
@@ -252,9 +284,8 @@
     display: flex;
     justify-content: flex-end;   /* сохраняем прижатие к правому краю */
     align-items: flex-end;
-    margin-top: 20px;            /* уменьшаем отступ сверху */
     padding-right: 0;
-    top: 35px;          /* позиция выше нижнего края */
+    top: -70px;          /* позиция выше нижнего края */
   }
 
   .skills-text,
@@ -268,7 +299,7 @@
   }
 
   .contacts-text {
-    font-size: 65px;             /* уменьшаем шрифт с 96px */
+    font-size: 50px;             /* уменьшаем шрифт с 96px */
     line-height: 0.8;
     color: #ffffff;
     text-transform: uppercase;
@@ -286,6 +317,10 @@
     letter-spacing: normal; /* убираем визуальные "дыры" между буквами */
     word-spacing: 0; /* чтобы пробелы между словами не мешали выравниванию */
     padding-right: 30px; /* ✅ отступ от правого края */
+}
+
+.hero-title {
+  font-size: 48px;
 }
 
   .skills-line, 
@@ -367,102 +402,342 @@
   color: rgb(121, 121, 121);
 }
 
-/* ================================
-   MOBILE — CONTACTS SECTION
-   Адаптация под < 768px
-   ================================ */
-   @media (max-width: 768px) {
 
-    /* Общий контейнер контактов */
-    .contacts-section {
-      position: relative;
-      width: 100%;
-      height: auto;
-      min-height: 520px;                /* << можешь менять */
-      background: #000;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;               /* << регулируй отступы */
-      overflow: hidden;
-    }
-  
-    /* Делаем одно целое — убираем левый/правый блоки */
-    .contacts-left,
-    .contacts-right,
-    .contacts-header {
-      display: none !important;
-    }
-  
-    /* Фоновое изображение поверх черного блока */
-    .contact-image {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0.45;                    /* << регулируй прозрачность */
-      z-index: 1;
-    }
-  
-    /* Текст сверху изображения */
-    .contact-subtitle {
-      position: relative;
-      z-index: 2;
-      font-size: 26px;                  /* << размер можно менять */
-      text-transform: uppercase;
-      color: #bdbdbd;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-  
-    .contact-phone {
-      position: relative;
-      z-index: 2;
-      font-size: 40px;                  /* << главное название */
-      text-transform: uppercase;
-      color: #ffffff;
-      margin-bottom: 30px;
-      text-align: center;
-      cursor: pointer;
-    }
-  
-    /* Блок ссылок (если нужно оставить) */
-    .contact-links {
-      position: relative;
-      z-index: 2;
-      margin-top: 20px;
-      text-align: center;
-      gap: 15px;
-    }
-  
-    .contact-label {
-      font-size: 22px;
-      color: #CFCFCF;
-    }
-  
-    /* Точка (если нужна) */
-    .contact-dot {
-      width: 10px;
-      height: 10px;
-      background: white;
-      margin: 0 auto;
-    }
+    /* === MOBILE: contacts — показываем фон и контент поверх него === */
+@media (max-width: 768px) {
+  .contacts-section {
+    position: relative;
+    width: 100%;
+    min-height: 400px;
+    max-height: 750px;
+    background: #000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
   }
+
+  /* Не скрываем .contacts-left — делаем его фоновым, абсолютным и растягиваем по секции */
+  .contacts-left {
+    display: block !important;
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* чтобы клики проходили к элементам поверх фона */
+  }
+
+  /* Фоновое изображение */
+  .contact-image {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.45;         /* регулируй прозрачность */
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  /* Контент (тексты) — поверх фонового изображения */
+  .contacts-right {
+    display: flex !important;
+    position: relative !important;
+    z-index: 2 !important;
+    width: 100% !important;
+    max-width: 900px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 0;
+    background: transparent;
+  }
+
+  /* Убираем десктопное смещение margin-top */
+  .contacts-right ,
+  .contacts-right {
+    margin: 0 0 18px 0;
+    text-align: center;
+  }
+
+  .contact-phone {
+    margin-top: -25px;
+    text-align: left;
+  }
+
+  .contact-subtitle {
+    margin-top: 450px;
+    text-align: left;
+  }
+}
+
   
 
 .footer {
-  width: 100%;
-  max-width: 100%;
-  height: 40px;
-  background: #212121;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Russo One', sans-serif;
+  height: auto;                /* футер растягивается по содержимому */
+  padding: 20px 0;
 }
 
+.footer-content {
+  flex-direction: column;      /* элементы теперь вертикально */
+  align-items: flex-start;     /* выравнивание слева */
+  padding: 0 20px;             /* общие отступы */
+  gap: 10px;                   /* расстояние между блоками */
 }
+
+.footer-left {
+  font-size: 15px;             /* размер текста */
+  line-height: 1.4;
+  text-transform: uppercase;        /* можно включить uppercase если надо */
+}
+
+/* Блок ссылок + год */
+.footer-links {
+  display: flex;
+  flex-direction: column;      /* ссылки в столбик */
+  gap: 6px;                    /* расстояние между ссылками */
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.footer-links a {
+  color: #ffffff;
+  opacity: 0.8;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.footer-year {
+  margin-top: 10px;            /* отступ сверху */
+  font-size: 15px;             /* год не теряется визуально */
+  opacity: 0.8;
+}
+
+
+#feedbackModal .modal-content {
+  top: 55% !important;               /* было 50%, опускаем ниже */
+  transform: translate(0%, -63%);  /* сохраняем центрирование */
+}
+
+.feedback-form label {
+  font-size: 16px;
+  color: #000000;
+  display: block;
+  margin-top: 25px;
+}
+
+.feedback-form input, .feedback-form select, .feedback-form textarea {
+  padding: 10px;
+  margin-top: 5px;
+  font-size: 15px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+}
+
+.feedback-form button {
+  margin-top: 20px;
+  padding: 12px;
+  background: #000;
+  color: #fff;
+  font-size: 20px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  font-size: 45px;
+  font-weight: bold;
+  color: #a3a3a3;
+  cursor: pointer;
+}
+
+.bio-name-2 {
+  font-size: 32px;
+  color: black;
+  text-transform: capitalize;
+  max-width: 80%;
+}
+
+    body:has(.case-wrapper) .skills-text,
+    body:has(.case-wrapper) .skills-line {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      width: 0 !important;
+      height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+  
+  
+
+  body:has(.cases-header-2) .cases-text-2,
+  body:has(.cases-header-2) .cases-line {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .case-title-2 {
+    font-size: 40px;
+    line-height: 1;
+    text-align: left;
+    padding-left: 30px;
+    margin-bottom: -20px;
+  }
+
+
+
+  body:has(.case-wrapper) .case-image-2,
+  body:has(.case-wrapper) .case-image-2 img,
+  body:has(.case-wrapper) .case-panel,
+  body:has(.case-wrapper) .text-wrapper,
+  body:has(.case-wrapper) .logo-wrapper,
+  body:has(.case-wrapper) .case-logo {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    z-index: auto !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  @media (max-width: 768px) {
+
+    body:has(.case-wrapper) .case-wrapper {
+      display: flex !important;
+      flex-direction: column !important;
+      width: 100%;      overflow: visible !important;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+  
+    /* 1. Изображение — первый блок */
+    body:has(.case-wrapper) .case-image-2 {
+      order: 1;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      height: auto !important;
+      display: block !important;
+      object-fit: cover !important;
+    }
+  
+    body:has(.case-wrapper) .case-image-2 img {
+      width: 100% !important;
+      height: auto !important;
+      object-fit: cover !important;
+      display: block !important;
+    }
+  
+    /* 2. Чёрный блок — строго под картинкой */
+    body:has(.case-wrapper) .case-panel {
+      order: 2;
+      background: #000 !important;
+      width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      clip-path: border-box;
+    }
+  
+    /* 3. Логотип */
+    body:has(.case-wrapper) .logo-wrapper,
+    body:has(.case-wrapper) .case-logo {
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto 20px auto !important;
+      top: 25px !important;
+    }
+  
+    /* 4. Текст */
+    body:has(.case-wrapper) .text-wrapper {
+      order: 3;
+      width: 100% !important;
+      max-width: 100% !important;
+    
+      /* внутренние отступы */
+      padding-left: 30px !important;
+      padding-right: 30px !important;
+      padding-top: 30px !important;
+      box-sizing: border-box !important;
+    
+      /* внешний отступ снизу */
+      margin: 0 0 60px 0 !important;
+    
+      /* типографика */
+      text-align: center !important;
+      color: #fff !important;
+    }
+    
+  
+    /* 5. Иконки */
+    body:has(.case-wrapper) .icon-row {
+      order: 4;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    body:has(.case-wrapper) .review-bio-section {
+      position: relative !important;
+      display: block !important;
+      clear: both !important;
+      margin: 30px 0 0 0 !important;    /* расстояние между концом кейса и отзывом */
+      padding: 30px 20px !important;
+      box-sizing: border-box !important;
+      z-index: 2 !important;
+      background: transparent !important;
+    }
+  
+    /* аватар в отзыве — стандартные размеры в потоке */
+    body:has(.case-wrapper) .review-avatar {
+      position: relative !important;
+      margin: 0 auto 18px auto !important;
+      display: block !important;
+      width: 140px !important;
+      height: 140px !important;
+      object-fit: cover !important;
+      border-radius: 50% !important;
+    }
+  
+    /* текстовые правила отзыва — минимальные переопределения */
+    body:has(.case-wrapper) .review-text-block,
+    body:has(.case-wrapper) .review-quote,
+    body:has(.case-wrapper) .review-title,
+    body:has(.case-wrapper) .review-text,
+    body:has(.case-wrapper) .review-line {
+      position: relative !important;
+      margin: 0 auto !important;
+      padding: 0 !important;
+    }
+  }
+  

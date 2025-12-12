@@ -179,7 +179,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="hero-subtitle">сайт</div>
     <div class="hero-title">Портфолио</div>
     <div class="hero-caption">не виртуального дизайнера</div>
-    <img class="hero-image" src="img/portr-1.png" alt="Портрет Михаила" />
+    <img class="hero-image" src="img/portr-1.webp" alt="Портрет Михаила" />
   </section>
 
 <!-- Плавающее меню -->
@@ -224,7 +224,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <section id="bio" class="bio scroll-fade">
     <div class="bio-content">
       <div class="bio-anchor">
-        <h1 class="bio-name">михаил образцов</h1> 
+        <h1 class="bio-name">Михаил Образцов</h1> 
         <div class="bio-underline"></div> <!-- ← чёрная полоска -->
       </div>
       <p class="bio-description">
@@ -459,7 +459,7 @@ if ($cases && is_array($cases)) {
 <!-- КОНТАКТЫ -->
 <section id="contacts" class="contacts-section scroll-fade">
   <div class="contacts-left">
-    <img src="img/mikhail-at-work.jpg" alt="Фото в тоне" class="contact-image" />
+    <img src="img/mikhail-at-work.webp" alt="Фото в тоне" class="contact-image" />
   </div>
 
   <div class="contacts-right">
