@@ -209,6 +209,7 @@
   text-align: center;
   gap: 50px;
   position: relative;
+  margin: 70px auto 100px !important;
 }
 
 .stats-item {
@@ -351,15 +352,16 @@
   box-sizing: border-box;
 }
 
-.skill {
-  width: 100%;
-  max-width: 160px;
-  text-align: left;
-}
 
 .tool {
-  font-size: 18px;
-  margin-bottom: 14px;
+  font-size: 24px;
+  color: #AAAAAA;
+  text-transform: capitalize;
+  margin-bottom: 25px;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: left;
 }
 
 .dot {
@@ -378,7 +380,7 @@
 }
 
 .quote-title {
-  font-size: 48px;   /* ↓ уменьшишь вручную по вкусу */
+  font-size: 40px;   /* ↓ уменьшишь вручную по вкусу */
   line-height: 1;
   margin-bottom: 24px;
 }
@@ -628,13 +630,16 @@
 
   @media (max-width: 768px) {
 
-    body:has(.case-wrapper) .case-wrapper {
-      display: flex !important;
-      flex-direction: column !important;
-      width: 100%;      overflow: visible !important;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
-    }
+  body:has(.case-wrapper) .case-wrapper *,
+  body:has(.case-wrapper) .case-wrapper *::before,
+  body:has(.case-wrapper) .case-wrapper *::after {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
   
     /* 1. Изображение — первый блок */
     body:has(.case-wrapper) .case-image-2 {
@@ -658,38 +663,49 @@
     body:has(.case-wrapper) .case-panel {
       order: 2;
       background: #000 !important;
+      flex-direction: column;
+      align-items: center;
+      clip-path: border-box !important;
+      display: block !important;
       width: 100% !important;
       padding: 0 !important;
       margin: 0 !important;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      clip-path: border-box;
+      box-sizing: border-box !important;
+      padding-bottom: 20px !important;
     }
   
     /* 3. Логотип */
     body:has(.case-wrapper) .logo-wrapper,
-    body:has(.case-wrapper) .case-logo {
-      width: 100%;
-      max-width: 320px;
-      margin: 0 auto 20px auto !important;
-      top: 25px !important;
+    body:has(.case-wrapper) .case-logo,
+    body:has(.case-wrapper) .icon-row {
+      display: block !important;
+      width: 100% !important;
+      margin: 0 auto 30px auto !important;
+      padding: 0 30px !important;
+      box-sizing: border-box !important;
     }
+
+    body:has(.case-wrapper) .logo-wrapper,
+    body:has(.case-wrapper) .case-logo {
+      padding-top: 30px !important;
+    }
+
   
     /* 4. Текст */
     body:has(.case-wrapper) .text-wrapper {
       order: 3;
-      width: 100% !important;
+ 
       max-width: 100% !important;
+      min-width: 90% !important;
     
       /* внутренние отступы */
       padding-left: 30px !important;
       padding-right: 30px !important;
-      padding-top: 30px !important;
+      padding-top: 15px !important;
       box-sizing: border-box !important;
     
       /* внешний отступ снизу */
-      margin: 0 0 60px 0 !important;
+      /*margin: 0 0 0px 0 !important;*/
     
       /* типографика */
       text-align: center !important;
@@ -701,20 +717,39 @@
     body:has(.case-wrapper) .icon-row {
       order: 4;
       width: 100%;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
+      display: flex !important;
+      justify-content: center !important;
+      flex-wrap: wrap !important;
+      gap: 20px !important;
+      margin-top: 25px !important;
+      margin-bottom: 30px !important;
+      padding: 0 !important;
+      box-sizing: border-box !important;
     }
 
-    body:has(.case-wrapper) .review-bio-section {
+    body:has(.case-wrapper) .icon-row img {
+      width: 44px !important;   /* раньше было примерно 32px */
+      height: 44px !important;
+      object-fit: contain !important;
+    }
+    
+
+    body:has(.case-wrapper) .case-wrapper {
       position: relative !important;
+      overflow: visible !important;
+      height: auto !important;
+      padding-left: 0px !important; 
+      padding-right: 0px !important; 
+    }
+
+
+    body:has(.case-wrapper) .review-bio-section {
       display: block !important;
+      position: relative !important;
+      /*margin-top: 40px !important;*/
+      padding: 40px 20px !important;
       clear: both !important;
-      margin: 30px 0 0 0 !important;    /* расстояние между концом кейса и отзывом */
-      padding: 30px 20px !important;
-      box-sizing: border-box !important;
-      z-index: 2 !important;
+      z-index: 5 !important;
       background: transparent !important;
     }
   
@@ -723,8 +758,6 @@
       position: relative !important;
       margin: 0 auto 18px auto !important;
       display: block !important;
-      width: 140px !important;
-      height: 140px !important;
       object-fit: cover !important;
       border-radius: 50% !important;
     }
@@ -736,8 +769,304 @@
     body:has(.case-wrapper) .review-text,
     body:has(.case-wrapper) .review-line {
       position: relative !important;
-      margin: 0 auto !important;
+      /* margin: 0 auto !important; */
       padding: 0 !important;
-    }
+      text-align: center;
+      /* padding-top: 15px; */
+      align-items: center;
   }
-  
+
+/* Цитата клиента */
+body:has(.case-wrapper) .review-quote {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Линия под цитатой */
+body:has(.case-wrapper) .review-line {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Имя / должность клиента */
+body:has(.case-wrapper) .review-title {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+/* Основной текст отзыва */
+body:has(.case-wrapper) .review-text {
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+
+    .pattern-bg-full {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      left: 0 !important;
+      right: 0 !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      background-image: url(data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20'><rect width='1' height='20' fill='gray' fill-opacity='0.1'/><rect width='20' height='1' fill='gray' fill-opacity='0.1'/></svg>);
+      background-repeat: repeat;
+      display: flex;
+      align-items: center;
+  }
+
+  .case-data-block {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px 20px;
+    background-color: transparent;
+    overflow: hidden; /* важно, чтобы фон не обрезался */
+    min-height: 750px; /* гарантированно покрывает контент */
+  }
+
+  /* Фоновая подложка — теперь тянется по высоте родителя */
+  .case-data-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0; /* растягиваем фон на всю высоту блока */
+    background-color: #000; /* если чёрный фон */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: 0;
+  }
+
+  /* Контент */
+  .case-data-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    width: 100%;
+    max-width: 600px;
+    gap: 25px;
+  }
+
+  /* Изображение */
+  .case-data-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  /* Текст */
+  .case-data-text {
+    padding: 10px 15px;
+color: #ffffff;
+  }
+
+  .case-data-title {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: #ffffff;
+    line-height: 1.3;
+  }
+
+  .case-data-paragraph {
+    font-size: 22px;
+    line-height: 1.2;
+    color: #ffffff;
+  }
+
+  .case-bio-section {
+    display: flex;
+    flex-direction: column; /* текст сверху, фото ниже */
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    background-color: #fff;
+    overflow: visible;
+    margin-top: 100px;
+  }
+
+  /* Текстовая часть */
+  .bio-text-block {
+    order: 1;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+  }
+
+  .bio-quote {
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .bio-text {
+    font-size: 25px;
+    line-height: 1.4;
+    color: #000000;
+    margin-bottom: 20px;
+  }
+
+  .bio-title {
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: #000;
+  }
+
+  .bio-text_2 {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #000000;
+  }
+
+  /* Изображение */
+  .bio-image-wrapper {
+    order: 2;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .bio-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0px;
+    object-fit: cover;
+  }
+
+  .case-gallery-section {
+    max-width: 1400px;
+    margin: 0px !important;
+    padding: 0px !important;
+    box-sizing: border-box;
+}
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px; /* фиксированная высота строк */
+    gap: 0px !important;
+  }
+
+  /* === MOBILE LIGHTBOX REBUILD === */
+@media (max-width: 768px) {
+
+  /* Общий блок — делаем fullscreen */
+  .gallery-lightbox {
+    display: none;
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 9999 !important;
+    background: rgba(0,0,0,0.9) !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    touch-action: pan-y pinch-zoom; /* позволяет свайпы */
+  }
+
+  .gallery-lightbox.open {
+    display: flex !important;
+  }
+
+  /* Картинка — на всю ширину */
+  .gallery-lightbox .lb-img {
+    width: 100vw !important;
+    height: auto !important;
+    max-height: 100vh !important;
+    object-fit: contain !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .gallery-lightbox .lb-img {
+    touch-action: pinch-zoom;
+    -webkit-user-drag: none;
+  }
+
+  /* Убираем кнопки Prev/Next полностью */
+  .lb-prev,
+  .lb-next {
+    display: none !important;
+  }
+
+  /* Кнопка закрытия — белая, в углу */
+  .lb-close {
+    position: absolute !important;
+    top: 88px !important;
+    right: 16px !important;
+    width: 40px !important;
+    height: 40px !important;
+    background: rgba(255,255,255,0.15) !important;
+    color: #fff !important;
+    border: 2px solid rgba(255,255,255,0.6) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 20px !important;
+    z-index: 10000 !important;
+  }
+
+
+/* Блокируем прокрутку под модалкой */
+body.modal-open {
+  overflow: hidden !important;
+  width: 100% !important;
+  touch-action: none !important;
+  overscroll-behavior: none;
+}
+
+.gallery-lightbox .lb-img {
+  touch-action: pinch-zoom;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+}
+
+.cookie-close {
+  position: absolute;
+  top: -7px;
+  right: 0px;
+  background: #ffffff00;
+  color: #000000;
+  border: none;
+  font-size: 14px;
+  line-height: 2;
+  cursor: pointer;
+  padding: 4px;
+  top: 0px;
+  right: 10px;    
+}
+
+.cookie-accept {
+  font-size: 13px;
+  background: #080808;
+  color: #ffffff;
+  border: 0px !important;
+}
+
+.cookie-banner .cookie-inner {
+  background: #ffffff;
+}
+
+.cookie-banner .cookie-text {
+  flex: 1 1 auto;
+  color: #000000;
+  text-align: center;
+}
+
+.cookie-actions {
+  justify-content: center !important;
+  margin-top: 0px !important; 
+}

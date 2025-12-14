@@ -25,7 +25,7 @@ if (!is_array($cases)) {
   <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Russo+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="/manifest.json">
 
 
 
@@ -85,6 +85,20 @@ if (!is_array($cases)) {
 }
 </script>
 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105823538', 'ym');
+
+    ym(105823538, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/105823538" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <!-- dataLayer с дефолтным отказом (до загрузки GTM) -->
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -109,6 +123,16 @@ if (!is_array($cases)) {
 </script>
 <!-- End Google Tag Manager -->
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QYD6HWLK0G"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QYD6HWLK0G');
+</script>
+
 
 </head>
 <body>
@@ -124,16 +148,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <button class="cookie-close" id="cookieClose" aria-label="Закрыть уведомление">✕</button>
 
     <div class="cookie-text">
-      Мы используем файлы cookie, чтобы анализировать трафик, подбирать для вас подходящий контент и рекламу, 
-      а также дать вам возможность делиться информацией в социальных сетях. Мы передаем информацию о 
-      ваших действиях на сайте в обезличенном виде нашим партнерам: социальным сетям и компаниям, занимающимся 
-      рекламой и веб-аналитикой. Наши партнеры могут комбинировать эти сведения с предоставленной вами информацией,
-      а также данными, которые они получили при использовании вами их сервисов. Продолжая пользоваться данным сайтом, 
-      вы подтверждаете свое согласие на использование файлов cookie в соответствии с настоящим уведомлением.
+    <p style="text-transform: uppercase;">Мы используем cookie, чтобы сделать работу на сайте удобнее.</p> Продолжая использовать наш сайт, вы даете согласие 
+на <a href="privacy-policy.html">обработку файлов cookie.</a> <br> Вы можнете заблокировать cookie в настройках вашего браузера.
     </div>
 
     <div class="cookie-actions">
-      <button id="cookieAccept" class="cookie-accept" aria-label="Принять файлы cookie">Принимаю</button>
+      <button id="cookieAccept" class="cookie-accept" aria-label="Принять файлы cookie">Принять</button>
     </div>
   </div>
 </div>
@@ -282,7 +302,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       ретушь
     </p>
 
-    <img class="direction-image" src="img/napr-im-1.png" alt="...">
+    <img class="direction-image" src="img/napr-im-1.webp" alt="...">
     <div class="direction-square"></div>
   </div>
 </section>
@@ -317,7 +337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div class="skill-column">
     <div class="skill-label">прототип</div>
-    <div class="tool">Figma</div>
+    <div class="tool">Figma<br> XD</div>
     <div class="dots">
       <div class="dot"></div><div class="dot"></div><div class="dot"></div>
       <div class="dot"></div><div class="dot"></div><div class="dot gray"></div>
@@ -353,11 +373,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 
   <div class="skill-column">
-    <div class="skill-label">изучаю</div>
-    <div class="tool">HTML<br>CSS</div>    
+    <div class="skill-label">фронтенд</div>
+    <div class="tool">HTML, CSS<br>JS, Git</div>    
     <div class="dots">
-      <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-      <div class="dot gray"></div><div class="dot gray"></div><div class="dot gray"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+    <div class="dot"></div><div class="dot"></div><div class="dot gray"></div>
     </div>
   </div>
 </div>
@@ -489,7 +509,7 @@ if ($cases && is_array($cases)) {
 
       <div class="footer-links">
         <a href="privacy-policy.html">Политика в отношении обработки персональных данных</a>
-        <a href="personal-data.html">Обработка персональных данных</a>
+        <a href="personal-data.html">Согласие на обработку персональных данных</a>
         <span class="footer-year">2025</span>
       </div>
     </div>

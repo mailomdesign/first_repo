@@ -408,3 +408,5 @@ if ('serviceWorker' in navigator) {
   hideMobileMenuIfDesktop();
   window.addEventListener('resize', hideMobileMenuIfDesktop);
 })();
+
+

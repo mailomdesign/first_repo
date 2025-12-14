@@ -7,7 +7,7 @@
     "desc": "разработка логотипа компании, рекамной и печатной продукции, наружная реклама, допечатная подготовка, web, дизайн сопровождение",
     "site": "msk-development.ru",
     "tag": "#development",
-    "image_color": "img/cases/case_msk.png",
+    "image_color": "img/cases/case_msk.webp",
     "page": "case_msk.html"
   },
   {
@@ -18,7 +18,7 @@
     "desc": "раработка логотипа, верстка рекламных материалов, визуализация дизайна кофеен, элементы оформления дизайна кофеен, дизайн сопровождение",
     "site": "sep-studio.ru",
     "tag": "#horeca",
-    "image_color": "img/cases/case_sep.png",
+    "image_color": "img/cases/case_sep.webp",
     "page": "case_sep.html"
   },
   {
@@ -29,7 +29,7 @@
     "desc": "разработка дизайна одежды, технические макеты, визуализация, разработка логотипов, допечатная подготовка, сопровождение бренда",
     "site": "@freeplaysevendesign",
     "tag": "#fashion",
-    "image_color": "img/cases/case_fp7d.png",
+    "image_color": "img/cases/case_fp7d.webp",
     "page": "case_fp7d.html"
   },
   {
@@ -40,7 +40,7 @@
     "desc": "разработка дизайна меню, верстка меню, допечатная подготовка, дизайн сопровождение",
     "site": "@borodashvilirest",
     "tag": "#horeca",
-    "image_color": "img/cases/case_bg.png",
+    "image_color": "img/cases/case_bg.webp",
     "page": "inprogress.html"
     },
   {
@@ -51,7 +51,7 @@
     "desc": "разработка фирменного стиля и брендбука компании, pos материалы, допечатная подготовка, альбомы и наружная реклама",
     "site": "muva-development.ru",
     "tag": "#development",
-    "image_color": "img/cases/case_muva.png",
+    "image_color": "img/cases/case_muva.webp",
     "page": "inprogress.html"
   },
   {
@@ -62,7 +62,7 @@
     "desc": "разработка, дизайн, продвижение, проекты, реализация, подготовка",
     "site": "obraztsov.pro",
     "tag": "#design",
-    "image_color": "img/cases/case_om.png",
+    "image_color": "img/cases/case_om.webp",
     "page": "inprogress.html"
   }
 ]

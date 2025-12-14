@@ -1925,18 +1925,6 @@ margin: 0px 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Адаптивность */
-@media (max-width: 1024px) {
-  .gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 .gallery-lightbox {
   display: none;
@@ -1974,7 +1962,17 @@ margin: 0px 0;
 .lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
 .lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
 
-body.modal-open { overflow: hidden; }
+body.modal-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+.gallery-lightbox .lb-img {
+  touch-action: pinch-zoom;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 
 @media (max-width: 600px) {
   .lb-btn { width: 36px; height: 36px; font-size: 16px; }
