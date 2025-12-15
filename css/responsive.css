@@ -971,9 +971,14 @@ color: #ffffff;
     justify-content: center !important;
     align-items: center !important;
     padding: 0 !important;
-    touch-action: none;              /* контейнер сам жесты НЕ обрабатывает */
+    touch-action: auto;
     overscroll-behavior: contain;
-  }
+    pointer-events: auto;
+  }}
+
+  .gallery-lightbox .lb-img {
+    touch-action: pinch-zoom;
+    -webkit-user-drag: none;
   }
 
   .gallery-lightbox.open {
@@ -988,22 +993,15 @@ color: #ffffff;
     object-fit: contain !important;
     margin: 0 !important;
     padding: 0 !important;
-    touch-action: pan-x pan-y;        /* 🔑 разрешаем жесты */
+    touch-action: auto !important;        /* 🔑 разрешаем жесты */
 
     /* 🔑 делаем собственную зону */
     pointer-events: auto;
     user-select: none;
     -webkit-user-drag: none;
+  }
+  
 
-    /* 🔑 ключевой момент */
-    overflow: auto;
-  }
-  }
-
-  .gallery-lightbox .lb-img {
-    touch-action: pinch-zoom;
-    -webkit-user-drag: none;
-  }
 
   /* Убираем кнопки Prev/Next полностью */
   .lb-prev,
@@ -1032,12 +1030,14 @@ color: #ffffff;
 
 /* Блокируем прокрутку под модалкой */
 body.modal-open {
-  overflow: hidden !important;
   width: 100% !important;
   touch-action: none !important;
   overscroll-behavior: none;
 }
-}
+
+body.modal-open > *:not(.gallery-lightbox) {
+  pointer-events: none;
+}}
 
 .cookie-close {
   position: absolute;

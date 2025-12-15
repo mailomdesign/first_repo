@@ -393,17 +393,15 @@ gtag('config', 'G-QYD6HWLK0G');
   
     /* ---------- BLOCK VERTICAL SCROLL (safe) ---------- */
   
-    box.addEventListener('touchmove', (e) => {
-  if (!box.classList.contains('open')) return;
+document.addEventListener('touchmove', (e) => {
+  if (!document.body.classList.contains('modal-open')) return;
 
-  // 🔑 если 2+ пальца — никогда не мешаем
-  if (e.touches.length > 1) return;
-
-  // 🔑 если касание по изображению — не мешаем
-  if (e.target === img) return;
-
-  e.preventDefault();
+  // если касание НЕ по картинке — блокируем
+  if (!e.target.closest('.lb-img')) {
+    e.preventDefault();
+  }
 }, { passive: false });
+
 
 });
   </script>
