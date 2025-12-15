@@ -971,7 +971,9 @@ color: #ffffff;
     justify-content: center !important;
     align-items: center !important;
     padding: 0 !important;
-    touch-action: pan-y pinch-zoom; /* позволяет свайпы */
+    touch-action: none;              /* контейнер сам жесты НЕ обрабатывает */
+    overscroll-behavior: contain;
+  }
   }
 
   .gallery-lightbox.open {
@@ -986,6 +988,16 @@ color: #ffffff;
     object-fit: contain !important;
     margin: 0 !important;
     padding: 0 !important;
+    touch-action: pan-x pan-y;        /* 🔑 разрешаем жесты */
+
+    /* 🔑 делаем собственную зону */
+    pointer-events: auto;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    /* 🔑 ключевой момент */
+    overflow: auto;
+  }
   }
 
   .gallery-lightbox .lb-img {
@@ -1025,13 +1037,6 @@ body.modal-open {
   touch-action: none !important;
   overscroll-behavior: none;
 }
-
-.gallery-lightbox .lb-img {
-  touch-action: pinch-zoom;
-  -webkit-user-drag: none;
-  user-select: none;
-}
-
 }
 
 .cookie-close {
@@ -1067,6 +1072,6 @@ body.modal-open {
 }
 
 .cookie-actions {
-  justify-content: center !important;
+  justify-content: center !important; 
   margin-top: 0px !important; 
 }

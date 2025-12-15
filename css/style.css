@@ -1962,16 +1962,8 @@ margin: 0px 0;
 .lb-prev  { left: 20px; top: 50%; transform: translateY(-50%); }
 .lb-next  { right: 20px; top: 50%; transform: translateY(-50%); }
 
-body.modal-open {
-  overflow: hidden;
-  overscroll-behavior: none;
-}
 
-.gallery-lightbox .lb-img {
-  touch-action: pinch-zoom;
-  -webkit-user-drag: none;
-  user-select: none;
-}
+
 
 
 @media (max-width: 600px) {
