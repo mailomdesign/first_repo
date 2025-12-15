@@ -316,6 +316,73 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 })();
 
+/* ===============================
+   AJAX-отправка формы feedback
+================================ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('feedbackModal');
+  if (!modal) return;
+
+  const form = modal.querySelector('#feedbackForm');
+  const successBlock = modal.querySelector('.feedback-success');
+  const modalContent = modal.querySelector('.modal-content');
+
+  if (!form || !successBlock) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // браузер сам проверит required-поля
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Ошибка отправки');
+
+      /* --- УСПЕХ --- */
+
+      // скрываем форму
+      form.style.display = 'none';
+
+      // показываем сообщение
+      successBlock.hidden = false;
+
+      // через 3 секунды закрываем модалку
+      setTimeout(() => {
+        modalContent.classList.add('fade-out');
+
+        setTimeout(() => {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+
+          // сброс состояния для следующего открытия
+          modalContent.classList.remove('fade-out');
+          successBlock.hidden = true;
+          form.reset();
+          form.style.display = '';
+        }, 400); // должно совпадать с CSS-анимацией
+
+      }, 3000);
+
+    } catch (err) {
+      console.error(err);
+      alert('Не удалось отправить сообщение. Попробуйте позже.');
+    }
+  });
+});
+
+
+
 (function () {
   const banner = document.getElementById('cookieBanner');
   const acceptBtn = document.getElementById('cookieAccept');
