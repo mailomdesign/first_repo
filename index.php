@@ -377,7 +377,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="tool">HTML, CSS<br>JS, Git</div>    
     <div class="dots">
     <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    <div class="dot"></div><div class="dot"></div><div class="dot gray"></div>
+    <div class="dot"></div><div class="dot gray"></div><div class="dot gray"></div>
     </div>
   </div>
 </div>

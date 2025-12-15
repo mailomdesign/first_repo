@@ -987,18 +987,20 @@ color: #ffffff;
 
   /* Картинка — на всю ширину */
   .gallery-lightbox .lb-img {
-    width: 100vw !important;
-    height: auto !important;
-    max-height: 100vh !important;
     object-fit: contain !important;
     margin: 0 !important;
     padding: 0 !important;
-    touch-action: auto !important;        /* 🔑 разрешаем жесты */
 
     /* 🔑 делаем собственную зону */
     pointer-events: auto;
     user-select: none;
     -webkit-user-drag: none;
+    transform-origin: center center;
+  transition: transform 0.15s ease-out;
+  touch-action: none; /* ❗ важно: жесты обрабатываем сами */
+  will-change: transform;
+  max-width: 100vw;
+  max-height: 100vh;
   }
   
 
