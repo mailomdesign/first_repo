@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ========== КАСТОМНЫЙ СКРОЛЛБАР ==========
+
+// ============================== Скролл бар ============================================================
+
   const thumb = document.querySelector('.scroll-thumb');
   if (thumb) {
     function updateThumbPosition() {
@@ -78,7 +80,9 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// === EDUCATION subnav tabs ===
+
+// ============================== Обучение вкладки ============================================================
+
 document.addEventListener('DOMContentLoaded', () => {
   const subnav = document.getElementById('edu-subnav');
   if (!subnav) return;
@@ -152,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-// === EDUCATION subnav: фиксация + overlay ===
+// ============================== Обучение вкладки ============================================================
 (() => {
   const subnav  = document.getElementById('edu-subnav');
   const wrap    = subnav?.parentElement;
@@ -255,44 +259,85 @@ document.addEventListener('DOMContentLoaded', () => {
 })();
 
 
-// === Универсальный делегированный обработчик модалки ===
-(function() {
+// ============================== Форма обратной связи ============================================================
+
+(function () {
   const modalId = "feedbackModal";
   const modal = () => document.getElementById(modalId);
   const closeSelector = "#closeModal, .modal .close";
 
+  let initialContentHeight = null; // ← КЛЮЧ
+
+  /* ---------- OPEN ---------- */
+
   function openFeedback(subjectValue) {
     const m = modal();
     if (!m) return;
+
     m.style.display = "block";
     document.body.style.overflow = "hidden";
 
     const subjectSel = m.querySelector("#subject");
     if (subjectSel && subjectValue) {
-      const opt = Array.from(subjectSel.options).find(o => o.value === subjectValue);
+      const opt = [...subjectSel.options].find(o => o.value === subjectValue);
       if (opt) subjectSel.value = subjectValue;
     }
+
+    const content = m.querySelector(".modal-content");
+
+    if (content) {
+      // 🔑 сбрасываем прошлую фиксацию
+      content.style.minHeight = "";
+      initialContentHeight = null;
+
+      // 🔒 замеряем реальную высоту формы (ПОСЛЕ рендера)
+      requestAnimationFrame(() => {
+        initialContentHeight = content.offsetHeight;
+      });
+    }
   }
+
+  /* ---------- CLOSE ---------- */
 
   function closeFeedback() {
     const m = modal();
     if (!m) return;
+
     m.style.display = "none";
     document.body.style.overflow = "";
+
+    const form = m.querySelector("#feedbackForm");
+    const success = m.querySelector(".feedback-success");
+    const content = m.querySelector(".modal-content");
+
+    if (form) {
+      form.reset();
+      form.style.display = "";
+    }
+
+    if (success) success.hidden = true;
+
+    if (content) {
+      content.classList.remove("fade-out");
+      content.style.minHeight = ""; // 🔓 обязательно снимаем
+    }
+
+    initialContentHeight = null;
   }
 
-  document.addEventListener("click", function(e) {
-    const opener = e.target.closest("#openModal, #openModalEdu, [data-open-feedback]");
+  /* ---------- CLICK HANDLER ---------- */
+
+  document.addEventListener("click", (e) => {
+    const opener = e.target.closest(
+      "#openModal, #openModalEdu, [data-open-feedback]"
+    );
+
     if (opener) {
       e.preventDefault();
 
-      // Определяем, какая кнопка была нажата
-      let subjectValue = opener.getAttribute("data-open-feedback-value") || null;
-
-      if (!subjectValue) {
-        if (opener.id === "openModalEdu") subjectValue = "Обучение";
-        else if (opener.id === "openModal") subjectValue = "Сотрудничество";
-      }
+      let subjectValue =
+        opener.getAttribute("data-open-feedback-value") ||
+        (opener.id === "openModalEdu" ? "Обучение" : "Сотрудничество");
 
       openFeedback(subjectValue);
       return;
@@ -308,80 +353,80 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m && e.target === m) closeFeedback();
   });
 
-  document.addEventListener("keydown", e => {
+  document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       const m = modal();
       if (m && m.style.display === "block") closeFeedback();
     }
   });
-})();
 
-/* ===============================
-   AJAX-отправка формы feedback
-================================ */
+  /* ===============================
+     AJAX SUBMIT
+  ================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  const modal = document.getElementById('feedbackModal');
-  if (!modal) return;
+  document.addEventListener(
+    "submit",
+    async (e) => {
+      const form = e.target;
+      if (!form.matches("#feedbackForm")) return;
 
-  const form = modal.querySelector('#feedbackForm');
-  const successBlock = modal.querySelector('.feedback-success');
-  const modalContent = modal.querySelector('.modal-content');
+      e.preventDefault();
 
-  if (!form || !successBlock) return;
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+      const m = modal();
+      const success = m.querySelector(".feedback-success");
+      const successText = success.querySelector("p");
+      const content = m.querySelector(".modal-content");
 
-    // браузер сам проверит required-поля
-    if (!form.checkValidity()) {
-      form.reportValidity();
-      return;
-    }
+      const userName =
+        form.querySelector("#name")?.value.trim() || "друг";
 
-    const formData = new FormData(form);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+        });
 
-    try {
-      const response = await fetch(form.action, {
-        method: 'POST',
-        body: formData,
-      });
+        if (!res.ok) throw new Error("Send failed");
 
-      if (!response.ok) throw new Error('Ошибка отправки');
+        // 🔑 персонализированный текст
+        successText.textContent =
+          `Здравствуйте, ${userName}! Мы получили ваше обращение и скоро ответим.`;
 
-      /* --- УСПЕХ --- */
+        // 🔒 фиксируем МИНИМАЛЬНУЮ высоту белого окна
+        if (content && initialContentHeight) {
+          content.style.minHeight = initialContentHeight + "px";
+        }
 
-      // скрываем форму
-      form.style.display = 'none';
-
-      // показываем сообщение
-      successBlock.hidden = false;
-
-      // через 3 секунды закрываем модалку
-      setTimeout(() => {
-        modalContent.classList.add('fade-out');
+        form.style.display = "none";
+        success.hidden = false;
 
         setTimeout(() => {
-          modal.style.display = 'none';
-          document.body.style.overflow = '';
+          content.classList.add("fade-out");
+          setTimeout(closeFeedback, 1000);
+        }, 3000);
 
-          // сброс состояния для следующего открытия
-          modalContent.classList.remove('fade-out');
-          successBlock.hidden = true;
-          form.reset();
-          form.style.display = '';
-        }, 400); // должно совпадать с CSS-анимацией
-
-      }, 3000);
-
-    } catch (err) {
-      console.error(err);
-      alert('Не удалось отправить сообщение. Попробуйте позже.');
-    }
-  });
-});
+      } catch (err) {
+        alert("Ошибка отправки. Попробуйте позже.");
+        console.error(err);
+      }
+    },
+    true
+  );
+})();
 
 
+
+
+
+
+
+
+// ============================== CookieBanner ============================================================
 
 (function () {
   const banner = document.getElementById('cookieBanner');

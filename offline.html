@@ -156,31 +156,79 @@ gtag('config', 'G-QYD6HWLK0G');
   
   
   <!-- модалка: вставлять перед </body> -->
-  <div id="feedbackModal" class="modal">
-    <div class="modal-content">
-      <span class="close" id="closeModal">&times;</span>
-      <h2>Обратная связь</h2>
-      <form action="php/send.php" method="post" class="feedback-form">
-        <label for="name">Ваше имя</label>
-        <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
-        <label for="phone">Контактный номер телефона</label>
-        <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
-        <label for="subject">Тема сообщения</label>
-        <select id="subject" name="subject" required>
-          <option value="">Выберите необходимое</option>
-          <option value="Сотрудничество">Сотрудничество</option>
-          <option value="Обучение">Обучение</option>
-        </select>
-        <label for="message">Краткое описание</label>
-        <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
-        <button type="submit">Отправить</button>
-        
-<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
-<div class="consent">
-  <input type="checkbox" id="consent" name="consent" required aria-required="true">
-  <label for="consent" class="consent-label">
-    Я принимаю <a href="privacy-policy.html">условия использования и политику конфиденциальности</a> и даю <a href="personal-data.html">согласие на обработку персональных данных</a>
-  </label>
+<div id="feedbackModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+
+    <h2>Обратная связь</h2>
+
+    <!-- ФОРМА -->
+    <form
+      action="php/send.php"
+      method="post"
+      class="feedback-form"
+      id="feedbackForm"
+      novalidate
+    >
+      <label for="name">Ваше имя</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Как я могу к Вам обращаться"
+        required
+      >
+
+      <label for="phone">Контактный номер телефона</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Ваш контактный номер"
+        required
+      >
+
+      <label for="subject">Тема сообщения</label>
+      <select id="subject" name="subject" required>
+        <option value="">Выберите необходимое</option>
+        <option value="Сотрудничество">Сотрудничество</option>
+        <option value="Обучение">Обучение</option>
+      </select>
+
+      <label for="message">Краткое описание</label>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Введите сообщение"
+        required
+      ></textarea>
+
+      <button type="submit">Отправить</button>
+
+      <!-- СОГЛАСИЕ -->
+      <div class="consent">
+        <input
+          type="checkbox"
+          id="consent"
+          name="consent"
+          required
+          aria-required="true"
+        >
+        <label for="consent" class="consent-label">
+          Я принимаю
+          <a href="privacy-policy.html">условия использования и политику конфиденциальности</a>
+          и даю
+          <a href="personal-data.html">согласие на обработку персональных данных</a>
+        </label>
+      </div>
+    </form>
+
+    <!-- СООБЩЕНИЕ ОБ УСПЕХЕ (пока скрыто) -->
+    <div class="feedback-success" hidden>
+      <p>Ваше сообщение отправлено</p>
+    </div>
+
+  </div>
 </div>
 
   

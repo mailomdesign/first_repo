@@ -20,18 +20,8 @@
     "tag": "#horeca",
     "image_color": "img/cases/case_sep.webp",
     "page": "case_sep.html"
-  },
-  {
-    "title": "FP7D",
-    "logo_bw": "img/logos/logo-fp7d_b.svg",
-    "logo_color": "img/logos/logo-fp7d_w.svg",
-    "label": "задачи",
-    "desc": "разработка дизайна одежды, технические макеты, визуализация, разработка логотипов, допечатная подготовка, сопровождение бренда",
-    "site": "@freeplaysevendesign",
-    "tag": "#fashion",
-    "image_color": "img/cases/case_fp7d.webp",
-    "page": "case_fp7d.html"
-  },
+  },  
+
   {
     "title": "Boroda Group",
     "logo_bw": "img/logos/logo-BG_b.svg",
@@ -43,6 +33,19 @@
     "image_color": "img/cases/case_bg.webp",
     "page": "inprogress.html"
     },
+
+  {
+    "title": "FP7D",
+    "logo_bw": "img/logos/logo-fp7d_b.svg",
+    "logo_color": "img/logos/logo-fp7d_w.svg",
+    "label": "задачи",
+    "desc": "разработка дизайна одежды, технические макеты, визуализация, разработка логотипов, допечатная подготовка, сопровождение бренда",
+    "site": "@freeplaysevendesign",
+    "tag": "#fashion",
+    "image_color": "img/cases/case_fp7d.webp",
+    "page": "inprogress.html"
+  },
+
   {
     "title": "MUVA",
     "logo_bw": "img/logos/logo-muva_b.svg",
@@ -54,6 +57,7 @@
     "image_color": "img/cases/case_muva.webp",
     "page": "inprogress.html"
   },
+  
   {
     "title": "Архив",
     "logo_bw": "img/logos/logo-OM_b.svg",

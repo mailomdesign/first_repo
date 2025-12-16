@@ -294,76 +294,237 @@ gtag('config', 'G-QYD6HWLK0G');
   <button class="lb-btn lb-next"  aria-label="Вперёд">▶</button>
 </div>
 
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // обязательно: галерея
-    const grid = document.getElementById('gallery-grid'); // <-- добавлено
-    const tiles = Array.from(document.querySelectorAll('.gallery-item'));
-    const box = document.getElementById('gallery-lightbox');
-    if (!tiles.length || !box) return;
-  
-    const img = box.querySelector('.lb-img');
-    const btnClose = box.querySelector('.lb-close');
-    const btnPrev  = box.querySelector('.lb-prev');
-    const btnNext  = box.querySelector('.lb-next');
-    let idx = 0;
-  
-    const getSrc = (tile) => {
-      if (!tile) return '';
-      const t = tile.querySelector('img');
-      if (t && t.src) return t.src;
-      if (tile.dataset && tile.dataset.src) return tile.dataset.src;
-      const bg = getComputedStyle(tile).backgroundImage;
-      if (!bg || bg === 'none') return '';
-      return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-    };
-  
-    const open = (i) => {
-      idx = i;
-      const src = getSrc(tiles[idx]);
-      if (!src) return;
-      img.src = src;
-      box.classList.add('open');
-      box.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-    };
-  
-    const close = () => {
-      box.classList.remove('open');
-      box.setAttribute('aria-hidden', 'true');
-      img.src = '';
-      document.body.classList.remove('modal-open');
-    };
-  
-    const next = () => open((idx + 1) % tiles.length);
-    const prev = () => open((idx - 1 + tiles.length) % tiles.length);
-  
-    // открытие по клику на item
-    tiles.forEach((el, i) => {
-      el.style.cursor = 'pointer';
-      el.addEventListener('click', (e) => { e.preventDefault(); open(i); });
-    });
-  
-    // fallback: если хотите открыть модалку при клике на пустое место — уберите это,
-    // но сейчас мы не добавляем глобальный click на body чтобы не было ложных срабатываний.
-  
-    btnClose && btnClose.addEventListener('click', close);
-    btnNext && btnNext.addEventListener('click', next);
-    btnPrev && btnPrev.addEventListener('click', prev);
-  
-    // Закрытие кликом по фону (клик именно по контейнеру)
-    box.addEventListener('click', (e) => { if (e.target === box) close(); });
-  
-    // Клавиши
-    document.addEventListener('keydown', (e) => {
-      if (!box.classList.contains('open')) return;
-      if (e.key === 'Escape') close();
-      if (e.key === 'ArrowRight') next();
-      if (e.key === 'ArrowLeft') prev();
+document.addEventListener('DOMContentLoaded', () => {
+
+  const tiles = Array.from(document.querySelectorAll('.gallery-item'));
+  const box   = document.getElementById('gallery-lightbox');
+  if (!tiles.length || !box) return;
+
+  const img      = box.querySelector('.lb-img');
+  const btnClose = box.querySelector('.lb-close');
+  const btnPrev  = box.querySelector('.lb-prev');
+  const btnNext  = box.querySelector('.lb-next');
+
+  let idx = 0;
+
+  /* ===============================
+     ZOOM / DRAG STATE
+  ================================ */
+
+  let scale = 1;
+  let lastScale = 1;
+  let startDist = 0;
+
+  let posX = 0;
+  let posY = 0;
+
+  let dragStartX = 0;
+  let dragStartY = 0;
+  let isDragging = false;
+
+  /* double tap */
+  let lastTap = 0;
+  const DOUBLE_TAP_DELAY = 300;
+  const DOUBLE_TAP_SCALE = 2;
+
+  const clamp = (v, min, max) => Math.min(max, Math.max(min, v));
+
+  function distance(t1, t2) {
+    return Math.hypot(
+      t2.clientX - t1.clientX,
+      t2.clientY - t1.clientY
+    );
+  }
+
+  function applyTransform() {
+    img.style.transform = `translate(${posX}px, ${posY}px) scale(${scale})`;
+  }
+
+  function resetZoom() {
+    scale = 1;
+    lastScale = 1;
+    posX = 0;
+    posY = 0;
+    applyTransform();
+  }
+
+  /* ===============================
+     HELPERS
+  ================================ */
+
+  const getSrc = (tile) => {
+    const t = tile.querySelector('img');
+    if (t?.src) return t.src;
+    if (tile.dataset?.src) return tile.dataset.src;
+
+    const bg = getComputedStyle(tile).backgroundImage;
+    if (!bg || bg === 'none') return '';
+    return bg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+  };
+
+  /* ===============================
+     OPEN / CLOSE
+  ================================ */
+
+  const open = (i) => {
+    idx = i;
+    const src = getSrc(tiles[idx]);
+    if (!src) return;
+
+    img.src = src;
+    resetZoom();
+
+    box.classList.add('open');
+    box.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('modal-open');
+  };
+
+  const close = () => {
+    box.classList.remove('open');
+    box.setAttribute('aria-hidden', 'true');
+    img.src = '';
+    document.body.classList.remove('modal-open');
+  };
+
+  const next = () => open((idx + 1) % tiles.length);
+  const prev = () => open((idx - 1 + tiles.length) % tiles.length);
+
+  /* ===============================
+     CLICK HANDLERS
+  ================================ */
+
+  tiles.forEach((el, i) => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      open(i);
     });
   });
-  </script>
+
+  btnClose?.addEventListener('click', close);
+  btnNext?.addEventListener('click', next);
+  btnPrev?.addEventListener('click', prev);
+
+  box.addEventListener('click', (e) => {
+    if (e.target === box) close();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowRight') next();
+    if (e.key === 'ArrowLeft') prev();
+  });
+
+  /* ===============================
+     SWIPE (only if NOT zoomed)
+  ================================ */
+
+  let swipeStartX = 0;
+  let swipeStartY = 0;
+
+  box.addEventListener('touchstart', (e) => {
+    if (e.touches.length !== 1 || scale > 1) return;
+    swipeStartX = e.touches[0].clientX;
+    swipeStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  box.addEventListener('touchend', (e) => {
+    if (e.changedTouches.length !== 1 || scale > 1) return;
+
+    const dx = e.changedTouches[0].clientX - swipeStartX;
+    const dy = e.changedTouches[0].clientY - swipeStartY;
+
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
+      dx < 0 ? next() : prev();
+    }
+  });
+
+  /* ===============================
+     BLOCK BACKGROUND SCROLL
+  ================================ */
+
+  document.addEventListener('touchmove', (e) => {
+    if (!document.body.classList.contains('modal-open')) return;
+    if (!e.target.closest('.lb-img')) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  /* ===============================
+     PINCH + DRAG + DOUBLE TAP
+  ================================ */
+
+  box.addEventListener('touchstart', (e) => {
+    if (!box.classList.contains('open')) return;
+
+    /* DOUBLE TAP */
+    if (e.touches.length === 1) {
+      const now = Date.now();
+      const tapGap = now - lastTap;
+
+      if (tapGap < DOUBLE_TAP_DELAY && tapGap > 0) {
+        e.preventDefault();
+
+        const rect = img.getBoundingClientRect();
+        const tapX = e.touches[0].clientX - rect.left - rect.width / 2;
+        const tapY = e.touches[0].clientY - rect.top  - rect.height / 2;
+
+        if (scale === 1) {
+          scale = DOUBLE_TAP_SCALE;
+          posX = -tapX * (scale - 1);
+          posY = -tapY * (scale - 1);
+        } else {
+          resetZoom();
+        }
+
+        applyTransform();
+      }
+
+      lastTap = now;
+    }
+
+    /* PINCH */
+    if (e.touches.length === 2) {
+      startDist = distance(e.touches[0], e.touches[1]);
+      lastScale = scale;
+    }
+
+    /* DRAG */
+    if (e.touches.length === 1 && scale > 1) {
+      isDragging = true;
+      dragStartX = e.touches[0].clientX - posX;
+      dragStartY = e.touches[0].clientY - posY;
+    }
+  }, { passive: false });
+
+  box.addEventListener('touchmove', (e) => {
+    if (!box.classList.contains('open')) return;
+
+    if (e.touches.length === 2) {
+      e.preventDefault();
+      const newDist = distance(e.touches[0], e.touches[1]);
+      scale = clamp(lastScale * (newDist / startDist), 1, 3);
+      applyTransform();
+    }
+
+    if (e.touches.length === 1 && isDragging && scale > 1) {
+      e.preventDefault();
+      posX = e.touches[0].clientX - dragStartX;
+      posY = e.touches[0].clientY - dragStartY;
+      applyTransform();
+    }
+  }, { passive: false });
+
+  box.addEventListener('touchend', () => {
+    isDragging = false;
+    if (scale <= 1) resetZoom();
+  });
+
+});
+</script>
+
   
   
 
@@ -428,32 +589,75 @@ gtag('config', 'G-QYD6HWLK0G');
 <div id="feedbackModal" class="modal">
   <div class="modal-content">
     <span class="close" id="closeModal">&times;</span>
+
     <h2>Обратная связь</h2>
-    <form action="php/send.php" method="post" class="feedback-form">
+
+    <!-- ФОРМА -->
+    <form
+      action="php/send.php"
+      method="post"
+      class="feedback-form"
+      id="feedbackForm"
+      novalidate
+    >
       <label for="name">Ваше имя</label>
-      <input type="text" id="name" name="name" placeholder="Как я могу к Вам обращаться" required>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Как я могу к Вам обращаться"
+        required
+      >
+
       <label for="phone">Контактный номер телефона</label>
-      <input type="tel" id="phone" name="phone" placeholder="Ваш контактный номер" required>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        placeholder="Ваш контактный номер"
+        required
+      >
+
       <label for="subject">Тема сообщения</label>
       <select id="subject" name="subject" required>
         <option value="">Выберите необходимое</option>
         <option value="Сотрудничество">Сотрудничество</option>
         <option value="Обучение">Обучение</option>
       </select>
+
       <label for="message">Краткое описание</label>
-      <textarea id="message" name="message" placeholder="Введите сообщение" required></textarea>
+      <textarea
+        id="message"
+        name="message"
+        placeholder="Введите сообщение"
+        required
+      ></textarea>
+
       <button type="submit">Отправить</button>
-      
-<!-- вставляем внутрь формы, в том же контейнере, где поля и кнопка -->
-<div class="consent">
-  <input type="checkbox" id="consent" name="consent" required aria-required="true">
-  <label for="consent" class="consent-label">
-    Я принимаю <a href="privacy-policy.html">условия использования и политику конфиденциальности</a> и даю <a href="personal-data.html">согласие на обработку персональных данных</a>
-  </label>
-</div>
 
-
+      <!-- СОГЛАСИЕ -->
+      <div class="consent">
+        <input
+          type="checkbox"
+          id="consent"
+          name="consent"
+          required
+          aria-required="true"
+        >
+        <label for="consent" class="consent-label">
+          Я принимаю
+          <a href="privacy-policy.html">условия использования и политику конфиденциальности</a>
+          и даю
+          <a href="personal-data.html">согласие на обработку персональных данных</a>
+        </label>
+      </div>
     </form>
+
+    <!-- СООБЩЕНИЕ ОБ УСПЕХЕ (пока скрыто) -->
+    <div class="feedback-success" hidden>
+      <p>Ваше сообщение отправлено</p>
+    </div>
+
   </div>
 </div>
 

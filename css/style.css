@@ -769,6 +769,7 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
     top: 195px;
     text-align: right;
     text-transform: uppercase;
+    line-height: 1;
   }
 
   .case-label {
@@ -946,18 +947,20 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 .modal-content {
   background: #fff;
   margin: 10% auto;
-  padding: 30px;        /* было 30 px */
-  width: 500px;         /* было 500 px */
+  padding: clamp(20px, 3vw, 36px);
+  width: 400px;         /* было 500 px */
   border-radius: 6px;
   position: relative;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* исправлены пробелы */
-}
+  }
+
+  
 
 /* Закрыть */
 .close {
   position: absolute;
   top: 15px; right: 20px;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
   color: #333;
   cursor: pointer;
@@ -1052,9 +1055,9 @@ body::-webkit-scrollbar { display: none; } /* Chrome, Safari, Opera */
 
 .feedback-success {
   text-align: center;
-  font-size: 18px;
-  padding: 40px 20px;
-  color: #fff;
+  font-size: 20px;
+  /* padding: 40px 20px;*/
+  color: #000000;
 }
 
 .modal.fade-out {
